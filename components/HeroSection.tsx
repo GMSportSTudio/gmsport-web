@@ -292,7 +292,7 @@ export default function HeroSection() {
           >
             GmSportStudio pone el análisis profesional en tu laptop.
             Telestración, scouting y corte de clips en segundos —
-            sin suscripciones de miles de euros.
+            a un precio que cualquier entrenador puede permitirse.
           </motion.p>
 
           {/* CTA con pulso magnético */}
@@ -359,7 +359,7 @@ export default function HeroSection() {
                 <path d="M6 1L7.5 4.5H11L8.5 6.5L9.5 10L6 8L2.5 10L3.5 6.5L1 4.5H4.5L6 1Z"
                   fill="#FF5722" fillOpacity="0.6" />
               </svg>
-              Pago único
+              Beta 9,99€
             </span>
             <span className="w-px h-3 bg-white/10" />
             <span>Mac &amp; Windows</span>
