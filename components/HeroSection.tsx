@@ -10,13 +10,16 @@ const fadeUp = (delay = 0): Variants => ({
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, delay, ease: EASE } },
 });
 
-const scaleIn: Variants = {
-  hidden:  { opacity: 0, scale: 0.94, y: 20 },
-  visible: { opacity: 1, scale: 1,    y: 0,
-    transition: { duration: 0.85, delay: 0.3, ease: EASE } },
+const floatAnim = {
+  y: [0, -14, 0],
+  transition: {
+    duration: 5.5,
+    repeat: Infinity,
+    ease: "easeInOut" as const,
+  },
 };
 
-/* ─── App Mockup (dashboard interior) ────────────────────────── */
+/* ─── App Dashboard Mockup ────────────────────────────────────── */
 function AppMockup() {
   return (
     <div className="w-full h-full bg-[#0d0d0d] flex flex-col overflow-hidden">
@@ -85,6 +88,19 @@ function AppMockup() {
             <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
             <span className="text-[8px] text-white/70 font-medium">LIVE  34:12</span>
           </div>
+
+          {/* Stats overlay */}
+          <div className="absolute bottom-2 left-2 flex gap-2">
+            {[
+              { label: "Pases", value: "142" },
+              { label: "xG", value: "2.4" },
+            ].map(({ label, value }) => (
+              <div key={label} className="px-2 py-1 rounded bg-black/70 border border-white/10 backdrop-blur-sm">
+                <span className="block text-[10px] font-black text-white stat-num">{value}</span>
+                <span className="block text-[7px] text-white/40 uppercase tracking-wider">{label}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Panel lateral */}
@@ -116,43 +132,99 @@ function AppMockup() {
   );
 }
 
-/* ─── MacBook Frame ───────────────────────────────────────────── */
+/* ─── MacBook Frame realista y flotante ───────────────────────── */
 function MacBookFrame() {
   return (
     <div className="relative w-full select-none">
-      {/* Glow naranja */}
+
+      {/* Sombra proyectada — realista */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-[5%] top-[20%] bottom-[-8%] -z-10"
+        className="absolute left-[10%] right-[10%] bottom-[-6%] h-[60px] -z-10"
         style={{
-          background: "radial-gradient(ellipse at 50% 50%, rgba(255,87,34,0.32) 0%, rgba(255,87,34,0.1) 45%, transparent 70%)",
-          filter: "blur(36px)",
+          background: "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.75) 0%, transparent 70%)",
+          filter: "blur(20px)",
         }}
       />
 
-      {/* Cuerpo */}
+      {/* Glow naranja ambiental detrás */}
       <div
-        className="relative rounded-t-xl overflow-hidden"
+        aria-hidden="true"
+        className="absolute inset-x-[8%] top-[15%] bottom-[-5%] -z-10"
         style={{
-          background: "linear-gradient(145deg, #2e2e2e 0%, #1a1a1a 100%)",
-          padding: "10px 10px 0",
-          boxShadow: "0 0 0 1px rgba(255,255,255,0.09), 0 40px 100px rgba(0,0,0,0.75)",
+          background: "radial-gradient(ellipse at 50% 45%, rgba(255,87,34,0.28) 0%, rgba(255,87,34,0.08) 45%, transparent 70%)",
+          filter: "blur(32px)",
+        }}
+      />
+
+      {/* Cuerpo del MacBook */}
+      <div
+        className="relative rounded-t-[14px] overflow-hidden"
+        style={{
+          background: "linear-gradient(160deg, #3a3a3a 0%, #1e1e1e 40%, #141414 100%)",
+          padding: "12px 12px 0",
+          boxShadow:
+            "0 0 0 1px rgba(255,255,255,0.08), " +
+            "0 2px 0 0 rgba(255,255,255,0.04) inset, " +
+            "0 -2px 0 0 rgba(0,0,0,0.6) inset, " +
+            "0 50px 120px rgba(0,0,0,0.8)",
         }}
       >
-        <div className="flex items-center justify-center h-5 mb-1">
-          <div className="w-1.5 h-1.5 rounded-full bg-[#333] border border-[#444]" />
+        {/* Notch / cámara */}
+        <div className="flex items-center justify-center h-5 mb-2">
+          <div className="flex items-center gap-2">
+            <div className="w-1 h-1 rounded-full bg-[#333]" />
+            <div
+              className="w-2 h-2 rounded-full border border-[#3a3a3a]"
+              style={{ background: "radial-gradient(circle at 35% 35%, #555, #222)" }}
+            />
+            <div className="w-1 h-1 rounded-full bg-[#333]" />
+          </div>
         </div>
-        <div className="rounded-t-sm overflow-hidden aspect-[16/10]">
+
+        {/* Pantalla — bisel oscuro + contenido */}
+        <div
+          className="rounded-t-sm overflow-hidden aspect-[16/10]"
+          style={{
+            boxShadow: "0 0 0 1.5px rgba(0,0,0,0.8) inset, 0 0 20px rgba(0,0,0,0.5) inset",
+          }}
+        >
           <AppMockup />
         </div>
       </div>
 
       {/* Base */}
-      <div className="h-[14px] rounded-b-sm mx-[2px]"
-        style={{ background: "linear-gradient(to bottom, #1a1a1a, #252525)", boxShadow: "0 4px 12px rgba(0,0,0,0.5)" }} />
+      <div
+        className="h-[16px] mx-[1px]"
+        style={{
+          background: "linear-gradient(to bottom, #252525, #1e1e1e)",
+          borderBottomLeftRadius: "2px",
+          borderBottomRightRadius: "2px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05)",
+        }}
+      />
+      {/* Bisagra central */}
+      <div
+        className="mx-auto"
+        style={{
+          width: "18%",
+          height: "3px",
+          background: "linear-gradient(to bottom, #1a1a1a, #2a2a2a)",
+          borderRadius: "0 0 4px 4px",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.5)",
+        }}
+      />
+      {/* Base inferior / trackpad area */}
       <div className="flex justify-center">
-        <div className="h-[6px] w-[52%] rounded-b-xl"
-          style={{ background: "linear-gradient(to bottom, #252525, #1c1c1c)", boxShadow: "0 6px 20px rgba(0,0,0,0.4)" }} />
+        <div
+          className="h-[5px]"
+          style={{
+            width: "55%",
+            background: "linear-gradient(to bottom, #2a2a2a, #1c1c1c)",
+            borderRadius: "0 0 10px 10px",
+            boxShadow: "0 6px 24px rgba(0,0,0,0.5)",
+          }}
+        />
       </div>
     </div>
   );
@@ -191,7 +263,7 @@ export default function HeroSection() {
             Beta abierta — plazas limitadas
           </motion.div>
 
-          {/* Titular — dos líneas con intención */}
+          {/* Titular con degradado naranja → blanco */}
           <motion.h1
             variants={fadeUp(0.1)}
             initial="hidden"
@@ -200,76 +272,79 @@ export default function HeroSection() {
           >
             <span
               style={{
-                background: "linear-gradient(135deg, #FF5722 0%, #FF8A65 100%)",
+                background: "linear-gradient(135deg, #FF5722 0%, #FF8A65 38%, #ffffff 72%, #e5e5e5 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}
             >
-              Deja de perder horas
-              <br />editando.
-            </span>
-            <br />
-            <span
-              style={{
-                background: "linear-gradient(160deg, #ffffff 40%, #9ca3af 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Empieza a ganar
-              <br />partidos analizando.
+              El scouting de élite
+              <br />ya no es un privilegio.
             </span>
           </motion.h1>
 
-          {/* Subtítulo orientado al dolor */}
+          {/* Subtítulo */}
           <motion.p
             variants={fadeUp(0.2)}
             initial="hidden"
             animate="visible"
             className="max-w-md text-base sm:text-lg text-[#EDEDED]/50 leading-relaxed"
           >
-            GmSportStudio pone el análisis de élite en tu laptop.
+            GmSportStudio pone el análisis profesional en tu laptop.
             Telestración, scouting y corte de clips en segundos —
             sin suscripciones de miles de euros.
           </motion.p>
 
-          {/* CTAs */}
+          {/* CTA con pulso magnético */}
           <motion.div
             variants={fadeUp(0.3)}
             initial="hidden"
             animate="visible"
             className="flex flex-col items-center lg:items-start gap-3 w-full sm:w-auto"
           >
-            {/* Botón principal */}
-            <motion.a
-              href="https://forms.gle/3KAVe45PeSpJMy8g6"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 380, damping: 22 }}
-              className="relative inline-flex items-center justify-center gap-2.5
-                         w-full sm:w-auto px-8 py-3.5
-                         text-white font-semibold text-base cursor-pointer
-                         bg-[#FF5722] hover:bg-[#E64A19]
-                         border border-[rgba(255,87,34,0.55)]
-                         shadow-[0_1px_4px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,87,34,0.2)]
-                         hover:shadow-[0_0_0_1px_rgba(255,87,34,0.5),0_6px_24px_rgba(255,87,34,0.35)]
-                         transition-all duration-150"
-            style={{ borderRadius: "6px" }}
-            >
-              <span
+            <div className="relative">
+              {/* Anillo de pulso */}
+              <motion.span
                 aria-hidden="true"
-                className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                className="absolute inset-0 rounded-[8px] bg-[#FF5722]/30"
+                animate={{ scale: [1, 1.18, 1], opacity: [0.5, 0, 0.5] }}
+                transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
               />
-              <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M8 1.5L10.5 6.5H15L11 9.5L12.5 14.5L8 11.5L3.5 14.5L5 9.5L1 6.5H5.5L8 1.5Z"
-                  fill="currentColor" fillOpacity="0.95" />
-              </svg>
-              Únete a la Beta
-            </motion.a>
+              <motion.span
+                aria-hidden="true"
+                className="absolute inset-0 rounded-[8px] bg-[#FF5722]/18"
+                animate={{ scale: [1, 1.36, 1], opacity: [0.4, 0, 0.4] }}
+                transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+              />
+
+              <motion.a
+                href="https://forms.gle/Kfj3TwAeuJe88Bc28"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                className="relative inline-flex items-center justify-center gap-2.5
+                           w-full sm:w-auto px-8 py-3.5
+                           text-white font-semibold text-base cursor-pointer
+                           bg-[#FF5722] hover:bg-[#E64A19]
+                           border border-[rgba(255,87,34,0.55)]
+                           shadow-[0_1px_4px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,87,34,0.2)]
+                           hover:shadow-[0_0_0_1px_rgba(255,87,34,0.5),0_6px_24px_rgba(255,87,34,0.35)]
+                           transition-all duration-150"
+                style={{ borderRadius: "8px" }}
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                />
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M8 1.5L10.5 6.5H15L11 9.5L12.5 14.5L8 11.5L3.5 14.5L5 9.5L1 6.5H5.5L8 1.5Z"
+                    fill="currentColor" fillOpacity="0.95" />
+                </svg>
+                9,99€ · Acceso Beta
+              </motion.a>
+            </div>
           </motion.div>
 
           {/* Social proof */}
@@ -284,7 +359,7 @@ export default function HeroSection() {
                 <path d="M6 1L7.5 4.5H11L8.5 6.5L9.5 10L6 8L2.5 10L3.5 6.5L1 4.5H4.5L6 1Z"
                   fill="#FF5722" fillOpacity="0.6" />
               </svg>
-              Sin suscripción
+              Pago único
             </span>
             <span className="w-px h-3 bg-white/10" />
             <span>Mac &amp; Windows</span>
@@ -293,14 +368,16 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* ── Columna derecha — Dashboard protagonista ── */}
+        {/* ── Columna derecha — MacBook flotante ── */}
         <motion.div
-          variants={scaleIn}
-          initial="hidden"
-          animate="visible"
-          className="w-full lg:translate-y-4"
+          initial={{ opacity: 0, scale: 0.92, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.25, ease: EASE }}
+          className="w-full"
         >
-          <MacBookFrame />
+          <motion.div animate={floatAnim}>
+            <MacBookFrame />
+          </motion.div>
         </motion.div>
       </div>
     </section>
