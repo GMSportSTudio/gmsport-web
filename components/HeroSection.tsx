@@ -1,5 +1,7 @@
 "use client";
 
+"use client";
+
 import { useEffect, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 
@@ -393,15 +395,66 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* ── Columna derecha — MacBook flotante ── */}
+        {/* ── Columna derecha — Vídeo demo ── */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.92, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.93, y: 30 }}
+          animate={{ opacity: 1, scale: 1,    y: 0  }}
           transition={{ duration: 0.9, delay: 0.25, ease: EASE }}
-          className="w-full"
+          className="w-full flex justify-center"
         >
-          <motion.div animate={floatAnim}>
-            <MacBookFrame />
+          <motion.div
+            animate={floatAnim}
+            className="relative w-full max-w-2xl"
+          >
+            {/* Glow naranja ambiental detrás */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-[8%] top-[10%] bottom-[-8%] -z-10 pointer-events-none"
+              style={{
+                background: "radial-gradient(ellipse at 50% 50%, rgba(255,87,34,0.30) 0%, rgba(255,87,34,0.08) 45%, transparent 70%)",
+                filter: "blur(36px)",
+              }}
+            />
+
+            {/* Contenedor del vídeo — estética high-end */}
+            <div
+              className="relative w-full overflow-hidden rounded-2xl border border-white/10"
+              style={{
+                boxShadow:
+                  "0 0 0 1px rgba(255,255,255,0.06) inset, " +
+                  "0 32px 80px rgba(0,0,0,0.75), " +
+                  "0 8px 24px rgba(0,0,0,0.5)",
+              }}
+            >
+              {/* Línea reflejo superior */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-px z-10 pointer-events-none"
+                style={{
+                  background: "linear-gradient(90deg, transparent 10%, rgba(255,255,255,0.14) 50%, transparent 90%)",
+                }}
+              />
+
+              {/* Vídeo */}
+              <video
+                src="/app-demo.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-auto block"
+                style={{ display: "block" }}
+              />
+
+              {/* Máscara degradado inferior — funde con el fondo oscuro */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none z-10"
+                style={{
+                  background: "linear-gradient(to bottom, transparent 0%, rgba(17,17,17,0.65) 60%, rgba(17,17,17,0.97) 100%)",
+                }}
+              />
+            </div>
           </motion.div>
         </motion.div>
       </div>
