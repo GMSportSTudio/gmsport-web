@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 
 /* ─── Animaciones ─────────────────────────────────────────────── */
@@ -18,6 +19,27 @@ const floatAnim = {
     ease: "easeInOut" as const,
   },
 };
+
+/* ─── Mini contador para el Dashboard ────────────────────────── */
+function AnimatedStat({ target, decimals = 0, delay = 0 }: { target: number; decimals?: number; delay?: number }) {
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    const t = setTimeout(() => {
+      const duration = 1200;
+      let start: number | null = null;
+      const tick = (ts: number) => {
+        if (!start) start = ts;
+        const p = Math.min((ts - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        setVal(parseFloat((eased * target).toFixed(decimals)));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, 900 + delay); // espera que el MacBook aparezca
+    return () => clearTimeout(t);
+  }, [target, delay, decimals]);
+  return <>{decimals > 0 ? val.toFixed(decimals) : Math.round(val)}</>;
+}
 
 /* ─── App Dashboard Mockup ────────────────────────────────────── */
 function AppMockup() {
@@ -89,17 +111,20 @@ function AppMockup() {
             <span className="text-[8px] text-white/70 font-medium">LIVE  34:12</span>
           </div>
 
-          {/* Stats overlay */}
+          {/* Stats overlay con contadores animados */}
           <div className="absolute bottom-2 left-2 flex gap-2">
-            {[
-              { label: "Pases", value: "142" },
-              { label: "xG", value: "2.4" },
-            ].map(({ label, value }) => (
-              <div key={label} className="px-2 py-1 rounded bg-black/70 border border-white/10 backdrop-blur-sm">
-                <span className="block text-[10px] font-black text-white stat-num">{value}</span>
-                <span className="block text-[7px] text-white/40 uppercase tracking-wider">{label}</span>
-              </div>
-            ))}
+            <div className="px-2 py-1 rounded bg-black/70 border border-white/10 backdrop-blur-sm">
+              <span className="block text-[10px] font-black text-white stat-num">
+                <AnimatedStat target={142} delay={0} />
+              </span>
+              <span className="block text-[7px] text-white/40 uppercase tracking-wider">Pases</span>
+            </div>
+            <div className="px-2 py-1 rounded bg-black/70 border border-white/10 backdrop-blur-sm">
+              <span className="block text-[10px] font-black text-white stat-num">
+                <AnimatedStat target={2.4} decimals={1} delay={200} />
+              </span>
+              <span className="block text-[7px] text-white/40 uppercase tracking-wider">xG</span>
+            </div>
           </div>
         </div>
 

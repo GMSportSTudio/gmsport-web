@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
 import { FolderOpen, CirclePlay, Scissors, Database } from "lucide-react";
+import { useCountUp } from "@/hooks/useCountUp";
 
 /* ─── Tipos ─────────────────────────────────────────────────── */
 interface Feature {
@@ -130,16 +131,22 @@ function ClipsVisual() {
   );
 }
 
-function DatabaseVisual() {
+function DatabaseVisual({ inView }: { inView: boolean }) {
+  const sesiones  = useCountUp(142, { inView, delay: 200 });
+  const jugadores = useCountUp(38,  { inView, delay: 350 });
+  const clips     = useCountUp(891, { inView, delay: 500 });
+
+  const stats = [
+    { label: "Sesiones",  value: sesiones  },
+    { label: "Jugadores", value: jugadores },
+    { label: "Clips",     value: clips     },
+  ];
+
   return (
     <div className="absolute right-6 top-1/2 -translate-y-1/2 flex gap-3 opacity-20 pointer-events-none">
-      {[
-        { label: "Sesiones",  value: "142" },
-        { label: "Jugadores", value: "38"  },
-        { label: "Clips",     value: "891" },
-      ].map(({ label, value }) => (
+      {stats.map(({ label, value }) => (
         <div key={label} className="flex flex-col items-center gap-1">
-          <span className="text-2xl font-black text-white">{value}</span>
+          <span className="stat-num text-2xl font-black text-white">{value}</span>
           <span className="text-[10px] text-white/50 uppercase tracking-wider">{label}</span>
         </div>
       ))}
@@ -148,15 +155,31 @@ function DatabaseVisual() {
 }
 
 /* ─── Card individual ────────────────────────────────────────── */
-function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
+function FeatureCard({
+  feature,
+  index,
+  inView,
+}: {
+  feature: Feature;
+  index: number;
+  inView: boolean;
+}) {
   const isAccent = feature.variant === "accent";
   const isLarge  = feature.variant === "large";
+
+  const hoverGlow = isAccent
+    ? "0 0 0 1.5px rgba(255,87,34,0.65), 0 20px 56px rgba(0,0,0,0.65), 0 0 48px rgba(255,87,34,0.14)"
+    : "0 0 0 1.5px rgba(255,87,34,0.4),  0 20px 56px rgba(0,0,0,0.65), 0 0 40px rgba(255,87,34,0.09)";
 
   return (
     <motion.div
       variants={cardVariants}
       transition={{ duration: 0.6, delay: index * 0.1, ease: EASE }}
-      whileHover={{ scale: 1.005 }}
+      whileHover={{
+        y: -6,
+        boxShadow: hoverGlow,
+        transition: { duration: 0.22, ease: "easeOut" },
+      }}
       className={[
         "bento-card p-6 flex flex-col gap-4 group cursor-default card-top-shine",
         feature.grid,
@@ -166,8 +189,10 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
     >
       {/* Contenido */}
       <div className="relative z-10 flex flex-col gap-3 flex-1">
-        {/* Icono */}
-        <div
+        {/* Icono — sube con el card */}
+        <motion.div
+          whileHover={{ scale: 1.1, rotate: -4 }}
+          transition={{ type: "spring", stiffness: 400, damping: 18 }}
           className={[
             "w-10 h-10 rounded-xl flex items-center justify-center shrink-0",
             isAccent
@@ -176,7 +201,7 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
           ].join(" ")}
         >
           {feature.icon}
-        </div>
+        </motion.div>
 
         {/* Texto */}
         <div className="flex flex-col gap-1.5">
@@ -202,13 +227,15 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
                            rounded-full text-xs font-medium bg-[#FF5722]/15 text-[#FF8A65]
                            border border-[#FF5722]/25">
             <span className="w-1 h-1 rounded-full bg-[#FF5722]" />
-            Sin conversiones
+            Integración directa
           </span>
         )}
       </div>
 
-      {/* Visual decorativo */}
-      {feature.visual}
+      {/* Visual decorativo — pasa inView al que lo necesite */}
+      {feature.id === "db"
+        ? <DatabaseVisual inView={inView} />
+        : feature.visual}
     </motion.div>
   );
 }
@@ -260,7 +287,7 @@ export default function FeaturesSection() {
         className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4"
       >
         {FEATURES.map((feature, i) => (
-          <FeatureCard key={feature.id} feature={feature} index={i} />
+          <FeatureCard key={feature.id} feature={feature} index={i} inView={inView} />
         ))}
       </motion.div>
     </section>

@@ -273,6 +273,11 @@ body {
   }
 }
 
+/* ─── Scroll offset para navbar fija ───────────────────────── */
+section[id] {
+  scroll-margin-top: 72px;
+}
+
 /* ─── Scrollbar — estilo app ────────────────────────────────── */
 ::-webkit-scrollbar        { width: 6px; }
 ::-webkit-scrollbar-track  { background: var(--color-surface); }
