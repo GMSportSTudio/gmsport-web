@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import BackgroundEffects from "@/components/BackgroundEffects";
+import CookieBanner from "@/components/CookieBanner";
 import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
@@ -99,6 +100,7 @@ export default function RootLayout({
         <BackgroundEffects />
         <Navbar />
         <main className="flex-1 pt-16">{children}</main>
+        <CookieBanner />
         <Analytics />
       </body>
     </html>

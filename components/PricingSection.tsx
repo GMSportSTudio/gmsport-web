@@ -221,7 +221,7 @@ export default function PricingSection() {
         <p className="text-xs text-[#cccccc]/40 leading-relaxed">
           ¿Buscas licencias para todo tu club? Pronto abriremos los planes anuales y por equipos.{" "}
           <a
-            href="mailto:josegalan16@gmail.com"
+            href="mailto:clubes@gmsportstudio.com"
             className="text-[#FF7043]/80 hover:text-[#FF7043] underline underline-offset-2 transition-colors duration-150"
           >
             Escríbenos para una oferta personalizada.
