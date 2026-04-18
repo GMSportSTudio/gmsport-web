@@ -437,7 +437,7 @@ export default function HeroSection() {
 
               {/* Vídeo */}
               <video
-                src="/app-demo.mp4"
+                src="/app-demo-web.mp4"
                 autoPlay
                 loop
                 muted

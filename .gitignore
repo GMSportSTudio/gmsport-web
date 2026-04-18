@@ -41,6 +41,6 @@ yarn-error.log*
 next-env.d.ts
 
 # vídeos grandes — subir a CDN externo, no a git
-/public/*.mp4
+/public/app-demo.mp4
 /public/*.mov
 /public/*.webm
