@@ -14,9 +14,74 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const BASE_URL = "https://www.gmsportstudio.com";
+
 export const metadata: Metadata = {
-  title: "GmSportStudio",
-  description: "Estudio de edición deportiva profesional",
+  metadataBase: new URL(BASE_URL),
+
+  title: {
+    default: "GmSportStudio | Software de Vídeo Análisis para Baloncesto",
+    template: "%s · GmSportStudio",
+  },
+
+  description:
+    "Analiza partidos de baloncesto con telestración profesional, scouting avanzado y corte de clips ultrarrápido. Integración directa con YouTube. La alternativa low cost a Hudl y Nacsport para clubes y entrenadores. Desde 99€.",
+
+  keywords: [
+    "video análisis baloncesto",
+    "scouting basket low cost",
+    "software telestración baloncesto",
+    "alternativa Hudl baloncesto",
+    "alternativa Nacsport",
+    "análisis táctico baloncesto",
+    "software entrenadores baloncesto",
+    "edición video deportivo",
+    "dashboard análisis deportivo",
+    "scouting fútbol bajo coste",
+    "GmSportStudio",
+  ],
+
+  authors: [{ name: "GmSportStudio", url: BASE_URL }],
+  creator: "GmSportStudio",
+  publisher: "GmSportStudio",
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
+
+  alternates: {
+    canonical: BASE_URL,
+  },
+
+  openGraph: {
+    type:        "website",
+    locale:      "es_ES",
+    url:         BASE_URL,
+    siteName:    "GmSportStudio",
+    title:       "GmSportStudio | Vídeo Análisis Deportivo · Alternativa a Hudl y Nacsport",
+    description:
+      "Telestración, scouting y clips en segundos. Integración con YouTube. La herramienta de análisis profesional para entrenadores que no quieren pagar una fortuna.",
+    images: [
+      {
+        url:    "/og-image.png",
+        width:  1200,
+        height: 630,
+        alt:    "GmSportStudio — Software de vídeo análisis deportivo para baloncesto y fútbol",
+      },
+    ],
+  },
+
+  twitter: {
+    card:        "summary_large_image",
+    site:        "@josegalandev",
+    creator:     "@josegalandev",
+    title:       "GmSportStudio | Vídeo Análisis Deportivo",
+    description:
+      "Telestración, scouting y corte de clips. La alternativa low cost a Hudl y Nacsport.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
@@ -30,10 +95,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-          <BackgroundEffects />
-          <Navbar />
-          <main className="flex-1 pt-16">{children}</main>
-        </body>
+        <BackgroundEffects />
+        <Navbar />
+        <main className="flex-1 pt-16">{children}</main>
+      </body>
     </html>
   );
 }
