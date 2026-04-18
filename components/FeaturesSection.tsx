@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
-import { Pencil, CirclePlay, Scissors, Database } from "lucide-react";
+import { FolderOpen, CirclePlay, Scissors, Database } from "lucide-react";
 
 /* ─── Tipos ─────────────────────────────────────────────────── */
 interface Feature {
@@ -21,13 +21,13 @@ interface Feature {
 /* ─── Datos ─────────────────────────────────────────────────── */
 const FEATURES: Feature[] = [
   {
-    id:          "telestracion",
-    icon:        <Pencil size={22} strokeWidth={1.8} />,
-    title:       "Telestrador Dinámico",
-    description: "Dibuja flechas, zonas y trayectorias sobre el video en tiempo real. Sin pausar el análisis.",
+    id:          "multipartido",
+    icon:        <FolderOpen size={22} strokeWidth={1.8} />,
+    title:       "Varios partidos, un proyecto",
+    description: "Agrupa todos los partidos de una jornada, rival o temporada en un único proyecto. Cambia de partido sin perder el contexto del análisis.",
     grid:        "col-span-2 md:col-span-2 row-span-2",
     variant:     "large",
-    visual:      <TelestradorVisual />,
+    visual:      <MultiMatchVisual />,
   },
   {
     id:          "youtube",
@@ -67,25 +67,37 @@ const cardVariants: Variants = {
 };
 
 /* ─── Visuales decorativos ───────────────────────────────────── */
-function TelestradorVisual() {
+function MultiMatchVisual() {
+  const matches = [
+    { label: "J12 · Real Madrid",   active: true  },
+    { label: "J13 · FC Barcelona",  active: false },
+    { label: "J14 · Unicaja",       active: false },
+  ];
   return (
-    <div className="absolute inset-0 flex items-end justify-center overflow-hidden pointer-events-none">
-      <svg viewBox="0 0 320 200" className="w-full max-w-xs opacity-25 mb-4" fill="none">
-        <rect x="10" y="10" width="300" height="180" rx="6" stroke="#2a5c3a" strokeWidth="1" />
-        <line x1="160" y1="10" x2="160" y2="190" stroke="#2a5c3a" strokeWidth="0.8" />
-        <circle cx="160" cy="100" r="36" stroke="#2a5c3a" strokeWidth="0.8" />
-        {/* Jugadores */}
-        {[[80,60],[130,100],[160,60],[200,80],[240,100]].map(([x,y],i)=>(
-          <circle key={i} cx={x} cy={y} r="7" fill="#FF5722" fillOpacity="0.7" />
-        ))}
-        {/* Línea de telestración animada */}
-        <path d="M 80 60 Q 130 40 160 60 T 240 100" stroke="#FF5722" strokeWidth="2"
-          strokeDasharray="6 3" opacity="0.9" />
-        <polygon points="236,93 244,100 235,107" fill="#FF5722" opacity="0.9" />
-        {/* Zona sombreada */}
-        <ellipse cx="160" cy="85" rx="50" ry="28" fill="#FF5722" fillOpacity="0.08"
-          stroke="#FF5722" strokeWidth="0.8" strokeOpacity="0.4" />
-      </svg>
+    <div className="absolute bottom-5 left-5 right-5 flex flex-col gap-2 pointer-events-none opacity-30">
+      {matches.map(({ label, active }) => (
+        <div
+          key={label}
+          className="flex items-center gap-2.5 px-3 py-2 rounded-lg border"
+          style={{
+            background: active ? "rgba(255,87,34,0.12)" : "rgba(255,255,255,0.04)",
+            borderColor: active ? "rgba(255,87,34,0.35)" : "rgba(255,255,255,0.08)",
+          }}
+        >
+          <span
+            className="w-1.5 h-1.5 rounded-full shrink-0"
+            style={{ background: active ? "#FF5722" : "rgba(255,255,255,0.2)" }}
+          />
+          <span className="text-[11px] font-medium" style={{ color: active ? "#FF8A65" : "rgba(255,255,255,0.4)" }}>
+            {label}
+          </span>
+          {active && (
+            <span className="ml-auto text-[9px] text-[#FF7043] font-semibold uppercase tracking-wider">
+              Activo
+            </span>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
