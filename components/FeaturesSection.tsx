@@ -1,0 +1,283 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView, type Variants } from "framer-motion";
+import { Pencil, CirclePlay, Scissors, Database } from "lucide-react";
+
+/* ─── Tipos ─────────────────────────────────────────────────── */
+interface Feature {
+  id:          string;
+  icon:        React.ReactNode;
+  title:       string;
+  description: string;
+  /** Clase de grid para el layout asimétrico */
+  grid:        string;
+  /** Variante visual de la card */
+  variant:     "default" | "accent" | "large";
+  /** Contenido decorativo opcional dentro de la card */
+  visual?:     React.ReactNode;
+}
+
+/* ─── Datos ─────────────────────────────────────────────────── */
+const FEATURES: Feature[] = [
+  {
+    id:          "telestracion",
+    icon:        <Pencil size={22} strokeWidth={1.8} />,
+    title:       "Telestrador Dinámico",
+    description: "Dibuja flechas, zonas y trayectorias sobre el video en tiempo real. Sin pausar el análisis.",
+    grid:        "col-span-2 md:col-span-2 row-span-2",
+    variant:     "large",
+    visual:      <TelestradorVisual />,
+  },
+  {
+    id:          "youtube",
+    icon:        <CirclePlay size={22} strokeWidth={1.8} />,
+    title:       "YouTube Nativo",
+    description: "Pega la URL de cualquier partido y empieza a analizar al instante.",
+    grid:        "col-span-2 md:col-span-1",
+    variant:     "accent",
+    visual:      <YoutubeVisual />,
+  },
+  {
+    id:          "clips",
+    icon:        <Scissors size={22} strokeWidth={1.8} />,
+    title:       "Corte de Clips Ultra-rápido",
+    description: "Marca inicio y fin con una tecla. Exporta la jugada en segundos.",
+    grid:        "col-span-2 md:col-span-1",
+    variant:     "default",
+    visual:      <ClipsVisual />,
+  },
+  {
+    id:          "db",
+    icon:        <Database size={22} strokeWidth={1.8} />,
+    title:       "Base de Datos Local",
+    description: "Tus informes, sesiones y jugadores guardados offline. Siempre contigo, sin depender de la nube.",
+    grid:        "col-span-2 md:col-span-2",
+    variant:     "default",
+    visual:      <DatabaseVisual />,
+  },
+];
+
+/* ─── Variantes de animación ─────────────────────────────────── */
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const cardVariants: Variants = {
+  hidden:  { opacity: 0, y: 32, scale: 0.97 },
+  visible: { opacity: 1, y: 0,  scale: 1 },
+};
+
+/* ─── Visuales decorativos ───────────────────────────────────── */
+function TelestradorVisual() {
+  return (
+    <div className="absolute inset-0 flex items-end justify-center overflow-hidden pointer-events-none">
+      <svg viewBox="0 0 320 200" className="w-full max-w-xs opacity-25 mb-4" fill="none">
+        <rect x="10" y="10" width="300" height="180" rx="6" stroke="#2a5c3a" strokeWidth="1" />
+        <line x1="160" y1="10" x2="160" y2="190" stroke="#2a5c3a" strokeWidth="0.8" />
+        <circle cx="160" cy="100" r="36" stroke="#2a5c3a" strokeWidth="0.8" />
+        {/* Jugadores */}
+        {[[80,60],[130,100],[160,60],[200,80],[240,100]].map(([x,y],i)=>(
+          <circle key={i} cx={x} cy={y} r="7" fill="#FF5722" fillOpacity="0.7" />
+        ))}
+        {/* Línea de telestración animada */}
+        <path d="M 80 60 Q 130 40 160 60 T 240 100" stroke="#FF5722" strokeWidth="2"
+          strokeDasharray="6 3" opacity="0.9" />
+        <polygon points="236,93 244,100 235,107" fill="#FF5722" opacity="0.9" />
+        {/* Zona sombreada */}
+        <ellipse cx="160" cy="85" rx="50" ry="28" fill="#FF5722" fillOpacity="0.08"
+          stroke="#FF5722" strokeWidth="0.8" strokeOpacity="0.4" />
+      </svg>
+    </div>
+  );
+}
+
+function YoutubeVisual() {
+  return (
+    <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none">
+      <div className="w-14 h-10 rounded bg-red-600 flex items-center justify-center">
+        <div className="w-0 h-0 border-y-[7px] border-y-transparent border-l-[12px] border-l-white ml-1" />
+      </div>
+    </div>
+  );
+}
+
+function ClipsVisual() {
+  return (
+    <div className="absolute bottom-3 right-3 flex gap-1 opacity-25 pointer-events-none">
+      {[40, 70, 30, 55, 85, 45, 65].map((h, i) => (
+        <div
+          key={i}
+          className="w-2 rounded-sm"
+          style={{
+            height: `${h}%`,
+            maxHeight: "40px",
+            background: i === 3 ? "#FF5722" : "rgba(255,255,255,0.3)",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function DatabaseVisual() {
+  return (
+    <div className="absolute right-6 top-1/2 -translate-y-1/2 flex gap-3 opacity-20 pointer-events-none">
+      {[
+        { label: "Sesiones",  value: "142" },
+        { label: "Jugadores", value: "38"  },
+        { label: "Clips",     value: "891" },
+      ].map(({ label, value }) => (
+        <div key={label} className="flex flex-col items-center gap-1">
+          <span className="text-2xl font-black text-white">{value}</span>
+          <span className="text-[10px] text-white/50 uppercase tracking-wider">{label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ─── Card individual ────────────────────────────────────────── */
+function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
+  const isAccent = feature.variant === "accent";
+  const isLarge  = feature.variant === "large";
+
+  return (
+    <motion.div
+      variants={cardVariants}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: EASE }}
+      whileHover={{ y: -4, transition: { duration: 0.25, ease: "easeOut" } }}
+      className={[
+        "relative overflow-hidden rounded-2xl p-6 flex flex-col gap-4 group cursor-default",
+        feature.grid,
+        isAccent
+          ? "border border-[#FF5722]/30 bg-[#FF5722]/8"
+          : "border border-white/7 bg-[#111111]",
+        isLarge ? "min-h-[280px] md:min-h-[320px]" : "min-h-[160px]",
+      ].join(" ")}
+      style={isAccent ? {
+        background: "linear-gradient(135deg, rgba(255,87,34,0.1) 0%, rgba(17,17,17,0.95) 60%)",
+      } : undefined}
+    >
+      {/* Resplandor de hover */}
+      <div
+        aria-hidden="true"
+        className={[
+          "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl",
+          isAccent
+            ? "bg-[radial-gradient(ellipse_at_top-left,rgba(255,87,34,0.12),transparent_60%)]"
+            : "bg-[radial-gradient(ellipse_at_top-left,rgba(255,255,255,0.04),transparent_60%)]",
+        ].join(" ")}
+      />
+
+      {/* Borde superior iluminado */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          background: isAccent
+            ? "linear-gradient(90deg, transparent, rgba(255,87,34,0.6), transparent)"
+            : "linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)",
+        }}
+      />
+
+      {/* Contenido */}
+      <div className="relative z-10 flex flex-col gap-3 flex-1">
+        {/* Icono */}
+        <div
+          className={[
+            "w-10 h-10 rounded-xl flex items-center justify-center shrink-0",
+            isAccent
+              ? "bg-[#FF5722]/20 text-[#FF7043]"
+              : "bg-white/6 text-white/60 group-hover:text-white/90 transition-colors duration-300",
+          ].join(" ")}
+        >
+          {feature.icon}
+        </div>
+
+        {/* Texto */}
+        <div className="flex flex-col gap-1.5">
+          <h3 className={[
+            "font-semibold leading-snug",
+            isLarge ? "text-xl" : "text-base",
+            isAccent ? "text-white" : "text-[#EDEDED]",
+          ].join(" ")}>
+            {feature.title}
+          </h3>
+          <p className={[
+            "text-sm leading-relaxed",
+            isLarge ? "max-w-xs" : "",
+            "text-[#EDEDED]/45 group-hover:text-[#EDEDED]/65 transition-colors duration-300",
+          ].join(" ")}>
+            {feature.description}
+          </p>
+        </div>
+
+        {/* Badge en card accent */}
+        {isAccent && (
+          <span className="mt-auto self-start inline-flex items-center gap-1.5 px-2.5 py-1
+                           rounded-full text-xs font-medium bg-[#FF5722]/15 text-[#FF8A65]
+                           border border-[#FF5722]/25">
+            <span className="w-1 h-1 rounded-full bg-[#FF5722]" />
+            Sin conversiones
+          </span>
+        )}
+      </div>
+
+      {/* Visual decorativo */}
+      {feature.visual}
+    </motion.div>
+  );
+}
+
+/* ─── Sección principal ──────────────────────────────────────── */
+export default function FeaturesSection() {
+  const ref     = useRef<HTMLDivElement>(null);
+  const inView  = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section
+      id="caracteristicas"
+      ref={ref}
+      className="relative px-5 md:px-8 py-24 md:py-32 max-w-6xl mx-auto"
+    >
+      {/* Cabecera */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, ease: EASE }}
+        className="flex flex-col items-center text-center gap-4 mb-14"
+      >
+        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10
+                         bg-white/4 text-white/40 text-xs font-medium tracking-wide uppercase">
+          Características
+        </span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight"
+          style={{
+            background: "linear-gradient(160deg, #ffffff 40%, #6b7280 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          Todo lo que necesitas,
+          <br />
+          nada que no necesites.
+        </h2>
+        <p className="max-w-md text-[#EDEDED]/45 text-base leading-relaxed">
+          Herramientas de análisis profesionales diseñadas para entrenadores que valoran su tiempo.
+        </p>
+      </motion.div>
+
+      {/* Bento Grid */}
+      <motion.div
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+        className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4"
+      >
+        {FEATURES.map((feature, i) => (
+          <FeatureCard key={feature.id} feature={feature} index={i} />
+        ))}
+      </motion.div>
+    </section>
+  );
+}
