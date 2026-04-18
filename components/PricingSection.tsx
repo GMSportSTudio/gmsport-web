@@ -204,6 +204,30 @@ export default function PricingSection() {
         </div>
         <p className="text-[11px] text-[#cccccc]/18">Próximamente · Los Fundadores tendrán descuento permanente</p>
       </motion.div>
+
+      {/* B2B lead capture */}
+      <motion.div
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={fadeUp(0.42)}
+        className="mt-8 flex items-start gap-3 max-w-md w-full px-4 py-3.5 rounded-lg border border-white/7 bg-white/3"
+      >
+        <span className="text-[#FF7043] mt-0.5 shrink-0">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </span>
+        <p className="text-xs text-[#cccccc]/40 leading-relaxed">
+          ¿Buscas licencias para todo tu club? Pronto abriremos los planes anuales y por equipos.{" "}
+          <a
+            href="mailto:josegalan16@gmail.com"
+            className="text-[#FF7043]/80 hover:text-[#FF7043] underline underline-offset-2 transition-colors duration-150"
+          >
+            Escríbenos para una oferta personalizada.
+          </a>
+        </p>
+      </motion.div>
     </section>
   );
 }
