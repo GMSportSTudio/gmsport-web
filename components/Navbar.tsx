@@ -24,7 +24,7 @@ export default function Navbar() {
   /* Cierra el menú al redimensionar a desktop */
   useEffect(() => {
     const onResize = () => { if (window.innerWidth >= 768) setMenuOpen(false); };
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", onResize, { passive: true });
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
@@ -82,7 +82,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           {/* Botón Acceso Beta */}
           <motion.a
-            href="#beta"
+            href="#precios"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -168,7 +168,7 @@ export default function Navbar() {
                 className="pt-3"
               >
                 <a
-                  href="#beta"
+                  href="#precios"
                   onClick={() => setMenuOpen(false)}
                   className="flex items-center justify-center w-full py-2.5 text-sm font-semibold
                              text-white bg-[#FF5722] hover:bg-[#E64A19]

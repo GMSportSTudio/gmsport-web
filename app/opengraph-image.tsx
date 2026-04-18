@@ -62,7 +62,7 @@ export default function OGImage() {
           marginTop: 28, fontSize: 24, color: "rgba(237,237,237,0.5)",
           maxWidth: 680, lineHeight: 1.5,
         }}>
-          Telestración · Scouting · YouTube · La alternativa a Hudl y Nacsport
+          Telestración · Scouting · YouTube · Análisis táctico profesional
         </p>
 
         {/* Badge */}
@@ -76,7 +76,7 @@ export default function OGImage() {
             width: 8, height: 8, borderRadius: "50%", background: "#FF5722",
           }} />
           <span style={{ color: "#FF8A65", fontSize: 16, fontWeight: 600, letterSpacing: 1 }}>
-            Beta Founder · Desde 99€ · gmsportstudio.com
+            Beta abierta · 9,99€ · gmsportstudio.com
           </span>
         </div>
       </div>

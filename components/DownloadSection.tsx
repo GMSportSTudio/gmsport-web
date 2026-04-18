@@ -355,7 +355,7 @@ export default function DownloadSection() {
           className="mt-6 flex flex-col items-center gap-3"
         >
           <p className="text-xs text-[#EDEDED]/25">
-            Versión 1.1 Beta · Solo macOS por ahora · Windows próximamente
+            Versión 1.1 Beta · macOS (Apple Silicon &amp; Intel) · Windows 10/11
           </p>
 
           {/* Acordeón instrucciones seguridad */}

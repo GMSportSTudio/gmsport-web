@@ -55,7 +55,7 @@ const FEATURES: Feature[] = [
     description: "Tus informes, sesiones y jugadores guardados offline. Siempre contigo, sin depender de la nube.",
     grid:        "col-span-2 md:col-span-2",
     variant:     "default",
-    visual:      <DatabaseVisual />,
+    visual:      undefined,
   },
 ];
 

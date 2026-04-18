@@ -60,12 +60,12 @@ export const metadata: Metadata = {
     locale:      "es_ES",
     url:         BASE_URL,
     siteName:    "GmSportStudio",
-    title:       "GmSportStudio | Vídeo Análisis Deportivo · Alternativa a Hudl y Nacsport",
+    title:       "GmSportStudio | Vídeo Análisis Deportivo para Entrenadores",
     description:
-      "Telestración, scouting y clips en segundos. Integración con YouTube. La herramienta de análisis profesional para entrenadores que no quieren pagar una fortuna.",
+      "Telestración, scouting y clips en segundos. Integración con YouTube. La herramienta de análisis profesional para entrenadores a precio asequible.",
     images: [
       {
-        url:    "/og-image.png",
+        url:    `${BASE_URL}/opengraph-image`,
         width:  1200,
         height: 630,
         alt:    "GmSportStudio — Software de vídeo análisis deportivo para baloncesto y fútbol",
@@ -79,8 +79,8 @@ export const metadata: Metadata = {
     creator:     "@josegalandev",
     title:       "GmSportStudio | Vídeo Análisis Deportivo",
     description:
-      "Telestración, scouting y corte de clips. La alternativa low cost a Hudl y Nacsport.",
-    images: ["/og-image.png"],
+      "Telestración, scouting y corte de clips. La herramienta profesional para entrenadores a precio asequible.",
+    images: [`${BASE_URL}/opengraph-image`],
   },
 };
 

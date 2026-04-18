@@ -20,7 +20,6 @@ const PILLARS = [
     body:     "Olvídate de descargar vídeos o pagar plataformas de streaming. Pega la URL de YouTube y empieza a telestrarar, marcar eventos y cortar clips directamente. Sin conversiones, sin esperas.",
     bullets:  ["Partidos en directo y grabados", "Playlists completas de temporada", "Sin límite de URLs analizadas"],
     color:    "#FF5722",
-    gradient: "from-[#FF5722]/10 to-transparent",
     border:   "border-[#FF5722]/20",
   },
   {
@@ -30,7 +29,6 @@ const PILLARS = [
     body:     "Un panel que centraliza jugadores, sesiones, clips y estadísticas. Filtra por partido, jugador o acción táctica. Presenta tus informes directamente desde la app sin exportar nada.",
     bullets:  ["Vista de campo con posicionamiento", "Timeline de eventos por partido", "Exportación a vídeo en un clic"],
     color:    "#7C3AED",
-    gradient: "from-[#7C3AED]/10 to-transparent",
     border:   "border-[#7C3AED]/20",
   },
   {
@@ -40,7 +38,6 @@ const PILLARS = [
     body:     "El software de análisis profesional ha sido históricamente inaccesible para la mayoría de clubes. GmSportStudio rompe esa barrera con planes mensuales, anuales y paquetes de licencias para equipos, sin renunciar a ninguna función.",
     bullets:  ["Planes mensuales y anuales", "Licencias para clubes y academias", "Sin costes ocultos"],
     color:    "#16A34A",
-    gradient: "from-[#16A34A]/10 to-transparent",
     border:   "border-[#16A34A]/20",
   },
 ];
@@ -112,7 +109,10 @@ export default function WhySection() {
             ].join(" ")}
           >
             {/* Gradiente de fondo sutil */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${p.gradient} opacity-60 pointer-events-none`} />
+            <div
+              className="absolute inset-0 opacity-60 pointer-events-none"
+              style={{ background: `linear-gradient(135deg, ${p.color}18 0%, transparent 60%)` }}
+            />
 
             {/* Icono + tag */}
             <div className="relative flex items-center gap-3">
