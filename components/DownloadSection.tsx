@@ -6,9 +6,10 @@ import { Download, ChevronDown, MousePointer2, ShieldCheck, AlertTriangle, Apple
 
 /* ─── URLs de descarga — actualiza cuando subas los DMGs ─────── */
 const DOWNLOADS = {
-  silicon:   "https://github.com/GMSportSTudio/gmsport-web/releases/latest/download/GMSportStudio-macos-applesilicon-1.1.2.zip",
-  intel:     "https://github.com/GMSportSTudio/gmsport-web/releases/latest/download/GMSportStudio-macos-intel-1.1.2.zip",
-  universal: "https://github.com/GMSportSTudio/gmsport-web/releases/latest/download/GMSportStudio-macos-universal-1.1.2.zip",
+  silicon:   "https://github.com/GMSportSTudio/gmsport-web/releases/download/v1.1-beta/GMSportStudio-macos-applesilicon-1.1.2.zip",
+  intel:     "https://github.com/GMSportSTudio/gmsport-web/releases/download/v1.1-beta/GMSportStudio-macos-intel-1.1.2.zip",
+  universal: "https://github.com/GMSportSTudio/gmsport-web/releases/download/v1.1-beta/GMSportStudio-macos-universal-1.1.2.zip",
+  windows:   "https://github.com/GMSportSTudio/gmsport-web/releases/download/v1.1-beta/GMSportStudio-Setup-1.1.2.exe",
 };
 
 /* ─── Tipos ──────────────────────────────────────────────────── */
@@ -308,7 +309,7 @@ export default function DownloadSection() {
             </>
           )}
 
-          {/* No detectado → universal recomendado + opciones específicas */}
+          {/* No detectado → opciones específicas */}
           {(!isMac || !detected) && (
             <>
               <motion.div variants={fadeUp(0.1)} className="flex-1">
@@ -329,6 +330,23 @@ export default function DownloadSection() {
               </motion.div>
             </>
           )}
+        </motion.div>
+
+        {/* Botón Windows — siempre visible */}
+        <motion.div
+          initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp(0.3)}
+          className="mt-3 w-full max-w-xl"
+        >
+          <DownloadButton
+            href={DOWNLOADS.windows}
+            label="Descargar para Windows"
+            sublabel="Windows 10/11 · EXE · Setup"
+            icon={
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M3 5.557L10.373 4.5v7.173H3V5.557zm0 12.886L10.373 19.5V12.5H3v5.943zM11.2 4.37L21 3v8.673h-9.8V4.37zm0 15.26L21 21v-8.327h-9.8v7.957z"/>
+              </svg>
+            }
+          />
         </motion.div>
 
         {/* Nota de versión + enlace instrucciones */}
