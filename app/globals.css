@@ -182,9 +182,94 @@ body {
     color: var(--color-success-bright);
   }
 
-  /* Glow naranja */
+  /* ── Glow naranja ─────────────────────────────────────────────── */
   .glow-accent {
     box-shadow: 0 0 16px rgba(255, 87, 34, 0.25), 0 0 48px rgba(255, 87, 34, 0.08);
+  }
+  .glow-accent-lg {
+    box-shadow:
+      0 0 0 1px rgba(255, 87, 34, 0.18),
+      0 0 32px rgba(255, 87, 34, 0.22),
+      0 0 80px rgba(255, 87, 34, 0.10),
+      0 32px 80px rgba(0, 0, 0, 0.6);
+  }
+  /* Halo ambiental que guía la vista hacia el CTA */
+  .glow-cta-guide {
+    position: relative;
+  }
+  .glow-cta-guide::before {
+    content: "";
+    position: absolute;
+    inset: -60px -80px;
+    background: radial-gradient(ellipse at 50% 60%, rgba(255, 87, 34, 0.13) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(24px);
+  }
+
+  /* ── Bento card — glass con profundidad ───────────────────────── */
+  .bento-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(28, 28, 28, 0.85) 0%, rgba(14, 14, 14, 0.92) 100%);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.065);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.06) inset,   /* inner highlight top */
+      0 -1px 0 0 rgba(0, 0, 0, 0.4) inset,          /* inner shadow bottom */
+      0 8px 24px rgba(0, 0, 0, 0.45),
+      0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 280ms ease, border-color 280ms ease, transform 250ms ease;
+  }
+  .bento-card:hover {
+    border-color: rgba(255, 255, 255, 0.11);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.10) inset,
+      0 -1px 0 0 rgba(0, 0, 0, 0.4) inset,
+      0 16px 48px rgba(0, 0, 0, 0.55),
+      0 4px 12px rgba(0, 0, 0, 0.35);
+    transform: translateY(-3px);
+  }
+  .bento-card-accent {
+    background: linear-gradient(135deg, rgba(255, 87, 34, 0.12) 0%, rgba(14, 14, 14, 0.92) 55%);
+    border-color: rgba(255, 87, 34, 0.28);
+    box-shadow:
+      0 1px 0 0 rgba(255, 120, 60, 0.15) inset,
+      0 -1px 0 0 rgba(0, 0, 0, 0.4) inset,
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 0 40px rgba(255, 87, 34, 0.06);
+  }
+  .bento-card-accent:hover {
+    border-color: rgba(255, 87, 34, 0.45);
+    box-shadow:
+      0 1px 0 0 rgba(255, 120, 60, 0.22) inset,
+      0 -1px 0 0 rgba(0, 0, 0, 0.4) inset,
+      0 16px 48px rgba(0, 0, 0, 0.55),
+      0 0 60px rgba(255, 87, 34, 0.10);
+  }
+
+  /* ── Números tech — tabular, tight ───────────────────────────── */
+  .stat-num {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1, "ss01" 1;
+    letter-spacing: -0.03em;
+    font-weight: 900;
+  }
+
+  /* ── Shimmer en línea superior de card ───────────────────────── */
+  .card-top-shine::after {
+    content: "";
+    position: absolute;
+    inset-inline: 10%;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    pointer-events: none;
+  }
+  .card-top-shine-accent::after {
+    background: linear-gradient(90deg, transparent, rgba(255, 87, 34, 0.55), transparent);
   }
 }
 

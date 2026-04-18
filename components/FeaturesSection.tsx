@@ -156,41 +156,14 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
     <motion.div
       variants={cardVariants}
       transition={{ duration: 0.6, delay: index * 0.1, ease: EASE }}
-      whileHover={{ y: -4, transition: { duration: 0.25, ease: "easeOut" } }}
+      whileHover={{ scale: 1.005 }}
       className={[
-        "relative overflow-hidden rounded-2xl p-6 flex flex-col gap-4 group cursor-default",
+        "bento-card p-6 flex flex-col gap-4 group cursor-default card-top-shine",
         feature.grid,
-        isAccent
-          ? "border border-[#FF5722]/30 bg-[#FF5722]/8"
-          : "border border-white/7 bg-[#111111]",
+        isAccent ? "bento-card-accent card-top-shine-accent" : "",
         isLarge ? "min-h-[280px] md:min-h-[320px]" : "min-h-[160px]",
       ].join(" ")}
-      style={isAccent ? {
-        background: "linear-gradient(135deg, rgba(255,87,34,0.1) 0%, rgba(17,17,17,0.95) 60%)",
-      } : undefined}
     >
-      {/* Resplandor de hover */}
-      <div
-        aria-hidden="true"
-        className={[
-          "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl",
-          isAccent
-            ? "bg-[radial-gradient(ellipse_at_top-left,rgba(255,87,34,0.12),transparent_60%)]"
-            : "bg-[radial-gradient(ellipse_at_top-left,rgba(255,255,255,0.04),transparent_60%)]",
-        ].join(" ")}
-      />
-
-      {/* Borde superior iluminado */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{
-          background: isAccent
-            ? "linear-gradient(90deg, transparent, rgba(255,87,34,0.6), transparent)"
-            : "linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)",
-        }}
-      />
-
       {/* Contenido */}
       <div className="relative z-10 flex flex-col gap-3 flex-1">
         {/* Icono */}
@@ -272,7 +245,7 @@ export default function FeaturesSection() {
         >
           Todo lo que necesitas,
           <br />
-          nada que no necesites.
+          al precio que necesitas.
         </h2>
         <p className="max-w-md text-[#EDEDED]/45 text-base leading-relaxed">
           Herramientas de análisis profesionales diseñadas para entrenadores que valoran su tiempo.

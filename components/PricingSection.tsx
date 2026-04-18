@@ -73,7 +73,7 @@ export default function PricingSection() {
 
       {/* Tarjeta principal */}
       <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp(0.15)}
-        className="w-full max-w-md relative"
+        className="w-full max-w-md relative glow-cta-guide"
       >
         {/* Glow detrás */}
         <div aria-hidden="true" className="absolute -inset-px pointer-events-none"
@@ -125,8 +125,8 @@ export default function PricingSection() {
             {/* Precio */}
             <div className="flex items-end gap-2 leading-none">
               <span className="text-[#cccccc]/50 text-xl font-medium mb-1">€</span>
-              <span className="text-7xl font-black text-white tracking-tight">9</span>
-              <span className="text-4xl font-black text-white/70 mb-1">,99</span>
+              <span className="stat-num text-7xl font-black text-white">9</span>
+              <span className="stat-num text-4xl font-black text-white/70 mb-1">,99</span>
               <div className="flex flex-col mb-2 ml-1">
                 <span className="text-xs text-[#cccccc]/40 leading-tight">pago</span>
                 <span className="text-xs text-[#cccccc]/40 leading-tight">único</span>
