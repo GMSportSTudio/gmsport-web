@@ -25,14 +25,14 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Analiza partidos de baloncesto con telestración profesional, scouting avanzado y corte de clips ultrarrápido. Integración directa con YouTube. La alternativa low cost a Hudl y Nacsport para clubes y entrenadores. Desde 99€.",
+    "Analiza partidos de baloncesto con telestración profesional, scouting avanzado y corte de clips ultrarrápido. Integración directa con YouTube. Planes mensuales, anuales y licencias para clubes. Tecnología de élite a precio asequible.",
 
   keywords: [
     "video análisis baloncesto",
     "scouting basket low cost",
     "software telestración baloncesto",
-    "alternativa Hudl baloncesto",
-    "alternativa Nacsport",
+    "software análisis táctico deportivo",
+    "licencias software deportivo clubes",
     "análisis táctico baloncesto",
     "software entrenadores baloncesto",
     "edición video deportivo",

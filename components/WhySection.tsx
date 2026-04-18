@@ -37,23 +37,24 @@ const PILLARS = [
     icon:     <BadgeDollarSign size={24} strokeWidth={1.8} />,
     tag:      "Precio accesible",
     title:    "Tecnología de élite para clubes modestos",
-    body:     "Hudl cuesta más de 2.000€ al año. Nacsport supera los 1.500€. GmSportStudio es un pago único de 99€ con todas las actualizaciones incluidas. La misma potencia, sin el abono mensual que lastra el presupuesto del club.",
-    bullets:  ["Pago único — sin suscripción", "Actualizaciones de por vida", "Licencia para 1 dispositivo"],
+    body:     "El software de análisis profesional ha sido históricamente inaccesible para la mayoría de clubes. GmSportStudio rompe esa barrera con planes mensuales, anuales y paquetes de licencias para equipos, sin renunciar a ninguna función.",
+    bullets:  ["Planes mensuales y anuales", "Licencias para clubes y academias", "Sin costes ocultos"],
     color:    "#16A34A",
     gradient: "from-[#16A34A]/10 to-transparent",
     border:   "border-[#16A34A]/20",
   },
 ];
 
-/* ─── Tabla comparativa ──────────────────────────────────────── */
-const COMPARISON = [
-  { feature: "Vídeo análisis avanzado",  gms: true,  hudl: true,  nacsport: true  },
-  { feature: "Telestración en tiempo real", gms: true, hudl: true, nacsport: true },
-  { feature: "Integración con YouTube",  gms: true,  hudl: false, nacsport: false },
-  { feature: "Sin suscripción anual",    gms: true,  hudl: false, nacsport: false },
-  { feature: "Mac + Windows",           gms: true,  hudl: true,  nacsport: true  },
-  { feature: "Base de datos local",      gms: true,  hudl: false, nacsport: true  },
-  { feature: "Precio de entrada",        gms: "99€", hudl: "2.000€+", nacsport: "1.500€+" },
+/* ─── Tabla de funciones ─────────────────────────────────────── */
+const FEATURES_TABLE = [
+  { feature: "Vídeo análisis avanzado",        individual: true,  club: true  },
+  { feature: "Telestración en tiempo real",    individual: true,  club: true  },
+  { feature: "Integración con YouTube",        individual: true,  club: true  },
+  { feature: "Corte de clips ultrarrápido",    individual: true,  club: true  },
+  { feature: "Mac + Windows",                  individual: true,  club: true  },
+  { feature: "Base de datos local offline",    individual: true,  club: true  },
+  { feature: "Panel de administración",        individual: false, club: true  },
+  { feature: "Múltiples dispositivos",         individual: false, club: true  },
 ];
 
 /* ─── Componente principal ───────────────────────────────────── */
@@ -65,7 +66,7 @@ export default function WhySection() {
     <section
       id="por-que"
       ref={ref}
-      aria-label="Por qué elegir GmSportStudio frente a Hudl y Nacsport"
+      aria-label="Por qué elegir GmSportStudio"
       className="relative px-5 md:px-8 py-24 md:py-32 max-w-6xl mx-auto w-full"
     >
       {/* Cabecera */}
@@ -84,12 +85,12 @@ export default function WhySection() {
             WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
           }}
         >
-          La alternativa inteligente
-          <br />a Hudl y Nacsport
+          Herramientas de élite
+          <br />al alcance de todos
         </h2>
-        <p className="max-w-lg text-[#EDEDED]/45 text-base leading-relaxed">
-          Mismo nivel de análisis profesional. Sin el precio que solo se pueden permitir
-          los clubes de primera división.
+        <p className="max-w-lg text-[#cccccc]/45 text-base leading-relaxed">
+          El mismo nivel de análisis que usan los equipos profesionales,
+          con planes diseñados para entrenadores individuales y clubes de cualquier categoría.
         </p>
       </motion.div>
 
@@ -146,22 +147,22 @@ export default function WhySection() {
         ))}
       </motion.div>
 
-      {/* Tabla comparativa */}
+      {/* Tabla de funciones */}
       <motion.div
         initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp(0.4)}
-        className="rounded-2xl overflow-hidden border border-white/8"
+        className="overflow-hidden border border-white/8"
+        style={{ borderRadius: "8px" }}
       >
         {/* Cabecera tabla */}
-        <div className="grid grid-cols-4 bg-[#111] border-b border-white/8 px-4 py-3">
-          <span className="text-xs text-white/30 uppercase tracking-wider col-span-1">Característica</span>
+        <div className="grid grid-cols-3 bg-[#2d2d30] border-b border-white/8 px-4 py-3">
+          <span className="text-xs text-white/30 uppercase tracking-wider">Función</span>
           {[
-            { label: "GmSportStudio", highlight: true },
-            { label: "Hudl",          highlight: false },
-            { label: "Nacsport",      highlight: false },
+            { label: "Individual", highlight: false },
+            { label: "Club",       highlight: true  },
           ].map(({ label, highlight }) => (
             <span key={label} className={[
               "text-xs font-semibold text-center uppercase tracking-wider",
-              highlight ? "text-[#FF7043]" : "text-white/30",
+              highlight ? "text-[#4ec9b0]" : "text-[#FF7043]",
             ].join(" ")}>
               {label}
             </span>
@@ -169,27 +170,20 @@ export default function WhySection() {
         </div>
 
         {/* Filas */}
-        {COMPARISON.map((row, i) => (
+        {FEATURES_TABLE.map((row, i) => (
           <div
             key={row.feature}
             className={[
-              "grid grid-cols-4 px-4 py-3.5 items-center",
-              i % 2 === 0 ? "bg-[#0a0a0a]" : "bg-[#0d0d0d]",
-              i < COMPARISON.length - 1 ? "border-b border-white/5" : "",
+              "grid grid-cols-3 px-4 py-3.5 items-center",
+              i % 2 === 0 ? "bg-[#1e1e1e]" : "bg-[#252526]",
+              i < FEATURES_TABLE.length - 1 ? "border-b border-white/5" : "",
             ].join(" ")}
           >
-            <span className="text-sm text-[#EDEDED]/60 col-span-1 pr-4">{row.feature}</span>
-            {[row.gms, row.hudl, row.nacsport].map((val, j) => (
+            <span className="text-sm text-[#cccccc]/60 pr-4">{row.feature}</span>
+            {[row.individual, row.club].map((val, j) => (
               <div key={j} className="flex justify-center">
-                {typeof val === "string" ? (
-                  <span className={[
-                    "text-sm font-semibold",
-                    j === 0 ? "text-[#FF7043]" : "text-white/30",
-                  ].join(" ")}>
-                    {val}
-                  </span>
-                ) : val ? (
-                  <CheckCircle2 size={16} className={j === 0 ? "text-[#FF7043]" : "text-white/25"} />
+                {val ? (
+                  <CheckCircle2 size={16} className={j === 1 ? "text-[#4ec9b0]" : "text-[#FF7043]"} />
                 ) : (
                   <span className="text-white/15 text-lg leading-none">—</span>
                 )}

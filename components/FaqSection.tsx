@@ -19,12 +19,12 @@ const FAQS = [
     a: "Sí. La aplicación es compatible con macOS (Apple Silicon y Intel) y Windows 10/11. El instalador se adapta automáticamente a tu plataforma.",
   },
   {
-    q: "¿Qué incluye exactamente el acceso Founder?",
-    a: "Acceso inmediato a la Beta, todas las actualizaciones futuras sin coste adicional, soporte directo por email con el equipo y una insignia exclusiva de Founder visible en la aplicación.",
+    q: "¿Qué planes de precio hay?",
+    a: "Ofrecemos una suscripción mensual y otra anual para entrenadores individuales, con un ahorro del 35% en el plan anual. Para clubes y academias con varios entrenadores disponemos de paquetes de licencias con precio especial. Contacta con nosotros para un presupuesto personalizado.",
   },
   {
     q: "¿Puedo pedir reembolso si no me convence?",
-    a: "Sí. Ofrecemos una garantía de satisfacción. Si dentro de los 30 días posteriores a la compra consideras que la herramienta no cumple tus expectativas, te devolvemos el importe íntegro sin preguntas.",
+    a: "Sí. Ofrecemos una garantía de satisfacción. Si en los primeros 30 días consideras que la herramienta no cumple tus expectativas, te devolvemos el importe íntegro sin preguntas.",
   },
 ];
 

@@ -188,7 +188,7 @@ export default function HeroSection() {
                        bg-[#FF5722]/10 text-[#FF8A65] text-xs font-medium tracking-wide"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] animate-pulse" />
-            Beta Founder — plazas limitadas
+            Beta abierta — plazas limitadas
           </motion.div>
 
           {/* Titular — dos líneas con intención */}

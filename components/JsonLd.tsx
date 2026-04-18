@@ -7,21 +7,34 @@ export default function JsonLd() {
     operatingSystem: "macOS, Windows",
     url: "https://www.gmsportstudio.com",
     description:
-      "Software de vídeo análisis deportivo con telestración, scouting y corte de clips. Alternativa low cost a Hudl y Nacsport para entrenadores de baloncesto y fútbol.",
-    offers: {
-      "@type": "Offer",
-      price: "99",
-      priceCurrency: "EUR",
-      availability: "https://schema.org/LimitedAvailability",
-      description: "Acceso Founder vitalicio — Beta",
-    },
+      "Software de vídeo análisis deportivo con telestración, scouting y corte de clips. Planes mensuales, anuales y paquetes de licencias para clubes y academias deportivas.",
+    offers: [
+      {
+        "@type": "Offer",
+        name: "Plan Individual Mensual",
+        priceCurrency: "EUR",
+        availability: "https://schema.org/InStock",
+      },
+      {
+        "@type": "Offer",
+        name: "Plan Individual Anual",
+        priceCurrency: "EUR",
+        availability: "https://schema.org/InStock",
+      },
+      {
+        "@type": "Offer",
+        name: "Licencias para Clubes",
+        priceCurrency: "EUR",
+        availability: "https://schema.org/InStock",
+      },
+    ],
     creator: {
       "@type": "Organization",
       name: "GmSportStudio",
       url: "https://www.gmsportstudio.com",
     },
     keywords:
-      "video análisis baloncesto, scouting basket, telestración baloncesto, alternativa Hudl, alternativa Nacsport",
+      "video análisis baloncesto, scouting basket, telestración baloncesto, software entrenadores deportivos, análisis táctico fútbol",
     featureList: [
       "Telestrador dinámico en tiempo real",
       "Integración nativa con YouTube",
