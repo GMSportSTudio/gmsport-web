@@ -1,4 +1,5 @@
 import { Mail } from "lucide-react";
+import Image from "next/image";
 
 /* Icono X/Twitter como SVG (lucide-react no incluye "X" oficial) */
 function XIcon({ size = 16 }: { size?: number }) {
@@ -21,10 +22,14 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-5 md:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
 
         {/* Logo / Copyright */}
-        <div className="flex flex-col items-center sm:items-start gap-1">
-          <span className="font-semibold text-sm text-white/80 tracking-tight">
-            GmSport<span className="text-[#FF5722]">Studio</span>
-          </span>
+        <div className="flex flex-col items-center sm:items-start gap-2">
+          <Image
+            src="/logo.png"
+            alt="GmSportStudio"
+            height={32}
+            width={32}
+            className="h-8 w-auto object-contain grayscale opacity-40"
+          />
           <p className="text-xs text-[#EDEDED]/25">
             © {new Date().getFullYear()} GmSportStudio. Todos los derechos reservados.
           </p>

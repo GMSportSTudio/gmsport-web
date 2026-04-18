@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const NAV_LINKS = [
   { label: "Características", href: "#caracteristicas" },
@@ -48,21 +49,17 @@ export default function Navbar() {
         {/* ── Logo ── */}
         <a
           href="/"
-          className="flex items-center gap-2 select-none group"
+          className="flex items-center select-none group"
           aria-label="GmSportStudio — inicio"
         >
-          {/* Icono decorativo */}
-          <span
-            aria-hidden="true"
-            className="w-7 h-7 rounded-md flex items-center justify-center text-white text-xs font-black
-                       bg-gradient-to-br from-[#FF5722] to-[#E64A19]
-                       group-hover:scale-110 transition-transform duration-200"
-          >
-            G
-          </span>
-          <span className="font-semibold text-base tracking-tight text-white">
-            GmSport<span className="text-[#FF5722]">Studio</span>
-          </span>
+          <Image
+            src="/logo.png"
+            alt="GmSportStudio"
+            height={40}
+            width={40}
+            className="h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-200"
+            priority
+          />
         </a>
 
         {/* ── Links desktop ── */}
