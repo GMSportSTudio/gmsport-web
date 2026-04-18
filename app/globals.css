@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
-/* ─── Design Tokens ─────────────────────────────────────────── */
+/* ─── Design Tokens — alineados con ui/theme.py de la app ────── */
 @theme {
-  /* Colores base */
-  --color-background:   #050505;
-  --color-surface:      #1A1A1A;
-  --color-foreground:   #EDEDED;
-  --color-muted:        #6B7280;
+  /* ── Fondos (espejo de THEME_ELITE) ──────────────────────────
+     bg_main   = #1e1e1e   bg_panel  = #252526   bg_header = #2d2d30  */
+  --color-background:      #111111;   /* COLOR_TITLEBAR_BG — negro profundo */
+  --color-surface:         #1e1e1e;   /* bg_main de la app                  */
+  --color-surface-raised:  #252526;   /* bg_panel de la app                 */
+  --color-surface-header:  #2d2d30;   /* bg_header de la app                */
+  --color-surface-canvas:  #2b2b2b;   /* COLOR_LIENZO_BOTONERA              */
 
-  /* Paleta de acento */
-  --color-accent:           #FF5722;
-  --color-accent-hover:     #E64A19;
-  --color-accent-subtle:    #FF572220;
+  /* ── Texto ────────────────────────────────────────────────────
+     text_main = #cccccc   text_bright = #ffffff                           */
+  --color-foreground:      #cccccc;   /* text_main                          */
+  --color-foreground-bright: #ffffff; /* text_bright                        */
+  --color-muted:           #888888;   /* COLOR_TITLEBAR_TEXT                */
+  --color-hint:            #8a9aaa;   /* COLOR_TEXTO_HINT_BOTONERA          */
 
-  /* Grises técnicos */
-  --color-gray-tech:        #1A1A1A;
-  --color-gray-tech-light:  #2A2A2A;
-  --color-gray-tech-border: #333333;
+  /* ── Naranja deportivo (acento de marca web) ──────────────────  */
+  --color-accent:          #FF5722;
+  --color-accent-hover:    #E64A19;
+  --color-accent-subtle:   rgba(255, 87, 34, 0.15);
 
-  /* Fuente */
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  /* ── Verde de acierto (btn_success de la app) ─────────────────
+     btn_success = #16825d   titlebar_btn_active = #4ec9b0               */
+  --color-success:         #16825d;   /* btn_success — verde confirmar      */
+  --color-success-bright:  #4ec9b0;   /* titlebar_btn_active — teal activo  */
+  --color-success-subtle:  rgba(22, 130, 93, 0.15);
+
+  /* ── Azul primario de la app ──────────────────────────────────
+     btn_primary = #0e639c                                                 */
+  --color-primary:         #0e639c;
+  --color-primary-hover:   #1177bb;
+
+  /* ── Bordes ───────────────────────────────────────────────────  */
+  --color-border:          #333333;   /* COLOR_TIMELINE_GRID                */
+  --color-border-subtle:   #2a2d35;   /* COLOR_SEPARADOR_BOTONERA           */
+  --color-border-hover:    #555555;   /* COLOR_DIVISOR_TOOLBAR              */
+
+  /* ── Border-radius — espejo de CustomTkinter (corner_radius=6) ─
+     Tkinter relief="flat" bd=2 ≈ 0 radio visible
+     CustomTkinter default corner_radius = 6px                            */
+  --radius-btn:   6px;    /* botones — equivale a CTk corner_radius=6      */
+  --radius-card:  8px;    /* cards/paneles — bg_panel con borde             */
+  --radius-modal: 10px;   /* modales/popovers                               */
+
+  /* ── Fuente ───────────────────────────────────────────────────
+     La app usa Helvetica (macOS) / Arial (Win).
+     Geist Sans es el equivalente web moderno.                             */
+  --font-sans: var(--font-geist-sans), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "Courier New", monospace;
 }
 
 /* ─── Reset base ────────────────────────────────────────────── */
@@ -41,37 +70,106 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Utilities personalizadas ──────────────────────────────── */
+/* ─── Utilidades de botón — estilo app ──────────────────────── */
 @layer utilities {
 
-  /* Glassmorphism — contenedor con cristal oscuro */
+  /* Botón primario naranja (CTA principal de la web) */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-btn);
+    background: var(--color-accent);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    border: 1px solid rgba(255, 87, 34, 0.6);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    transition: background 150ms ease, box-shadow 150ms ease;
+  }
+  .btn-primary:hover {
+    background: var(--color-accent-hover);
+    box-shadow: 0 0 0 1px rgba(255,87,34,0.5), 0 4px 16px rgba(255,87,34,0.35);
+  }
+
+  /* Botón secundario (estilo btn_secondary de la app) */
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-btn);
+    background: #3c3c3c;
+    color: var(--color-foreground);
+    font-weight: 500;
+    font-size: 0.875rem;
+    border: 1px solid #555555;
+    transition: background 150ms ease, border-color 150ms ease;
+  }
+  .btn-secondary:hover {
+    background: #4a4a4a;
+    border-color: #666666;
+  }
+
+  /* Botón éxito verde (btn_success de la app) */
+  .btn-success {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-btn);
+    background: var(--color-success);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: 1px solid rgba(22,130,93,0.6);
+    transition: background 150ms ease;
+  }
+  .btn-success:hover {
+    background: #1a9a6e;
+  }
+
+  /* Card / panel — espejo de bg_panel con borde */
+  .app-panel {
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+  }
+
+  /* Header de panel — espejo de bg_header */
+  .app-header {
+    background: var(--color-surface-header);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* Glassmorphism — para secciones sobre fondo con partículas */
   .glass {
-    background: rgba(26, 26, 26, 0.55);
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 1rem;
+    background: rgba(30, 30, 30, 0.72);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-card);
   }
-
-  /* Variante más sutil para cards internas */
   .glass-sm {
-    background: rgba(26, 26, 26, 0.35);
-    backdrop-filter: blur(8px) saturate(140%);
-    -webkit-backdrop-filter: blur(8px) saturate(140%);
+    background: rgba(37, 37, 38, 0.55);
+    backdrop-filter: blur(8px) saturate(130%);
+    -webkit-backdrop-filter: blur(8px) saturate(130%);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 0.75rem;
+    border-radius: var(--radius-btn);
   }
-
-  /* Variante con borde naranja acento */
   .glass-accent {
-    background: rgba(26, 26, 26, 0.55);
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    border: 1px solid rgba(255, 87, 34, 0.35);
-    border-radius: 1rem;
+    background: rgba(30, 30, 30, 0.72);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(255, 87, 34, 0.3);
+    border-radius: var(--radius-card);
   }
 
-  /* Gradiente de texto con acento */
+  /* Gradiente de texto naranja */
   .text-gradient {
     background: linear-gradient(135deg, #FF5722 0%, #FF8A65 100%);
     -webkit-background-clip: text;
@@ -79,23 +177,19 @@ body {
     background-clip: text;
   }
 
-  /* Resplandor naranja para hover/focus */
+  /* Teal activo — COLOR_TITLEBAR_BTN_ACTIVE */
+  .text-teal {
+    color: var(--color-success-bright);
+  }
+
+  /* Glow naranja */
   .glow-accent {
-    box-shadow: 0 0 20px rgba(255, 87, 34, 0.3), 0 0 60px rgba(255, 87, 34, 0.1);
+    box-shadow: 0 0 16px rgba(255, 87, 34, 0.25), 0 0 48px rgba(255, 87, 34, 0.08);
   }
 }
 
-/* ─── Scrollbar personalizada ───────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-background);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-gray-tech-border);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
-}
+/* ─── Scrollbar — estilo app ────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: var(--color-surface); }
+::-webkit-scrollbar-thumb  { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }

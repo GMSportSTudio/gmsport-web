@@ -89,13 +89,14 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium
+            className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold
                        text-white cursor-pointer select-none
-                       bg-gradient-to-r from-[#FF5722] to-[#FF7043]
-                       hover:from-[#E64A19] hover:to-[#FF5722]
-                       shadow-[0_2px_12px_rgba(255,87,34,0.35)]
-                       hover:shadow-[0_4px_20px_rgba(255,87,34,0.5)]
-                       transition-shadow duration-300"
+                       bg-[#FF5722] hover:bg-[#E64A19]
+                       border border-[rgba(255,87,34,0.5)]
+                       shadow-[0_1px_3px_rgba(0,0,0,0.4)]
+                       hover:shadow-[0_0_0_1px_rgba(255,87,34,0.4),0_4px_16px_rgba(255,87,34,0.3)]
+                       transition-all duration-150"
+            style={{ borderRadius: "6px" }}
           >
             Acceso Beta
           </motion.a>
@@ -172,10 +173,11 @@ export default function Navbar() {
                 <a
                   href="#beta"
                   onClick={() => setMenuOpen(false)}
-                  className="flex items-center justify-center w-full py-2.5 rounded-lg text-sm font-medium
-                             text-white bg-gradient-to-r from-[#FF5722] to-[#FF7043]
-                             shadow-[0_2px_12px_rgba(255,87,34,0.35)]
-                             active:scale-95 transition-transform duration-100"
+                  className="flex items-center justify-center w-full py-2.5 text-sm font-semibold
+                             text-white bg-[#FF5722] hover:bg-[#E64A19]
+                             border border-[rgba(255,87,34,0.5)]
+                             active:scale-95 transition-all duration-150"
+                  style={{ borderRadius: "6px" }}
                 >
                   Acceso Beta
                 </a>

@@ -104,8 +104,9 @@ export default function PricingSection() {
         {/* Resplandor naranja detrás de la card */}
         <div
           aria-hidden="true"
-          className="absolute -inset-px rounded-2xl pointer-events-none"
+          className="absolute -inset-px pointer-events-none"
           style={{
+            borderRadius: "9px",
             background:
               "linear-gradient(135deg, rgba(255,87,34,0.35) 0%, rgba(255,112,67,0.15) 50%, transparent 100%)",
             filter: "blur(1px)",
@@ -114,8 +115,9 @@ export default function PricingSection() {
 
         {/* Card */}
         <div
-          className="relative rounded-2xl overflow-hidden"
+          className="relative overflow-hidden"
           style={{
+            borderRadius: "8px",
             background: "linear-gradient(160deg, #1a1008 0%, #111111 55%, #0f0f0f 100%)",
             border: "1px solid rgba(255,87,34,0.3)",
             boxShadow:
@@ -200,12 +202,14 @@ export default function PricingSection() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 380, damping: 22 }}
-              className="relative flex items-center justify-center gap-2 w-full py-4 rounded-xl
+              className="relative flex items-center justify-center gap-2 w-full py-3.5
                          text-white font-semibold text-base
-                         bg-gradient-to-r from-[#FF5722] to-[#FF7043]
-                         shadow-[0_2px_20px_rgba(255,87,34,0.4)]
-                         hover:shadow-[0_4px_32px_rgba(255,87,34,0.6)]
-                         transition-shadow duration-300"
+                         bg-[#FF5722] hover:bg-[#E64A19]
+                         border border-[rgba(255,87,34,0.55)]
+                         shadow-[0_1px_4px_rgba(0,0,0,0.5)]
+                         hover:shadow-[0_0_0_1px_rgba(255,87,34,0.4),0_4px_20px_rgba(255,87,34,0.35)]
+                         transition-all duration-150"
+              style={{ borderRadius: "6px" }}
             >
               {/* Brillo interno */}
               <span

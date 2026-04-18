@@ -251,12 +251,14 @@ export default function HeroSection() {
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 380, damping: 22 }}
               className="relative inline-flex items-center justify-center gap-2.5
-                         w-full sm:w-auto px-8 py-4 rounded-xl
-                         text-white font-bold text-base cursor-pointer
-                         bg-gradient-to-r from-[#FF5722] to-[#FF7043]
-                         shadow-[0_0_0_1px_rgba(255,87,34,0.4),0_6px_28px_rgba(255,87,34,0.45)]
-                         hover:shadow-[0_0_0_1px_rgba(255,87,34,0.6),0_8px_40px_rgba(255,87,34,0.6)]
-                         transition-shadow duration-300"
+                         w-full sm:w-auto px-8 py-3.5
+                         text-white font-semibold text-base cursor-pointer
+                         bg-[#FF5722] hover:bg-[#E64A19]
+                         border border-[rgba(255,87,34,0.55)]
+                         shadow-[0_1px_4px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,87,34,0.2)]
+                         hover:shadow-[0_0_0_1px_rgba(255,87,34,0.5),0_6px_24px_rgba(255,87,34,0.35)]
+                         transition-all duration-150"
+            style={{ borderRadius: "6px" }}
             >
               <span
                 aria-hidden="true"
