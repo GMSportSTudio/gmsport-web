@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
-import { Zap, MessageCircle, Award, Percent, ShieldCheck, Star } from "lucide-react";
+import { Zap, MessageCircle, Award, Percent, Star, Users, ArrowRight } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -173,19 +173,75 @@ export default function PricingSection() {
               Reservar mi Pase Beta
             </motion.a>
 
-            {/* Garantía */}
-            <div className="flex items-center justify-center gap-2">
-              <ShieldCheck size={13} strokeWidth={1.8} className="text-[#cccccc]/20 shrink-0" />
-              <p className="text-xs text-[#cccccc]/30 text-center leading-relaxed">
-                Garantía de satisfacción · Si no es lo que esperabas, te devolvemos el dinero.
-              </p>
-            </div>
           </div>
         </div>
       </motion.div>
 
-      {/* Próximos planes — solo referencia, aún no disponibles */}
-      <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp(0.3)}
+      {/* Plan Club — destacado para clubes y academias */}
+      <motion.div
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={fadeUp(0.28)}
+        className="mt-10 w-full max-w-md"
+      >
+        <div
+          className="relative overflow-hidden rounded-xl border border-white/10 bg-[#0f0f0f] p-6"
+          style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.45)" }}
+        >
+          {/* Accento naranja superior */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-px"
+            style={{
+              background:
+                "linear-gradient(90deg, transparent 15%, rgba(255,87,34,0.45) 50%, transparent 85%)",
+            }}
+          />
+
+          <div className="flex items-start gap-3 mb-5">
+            <span
+              className="w-9 h-9 flex items-center justify-center shrink-0
+                         bg-[#FF5722]/12 text-[#FF7043] border border-[#FF5722]/20"
+              style={{ borderRadius: "6px" }}
+            >
+              <Users size={16} strokeWidth={2} />
+            </span>
+            <div className="flex-1">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#FF7043] mb-1">
+                Para clubes y academias
+              </p>
+              <h3 className="text-base font-bold text-white leading-snug">
+                5 cuentas · todo el staff técnico analizando en paralelo
+              </h3>
+            </div>
+          </div>
+
+          {/* Precio */}
+          <div className="flex items-baseline flex-wrap gap-x-2 gap-y-1 mb-4">
+            <span className="stat-num text-3xl font-black text-white leading-none">299€</span>
+            <span className="text-xs text-[#cccccc]/50">/ año</span>
+            <span className="text-xs text-[#cccccc]/25 mx-1">·</span>
+            <span className="text-sm text-[#cccccc]/55">o 40€/mes</span>
+          </div>
+
+          <p className="text-xs text-[#cccccc]/45 leading-relaxed mb-5">
+            Los 5 entrenadores trabajan sobre la misma biblioteca de clips, plantillas tácticas
+            y scouting compartido. Disponible tras el lanzamiento oficial.
+          </p>
+
+          <a
+            href="mailto:clubes@gmsportstudio.com?subject=Inter%C3%A9s%20en%20plan%20Club%20GMSportStudio"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold
+                       text-[#FF7043] hover:text-[#FF8A65] transition-colors duration-150"
+          >
+            Reservar plan Club
+            <ArrowRight size={12} strokeWidth={2.2} />
+          </a>
+        </div>
+      </motion.div>
+
+      {/* Próximos planes individuales — solo referencia, aún no disponibles */}
+      <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp(0.4)}
         className="mt-10 flex flex-col items-center gap-3"
       >
         <p className="text-xs text-[#cccccc]/20 uppercase tracking-widest">
@@ -205,11 +261,11 @@ export default function PricingSection() {
         <p className="text-[11px] text-[#cccccc]/18">Próximamente · Los Fundadores tendrán descuento permanente</p>
       </motion.div>
 
-      {/* B2B lead capture */}
+      {/* B2B lead capture — clubes grandes (>5 cuentas) */}
       <motion.div
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        variants={fadeUp(0.42)}
+        variants={fadeUp(0.52)}
         className="mt-8 flex items-start gap-3 max-w-md w-full px-4 py-3.5 rounded-lg border border-white/7 bg-white/3"
       >
         <span className="text-[#FF7043] mt-0.5 shrink-0">
@@ -219,12 +275,12 @@ export default function PricingSection() {
           </svg>
         </span>
         <p className="text-xs text-[#cccccc]/40 leading-relaxed">
-          ¿Buscas licencias para todo tu club? Pronto abriremos los planes anuales y por equipos.{" "}
+          ¿Federación, academia o club con más de 5 entrenadores?{" "}
           <a
-            href="mailto:clubes@gmsportstudio.com"
+            href="mailto:clubes@gmsportstudio.com?subject=Oferta%20personalizada%20%2B5%20cuentas"
             className="text-[#FF7043]/80 hover:text-[#FF7043] underline underline-offset-2 transition-colors duration-150"
           >
-            Escríbenos para una oferta personalizada.
+            Escríbenos para una oferta a medida.
           </a>
         </p>
       </motion.div>

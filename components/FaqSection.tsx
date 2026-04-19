@@ -19,12 +19,8 @@ const FAQS = [
     a: "Sí. La aplicación es compatible con macOS (Apple Silicon y Intel) y Windows 10/11. El instalador se adapta automáticamente a tu plataforma.",
   },
   {
-    q: "¿Qué planes de precio hay?",
-    a: "Ofrecemos una suscripción mensual y otra anual para entrenadores individuales, con un ahorro del 35% en el plan anual. Para clubes y academias con varios entrenadores disponemos de paquetes de licencias con precio especial. Contacta con nosotros para un presupuesto personalizado.",
-  },
-  {
-    q: "¿Puedo pedir reembolso si no me convence?",
-    a: "Sí. Ofrecemos una garantía de satisfacción. Si en los primeros 30 días consideras que la herramienta no cumple tus expectativas, te devolvemos el importe íntegro sin preguntas.",
+    q: "¿Qué planes de precio habrá tras el lanzamiento?",
+    a: "Tres opciones. Para entrenadores individuales: plan Mensual a 15€/mes o plan Anual a 99€/año (ahorras un 45% frente al mensual). Para clubes y academias: plan Club con 5 cuentas a 299€/año (o 40€/mes), pensado para que todo el cuerpo técnico trabaje sobre la misma biblioteca de clips y scouting. Quien entre con el Pase Fundador de 9,99€ tendrá descuento permanente en cualquiera de estos planes. Federaciones y clubes con más de 5 entrenadores: escríbenos a clubes@gmsportstudio.com para oferta personalizada.",
   },
 ];
 
