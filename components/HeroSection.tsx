@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import CountdownHero from "./CountdownHero";
 
 /* ─── Animaciones ─────────────────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -51,6 +52,9 @@ export default function HeroSection() {
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] animate-pulse" />
             Beta · Abre el 30 de abril · Plazas limitadas
           </motion.div>
+
+          {/* Countdown hasta el lanzamiento */}
+          <CountdownHero />
 
           {/* Titular con degradado naranja → blanco */}
           <motion.h1
