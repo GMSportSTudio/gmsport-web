@@ -14,7 +14,7 @@ const fadeUp = (delay = 0): Variants => ({
 const BENEFITS = [
   {
     icon:  <Zap size={15} strokeWidth={2} />,
-    label: "Acceso total a la herramienta hasta el lanzamiento oficial",
+    label: "Acceso total desde el 30 de abril hasta el lanzamiento oficial",
   },
   {
     icon:  <MessageCircle size={15} strokeWidth={2} />,
@@ -63,11 +63,11 @@ export default function PricingSection() {
           style={{ background: "linear-gradient(160deg, #ffffff 40%, #6b7280 100%)",
             WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}
         >
-          Entra ahora.
-          <br />Paga una sola vez.
+          Reserva antes
+          <br />del 30 de abril.
         </h2>
         <p className="max-w-sm text-[#cccccc]/45 text-base leading-relaxed">
-          Precio especial de lanzamiento disponible solo mientras dure la Beta.
+          Precio especial de lanzamiento solo para quienes entren con el Pase Fundador. Plazas limitadas.
         </p>
       </motion.div>
 
@@ -170,7 +170,7 @@ export default function PricingSection() {
               <span aria-hidden="true"
                 className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
               <Zap size={16} strokeWidth={2.2} />
-              Conseguir mi Pase Beta
+              Reservar mi Pase Beta
             </motion.a>
 
             {/* Garantía */}

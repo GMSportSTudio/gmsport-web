@@ -49,7 +49,7 @@ export default function HeroSection() {
                        bg-[#FF5722]/10 text-[#FF8A65] text-xs font-medium tracking-wide"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] animate-pulse" />
-            Beta abierta — plazas limitadas
+            Beta · Abre el 30 de abril · Plazas limitadas
           </motion.div>
 
           {/* Titular con degradado naranja → blanco */}
@@ -131,7 +131,7 @@ export default function HeroSection() {
                   <path d="M8 1.5L10.5 6.5H15L11 9.5L12.5 14.5L8 11.5L3.5 14.5L5 9.5L1 6.5H5.5L8 1.5Z"
                     fill="currentColor" fillOpacity="0.95" />
                 </svg>
-                9,99€ · Acceso Beta
+                Reservar mi plaza · 9,99€
               </motion.a>
             </div>
           </motion.div>
@@ -151,9 +151,9 @@ export default function HeroSection() {
               Beta 9,99€
             </span>
             <span className="w-px h-3 bg-white/10" />
-            <span>Mac &amp; Windows</span>
+            <span>Lanza 30 abril</span>
             <span className="w-px h-3 bg-white/10" />
-            <span>Garantía 30 días</span>
+            <span>Mac &amp; Windows</span>
           </motion.div>
         </div>
 

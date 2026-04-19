@@ -8,7 +8,7 @@ import { Plus } from "lucide-react";
 const FAQS = [
   {
     q: "¿Cuándo puedo acceder a la Beta?",
-    a: "El acceso Beta está disponible ahora mismo. Tras completar el formulario de inscripción recibirás un email con el enlace de descarga en menos de 24 horas.",
+    a: "La Beta se abre el 30 de abril de 2026. Si completas el formulario de inscripción ahora, aseguras tu plaza (son limitadas) y recibirás el enlace de descarga por email ese mismo día.",
   },
   {
     q: "¿Necesito una suscripción de video externa?",
