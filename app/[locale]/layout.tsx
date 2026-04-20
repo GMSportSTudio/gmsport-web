@@ -72,7 +72,9 @@ export async function generateMetadata({
     alternates: {
       canonical: locale === "es" ? `${BASE_URL}/` : `${BASE_URL}/${locale}`,
       languages: {
+        es: `${BASE_URL}/`,
         "es-ES": `${BASE_URL}/`,
+        en: `${BASE_URL}/en`,
         "en-US": `${BASE_URL}/en`,
         "x-default": `${BASE_URL}/`,
       },
@@ -133,7 +135,7 @@ export default async function LocaleLayout({
           <BackgroundEffects />
           <Navbar />
           <main className="flex-1 pt-16">
-            <JsonLd />
+            <JsonLd locale={locale} />
             {children}
           </main>
           <CookieBanner />

@@ -186,5 +186,31 @@
     "moreInfo": "Learn more",
     "accept": "Got it",
     "dialogLabel": "Cookie notice"
+  },
+  "LocaleSwitcher": {
+    "label": "Select language",
+    "switchToEs": "Switch to Spanish",
+    "switchToEn": "Switch to English"
+  },
+  "JsonLd": {
+    "appDescription": "Sports video analysis software with telestration, scouting and clip cutting. Monthly plans, yearly plans and license packs for sports clubs and academies.",
+    "keywords": "basketball video analysis, basketball scouting, basketball telestration, sports coaching software, soccer tactical analysis",
+    "offers": {
+      "founder": "Founder Beta Pass",
+      "monthly": "Monthly Plan",
+      "yearly": "Yearly Plan",
+      "club": "Club Plan (5 seats)"
+    },
+    "features": {
+      "telestrator": "Real-time dynamic telestration",
+      "youtube": "Native YouTube integration",
+      "clips": "Lightning-fast clip cutting",
+      "offlineDb": "Local offline database",
+      "platforms": "Runs on macOS and Windows"
+    },
+    "video": {
+      "name": "GmSportStudio — Telestration and tactical analysis demo",
+      "description": "Walkthrough of the video analysis workflow in GmSportStudio: real-time telestration, scouting and clip cutting."
+    }
   }
 }

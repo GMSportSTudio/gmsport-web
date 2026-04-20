@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
 
 export default function Navbar() {
   const t = useTranslations("Navbar");
@@ -79,8 +80,12 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* CTA + Hamburguesa */}
+        {/* LocaleSwitcher + CTA + Hamburguesa */}
         <div className="flex items-center gap-3">
+          <div className="hidden md:flex">
+            <LocaleSwitcher />
+          </div>
+
           <motion.a
             href="#precios"
             whileHover={{ scale: 1.05 }}
@@ -178,6 +183,16 @@ export default function Navbar() {
                 >
                   {t("ctaBeta")}
                 </a>
+              </motion.li>
+
+              {/* LocaleSwitcher en móvil */}
+              <motion.li
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: (NAV_LINKS.length + 1) * 0.06, duration: 0.2 }}
+                className="pt-4 flex justify-center"
+              >
+                <LocaleSwitcher />
               </motion.li>
             </ul>
           </motion.div>

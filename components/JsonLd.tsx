@@ -1,17 +1,33 @@
-export default function JsonLd() {
+import { getTranslations } from "next-intl/server";
+
+const BASE_URL = "https://www.gmsportstudio.com";
+
+/**
+ * JSON-LD estructurado por locale. Server component: extrae las claves
+ * del namespace "JsonLd" en messages/{locale}.json y genera los objetos
+ * SoftwareApplication + VideoObject con el texto correcto.
+ *
+ * priceValidUntil del Pase Fundador = fecha de lanzamiento de la Beta,
+ * tras la cual el plan deja de estar disponible como PreOrder.
+ */
+export default async function JsonLd({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: "JsonLd" });
+
+  const url = locale === "es" ? BASE_URL : `${BASE_URL}/${locale}`;
+
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: "GmSportStudio",
     applicationCategory: "SportsApplication",
     operatingSystem: "macOS, Windows",
-    url: "https://www.gmsportstudio.com",
-    description:
-      "Software de vídeo análisis deportivo con telestración, scouting y corte de clips. Planes mensuales, anuales y paquetes de licencias para clubes y academias deportivas.",
+    url,
+    inLanguage: locale,
+    description: t("appDescription"),
     offers: [
       {
         "@type": "Offer",
-        name: "Pase Fundador Beta",
+        name: t("offers.founder"),
         price: "9.99",
         priceCurrency: "EUR",
         priceValidUntil: "2026-04-29",
@@ -19,21 +35,21 @@ export default function JsonLd() {
       },
       {
         "@type": "Offer",
-        name: "Plan Mensual",
+        name: t("offers.monthly"),
         price: "15.00",
         priceCurrency: "EUR",
         availability: "https://schema.org/PreOrder",
       },
       {
         "@type": "Offer",
-        name: "Plan Anual",
+        name: t("offers.yearly"),
         price: "99.00",
         priceCurrency: "EUR",
         availability: "https://schema.org/PreOrder",
       },
       {
         "@type": "Offer",
-        name: "Plan Club (5 cuentas)",
+        name: t("offers.club"),
         price: "299.00",
         priceCurrency: "EUR",
         availability: "https://schema.org/PreOrder",
@@ -42,29 +58,28 @@ export default function JsonLd() {
     creator: {
       "@type": "Organization",
       name: "GmSportStudio",
-      url: "https://www.gmsportstudio.com",
+      url: BASE_URL,
     },
-    keywords:
-      "video análisis baloncesto, scouting basket, telestración baloncesto, software entrenadores deportivos, análisis táctico fútbol",
+    keywords: t("keywords"),
     featureList: [
-      "Telestrador dinámico en tiempo real",
-      "Integración nativa con YouTube",
-      "Corte de clips ultrarrápido",
-      "Base de datos local offline",
-      "Compatible con macOS y Windows",
+      t("features.telestrator"),
+      t("features.youtube"),
+      t("features.clips"),
+      t("features.offlineDb"),
+      t("features.platforms"),
     ],
   };
 
   const videoSchema = {
     "@context": "https://schema.org",
     "@type": "VideoObject",
-    name: "GmSportStudio — Demo de telestración y análisis táctico",
-    description:
-      "Demostración del flujo de trabajo de videoanálisis en GmSportStudio: telestración en tiempo real, scouting y corte de clips.",
-    thumbnailUrl: "https://www.gmsportstudio.com/opengraph-image",
+    name: t("video.name"),
+    description: t("video.description"),
+    thumbnailUrl: `${BASE_URL}/opengraph-image`,
     uploadDate: "2026-04-19",
-    contentUrl: "https://www.gmsportstudio.com/frontend-web.mp4",
+    contentUrl: `${BASE_URL}/frontend-web.mp4`,
     duration: "PT24S",
+    inLanguage: locale,
   };
 
   return (
