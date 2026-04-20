@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import CountdownHero from "./CountdownHero";
+import { useTranslations } from "next-intl";
 
 /* ─── Animaciones ─────────────────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -22,6 +23,8 @@ const floatAnim = {
 
 /* ─── Hero Section ────────────────────────────────────────────── */
 export default function HeroSection() {
+  const t = useTranslations("HeroSection");
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden px-5 md:px-8 py-20 md:py-0">
 
@@ -35,10 +38,10 @@ export default function HeroSection() {
           backgroundSize: "32px 32px",
         }} />
 
-      {/* ── Layout 2 columnas ── */}
+      {/* Layout 2 columnas */}
       <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-16 items-center">
 
-        {/* ── Columna izquierda — Texto ── */}
+        {/* Columna izquierda — Texto */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-7">
 
           {/* Badge */}
@@ -50,7 +53,7 @@ export default function HeroSection() {
                        bg-[#FF5722]/10 text-[#FF8A65] text-xs font-medium tracking-wide"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] animate-pulse" />
-            Beta · Abre el 30 de abril · Plazas limitadas
+            {t("badge")}
           </motion.div>
 
           {/* Countdown hasta el lanzamiento */}
@@ -71,8 +74,8 @@ export default function HeroSection() {
                 backgroundClip: "text",
               }}
             >
-              El scouting de élite
-              <br />ya no es un privilegio.
+              {t("titleLine1")}
+              <br />{t("titleLine2")}
             </span>
           </motion.h1>
 
@@ -83,9 +86,7 @@ export default function HeroSection() {
             animate="visible"
             className="max-w-md text-base sm:text-lg text-[#EDEDED]/50 leading-relaxed"
           >
-            GmSportStudio pone el análisis profesional en tu laptop.
-            Telestración, scouting y corte de clips en segundos —
-            a un precio que cualquier entrenador puede permitirse.
+            {t("subtitle")}
           </motion.p>
 
           {/* CTA con pulso magnético */}
@@ -135,7 +136,7 @@ export default function HeroSection() {
                   <path d="M8 1.5L10.5 6.5H15L11 9.5L12.5 14.5L8 11.5L3.5 14.5L5 9.5L1 6.5H5.5L8 1.5Z"
                     fill="currentColor" fillOpacity="0.95" />
                 </svg>
-                Reservar mi plaza · 9,99€
+                {t("cta")}
               </motion.a>
             </div>
           </motion.div>
@@ -152,16 +153,16 @@ export default function HeroSection() {
                 <path d="M6 1L7.5 4.5H11L8.5 6.5L9.5 10L6 8L2.5 10L3.5 6.5L1 4.5H4.5L6 1Z"
                   fill="#FF5722" fillOpacity="0.6" />
               </svg>
-              Beta 9,99€
+              {t("socialProofPrice")}
             </span>
             <span className="w-px h-3 bg-white/10" />
-            <span>Lanza 30 abril</span>
+            <span>{t("socialProofLaunch")}</span>
             <span className="w-px h-3 bg-white/10" />
-            <span>Mac &amp; Windows</span>
+            <span>{t("socialProofPlatform")}</span>
           </motion.div>
         </div>
 
-        {/* ── Columna derecha — Vídeo demo ── */}
+        {/* Columna derecha — Vídeo demo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.93, y: 30 }}
           animate={{ opacity: 1, scale: 1,    y: 0  }}

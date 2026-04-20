@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
 import { CirclePlay, LayoutDashboard, BadgeDollarSign, CheckCircle2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -11,59 +12,70 @@ const fadeUp = (delay = 0): Variants => ({
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, delay, ease: EASE } },
 });
 
-/* ─── Datos ──────────────────────────────────────────────────── */
-const PILLARS = [
-  {
-    icon:     <CirclePlay size={24} strokeWidth={1.8} />,
-    tag:      "YouTube Nativo",
-    title:    "Analiza cualquier partido en segundos",
-    body:     "Olvídate de descargar vídeos o pagar plataformas de streaming. Pega la URL de YouTube y empieza a telestrarar, marcar eventos y cortar clips directamente. Sin conversiones, sin esperas.",
-    bullets:  ["Partidos en directo y grabados", "Playlists completas de temporada", "Sin límite de URLs analizadas"],
-    color:    "#FF5722",
-    border:   "border-[#FF5722]/20",
-  },
-  {
-    icon:     <LayoutDashboard size={24} strokeWidth={1.8} />,
-    tag:      "Dashboard Interactivo",
-    title:    "Toda la información de un vistazo",
-    body:     "Un panel que centraliza jugadores, sesiones, clips y estadísticas. Filtra por partido, jugador o acción táctica. Presenta tus informes directamente desde la app sin exportar nada.",
-    bullets:  ["Vista de campo con posicionamiento", "Timeline de eventos por partido", "Exportación a vídeo en un clic"],
-    color:    "#7C3AED",
-    border:   "border-[#7C3AED]/20",
-  },
-  {
-    icon:     <BadgeDollarSign size={24} strokeWidth={1.8} />,
-    tag:      "Precio accesible",
-    title:    "Tecnología de élite para clubes modestos",
-    body:     "El software de análisis profesional ha sido históricamente inaccesible para la mayoría de clubes. GmSportStudio rompe esa barrera con planes mensuales, anuales y paquetes de licencias para equipos, sin renunciar a ninguna función.",
-    bullets:  ["Planes mensuales y anuales", "Licencias para clubes y academias", "Sin costes ocultos"],
-    color:    "#16A34A",
-    border:   "border-[#16A34A]/20",
-  },
-];
-
-/* ─── Tabla de funciones ─────────────────────────────────────── */
-const FEATURES_TABLE = [
-  { feature: "Vídeo análisis avanzado",        individual: true,  club: true  },
-  { feature: "Telestración en tiempo real",    individual: true,  club: true  },
-  { feature: "Integración con YouTube",        individual: true,  club: true  },
-  { feature: "Corte de clips ultrarrápido",    individual: true,  club: true  },
-  { feature: "Mac + Windows",                  individual: true,  club: true  },
-  { feature: "Base de datos local offline",    individual: true,  club: true  },
-  { feature: "Panel de administración",        individual: false, club: true  },
-  { feature: "Múltiples dispositivos",         individual: false, club: true  },
-];
-
 /* ─── Componente principal ───────────────────────────────────── */
 export default function WhySection() {
+  const t = useTranslations("WhySection");
   const ref    = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+
+  const PILLARS = [
+    {
+      icon:    <CirclePlay size={24} strokeWidth={1.8} />,
+      tag:     t("pillars.youtube.tag"),
+      title:   t("pillars.youtube.title"),
+      body:    t("pillars.youtube.body"),
+      bullets: [
+        t("pillars.youtube.bullet0"),
+        t("pillars.youtube.bullet1"),
+        t("pillars.youtube.bullet2"),
+      ],
+      color:  "#FF5722",
+      border: "border-[#FF5722]/20",
+    },
+    {
+      icon:    <LayoutDashboard size={24} strokeWidth={1.8} />,
+      tag:     t("pillars.dashboard.tag"),
+      title:   t("pillars.dashboard.title"),
+      body:    t("pillars.dashboard.body"),
+      bullets: [
+        t("pillars.dashboard.bullet0"),
+        t("pillars.dashboard.bullet1"),
+        t("pillars.dashboard.bullet2"),
+      ],
+      color:  "#7C3AED",
+      border: "border-[#7C3AED]/20",
+    },
+    {
+      icon:    <BadgeDollarSign size={24} strokeWidth={1.8} />,
+      tag:     t("pillars.price.tag"),
+      title:   t("pillars.price.title"),
+      body:    t("pillars.price.body"),
+      bullets: [
+        t("pillars.price.bullet0"),
+        t("pillars.price.bullet1"),
+        t("pillars.price.bullet2"),
+      ],
+      color:  "#16A34A",
+      border: "border-[#16A34A]/20",
+    },
+  ];
+
+  const FEATURES_TABLE = [
+    { feature: t("features.videoAnalysis"), individual: true,  club: true  },
+    { feature: t("features.telestration"),  individual: true,  club: true  },
+    { feature: t("features.youtube"),       individual: true,  club: true  },
+    { feature: t("features.clips"),         individual: true,  club: true  },
+    { feature: t("features.platforms"),     individual: true,  club: true  },
+    { feature: t("features.offlineDb"),     individual: true,  club: true  },
+    { feature: t("features.adminPanel"),    individual: false, club: true  },
+    { feature: t("features.multiDevice"),   individual: false, club: true  },
+  ];
 
   return (
     <section
       id="por-que"
       ref={ref}
-      aria-label="Por qué elegir GmSportStudio"
+      aria-label={t("sectionLabel")}
       className="relative px-5 md:px-8 py-24 md:py-32 max-w-6xl mx-auto w-full"
     >
       {/* Cabecera */}
@@ -73,7 +85,7 @@ export default function WhySection() {
       >
         <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10
                          bg-white/4 text-white/40 text-xs font-medium tracking-wide uppercase">
-          Por qué GmSportStudio
+          {t("eyebrow")}
         </span>
         <h2
           className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight max-w-2xl"
@@ -82,12 +94,11 @@ export default function WhySection() {
             WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
           }}
         >
-          Herramientas de élite
-          <br />al alcance de todos
+          {t("title1")}
+          <br />{t("title2")}
         </h2>
         <p className="max-w-lg text-[#cccccc]/45 text-base leading-relaxed">
-          El mismo nivel de análisis que usan los equipos profesionales,
-          con planes diseñados para entrenadores individuales y clubes de cualquier categoría.
+          {t("subtitle")}
         </p>
       </motion.div>
 
@@ -155,10 +166,10 @@ export default function WhySection() {
       >
         {/* Cabecera tabla */}
         <div className="grid grid-cols-3 bg-[#2d2d30] border-b border-white/8 px-4 py-3">
-          <span className="text-xs text-white/30 uppercase tracking-wider">Función</span>
+          <span className="text-xs text-white/30 uppercase tracking-wider">{t("tableColFeature")}</span>
           {[
-            { label: "Individual", highlight: false },
-            { label: "Club",       highlight: true  },
+            { label: t("tableColIndividual"), highlight: false },
+            { label: t("tableColClub"),       highlight: true  },
           ].map(({ label, highlight }) => (
             <span key={label} className={[
               "text-xs font-semibold text-center uppercase tracking-wider",

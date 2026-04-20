@@ -3,40 +3,7 @@
 import { useState, useRef } from "react";
 import { motion, useInView, AnimatePresence, type Variants } from "framer-motion";
 import { Plus } from "lucide-react";
-
-/* ─── Datos ──────────────────────────────────────────────────── */
-const FAQS = [
-  {
-    q: "¿Cuándo puedo acceder a la Beta?",
-    a: "La Beta se abre el 30 de abril de 2026. Si completas el formulario de inscripción ahora, aseguras tu plaza (son limitadas) y recibirás el enlace de descarga por email ese mismo día.",
-  },
-  {
-    q: "¿Necesito una suscripción de video externa?",
-    a: "No. GmSportStudio se integra directamente con YouTube, por lo que puedes analizar cualquier partido público sin necesidad de ninguna suscripción adicional. Para videos propios puedes importar archivos locales.",
-  },
-  {
-    q: "¿Funciona en Mac y PC?",
-    a: "Sí. La aplicación es compatible con macOS (Apple Silicon y Intel) y Windows 10/11. El instalador se adapta automáticamente a tu plataforma.",
-  },
-  {
-    q: "¿Qué planes de precio habrá tras el lanzamiento?",
-    a: "Tres opciones. Para entrenadores individuales: plan Mensual a 15€/mes o plan Anual a 99€/año (ahorras un 45% frente al mensual). Para clubes y academias: plan Club con 5 cuentas a 299€/año (o 40€/mes), pensado para que todo el cuerpo técnico trabaje sobre la misma biblioteca de clips y scouting. Quien entre con el Pase Fundador de 9,99€ tendrá descuento permanente en cualquiera de estos planes. Federaciones y clubes con más de 5 entrenadores: escríbenos a clubes@gmsportstudio.com para oferta personalizada.",
-  },
-];
-
-/* ─── FAQPage schema ─────────────────────────────────────────── */
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: FAQS.map((faq) => ({
-    "@type": "Question",
-    name: faq.q,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.a.replace(/<[^>]+>/g, ""),
-    },
-  })),
-};
+import { useTranslations } from "next-intl";
 
 /* ─── Animaciones ────────────────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -119,9 +86,31 @@ function AccordionItem({
 
 /* ─── Sección FAQ ────────────────────────────────────────────── */
 export default function FaqSection() {
+  const t = useTranslations("FaqSection");
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const ref    = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+
+  const FAQS = [
+    { q: t("faqs.q0"), a: t("faqs.a0") },
+    { q: t("faqs.q1"), a: t("faqs.a1") },
+    { q: t("faqs.q2"), a: t("faqs.a2") },
+    { q: t("faqs.q3"), a: t("faqs.a3") },
+  ];
+
+  // FAQPage schema — built from translated strings
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a.replace(/<[^>]+>/g, ""),
+      },
+    })),
+  };
 
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
 
@@ -146,7 +135,7 @@ export default function FaqSection() {
       >
         <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10
                          bg-white/4 text-white/40 text-xs font-medium tracking-wide uppercase">
-          FAQ
+          {t("eyebrow")}
         </span>
         <h2
           className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight"
@@ -157,7 +146,7 @@ export default function FaqSection() {
             backgroundClip: "text",
           }}
         >
-          Preguntas frecuentes
+          {t("title")}
         </h2>
       </motion.div>
 

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
 import { FolderOpen, CirclePlay, Scissors, Database } from "lucide-react";
 import { useCountUp } from "@/hooks/useCountUp";
+import { useTranslations } from "next-intl";
 
 /* ─── Tipos ─────────────────────────────────────────────────── */
 interface Feature {
@@ -11,53 +12,10 @@ interface Feature {
   icon:        React.ReactNode;
   title:       string;
   description: string;
-  /** Clase de grid para el layout asimétrico */
   grid:        string;
-  /** Variante visual de la card */
   variant:     "default" | "accent" | "large";
-  /** Contenido decorativo opcional dentro de la card */
   visual?:     React.ReactNode;
 }
-
-/* ─── Datos ─────────────────────────────────────────────────── */
-const FEATURES: Feature[] = [
-  {
-    id:          "multipartido",
-    icon:        <FolderOpen size={22} strokeWidth={1.8} />,
-    title:       "Varios partidos, un proyecto",
-    description: "Agrupa todos los partidos de una jornada, rival o temporada en un único proyecto. Cambia de partido sin perder el contexto del análisis.",
-    grid:        "col-span-2 md:col-span-2 row-span-2",
-    variant:     "large",
-    visual:      <MultiMatchVisual />,
-  },
-  {
-    id:          "youtube",
-    icon:        <CirclePlay size={22} strokeWidth={1.8} />,
-    title:       "YouTube Nativo",
-    description: "Pega la URL de cualquier partido y empieza a analizar al instante.",
-    grid:        "col-span-2 md:col-span-1",
-    variant:     "accent",
-    visual:      <YoutubeVisual />,
-  },
-  {
-    id:          "clips",
-    icon:        <Scissors size={22} strokeWidth={1.8} />,
-    title:       "Corte de Clips Ultra-rápido",
-    description: "Marca inicio y fin con una tecla. Exporta la jugada en segundos.",
-    grid:        "col-span-2 md:col-span-1",
-    variant:     "default",
-    visual:      <ClipsVisual />,
-  },
-  {
-    id:          "db",
-    icon:        <Database size={22} strokeWidth={1.8} />,
-    title:       "Base de Datos Local",
-    description: "Tus informes, sesiones y jugadores guardados offline. Siempre contigo, sin depender de la nube.",
-    grid:        "col-span-2 md:col-span-2",
-    variant:     "default",
-    visual:      undefined,
-  },
-];
 
 /* ─── Variantes de animación ─────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -164,6 +122,7 @@ function FeatureCard({
   index: number;
   inView: boolean;
 }) {
+  const t = useTranslations("FeaturesSection");
   const isAccent = feature.variant === "accent";
   const isLarge  = feature.variant === "large";
 
@@ -189,7 +148,7 @@ function FeatureCard({
     >
       {/* Contenido */}
       <div className="relative z-10 flex flex-col gap-3 flex-1">
-        {/* Icono — sube con el card */}
+        {/* Icono */}
         <motion.div
           whileHover={{ scale: 1.1, rotate: -4 }}
           transition={{ type: "spring", stiffness: 400, damping: 18 }}
@@ -227,12 +186,12 @@ function FeatureCard({
                            rounded-full text-xs font-medium bg-[#FF5722]/15 text-[#FF8A65]
                            border border-[#FF5722]/25">
             <span className="w-1 h-1 rounded-full bg-[#FF5722]" />
-            Integración directa
+            {t("badge.youtube")}
           </span>
         )}
       </div>
 
-      {/* Visual decorativo — pasa inView al que lo necesite */}
+      {/* Visual decorativo */}
       {feature.id === "db"
         ? <DatabaseVisual inView={inView} />
         : feature.visual}
@@ -242,8 +201,48 @@ function FeatureCard({
 
 /* ─── Sección principal ──────────────────────────────────────── */
 export default function FeaturesSection() {
-  const ref     = useRef<HTMLDivElement>(null);
-  const inView  = useInView(ref, { once: true, margin: "-80px" });
+  const t      = useTranslations("FeaturesSection");
+  const ref    = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const FEATURES: Feature[] = [
+    {
+      id:          "multipartido",
+      icon:        <FolderOpen size={22} strokeWidth={1.8} />,
+      title:       t("features.multipartido.title"),
+      description: t("features.multipartido.description"),
+      grid:        "col-span-2 md:col-span-2 row-span-2",
+      variant:     "large",
+      visual:      <MultiMatchVisual />,
+    },
+    {
+      id:          "youtube",
+      icon:        <CirclePlay size={22} strokeWidth={1.8} />,
+      title:       t("features.youtube.title"),
+      description: t("features.youtube.description"),
+      grid:        "col-span-2 md:col-span-1",
+      variant:     "accent",
+      visual:      <YoutubeVisual />,
+    },
+    {
+      id:          "clips",
+      icon:        <Scissors size={22} strokeWidth={1.8} />,
+      title:       t("features.clips.title"),
+      description: t("features.clips.description"),
+      grid:        "col-span-2 md:col-span-1",
+      variant:     "default",
+      visual:      <ClipsVisual />,
+    },
+    {
+      id:          "db",
+      icon:        <Database size={22} strokeWidth={1.8} />,
+      title:       t("features.db.title"),
+      description: t("features.db.description"),
+      grid:        "col-span-2 md:col-span-2",
+      variant:     "default",
+      visual:      undefined,
+    },
+  ];
 
   return (
     <section
@@ -260,7 +259,7 @@ export default function FeaturesSection() {
       >
         <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10
                          bg-white/4 text-white/40 text-xs font-medium tracking-wide uppercase">
-          Características
+          {t("eyebrow")}
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight"
           style={{
@@ -270,12 +269,12 @@ export default function FeaturesSection() {
             backgroundClip: "text",
           }}
         >
-          Todo lo que necesitas,
+          {t("title1")}
           <br />
-          al precio que necesitas.
+          {t("title2")}
         </h2>
         <p className="max-w-md text-[#EDEDED]/45 text-base leading-relaxed">
-          Herramientas de análisis profesionales diseñadas para entrenadores que valoran su tiempo.
+          {t("subtitle")}
         </p>
       </motion.div>
 

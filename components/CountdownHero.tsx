@@ -2,6 +2,7 @@
 
 import { Fragment, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 /* ─── Target: 30 de abril 2026, 00:00 Europe/Madrid (CEST = UTC+2) ─── */
 const TARGET_MS = new Date("2026-04-30T00:00:00+02:00").getTime();
@@ -29,6 +30,8 @@ function computeTimeLeft(): TimeLeft {
 
 /* ─── Componente ───────────────────────────────────────────────────── */
 export default function CountdownHero() {
+  const t = useTranslations("CountdownHero");
+
   // mounted evita hydration mismatch (el server renderiza distinto del client).
   const [mounted, setMounted] = useState(false);
   const [time, setTime] = useState<TimeLeft>(() => computeTimeLeft());
@@ -43,10 +46,10 @@ export default function CountdownHero() {
   if (!mounted || time.diff <= 0) return null;
 
   const cells: { label: string; value: number }[] = [
-    { label: "Días",  value: time.days    },
-    { label: "Horas", value: time.hours   },
-    { label: "Min",   value: time.minutes },
-    { label: "Seg",   value: time.seconds },
+    { label: t("labelDays"),  value: time.days    },
+    { label: t("labelHours"), value: time.hours   },
+    { label: t("labelMin"),   value: time.minutes },
+    { label: t("labelSec"),   value: time.seconds },
   ];
 
   return (
@@ -56,7 +59,7 @@ export default function CountdownHero() {
       transition={{ delay: 0.15, duration: 0.55, ease: EASE }}
       className="flex items-center gap-2 sm:gap-3"
       role="timer"
-      aria-label={`Faltan ${time.days} días, ${time.hours} horas, ${time.minutes} minutos y ${time.seconds} segundos para que abra la Beta`}
+      aria-label={t("ariaLabel", { days: time.days, hours: time.hours, minutes: time.minutes, seconds: time.seconds })}
     >
       {cells.map((cell, i) => (
         <Fragment key={cell.label}>

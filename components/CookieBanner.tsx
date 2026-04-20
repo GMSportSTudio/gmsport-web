@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const STORAGE_KEY = "gms_cookie_consent";
 
 export default function CookieBanner() {
+  const t = useTranslations("CookieBanner");
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -33,12 +35,12 @@ export default function CookieBanner() {
           <div
             className="bento-card px-5 py-4 flex flex-col sm:flex-row items-center gap-4"
             role="dialog"
-            aria-label="Aviso de cookies"
+            aria-label={t("dialogLabel")}
           >
             <p className="text-xs text-white/45 leading-relaxed text-center sm:text-left">
-              Usamos almacenamiento técnico (Firebase) y analítica sin cookies (Vercel).{" "}
+              {t("text")}{" "}
               <Link href="/cookies" className="text-white/60 underline underline-offset-2 hover:text-white transition-colors">
-                Más info
+                {t("moreInfo")}
               </Link>
             </p>
             <button
@@ -47,7 +49,7 @@ export default function CookieBanner() {
                          bg-[#FF5722] text-white hover:bg-[#FF7043]
                          transition-colors duration-200"
             >
-              Entendido
+              {t("accept")}
             </button>
           </div>
         </motion.div>

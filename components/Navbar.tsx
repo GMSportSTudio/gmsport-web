@@ -3,25 +3,26 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-
-const NAV_LINKS = [
-  { label: "Características", href: "#caracteristicas" },
-  { label: "Precios",         href: "#precios" },
-  { label: "FAQ",             href: "#faq" },
-];
+import { useTranslations } from "next-intl";
 
 export default function Navbar() {
-  const [menuOpen,   setMenuOpen]   = useState(false);
-  const [scrolled,   setScrolled]   = useState(false);
+  const t = useTranslations("Navbar");
 
-  /* Detecta scroll para intensificar el blur al bajar */
+  const NAV_LINKS = [
+    { label: t("features"), href: "#caracteristicas" },
+    { label: t("pricing"),  href: "#precios" },
+    { label: t("faq"),      href: "#faq" },
+  ];
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Cierra el menú al redimensionar a desktop */
   useEffect(() => {
     const onResize = () => { if (window.innerWidth >= 768) setMenuOpen(false); };
     window.addEventListener("resize", onResize, { passive: true });
@@ -46,11 +47,11 @@ export default function Navbar() {
     >
       <nav className="mx-auto max-w-6xl px-5 md:px-8 h-16 flex items-center justify-between">
 
-        {/* ── Logo ── */}
+        {/* Logo */}
         <a
           href="/"
           className="flex items-center select-none group"
-          aria-label="GmSportStudio — inicio"
+          aria-label={t("logoLabel")}
         >
           <Image
             src="/logo.png"
@@ -62,7 +63,7 @@ export default function Navbar() {
           />
         </a>
 
-        {/* ── Links desktop ── */}
+        {/* Links desktop */}
         <ul className="hidden md:flex items-center gap-8" role="list">
           {NAV_LINKS.map(({ label, href }) => (
             <li key={href}>
@@ -78,9 +79,8 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* ── CTA + Hamburguesa ── */}
+        {/* CTA + Hamburguesa */}
         <div className="flex items-center gap-3">
-          {/* Botón Acceso Beta */}
           <motion.a
             href="#precios"
             whileHover={{ scale: 1.05 }}
@@ -95,14 +95,14 @@ export default function Navbar() {
                        transition-all duration-150"
             style={{ borderRadius: "6px" }}
           >
-            Acceso Beta
+            {t("ctaBeta")}
           </motion.a>
 
           {/* Hamburguesa (solo móvil) */}
           <button
             onClick={() => setMenuOpen((v) => !v)}
             aria-expanded={menuOpen}
-            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-label={menuOpen ? t("closeMenu") : t("openMenu")}
             className="md:hidden flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded-md
                        hover:bg-white/5 transition-colors duration-200"
           >
@@ -125,7 +125,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* ── Menú móvil ── */}
+      {/* Menú móvil */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -176,7 +176,7 @@ export default function Navbar() {
                              active:scale-95 transition-all duration-150"
                   style={{ borderRadius: "6px" }}
                 >
-                  Acceso Beta
+                  {t("ctaBeta")}
                 </a>
               </motion.li>
             </ul>

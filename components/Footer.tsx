@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 function XIcon({ size = 15 }: { size?: number }) {
   return (
@@ -23,33 +24,35 @@ function InstagramIcon({ size = 15 }: { size?: number }) {
   );
 }
 
-const LEGAL_LINKS = [
-  { label: "Aviso Legal",   href: "/aviso-legal"   },
-  { label: "Privacidad",    href: "/privacidad"    },
-  { label: "Términos Beta", href: "/terminos-beta" },
-  { label: "Cookies",       href: "/cookies"       },
-];
-
-const SOCIAL_LINKS = [
-  {
-    label: "X / Twitter",
-    href:  "https://x.com/josegalandev",
-    icon:  <XIcon />,
-  },
-  {
-    label: "Instagram",
-    href:  "https://instagram.com/gmsportstudio",
-    icon:  <InstagramIcon />,
-  },
-];
-
 export default function Footer() {
+  const t = useTranslations("Footer");
+
+  const LEGAL_LINKS = [
+    { label: t("legal.avisoLegal"),   href: "/aviso-legal"   },
+    { label: t("legal.privacidad"),   href: "/privacidad"    },
+    { label: t("legal.terminosBeta"), href: "/terminos-beta" },
+    { label: t("legal.cookies"),      href: "/cookies"       },
+  ];
+
+  const SOCIAL_LINKS = [
+    {
+      label: "X / Twitter",
+      href:  "https://x.com/josegalandev",
+      icon:  <XIcon />,
+    },
+    {
+      label: "Instagram",
+      href:  "https://instagram.com/gmsportstudio",
+      icon:  <InstagramIcon />,
+    },
+  ];
+
   return (
     <footer
       style={{ background: "#111111" }}
       className="border-t border-white/10 mt-auto"
     >
-      {/* ── Columnas principales ─────────────────────────────────────────── */}
+      {/* Columnas principales */}
       <div className="max-w-6xl mx-auto px-6 md:px-10 pt-14 pb-10
                       grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8
                       text-center sm:text-left">
@@ -66,7 +69,7 @@ export default function Footer() {
             />
           </Link>
           <p className="text-xs text-white/35 leading-relaxed max-w-[220px]">
-            Software de vídeo análisis deportivo para entrenadores que quieren ganar.
+            {t("tagline")}
           </p>
           {/* Social icons */}
           <div className="flex items-center gap-2 mt-1">
@@ -92,7 +95,7 @@ export default function Footer() {
         {/* Col 2 — Legal */}
         <div className="flex flex-col items-center sm:items-start gap-1">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-white/20 mb-3">
-            Legal
+            {t("legalTitle")}
           </p>
           {LEGAL_LINKS.map(({ label, href }) => (
             <Link
@@ -109,12 +112,12 @@ export default function Footer() {
         {/* Col 3 — Contacto */}
         <div className="flex flex-col items-center sm:items-start gap-1">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-white/20 mb-3">
-            Contacto
+            {t("contactTitle")}
           </p>
           {[
-            { label: "Soporte",  href: "mailto:info@gmsportstudio.com",   text: "info@gmsportstudio.com"   },
-            { label: "Clubes",   href: "mailto:clubes@gmsportstudio.com", text: "clubes@gmsportstudio.com" },
-            { label: "CEO",      href: "mailto:ceo@gmsportstudio.com",    text: "ceo@gmsportstudio.com"    },
+            { label: t("contact.supportLabel"), href: "mailto:info@gmsportstudio.com",   text: "info@gmsportstudio.com"   },
+            { label: t("contact.clubesLabel"),  href: "mailto:clubes@gmsportstudio.com", text: "clubes@gmsportstudio.com" },
+            { label: t("contact.ceoLabel"),     href: "mailto:ceo@gmsportstudio.com",    text: "ceo@gmsportstudio.com"    },
           ].map(({ label, href, text }) => (
             <div key={href} className="flex items-baseline gap-2 py-0.5">
               <span className="text-[10px] uppercase tracking-widest text-white/15 w-12 shrink-0">
@@ -136,18 +139,18 @@ export default function Footer() {
             className="text-sm text-white/35 hover:text-[#FF7043]
                        transition-colors duration-200 py-0.5 mt-3"
           >
-            Solicitar acceso Beta →
+            {t("betaAccess")}
           </a>
         </div>
       </div>
 
-      {/* ── Barra inferior ───────────────────────────────────────────────── */}
+      {/* Barra inferior */}
       <div className="max-w-6xl mx-auto px-6 md:px-10 pb-8
                       flex flex-col sm:flex-row items-center justify-between gap-4
                       border-t border-white/6 pt-6">
 
         <p className="text-xs text-white/20 order-2 sm:order-1">
-          © {new Date().getFullYear()} GmSportStudio. Todos los derechos reservados.
+          {t("copyright", { year: new Date().getFullYear() })}
         </p>
 
         {/* System status badge */}
@@ -161,7 +164,7 @@ export default function Footer() {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
           </span>
           <span className="text-[11px] text-white/30 tracking-wide">
-            System Status: <span className="text-emerald-500/70">All systems operational</span>
+            {t("systemStatus")} <span className="text-emerald-500/70">{t("systemStatusOk")}</span>
           </span>
         </div>
       </div>

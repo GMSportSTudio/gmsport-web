@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
 import { Zap, MessageCircle, Award, Percent, Star, Users, ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -11,34 +12,22 @@ const fadeUp = (delay = 0): Variants => ({
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, delay, ease: EASE } },
 });
 
-const BENEFITS = [
-  {
-    icon:  <Zap size={15} strokeWidth={2} />,
-    label: "Acceso total desde el 30 de abril hasta el lanzamiento oficial",
-  },
-  {
-    icon:  <MessageCircle size={15} strokeWidth={2} />,
-    label: "Soporte prioritario directo con el equipo",
-  },
-  {
-    icon:  <Award size={15} strokeWidth={2} />,
-    label: "Insignia de Fundador exclusiva en la aplicación",
-  },
-  {
-    icon:  <Percent size={15} strokeWidth={2} />,
-    label: "Descuento permanente en la futura suscripción",
-  },
-];
-
-/* Precios futuros — solo referencia, aún no disponibles */
-const FUTURE_PLANS = [
-  { label: "Mensual",  price: "15€/mes"  },
-  { label: "Anual",    price: "99€/año"  },
-];
-
 export default function PricingSection() {
+  const t      = useTranslations("PricingSection");
   const ref    = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const BENEFITS = [
+    { icon: <Zap size={15} strokeWidth={2} />,           label: t("benefits.access")   },
+    { icon: <MessageCircle size={15} strokeWidth={2} />, label: t("benefits.support")  },
+    { icon: <Award size={15} strokeWidth={2} />,         label: t("benefits.badge")    },
+    { icon: <Percent size={15} strokeWidth={2} />,       label: t("benefits.discount") },
+  ];
+
+  const FUTURE_PLANS = [
+    { label: t("futurePlanMonthly"), price: t("futurePlanMonthlyPrice") },
+    { label: t("futurePlanYearly"),  price: t("futurePlanYearlyPrice")  },
+  ];
 
   return (
     <section
@@ -57,17 +46,17 @@ export default function PricingSection() {
       >
         <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10
                          bg-white/4 text-white/40 text-xs font-medium tracking-wide uppercase">
-          Precio
+          {t("eyebrow")}
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight"
           style={{ background: "linear-gradient(160deg, #ffffff 40%, #6b7280 100%)",
             WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}
         >
-          Reserva antes
-          <br />del 30 de abril.
+          {t("title1")}
+          <br />{t("title2")}
         </h2>
         <p className="max-w-sm text-[#cccccc]/45 text-base leading-relaxed">
-          Precio especial de lanzamiento solo para quienes entren con el Pase Fundador. Plazas limitadas.
+          {t("subtitle")}
         </p>
       </motion.div>
 
@@ -103,7 +92,7 @@ export default function PricingSection() {
                              bg-[#FF5722]/15 border border-[#FF5722]/30 text-[#FF8A65]"
               style={{ borderRadius: "4px" }}>
               <Star size={9} fill="currentColor" />
-              Solo durante la Beta
+              {t("badgeLabel")}
             </span>
           </div>
 
@@ -112,13 +101,13 @@ export default function PricingSection() {
             {/* Nombre del plan */}
             <div className="flex flex-col gap-1">
               <p className="text-xs font-bold uppercase tracking-widest text-[#FF7043]">
-                Acceso Fundador
+                {t("planEyebrow")}
               </p>
               <h3 className="text-xl font-bold text-white leading-snug">
-                Beta GMSS
+                {t("planTitle")}
               </h3>
               <p className="text-xs text-[#cccccc]/35 mt-0.5 leading-relaxed">
-                Reserva tu plaza ahora y forma parte de los primeros en usar la herramienta.
+                {t("planSubtitle")}
               </p>
             </div>
 
@@ -128,8 +117,8 @@ export default function PricingSection() {
               <span className="stat-num text-7xl font-black text-white">9</span>
               <span className="stat-num text-4xl font-black text-white/70 mb-1">,99</span>
               <div className="flex flex-col mb-2 ml-1">
-                <span className="text-xs text-[#cccccc]/40 leading-tight">pago</span>
-                <span className="text-xs text-[#cccccc]/40 leading-tight">único</span>
+                <span className="text-xs text-[#cccccc]/40 leading-tight">{t("priceUnitLine1")}</span>
+                <span className="text-xs text-[#cccccc]/40 leading-tight">{t("priceUnitLine2")}</span>
               </div>
             </div>
 
@@ -170,14 +159,14 @@ export default function PricingSection() {
               <span aria-hidden="true"
                 className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
               <Zap size={16} strokeWidth={2.2} />
-              Reservar mi Pase Beta
+              {t("cta")}
             </motion.a>
 
           </div>
         </div>
       </motion.div>
 
-      {/* Plan Club — destacado para clubes y academias */}
+      {/* Plan Club */}
       <motion.div
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
@@ -208,10 +197,10 @@ export default function PricingSection() {
             </span>
             <div className="flex-1">
               <p className="text-[10px] font-bold uppercase tracking-widest text-[#FF7043] mb-1">
-                Para clubes y academias
+                {t("clubEyebrow")}
               </p>
               <h3 className="text-base font-bold text-white leading-snug">
-                5 cuentas · todo el staff técnico analizando en paralelo
+                {t("clubTitle")}
               </h3>
             </div>
           </div>
@@ -219,14 +208,13 @@ export default function PricingSection() {
           {/* Precio */}
           <div className="flex items-baseline flex-wrap gap-x-2 gap-y-1 mb-4">
             <span className="stat-num text-3xl font-black text-white leading-none">299€</span>
-            <span className="text-xs text-[#cccccc]/50">/ año</span>
+            <span className="text-xs text-[#cccccc]/50">{t("clubPriceYear")}</span>
             <span className="text-xs text-[#cccccc]/25 mx-1">·</span>
-            <span className="text-sm text-[#cccccc]/55">o 40€/mes</span>
+            <span className="text-sm text-[#cccccc]/55">{t("clubPriceMonth")}</span>
           </div>
 
           <p className="text-xs text-[#cccccc]/45 leading-relaxed mb-5">
-            Los 5 entrenadores trabajan sobre la misma biblioteca de clips, plantillas tácticas
-            y scouting compartido. Disponible tras el lanzamiento oficial.
+            {t("clubBody")}
           </p>
 
           <a
@@ -234,18 +222,18 @@ export default function PricingSection() {
             className="inline-flex items-center gap-1.5 text-xs font-semibold
                        text-[#FF7043] hover:text-[#FF8A65] transition-colors duration-150"
           >
-            Reservar plan Club
+            {t("clubCta")}
             <ArrowRight size={12} strokeWidth={2.2} />
           </a>
         </div>
       </motion.div>
 
-      {/* Próximos planes individuales — solo referencia, aún no disponibles */}
+      {/* Proximos planes individuales */}
       <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp(0.4)}
         className="mt-10 flex flex-col items-center gap-3"
       >
         <p className="text-xs text-[#cccccc]/20 uppercase tracking-widest">
-          Planes tras el lanzamiento oficial
+          {t("futurePlansLabel")}
         </p>
         <div className="flex gap-3">
           {FUTURE_PLANS.map(({ label, price }) => (
@@ -258,10 +246,10 @@ export default function PricingSection() {
             </div>
           ))}
         </div>
-        <p className="text-[11px] text-[#cccccc]/18">Próximamente · Los Fundadores tendrán descuento permanente</p>
+        <p className="text-[11px] text-[#cccccc]/18">{t("futureFounderNote")}</p>
       </motion.div>
 
-      {/* B2B lead capture — clubes grandes (>5 cuentas) */}
+      {/* B2B lead capture */}
       <motion.div
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
@@ -275,12 +263,12 @@ export default function PricingSection() {
           </svg>
         </span>
         <p className="text-xs text-[#cccccc]/40 leading-relaxed">
-          ¿Federación, academia o club con más de 5 entrenadores?{" "}
+          {t("b2bText")}{" "}
           <a
             href="mailto:clubes@gmsportstudio.com?subject=Oferta%20personalizada%20%2B5%20cuentas"
             className="text-[#FF7043]/80 hover:text-[#FF7043] underline underline-offset-2 transition-colors duration-150"
           >
-            Escríbenos para una oferta a medida.
+            {t("b2bCta")}
           </a>
         </p>
       </motion.div>
