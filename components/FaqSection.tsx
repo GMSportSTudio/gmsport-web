@@ -24,6 +24,20 @@ const FAQS = [
   },
 ];
 
+/* ─── FAQPage schema ─────────────────────────────────────────── */
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.a.replace(/<[^>]+>/g, ""),
+    },
+  })),
+};
+
 /* ─── Animaciones ────────────────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -117,6 +131,12 @@ export default function FaqSection() {
       ref={ref}
       className="relative px-5 md:px-8 py-24 md:py-32 max-w-2xl mx-auto w-full"
     >
+      {/* FAQPage schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* Cabecera */}
       <motion.div
         initial="hidden"

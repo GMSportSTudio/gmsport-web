@@ -1,5 +1,5 @@
 export default function JsonLd() {
-  const schema = {
+  const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: "GmSportStudio",
@@ -11,21 +11,32 @@ export default function JsonLd() {
     offers: [
       {
         "@type": "Offer",
-        name: "Plan Individual Mensual",
+        name: "Pase Fundador Beta",
+        price: "9.99",
         priceCurrency: "EUR",
-        availability: "https://schema.org/InStock",
+        priceValidUntil: "2026-04-29",
+        availability: "https://schema.org/PreOrder",
       },
       {
         "@type": "Offer",
-        name: "Plan Individual Anual",
+        name: "Plan Mensual",
+        price: "15.00",
         priceCurrency: "EUR",
-        availability: "https://schema.org/InStock",
+        availability: "https://schema.org/PreOrder",
       },
       {
         "@type": "Offer",
-        name: "Licencias para Clubes",
+        name: "Plan Anual",
+        price: "99.00",
         priceCurrency: "EUR",
-        availability: "https://schema.org/InStock",
+        availability: "https://schema.org/PreOrder",
+      },
+      {
+        "@type": "Offer",
+        name: "Plan Club (5 cuentas)",
+        price: "299.00",
+        priceCurrency: "EUR",
+        availability: "https://schema.org/PreOrder",
       },
     ],
     creator: {
@@ -44,10 +55,28 @@ export default function JsonLd() {
     ],
   };
 
+  const videoSchema = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: "GmSportStudio — Demo de telestración y análisis táctico",
+    description:
+      "Demostración del flujo de trabajo de videoanálisis en GmSportStudio: telestración en tiempo real, scouting y corte de clips.",
+    thumbnailUrl: "https://www.gmsportstudio.com/opengraph-image",
+    uploadDate: "2026-04-19",
+    contentUrl: "https://www.gmsportstudio.com/frontend-web.mp4",
+    duration: "PT24S",
+  };
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+      />
+    </>
   );
 }
