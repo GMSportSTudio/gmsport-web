@@ -1,190 +1,190 @@
 {
   "Metadata": {
-    "title": "GmSportStudio | Software de Vídeo Análisis para Baloncesto",
+    "title": "GmSportStudio | Video Analysis Software for Basketball",
     "titleTemplate": "%s · GmSportStudio",
-    "description": "Analiza partidos de baloncesto con telestración profesional, scouting avanzado y corte de clips ultrarrápido. Integración directa con YouTube. Planes mensuales, anuales y licencias para clubes. Tecnología de élite a precio asequible.",
-    "ogTitle": "GmSportStudio | Vídeo Análisis Deportivo para Entrenadores",
-    "ogDescription": "Telestración, scouting y clips en segundos. Integración con YouTube. La herramienta de análisis profesional para entrenadores a precio asequible.",
-    "ogImageAlt": "GmSportStudio — Software de vídeo análisis deportivo para baloncesto y fútbol",
-    "twitterTitle": "GmSportStudio | Vídeo Análisis Deportivo",
-    "twitterDescription": "Telestración, scouting y corte de clips. La herramienta profesional para entrenadores a precio asequible."
+    "description": "Break down basketball games with pro-grade telestration, advanced scouting and lightning-fast clip cutting. Native YouTube integration. Monthly plans, yearly plans and club licenses. Elite-level technology at a price that fits your program.",
+    "ogTitle": "GmSportStudio | Sports Video Analysis for Coaches",
+    "ogDescription": "Telestration, scouting and clips in seconds. Native YouTube integration. Pro-grade analysis built for coaches — at a price that actually works.",
+    "ogImageAlt": "GmSportStudio — Sports video analysis software for basketball and soccer",
+    "twitterTitle": "GmSportStudio | Sports Video Analysis",
+    "twitterDescription": "Telestration, scouting and clip cutting. Pro-grade tools for coaches — at a price that actually works."
   },
   "Navbar": {
-    "features": "Características",
-    "pricing": "Precios",
+    "features": "Features",
+    "pricing": "Pricing",
     "faq": "FAQ",
-    "ctaBeta": "Acceso Beta",
-    "logoLabel": "GmSportStudio — inicio",
-    "openMenu": "Abrir menú",
-    "closeMenu": "Cerrar menú"
+    "ctaBeta": "Beta Access",
+    "logoLabel": "GmSportStudio — home",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "HeroSection": {
-    "badge": "Beta · Abre el 30 de abril · Plazas limitadas",
-    "titleLine1": "El scouting de élite",
-    "titleLine2": "ya no es un privilegio.",
-    "subtitle": "GmSportStudio pone el análisis profesional en tu laptop. Telestración, scouting y corte de clips en segundos — a un precio que cualquier entrenador puede permitirse.",
-    "cta": "Reservar mi plaza · 9,99€",
-    "socialProofPrice": "Beta 9,99€",
-    "socialProofLaunch": "Lanza 30 abril",
+    "badge": "Beta · Opens April 30 · Limited spots",
+    "titleLine1": "Elite scouting",
+    "titleLine2": "is no longer a privilege.",
+    "subtitle": "GmSportStudio puts pro-grade analysis on your laptop. Telestration, scouting and clip cutting in seconds — at a price any coach can afford.",
+    "cta": "Claim my spot · €9.99",
+    "socialProofPrice": "Beta €9.99",
+    "socialProofLaunch": "Launches April 30",
     "socialProofPlatform": "Mac & Windows"
   },
   "CountdownHero": {
-    "ariaLabel": "Faltan {days} días, {hours} horas, {minutes} minutos y {seconds} segundos para que abra la Beta",
-    "labelDays": "Días",
-    "labelHours": "Horas",
+    "ariaLabel": "{days} days, {hours} hours, {minutes} minutes and {seconds} seconds until the Beta opens",
+    "labelDays": "Days",
+    "labelHours": "Hours",
     "labelMin": "Min",
-    "labelSec": "Seg"
+    "labelSec": "Sec"
   },
   "WhySection": {
-    "sectionLabel": "Por qué elegir GmSportStudio",
-    "eyebrow": "Por qué GmSportStudio",
-    "title1": "Herramientas de élite",
-    "title2": "al alcance de todos",
-    "subtitle": "El mismo nivel de análisis que usan los equipos profesionales, con planes diseñados para entrenadores individuales y clubes de cualquier categoría.",
-    "tableColFeature": "Función",
+    "sectionLabel": "Why choose GmSportStudio",
+    "eyebrow": "Why GmSportStudio",
+    "title1": "Elite-level tools",
+    "title2": "within everyone's reach",
+    "subtitle": "The same level of analysis professional teams use, with plans designed for individual coaches and clubs at every level.",
+    "tableColFeature": "Feature",
     "tableColIndividual": "Individual",
     "tableColClub": "Club",
     "pillars": {
       "youtube": {
-        "tag": "YouTube Nativo",
-        "title": "Analiza cualquier partido en segundos",
-        "body": "Olvídate de descargar vídeos o pagar plataformas de streaming. Pega la URL de YouTube y empieza a telestrarar, marcar eventos y cortar clips directamente. Sin conversiones, sin esperas.",
-        "bullet0": "Partidos en directo y grabados",
-        "bullet1": "Playlists completas de temporada",
-        "bullet2": "Sin límite de URLs analizadas"
+        "tag": "Native YouTube",
+        "title": "Break down any game in seconds",
+        "body": "Forget downloading video files or paying for streaming platforms. Paste a YouTube URL and start telestrating, tagging events and cutting clips right away. No conversions, no waiting.",
+        "bullet0": "Live and recorded games",
+        "bullet1": "Full-season playlists",
+        "bullet2": "Unlimited URLs to analyze"
       },
       "dashboard": {
-        "tag": "Dashboard Interactivo",
-        "title": "Toda la información de un vistazo",
-        "body": "Un panel que centraliza jugadores, sesiones, clips y estadísticas. Filtra por partido, jugador o acción táctica. Presenta tus informes directamente desde la app sin exportar nada.",
-        "bullet0": "Vista de campo con posicionamiento",
-        "bullet1": "Timeline de eventos por partido",
-        "bullet2": "Exportación a vídeo en un clic"
+        "tag": "Interactive Dashboard",
+        "title": "All your data at a glance",
+        "body": "A single panel that brings together players, sessions, clips and stats. Filter by game, player or tactical action. Present your reports straight from the app — no exports required.",
+        "bullet0": "Court view with player positioning",
+        "bullet1": "Per-game event timeline",
+        "bullet2": "One-click video export"
       },
       "price": {
-        "tag": "Precio accesible",
-        "title": "Tecnología de élite para clubes modestos",
-        "body": "El software de análisis profesional ha sido históricamente inaccesible para la mayoría de clubes. GmSportStudio rompe esa barrera con planes mensuales, anuales y paquetes de licencias para equipos, sin renunciar a ninguna función.",
-        "bullet0": "Planes mensuales y anuales",
-        "bullet1": "Licencias para clubes y academias",
-        "bullet2": "Sin costes ocultos"
+        "tag": "Affordable pricing",
+        "title": "Elite tech for modest clubs",
+        "body": "Pro-grade analysis software has historically been out of reach for most clubs. GmSportStudio breaks that barrier with monthly plans, yearly plans and team license packs — without cutting a single feature.",
+        "bullet0": "Monthly and yearly plans",
+        "bullet1": "Licenses for clubs and academies",
+        "bullet2": "No hidden fees"
       }
     },
     "features": {
-      "videoAnalysis": "Vídeo análisis avanzado",
-      "telestration": "Telestración en tiempo real",
-      "youtube": "Integración con YouTube",
-      "clips": "Corte de clips ultrarrápido",
+      "videoAnalysis": "Advanced video analysis",
+      "telestration": "Real-time telestration",
+      "youtube": "YouTube integration",
+      "clips": "Lightning-fast clip cutting",
       "platforms": "Mac + Windows",
-      "offlineDb": "Base de datos local offline",
-      "adminPanel": "Panel de administración",
-      "multiDevice": "Múltiples dispositivos"
+      "offlineDb": "Local offline database",
+      "adminPanel": "Admin panel",
+      "multiDevice": "Multiple devices"
     }
   },
   "FeaturesSection": {
-    "eyebrow": "Características",
-    "title1": "Todo lo que necesitas,",
-    "title2": "al precio que necesitas.",
-    "subtitle": "Herramientas de análisis profesionales diseñadas para entrenadores que valoran su tiempo.",
+    "eyebrow": "Features",
+    "title1": "Everything you need,",
+    "title2": "at the price you need.",
+    "subtitle": "Professional analysis tools designed for coaches who value their time.",
     "features": {
       "multipartido": {
-        "title": "Varios partidos, un proyecto",
-        "description": "Agrupa todos los partidos de una jornada, rival o temporada en un único proyecto. Cambia de partido sin perder el contexto del análisis."
+        "title": "Multiple games, one project",
+        "description": "Group every game of a matchday, opponent or season into a single project. Switch between games without losing your analysis context."
       },
       "youtube": {
-        "title": "YouTube Nativo",
-        "description": "Pega la URL de cualquier partido y empieza a analizar al instante."
+        "title": "Native YouTube",
+        "description": "Paste any game URL and start breaking it down instantly."
       },
       "clips": {
-        "title": "Corte de Clips Ultra-rápido",
-        "description": "Marca inicio y fin con una tecla. Exporta la jugada en segundos."
+        "title": "Ultra-fast Clip Cutting",
+        "description": "Mark in and out with a single key. Export the play in seconds."
       },
       "db": {
-        "title": "Base de Datos Local",
-        "description": "Tus informes, sesiones y jugadores guardados offline. Siempre contigo, sin depender de la nube."
+        "title": "Local Database",
+        "description": "Your reports, sessions and players stored offline. Always with you — no cloud required."
       }
     },
     "badge": {
-      "youtube": "Integración directa"
+      "youtube": "Native integration"
     },
     "visual": {
-      "matchActive": "Activo",
-      "statsSessiones": "Sesiones",
-      "statsJugadores": "Jugadores",
+      "matchActive": "Active",
+      "statsSessiones": "Sessions",
+      "statsJugadores": "Players",
       "statsClips": "Clips"
     }
   },
   "PricingSection": {
-    "eyebrow": "Precio",
-    "title1": "Reserva antes",
-    "title2": "del 30 de abril.",
-    "subtitle": "Precio especial de lanzamiento solo para quienes entren con el Pase Fundador. Plazas limitadas.",
-    "badgeLabel": "Solo durante la Beta",
-    "planEyebrow": "Acceso Fundador",
-    "planTitle": "Beta GMSS",
-    "planSubtitle": "Reserva tu plaza ahora y forma parte de los primeros en usar la herramienta.",
-    "priceUnitLine1": "pago",
-    "priceUnitLine2": "único",
+    "eyebrow": "Pricing",
+    "title1": "Reserve before",
+    "title2": "April 30.",
+    "subtitle": "Special launch price only for those who come in with the Founder Pass. Limited spots.",
+    "badgeLabel": "Beta only",
+    "planEyebrow": "Founder Access",
+    "planTitle": "GMSS Beta",
+    "planSubtitle": "Claim your spot now and become one of the first to use the tool.",
+    "priceUnitLine1": "one-time",
+    "priceUnitLine2": "payment",
     "benefits": {
-      "access": "Acceso total desde el 30 de abril hasta el lanzamiento oficial",
-      "support": "Soporte prioritario directo con el equipo",
-      "badge": "Insignia de Fundador exclusiva en la aplicación",
-      "discount": "Descuento permanente en la futura suscripción"
+      "access": "Full access from April 30 through the official launch",
+      "support": "Priority support directly with the team",
+      "badge": "Exclusive in-app Founder badge",
+      "discount": "Permanent discount on the future subscription"
     },
-    "cta": "Reservar mi Pase Beta",
-    "clubEyebrow": "Para clubes y academias",
-    "clubTitle": "5 cuentas · todo el staff técnico analizando en paralelo",
-    "clubPriceYear": "/ año",
-    "clubPriceMonth": "o 40€/mes",
-    "clubBody": "Los 5 entrenadores trabajan sobre la misma biblioteca de clips, plantillas tácticas y scouting compartido. Disponible tras el lanzamiento oficial.",
-    "clubCta": "Reservar plan Club",
-    "futurePlansLabel": "Planes tras el lanzamiento oficial",
-    "futurePlanMonthly": "Mensual",
-    "futurePlanMonthlyPrice": "15€/mes",
-    "futurePlanYearly": "Anual",
-    "futurePlanYearlyPrice": "99€/año",
-    "futureFounderNote": "Próximamente · Los Fundadores tendrán descuento permanente",
-    "b2bText": "¿Federación, academia o club con más de 5 entrenadores?",
-    "b2bCta": "Escríbenos para una oferta a medida."
+    "cta": "Claim my Beta Pass",
+    "clubEyebrow": "For clubs and academies",
+    "clubTitle": "5 seats · the full coaching staff analyzing in parallel",
+    "clubPriceYear": "/ year",
+    "clubPriceMonth": "or €40/month",
+    "clubBody": "All 5 coaches work on the same clip library, tactical playbook and shared scouting. Available after the official launch.",
+    "clubCta": "Reserve Club plan",
+    "futurePlansLabel": "Plans after the official launch",
+    "futurePlanMonthly": "Monthly",
+    "futurePlanMonthlyPrice": "€15/month",
+    "futurePlanYearly": "Yearly",
+    "futurePlanYearlyPrice": "€99/year",
+    "futureFounderNote": "Coming soon · Founders keep a permanent discount",
+    "b2bText": "Federation, academy or club with more than 5 coaches?",
+    "b2bCta": "Get in touch for a custom quote."
   },
   "FaqSection": {
     "eyebrow": "FAQ",
-    "title": "Preguntas frecuentes",
+    "title": "Frequently asked questions",
     "faqs": {
-      "q0": "¿Cuándo puedo acceder a la Beta?",
-      "a0": "La Beta se abre el 30 de abril de 2026. Si completas el formulario de inscripción ahora, aseguras tu plaza (son limitadas) y recibirás el enlace de descarga por email ese mismo día.",
-      "q1": "¿Necesito una suscripción de video externa?",
-      "a1": "No. GmSportStudio se integra directamente con YouTube, por lo que puedes analizar cualquier partido público sin necesidad de ninguna suscripción adicional. Para videos propios puedes importar archivos locales.",
-      "q2": "¿Funciona en Mac y PC?",
-      "a2": "Sí. La aplicación es compatible con macOS (Apple Silicon y Intel) y Windows 10/11. El instalador se adapta automáticamente a tu plataforma.",
-      "q3": "¿Qué planes de precio habrá tras el lanzamiento?",
-      "a3": "Tres opciones. Para entrenadores individuales: plan Mensual a 15€/mes o plan Anual a 99€/año (ahorras un 45% frente al mensual). Para clubes y academias: plan Club con 5 cuentas a 299€/año (o 40€/mes), pensado para que todo el cuerpo técnico trabaje sobre la misma biblioteca de clips y scouting. Quien entre con el Pase Fundador de 9,99€ tendrá descuento permanente en cualquiera de estos planes. Federaciones y clubes con más de 5 entrenadores: escríbenos a clubes@gmsportstudio.com para oferta personalizada."
+      "q0": "When can I access the Beta?",
+      "a0": "The Beta opens on April 30, 2026. If you complete the sign-up form now, you lock in your spot (they're limited) and you'll receive the download link by email that same day.",
+      "q1": "Do I need an external video subscription?",
+      "a1": "No. GmSportStudio integrates natively with YouTube, so you can analyze any public game without any extra subscription. For your own footage, you can import local files.",
+      "q2": "Does it work on Mac and PC?",
+      "a2": "Yes. The app runs on macOS (Apple Silicon and Intel) and Windows 10/11. The installer adapts automatically to your platform.",
+      "q3": "What pricing plans will there be after launch?",
+      "a3": "Three options. For individual coaches: a Monthly plan at €15/month or a Yearly plan at €99/year (you save 45% vs. monthly). For clubs and academies: the Club plan with 5 seats at €299/year (or €40/month), built so the whole coaching staff works on the same clip library and scouting. Anyone who joins with the €9.99 Founder Pass keeps a permanent discount on any of these plans. Federations and clubs with more than 5 coaches: reach out to clubes@gmsportstudio.com for a custom offer."
     }
   },
   "Footer": {
-    "tagline": "Software de vídeo análisis deportivo para entrenadores que quieren ganar.",
+    "tagline": "Sports video analysis software for coaches who want to win.",
     "legalTitle": "Legal",
-    "contactTitle": "Contacto",
+    "contactTitle": "Contact",
     "legal": {
-      "avisoLegal": "Aviso Legal",
-      "privacidad": "Privacidad",
-      "terminosBeta": "Términos Beta",
+      "avisoLegal": "Legal Notice",
+      "privacidad": "Privacy",
+      "terminosBeta": "Beta Terms",
       "cookies": "Cookies"
     },
     "contact": {
-      "supportLabel": "Soporte",
-      "clubesLabel": "Clubes",
+      "supportLabel": "Support",
+      "clubesLabel": "Clubs",
       "ceoLabel": "CEO"
     },
-    "betaAccess": "Solicitar acceso Beta →",
-    "copyright": "© {year} GmSportStudio. Todos los derechos reservados.",
+    "betaAccess": "Request Beta access →",
+    "copyright": "© {year} GmSportStudio. All rights reserved.",
     "systemStatus": "System Status:",
     "systemStatusOk": "All systems operational"
   },
   "CookieBanner": {
-    "text": "Usamos almacenamiento técnico (Firebase) y analítica sin cookies (Vercel).",
-    "moreInfo": "Más info",
-    "accept": "Entendido",
-    "dialogLabel": "Aviso de cookies"
+    "text": "We use technical storage (Firebase) and cookieless analytics (Vercel).",
+    "moreInfo": "Learn more",
+    "accept": "Got it",
+    "dialogLabel": "Cookie notice"
   }
 }
