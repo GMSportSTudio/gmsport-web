@@ -76,7 +76,7 @@ export default async function JsonLd({ locale }: { locale: string }) {
     name: t("video.name"),
     description: t("video.description"),
     thumbnailUrl: `${BASE_URL}/opengraph-image`,
-    uploadDate: "2026-04-19",
+    uploadDate: "2026-04-19T12:00:00+02:00",
     contentUrl: `${BASE_URL}/frontend-web.mp4`,
     duration: "PT24S",
     inLanguage: locale,
