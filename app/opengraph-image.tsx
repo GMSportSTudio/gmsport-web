@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { getLogoDataUri } from "@/lib/logo-svg";
 
 export const runtime = "edge";
 export const alt     = "GmSportStudio — Software de vídeo análisis deportivo para baloncesto y fútbol";
@@ -33,14 +34,10 @@ export default function OGImage() {
         }} />
 
         {/* Logo */}
-        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 48 }}>
-          <div style={{
-            width: 48, height: 48, borderRadius: 12,
-            background: "linear-gradient(135deg, #FF5722, #E64A19)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: 24, fontWeight: 900, color: "white",
-          }}>G</div>
-          <span style={{ fontSize: 28, fontWeight: 700, color: "white", letterSpacing: -0.5 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 48 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={getLogoDataUri(72)} width={72} height={72} alt="" />
+          <span style={{ fontSize: 30, fontWeight: 700, color: "white", letterSpacing: -0.5 }}>
             GmSport<span style={{ color: "#FF5722" }}>Studio</span>
           </span>
         </div>

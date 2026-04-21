@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import LogoIcon from "@/components/LogoIcon";
 
 export default function Navbar() {
   const t = useTranslations("Navbar");
@@ -54,13 +54,9 @@ export default function Navbar() {
           className="flex items-center select-none group"
           aria-label={t("logoLabel")}
         >
-          <Image
-            src="/logo.png"
-            alt="GmSportStudio"
-            height={40}
-            width={40}
-            className="h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-200"
-            priority
+          <LogoIcon
+            size={40}
+            className="h-10 w-10 group-hover:scale-105 transition-transform duration-200"
           />
         </a>
 

@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import LogoIcon from "@/components/LogoIcon";
 
 function XIcon({ size = 15 }: { size?: number }) {
   return (
@@ -59,14 +59,8 @@ export default function Footer() {
 
         {/* Col 1 — Marca */}
         <div className="flex flex-col items-center sm:items-start gap-4">
-          <Link href="/" aria-label="Inicio">
-            <Image
-              src="/logo.png"
-              alt="GmSportStudio"
-              height={36}
-              width={36}
-              className="h-9 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity duration-300"
-            />
+          <Link href="/" aria-label="Inicio" className="opacity-85 hover:opacity-100 transition-opacity duration-300">
+            <LogoIcon size={36} className="h-9 w-9" />
           </Link>
           <p className="text-xs text-white/35 leading-relaxed max-w-[220px]">
             {t("tagline")}
