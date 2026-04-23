@@ -34,12 +34,15 @@ const sections = [
     content: (
       <>
         <p>
+          Al adquirir el Pase Beta Fundador, el Usuario acepta expresamente que la ejecución del contrato comienza con el inicio de la descarga del software, y que, conforme al artículo 103.m del Real Decreto Legislativo 1/2007 (TRLGDCU), pierde el derecho de desistimiento de 14 días aplicable a contratos a distancia. El Usuario reconoce haber sido informado de esta consecuencia con carácter previo a la compra.
+        </p>
+        <p className="mt-3">
           <strong className="text-white/70">No se admiten reembolsos</strong> una vez concedido el acceso a la Beta. Al adquirir el Pase Beta, reconoces y aceptas expresamente que:
         </p>
         <ul className="list-disc list-inside space-y-1 mt-2">
           <li>Estás adquiriendo acceso a software en desarrollo.</li>
           <li>El producto puede presentar errores o cambios.</li>
-          <li>El acceso es inmediato tras la verificación del pago, lo que implica la pérdida del derecho de desistimiento conforme al Art. 103.a) del Real Decreto Legislativo 1/2007.</li>
+          <li>El acceso es inmediato tras la verificación del pago, lo que implica la pérdida del derecho de desistimiento conforme al Art. 103.m) del Real Decreto Legislativo 1/2007.</li>
         </ul>
         <p className="mt-2">
           En caso de problemas técnicos graves imputables exclusivamente al titular, se estudiará la situación de forma individual contactando con <span className="text-white/70">info@gmsportstudio.com</span>.
@@ -154,7 +157,7 @@ const sections = [
     title: "10. Legislación aplicable",
     content: (
       <p>
-        Estos Términos se rigen por la legislación española. Cualquier controversia se someterá a los juzgados y tribunales de Jerez de la Frontera (Cádiz), salvo que la normativa de protección al consumidor establezca otro fuero imperativo.
+        Estos Términos se rigen por la legislación española. Para cualquier controversia derivada de la relación contractual con empresas (B2B), serán competentes los Juzgados y Tribunales de Jerez de la Frontera, Cádiz. En el caso de consumidores, se aplicará el fuero que corresponda conforme al artículo 90.2 del Real Decreto Legislativo 1/2007 (TRLGDCU) y el artículo 52.3 de la Ley de Enjuiciamiento Civil, generalmente el del domicilio del consumidor.
       </p>
     ),
   },
