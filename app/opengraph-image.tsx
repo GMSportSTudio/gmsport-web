@@ -20,9 +20,9 @@ export default function OGImage() {
       >
         {/* Glow naranja */}
         <div style={{
-          position: "absolute", top: "-20%", right: "-10%",
+          position: "absolute", top: -126, right: -70,
           width: 700, height: 700, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(255,87,34,0.18) 0%, transparent 65%)",
+          background: "rgba(255,87,34,0.12)",
         }} />
 
         {/* Logo */}
@@ -35,30 +35,22 @@ export default function OGImage() {
           }}>
             <div style={{ width: 32, height: 2, background: "#FF6B1A" }} />
           </div>
-          <span style={{ fontSize: 30, fontWeight: 700, color: "white", letterSpacing: -0.5 }}>
+          <span style={{ fontSize: 30, fontWeight: 700, color: "white", letterSpacing: "-0.5px" }}>
             GmSport<span style={{ color: "#FF5722" }}>Studio</span>
           </span>
         </div>
 
         {/* Titular */}
-        <div style={{
-          fontSize: 64, fontWeight: 900, lineHeight: 1.05,
-          letterSpacing: -2, maxWidth: 800,
-        }}>
+        <div style={{ display: "flex", flexDirection: "column", fontSize: 64, fontWeight: 900, lineHeight: 1.05, letterSpacing: "-2px", maxWidth: 800 }}>
           <span style={{ color: "#FF5722" }}>Deja de perder horas</span>
-          <br />
           <span style={{ color: "white" }}>editando. Empieza a</span>
-          <br />
           <span style={{ color: "white" }}>ganar partidos.</span>
         </div>
 
         {/* Descripción */}
-        <p style={{
-          marginTop: 28, fontSize: 24, color: "rgba(237,237,237,0.5)",
-          maxWidth: 680, lineHeight: 1.5,
-        }}>
+        <div style={{ marginTop: 28, fontSize: 24, color: "rgba(237,237,237,0.5)", maxWidth: 680, lineHeight: 1.5 }}>
           Telestración · Scouting · YouTube · Análisis táctico profesional
-        </p>
+        </div>
 
         {/* Badge */}
         <div style={{
@@ -67,10 +59,8 @@ export default function OGImage() {
           border: "1px solid rgba(255,87,34,0.4)",
           background: "rgba(255,87,34,0.12)",
         }}>
-          <div style={{
-            width: 8, height: 8, borderRadius: "50%", background: "#FF5722",
-          }} />
-          <span style={{ color: "#FF8A65", fontSize: 16, fontWeight: 600, letterSpacing: 1 }}>
+          <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#FF5722" }} />
+          <span style={{ color: "#FF8A65", fontSize: 16, fontWeight: 600, letterSpacing: "1px" }}>
             Beta abierta · 9,99€ · gmsportstudio.com
           </span>
         </div>
