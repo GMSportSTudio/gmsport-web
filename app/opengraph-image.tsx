@@ -1,5 +1,4 @@
 import { ImageResponse } from "next/og";
-import { getLogoDataUri } from "@/lib/logo-svg";
 
 export const runtime = "edge";
 export const alt     = "GmSportStudio — Software de vídeo análisis deportivo para baloncesto y fútbol";
@@ -19,24 +18,23 @@ export default function OGImage() {
           position: "relative",
         }}
       >
-        {/* Grid de puntos de fondo */}
-        <div style={{
-          position: "absolute", inset: 0,
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }} />
         {/* Glow naranja */}
         <div style={{
           position: "absolute", top: "-20%", right: "-10%",
           width: 700, height: 700, borderRadius: "50%",
           background: "radial-gradient(circle, rgba(255,87,34,0.18) 0%, transparent 65%)",
-          filter: "blur(40px)",
         }} />
 
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 48 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={getLogoDataUri(72)} width={72} height={72} alt="" />
+          <div style={{
+            width: 60, height: 60, borderRadius: "50%",
+            border: "2px solid #FF6B1A",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            background: "#0a0a0a",
+          }}>
+            <div style={{ width: 32, height: 2, background: "#FF6B1A" }} />
+          </div>
           <span style={{ fontSize: 30, fontWeight: 700, color: "white", letterSpacing: -0.5 }}>
             GmSport<span style={{ color: "#FF5722" }}>Studio</span>
           </span>
