@@ -9,26 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "weekly",
       priority: 1.0,
-      alternates: {
-        languages: {
-          es: `${base}/`,
-          pt: `${base}/pt`,
-          "x-default": `${base}/`,
-        },
-      },
-    },
-    {
-      url: `${base}/pt`,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 0.8,
-      alternates: {
-        languages: {
-          es: `${base}/`,
-          pt: `${base}/pt`,
-          "x-default": `${base}/`,
-        },
-      },
     },
     {
       url: `${base}/privacidad`,

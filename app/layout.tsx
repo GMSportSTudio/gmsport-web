@@ -22,7 +22,6 @@ export const metadata: Metadata = {
     canonical: "/",
     languages: {
       es: "/",
-      pt: "/pt",
       "x-default": "/",
     },
   },
