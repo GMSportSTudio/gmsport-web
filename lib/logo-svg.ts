@@ -45,6 +45,9 @@ export function getLogoSvgString(size: number): string {
  */
 export function getLogoDataUri(size: number): string {
   const svg = getLogoSvgString(size);
-  const base64 = Buffer.from(svg).toString("base64");
+  const bytes = new TextEncoder().encode(svg);
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  const base64 = btoa(binary);
   return `data:image/svg+xml;base64,${base64}`;
 }
