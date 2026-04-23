@@ -1,39 +1,40 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://www.gmsportstudio.com";
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  const base = "https://www.gmsportstudio.com";
+  const lastModified = new Date();
   return [
     {
-      url: BASE_URL,
-      lastModified: now,
+      url: `${base}/`,
+      lastModified,
       changeFrequency: "weekly",
       priority: 1.0,
       alternates: {
         languages: {
-          es: `${BASE_URL}/`,
-          en: `${BASE_URL}/en`,
-          // pt, fr: se añaden en mayo cuando lancemos sus traducciones
+          es: `${base}/`,
+          pt: `${base}/pt`,
+          "x-default": `${base}/`,
         },
       },
     },
     {
-      url: `${BASE_URL}/en`,
-      lastModified: now,
+      url: `${base}/pt`,
+      lastModified,
       changeFrequency: "weekly",
-      priority: 0.9,
+      priority: 0.8,
       alternates: {
         languages: {
-          es: `${BASE_URL}/`,
-          en: `${BASE_URL}/en`,
+          es: `${base}/`,
+          pt: `${base}/pt`,
+          "x-default": `${base}/`,
         },
       },
     },
-    // Legales (solo ES, sin versión multilingüe):
-    { url: `${BASE_URL}/aviso-legal`,   lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${BASE_URL}/privacidad`,    lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${BASE_URL}/terminos-beta`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${BASE_URL}/cookies`,       lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    {
+      url: `${base}/privacidad`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.3,
+    },
   ];
 }
