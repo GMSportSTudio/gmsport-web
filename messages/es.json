@@ -199,7 +199,8 @@
       "founder": "Pase Fundador Beta",
       "monthly": "Plan Mensual",
       "yearly": "Plan Anual",
-      "club": "Plan Club (5 cuentas)"
+      "club": "Plan Club (5 cuentas)",
+      "clubMonthly": "Licencia club 5 usuarios mensual"
     },
     "features": {
       "telestrator": "Telestrador dinámico en tiempo real",

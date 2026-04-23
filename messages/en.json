@@ -199,7 +199,8 @@
       "founder": "Founder Beta Pass",
       "monthly": "Monthly Plan",
       "yearly": "Yearly Plan",
-      "club": "Club Plan (5 seats)"
+      "club": "Club Plan (5 seats)",
+      "clubMonthly": "Club license 5 users monthly"
     },
     "features": {
       "telestrator": "Real-time dynamic telestration",
