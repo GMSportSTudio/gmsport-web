@@ -59,7 +59,13 @@ export function DescargaClient() {
 
   const handleDownload = (platform: string) => {
     setDl(platform);
-    window.location.href = `${FUNCTIONS_BASE}/getDownloadUrl?token=${encodeURIComponent(token)}&platform=${platform}`;
+    const url = `${FUNCTIONS_BASE}/getDownloadUrl?token=${encodeURIComponent(token)}&platform=${platform}`;
+    const a = document.createElement("a");
+    a.href = url;
+    a.rel = "noopener noreferrer";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
     setTimeout(() => setDl(null), 4000);
   };
 
