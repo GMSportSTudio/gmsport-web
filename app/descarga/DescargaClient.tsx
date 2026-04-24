@@ -51,7 +51,7 @@ export function DescargaClient() {
       .then(async r => {
         const data = await r.json();
         if (!r.ok) setMeta({ ...data, error: data.error } as Meta);
-        else       setMeta({ ...data, platforms_meta: data.platforms } as Meta);
+        else       setMeta(data as Meta);
       })
       .catch(() => setMeta({ error: "network_error" } as unknown as Meta))
       .finally(() => setLoading(false));
