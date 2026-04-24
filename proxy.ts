@@ -5,12 +5,8 @@ import { type NextRequest, NextResponse } from "next/server";
 const intlMiddleware = createMiddleware(routing);
 
 export default function proxy(req: NextRequest) {
-  // Protect /admin/* — client-side auth handles the real check; cookie is a soft gate
-  if (req.nextUrl.pathname.startsWith("/admin")) {
-    const session = req.cookies.get("gms_session")?.value;
-    if (!session) {
-      return NextResponse.redirect(new URL("/", req.url));
-    }
+  // /admin/* y /descarga — pasar directamente, auth gestionado en cliente
+  if (req.nextUrl.pathname.startsWith("/admin") || req.nextUrl.pathname.startsWith("/descarga")) {
     return NextResponse.next();
   }
 
