@@ -15,6 +15,6 @@ export default function proxy(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!api|_next|opengraph-image|icon|apple-icon|favicon\\.ico|sitemap\\.xml|robots\\.txt|aviso-legal|privacidad|terminos-beta|cookies|descarga|.*\\.(?:png|jpg|jpeg|gif|svg|ico|mp4|webm|webp|woff|woff2|ttf|otf|eot)).*)",
+    "/((?!api|_next|opengraph-image|icon|apple-icon|favicon\\.ico|sitemap\\.xml|robots\\.txt|aviso-legal|privacidad|terminos-beta|cookies|admin|descarga|.*\\.(?:png|jpg|jpeg|gif|svg|ico|mp4|webm|webp|woff|woff2|ttf|otf|eot)).*)",
   ],
 };
