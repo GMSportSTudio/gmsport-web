@@ -1,0 +1,161 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+
+const FUNCTIONS_BASE = "https://europe-west1-gmsportstudio-53bbf.cloudfunctions.net";
+
+interface PlatformMeta {
+  sha256: string | null;
+  size: number | null;
+}
+
+interface Meta {
+  email: string;
+  platforms: string[];
+  expiresAt: number;
+  downloads: number;
+  maxDownloads: number;
+  platforms_meta: Record<string, PlatformMeta>;
+  error?: string;
+}
+
+const PLATFORM_LABELS: Record<string, { icon: string; name: string; note: string }> = {
+  mac: {
+    icon: "🍎",
+    name: "macOS Universal (Apple Silicon + Intel)",
+    note: 'Si macOS muestra "No se puede verificar el desarrollador", ve a Ajustes → Privacidad y seguridad → Abrir de todas formas.',
+  },
+  windows: {
+    icon: "🪟",
+    name: "Windows (x64)",
+    note: 'Si Windows Defender muestra "Windows protegió tu PC", haz clic en "Más información" → "Ejecutar de todas formas".',
+  },
+};
+
+function formatBytes(b: number) {
+  return b > 1_000_000 ? `${(b / 1_000_000).toFixed(0)} MB` : `${(b / 1000).toFixed(0)} KB`;
+}
+
+export function DescargaClient() {
+  const params = useSearchParams();
+  const token  = params.get("token") ?? "";
+
+  const [meta, setMeta]         = useState<Meta | null>(null);
+  const [loading, setLoading]   = useState(true);
+  const [downloading, setDl]    = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!token) { setLoading(false); return; }
+    fetch(`${FUNCTIONS_BASE}/getInvitationMeta?token=${encodeURIComponent(token)}`)
+      .then(async r => {
+        const data = await r.json();
+        if (!r.ok) setMeta({ ...data, error: data.error } as Meta);
+        else       setMeta({ ...data, platforms_meta: data.platforms } as Meta);
+      })
+      .catch(() => setMeta({ error: "network_error" } as unknown as Meta))
+      .finally(() => setLoading(false));
+  }, [token]);
+
+  const handleDownload = (platform: string) => {
+    setDl(platform);
+    window.location.href = `${FUNCTIONS_BASE}/getDownloadUrl?token=${encodeURIComponent(token)}&platform=${platform}`;
+    setTimeout(() => setDl(null), 4000);
+  };
+
+  const errorMessages: Record<string, string> = {
+    invalid_token: "Este enlace no es válido.",
+    expired:       "Este enlace ha expirado. Solicita uno nuevo a ceo@gmsportstudio.com",
+    revoked:       "Este enlace ha sido revocado. Contacta con ceo@gmsportstudio.com",
+    limit_reached: "Límite de descargas alcanzado. Contacta con ceo@gmsportstudio.com",
+    missing_token: "Falta el token de descarga.",
+    network_error: "Error de red. Comprueba tu conexión e inténtalo de nuevo.",
+  };
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#0f1117", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "48px 16px", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+      <div style={{ width: "100%", maxWidth: 600 }}>
+
+        {/* Logo */}
+        <div style={{ textAlign: "center", marginBottom: 40 }}>
+          <h1 style={{ color: "#e8eaf0", fontSize: 28, fontWeight: 800, margin: "0 0 8px" }}>
+            GMSport<span style={{ color: "#ff6b1a" }}>Studio</span>
+          </h1>
+          <p style={{ color: "#555d6e", fontSize: 14, margin: 0 }}>Acceso Beta — Descarga privada</p>
+        </div>
+
+        {loading && (
+          <p style={{ color: "#555d6e", textAlign: "center" }}>Verificando enlace…</p>
+        )}
+
+        {!loading && !token && (
+          <div style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 16, padding: 32, textAlign: "center" }}>
+            <p style={{ color: "#f87171", margin: 0 }}>Enlace inválido. ¿Tienes el email de invitación?</p>
+          </div>
+        )}
+
+        {!loading && meta?.error && (
+          <div style={{ background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.3)", borderRadius: 16, padding: 32, textAlign: "center" }}>
+            <p style={{ color: "#f87171", fontSize: 16, fontWeight: 600, margin: "0 0 12px" }}>
+              {errorMessages[meta.error] ?? "Error desconocido."}
+            </p>
+            <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#ff6b1a", fontSize: 14 }}>
+              ceo@gmsportstudio.com
+            </a>
+          </div>
+        )}
+
+        {!loading && meta && !meta.error && (
+          <>
+            <div style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 16, padding: "20px 28px", marginBottom: 16 }}>
+              <p style={{ color: "#9095a0", fontSize: 13, margin: 0 }}>
+                ⚠️ Este enlace es <strong style={{ color: "#e8eaf0" }}>privado e intransferible</strong>. No lo compartas.
+              </p>
+            </div>
+
+            {meta.platforms.map(platform => {
+              const info = PLATFORM_LABELS[platform];
+              const pmeta = meta.platforms_meta?.[platform];
+              if (!info) return null;
+              return (
+                <div key={platform} style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 16, padding: "24px 28px", marginBottom: 16 }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+                    <div>
+                      <p style={{ color: "#e8eaf0", fontSize: 16, fontWeight: 700, margin: "0 0 4px" }}>
+                        {info.icon} GMSportStudio — {info.name}
+                      </p>
+                      {pmeta?.size && (
+                        <p style={{ color: "#555d6e", fontSize: 12, margin: 0 }}>{formatBytes(pmeta.size)}</p>
+                      )}
+                    </div>
+                    <button
+                      onClick={() => handleDownload(platform)}
+                      disabled={downloading === platform}
+                      style={{ background: "#ff6b1a", color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontWeight: 700, fontSize: 14, cursor: "pointer", whiteSpace: "nowrap", opacity: downloading === platform ? 0.7 : 1 }}>
+                      {downloading === platform ? "Preparando…" : "Descargar →"}
+                    </button>
+                  </div>
+                  {pmeta?.sha256 && (
+                    <div style={{ background: "#0f1117", borderRadius: 8, padding: "10px 14px" }}>
+                      <p style={{ color: "#3a3f50", fontSize: 10, margin: "0 0 4px", textTransform: "uppercase", letterSpacing: "0.5px" }}>SHA-256</p>
+                      <p style={{ color: "#555d6e", fontSize: 11, fontFamily: "monospace", margin: 0, wordBreak: "break-all" }}>{pmeta.sha256}</p>
+                    </div>
+                  )}
+                  <p style={{ color: "#555d6e", fontSize: 12, margin: "12px 0 0", lineHeight: 1.6 }}>{info.note}</p>
+                </div>
+              );
+            })}
+
+            <div style={{ textAlign: "center", marginTop: 24 }}>
+              <p style={{ color: "#3a3f50", fontSize: 12 }}>
+                Al descargar aceptas las{" "}
+                <a href="/terminos-beta" style={{ color: "#555d6e" }}>condiciones Beta</a>.
+                {" "}Licencia válida hasta el 30/05/2026.
+              </p>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}

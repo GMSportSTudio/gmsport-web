@@ -1,21 +1,24 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
+import { type NextRequest, NextResponse } from "next/server";
 
-export default createMiddleware(routing);
+const intlMiddleware = createMiddleware(routing);
+
+export default function proxy(req: NextRequest) {
+  // Protect /admin/* — client-side auth handles the real check; cookie is a soft gate
+  if (req.nextUrl.pathname.startsWith("/admin")) {
+    const session = req.cookies.get("gms_session")?.value;
+    if (!session) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+    return NextResponse.next();
+  }
+
+  return intlMiddleware(req);
+}
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths EXCEPT:
-     * - /api/* (API routes)
-     * - /_next/* (Next.js internals)
-     * - /opengraph-image* (OG image route)
-     * - /icon, /apple-icon (favicons dinámicos desde app/icon.tsx + app/apple-icon.tsx)
-     * - /favicon.ico
-     * - /sitemap.xml, /robots.txt
-     * - /aviso-legal, /privacidad, /terminos-beta, /cookies (ES-only legal pages)
-     * - Static files (png, jpg, svg, mp4, webp, woff, woff2, etc.)
-     */
-    "/((?!api|_next|opengraph-image|icon|apple-icon|favicon\\.ico|sitemap\\.xml|robots\\.txt|aviso-legal|privacidad|terminos-beta|cookies|.*\\.(?:png|jpg|jpeg|gif|svg|ico|mp4|webm|webp|woff|woff2|ttf|otf|eot)).*)",
+    "/((?!api|_next|opengraph-image|icon|apple-icon|favicon\\.ico|sitemap\\.xml|robots\\.txt|aviso-legal|privacidad|terminos-beta|cookies|descarga|.*\\.(?:png|jpg|jpeg|gif|svg|ico|mp4|webm|webp|woff|woff2|ttf|otf|eot)).*)",
   ],
 };
