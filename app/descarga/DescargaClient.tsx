@@ -111,7 +111,19 @@ export function DescargaClient() {
           </div>
         )}
 
-        {!loading && meta && !meta.error && (
+        {!loading && meta && !meta.error && (() => {
+          // Tolera ambos formatos del backend durante la ventana de despliegue:
+          //   nuevo: platforms = ["mac","windows"], platforms_meta = { mac:{...}, windows:{...} }
+          //   viejo: platforms = { mac:{...}, windows:{...} }   (bug: spread sobrescribía el array)
+          const rawPlatforms = (meta as { platforms: unknown }).platforms;
+          const rawMetaObj   = (meta as { platforms_meta?: Record<string, PlatformMeta> }).platforms_meta;
+          const platformIds: string[] = Array.isArray(rawPlatforms)
+            ? rawPlatforms as string[]
+            : (rawPlatforms && typeof rawPlatforms === "object" ? Object.keys(rawPlatforms) : []);
+          const metaByPlatform: Record<string, PlatformMeta> =
+            rawMetaObj ?? (Array.isArray(rawPlatforms) ? {} : (rawPlatforms as Record<string, PlatformMeta>) ?? {});
+
+          return (
           <>
             <div style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 16, padding: "20px 28px", marginBottom: 16 }}>
               <p style={{ color: "#9095a0", fontSize: 13, margin: 0 }}>
@@ -119,9 +131,9 @@ export function DescargaClient() {
               </p>
             </div>
 
-            {meta.platforms.map(platform => {
+            {platformIds.map(platform => {
               const info = PLATFORM_LABELS[platform];
-              const pmeta = meta.platforms_meta?.[platform];
+              const pmeta = metaByPlatform[platform];
               if (!info) return null;
               return (
                 <div key={platform} style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 16, padding: "24px 28px", marginBottom: 16 }}>
@@ -160,7 +172,8 @@ export function DescargaClient() {
               </p>
             </div>
           </>
-        )}
+          );
+        })()}
       </div>
     </div>
   );
