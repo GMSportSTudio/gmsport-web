@@ -44,6 +44,7 @@ export function DescargaClient() {
   const [meta, setMeta]         = useState<Meta | null>(null);
   const [loading, setLoading]   = useState(true);
   const [downloading, setDl]    = useState<string | null>(null);
+  const [dlError, setDlError]   = useState<string | null>(null);
 
   useEffect(() => {
     if (!token) { setLoading(false); return; }
@@ -57,25 +58,56 @@ export function DescargaClient() {
       .finally(() => setLoading(false));
   }, [token]);
 
-  const handleDownload = (platform: string) => {
+  const handleDownload = async (platform: string) => {
     setDl(platform);
-    const url = `${FUNCTIONS_BASE}/getDownloadUrl?token=${encodeURIComponent(token)}&platform=${platform}`;
-    const a = document.createElement("a");
-    a.href = url;
-    a.rel = "noopener noreferrer";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(() => setDl(null), 4000);
+    setDlError(null);
+    // POST en lugar de GET con redirect: los email-previewers (Outlook Safe
+    // Links, Gmail link scanning) solo siguen GETs, así que ya no pueden
+    // consumir cupos al previsualizar el link del email.
+    try {
+      const res = await fetch(`${FUNCTIONS_BASE}/getDownloadUrl`, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ token, platform }),
+      });
+      const data = await res.json().catch(() => ({} as Record<string, unknown>));
+      if (!res.ok) {
+        const code = (data && (data as { error?: string }).error) || "network_error";
+        setDlError(code);
+        setDl(null);
+        return;
+      }
+      const signedUrl = (data as { url?: string }).url;
+      if (!signedUrl) {
+        setDlError("network_error");
+        setDl(null);
+        return;
+      }
+      // <a>.click() funciona en WebViews donde window.location.href se bloquea.
+      const a = document.createElement("a");
+      a.href = signedUrl;
+      a.rel = "noopener noreferrer";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => setDl(null), 4000);
+    } catch {
+      setDlError("network_error");
+      setDl(null);
+    }
   };
 
   const errorMessages: Record<string, string> = {
-    invalid_token: "Este enlace no es válido.",
-    expired:       "Este enlace ha expirado. Solicita uno nuevo a ceo@gmsportstudio.com",
-    revoked:       "Este enlace ha sido revocado. Contacta con ceo@gmsportstudio.com",
-    limit_reached: "Límite de descargas alcanzado. Contacta con ceo@gmsportstudio.com",
-    missing_token: "Falta el token de descarga.",
-    network_error: "Error de red. Comprueba tu conexión e inténtalo de nuevo.",
+    invalid_token:        "Este enlace no es válido.",
+    expired:              "Este enlace ha expirado. Solicita uno nuevo a ceo@gmsportstudio.com",
+    revoked:              "Este enlace ha sido revocado. Contacta con ceo@gmsportstudio.com",
+    limit_reached:        "Límite de descargas alcanzado. Contacta con ceo@gmsportstudio.com",
+    platform_not_allowed: "Esta plataforma no está permitida para tu invitación.",
+    missing_token:        "Falta el token de descarga.",
+    missing_params:       "Faltan parámetros en la petición.",
+    no_release:           "No hay build disponible para esta plataforma. Contacta con ceo@gmsportstudio.com",
+    internal:             "Error interno. Inténtalo de nuevo en unos segundos.",
+    network_error:        "Error de red. Comprueba tu conexión e inténtalo de nuevo.",
   };
 
   return (
@@ -163,6 +195,14 @@ export function DescargaClient() {
                 </div>
               );
             })}
+
+            {dlError && (
+              <div style={{ background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.3)", borderRadius: 12, padding: "14px 18px", marginTop: 8, marginBottom: 8 }}>
+                <p style={{ color: "#f87171", fontSize: 14, margin: 0 }}>
+                  {errorMessages[dlError] ?? "Error al iniciar la descarga."}
+                </p>
+              </div>
+            )}
 
             <div style={{ textAlign: "center", marginTop: 24 }}>
               <p style={{ color: "#3a3f50", fontSize: 12 }}>
