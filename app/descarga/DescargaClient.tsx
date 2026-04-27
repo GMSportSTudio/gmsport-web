@@ -24,12 +24,20 @@ const PLATFORM_LABELS: Record<string, { icon: string; name: string; note: string
   mac: {
     icon: "🍎",
     name: "macOS Universal (Apple Silicon + Intel)",
-    note: 'Si macOS muestra "No se puede verificar el desarrollador", ve a Ajustes → Privacidad y seguridad → Abrir de todas formas.',
+    note:
+      'Antes de abrir la app, verifica la integridad: ' +
+      'shasum -a 256 ~/Downloads/GMSportStudio*.zip ' +
+      'y compara con el SHA256 publicado debajo. ' +
+      'Solo si el hash coincide, abre la app con Control+clic → Abrir.',
   },
   windows: {
     icon: "🪟",
     name: "Windows (x64)",
-    note: 'Si Windows Defender muestra "Windows protegió tu PC", haz clic en "Más información" → "Ejecutar de todas formas".',
+    note:
+      'Antes de ejecutar, verifica la integridad en PowerShell: ' +
+      'Get-FileHash -Algorithm SHA256 GMSportStudio*.zip ' +
+      'y compara con el SHA256 publicado debajo. ' +
+      'Solo si el hash coincide, ejecuta la app.',
   },
 };
 
