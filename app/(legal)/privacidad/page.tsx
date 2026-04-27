@@ -32,7 +32,7 @@ const sections = [
           <li>Correo electrónico (a través de Google Forms)</li>
         </ul>
         <p className="mt-2">
-          Adicionalmente, cuando el usuario realiza un pago, los procesadores de pago (Stripe / Ko-fi) tratan los datos financieros conforme a sus propias políticas. GmSportStudio no almacena datos de tarjetas bancarias.
+          Adicionalmente, cuando el usuario realiza un pago, <strong className="text-white/70">Gumroad, Inc.</strong> actúa como <strong className="text-white/70">Merchant of Record (MoR)</strong> y trata los datos financieros (nombre, dirección de facturación, datos de tarjeta) conforme a su propia política de privacidad. Gumroad es responsable del cobro, la facturación, la gestión del IVA europeo y la emisión del recibo. GmSportStudio no almacena datos de tarjetas bancarias en ningún momento; recibe únicamente confirmación del pago, identificador de venta (sale_id), email del comprador y país de facturación a efectos de habilitar el acceso a la Aplicación.
         </p>
       </>
     ),
@@ -60,14 +60,18 @@ const sections = [
     title: "4. Encargados del tratamiento (terceros)",
     content: (
       <>
-        <p>Para prestar el servicio, utilizamos los siguientes encargados del tratamiento que ofrecen garantías suficientes de cumplimiento del RGPD:</p>
+        <p>Para prestar el servicio, utilizamos los siguientes encargados del tratamiento (o, en el caso de Gumroad, responsable autónomo en su rol de MoR) que ofrecen garantías suficientes de cumplimiento del RGPD:</p>
         <ul className="list-disc list-inside space-y-1 mt-2">
-          <li><span className="text-white/70">Google Firebase</span> — autenticación y base de datos (EE. UU.; cláusulas contractuales tipo UE)</li>
-          <li><span className="text-white/70">Stripe</span> — procesamiento de pagos (EE. UU.; certificado PCI-DSS)</li>
-          <li><span className="text-white/70">Ko-fi</span> — procesamiento alternativo de pagos</li>
-          <li><span className="text-white/70">Vercel</span> — hospedaje web y analítica sin cookies (EE. UU.; DPA disponible)</li>
-          <li><span className="text-white/70">Google Forms</span> — recogida del formulario de registro Beta</li>
+          <li><span className="text-white/70">Gumroad, Inc.</span> — Merchant of Record y procesamiento de pagos (EE. UU.; certificado PCI-DSS; transferencia internacional amparada en el marco <em>EU-US Data Privacy Framework</em> y/o cláusulas contractuales tipo de la Comisión Europea). Gumroad gestiona el cobro, el IVA europeo y la facturación al consumidor final.</li>
+          <li><span className="text-white/70">Google Firebase</span> (Google Cloud EMEA Ltd.) — autenticación, base de datos en tiempo real, almacenamiento y Cloud Functions en región <em>europe-west1</em>; los datos en reposo permanecen en la UE. Posibles transferencias técnicas a EE. UU. amparadas en cláusulas contractuales tipo UE.</li>
+          <li><span className="text-white/70">Resend</span> — envío de emails transaccionales (confirmación de compra, invitaciones, notificaciones). Procesamiento en EE. UU. con cláusulas contractuales tipo.</li>
+          <li><span className="text-white/70">Vercel, Inc.</span> — hospedaje web y analítica sin cookies (EE. UU.; DPA firmado).</li>
+          <li><span className="text-white/70">Sentry</span> (Functional Software Inc.) — monitorización de errores en la Aplicación. Los eventos enviados se anonimizan (hash del UID con sal, eliminación de paths con nombre de usuario, sin tarjetas ni emails en logs).</li>
+          <li><span className="text-white/70">Google Forms</span> — recogida del formulario de registro a la lista de espera de la Beta.</li>
         </ul>
+        <p className="mt-3 text-white/40 text-xs">
+          Los enlaces a las políticas de privacidad de cada encargado están disponibles previa solicitud por correo electrónico a <span className="text-white/60">info@gmsportstudio.com</span>.
+        </p>
       </>
     ),
   },
@@ -121,7 +125,7 @@ export default function PrivacidadPage() {
     <LegalPage
       title="Política de Privacidad"
       subtitle="Protección de Datos"
-      updated="18 de abril de 2026"
+      updated="27 de abril de 2026"
       sections={sections}
     />
   );
