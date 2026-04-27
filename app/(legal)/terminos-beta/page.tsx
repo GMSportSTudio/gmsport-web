@@ -58,11 +58,28 @@ const sections = [
           Los usuarios que adquieran el Pase Beta durante la fase de lanzamiento inicial serán reconocidos como <strong className="text-white/70">Beta Founders</strong> y recibirán:
         </p>
         <ul className="list-disc list-inside space-y-1 mt-2">
-          <li>Un <strong className="text-white/70">50% de descuento de por vida</strong> sobre el precio de suscripción en el plan equivalente al que corresponda tras el lanzamiento oficial.</li>
+          <li>Un <strong className="text-white/70">50% de descuento de por vida</strong> sobre el precio público de suscripción, en los términos y con las limitaciones detalladas a continuación (subapartados 4.2, 4.3 y 4.4).</li>
           <li>Reconocimiento especial en el producto.</li>
         </ul>
-        <p className="mt-2 text-white/40 text-xs">
-          El descuento se aplicará de forma manual o automatizada en el momento del lanzamiento. El titular se reserva el derecho a modificar la estructura de precios, pero el descuento del 50% para Fundadores se mantendrá como compromiso firme.
+
+        <p className="mt-4">
+          <strong className="text-white/70">4.2. Planes elegibles.</strong> El descuento del 50% se aplica <strong className="text-white/70">exclusivamente a las suscripciones individuales</strong> (mensual y anual) destinadas a uso personal de un único entrenador o analista. <strong className="text-white/70">No es aplicable</strong> a los planes Pro Club ni a cualquier otro plan de equipo, club o empresa que pueda lanzarse en el futuro.
+        </p>
+
+        <p className="mt-3">
+          <strong className="text-white/70">4.3. Refund o disputa del Pase Beta.</strong> Si el comprador solicita la devolución del importe del Pase Beta —ya sea por desistimiento, refund voluntario o disputa (chargeback)— pierde de forma automática y permanente el estatus de Beta Founder y, con él, el derecho al descuento del 50%. La devolución del importe se considera incompatible con la conservación del beneficio.
+        </p>
+
+        <p className="mt-3">
+          <strong className="text-white/70">4.4. Vigencia del descuento.</strong>
+        </p>
+        <ul className="list-disc list-inside space-y-1 mt-1">
+          <li><strong className="text-white/70">(a)</strong> El descuento se mantiene mientras el Beta Founder conserve una suscripción individual activa, sin interrupción.</li>
+          <li><strong className="text-white/70">(b)</strong> Si la suscripción se interrumpe (cancelación voluntaria, fallo de pago, pausa, etc.), el Beta Founder dispone de <strong className="text-white/70">12 meses</strong> desde la última desconexión para reactivarla conservando el descuento. Pasado dicho plazo de 12 meses sin haber reactivado, el beneficio del 50% caduca de forma definitiva.</li>
+        </ul>
+
+        <p className="mt-3 text-white/40 text-xs">
+          El descuento se aplica de forma automatizada mediante enlaces personales e intransferibles emitidos por GmSportStudio. El titular se reserva el derecho a modificar la estructura de precios; el descuento del 50% para Fundadores en los planes individuales se mantiene como compromiso firme dentro de los términos definidos en este apartado.
         </p>
       </>
     ),
