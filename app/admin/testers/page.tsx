@@ -7,43 +7,116 @@ import { AdminGate } from "../invitaciones/components/AdminAuth";
 import { InviteTesterForm } from "./components/InviteTesterForm";
 import { TesterRow, type BetaTesterDoc } from "./components/TesterRow";
 
+// Polling: cada 30s recargamos la tabla. Útil durante el lanzamiento Beta
+// para ver quién se va registrando (pasa de "Sin registrar" → "Activo")
+// sin tener que pulsar manualmente "Actualizar".
+const POLL_INTERVAL_MS = 30_000;
+
 function TestersTable() {
   const [testers, setTesters] = useState<BetaTesterDoc[]>([]);
   const [loading, setLoading] = useState(true);
+  const [lastSync, setLastSync] = useState<Date | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const q = query(
-        collection(db, "licenses"),
-        where("planTier", "==", "beta_tester"),
-        orderBy("invitedAt", "desc"),
-        limit(200),
-      );
-      const snap = await getDocs(q);
-      setTesters(snap.docs.map(d => ({ id: d.id, ...d.data() } as BetaTesterDoc)));
-    } catch (err: unknown) {
-      // Si el index compuesto (planTier + invitedAt) no existe todavía,
-      // caemos a una query simple por planTier sin orderBy.
+      // ── Query 1: licenses con planTier=beta_tester (testers ya registrados)
+      let licDocs: BetaTesterDoc[] = [];
       try {
+        const q = query(
+          collection(db, "licenses"),
+          where("planTier", "==", "beta_tester"),
+          orderBy("invitedAt", "desc"),
+          limit(200),
+        );
+        const snap = await getDocs(q);
+        licDocs = snap.docs.map(d => ({ id: d.id, _origin: "license", ...d.data() } as BetaTesterDoc));
+      } catch {
+        // Index compuesto (planTier+invitedAt) puede no existir → fallback sin orderBy.
         const fallback = query(
           collection(db, "licenses"),
           where("planTier", "==", "beta_tester"),
           limit(200),
         );
         const snap = await getDocs(fallback);
-        setTesters(snap.docs.map(d => ({ id: d.id, ...d.data() } as BetaTesterDoc)));
-      } catch (e2) {
-        console.error("Listado testers falló:", e2);
+        licDocs = snap.docs.map(d => ({ id: d.id, _origin: "license", ...d.data() } as BetaTesterDoc));
       }
+
+      // ── Query 2: invitations source=beta_tester_invite (incluye los aún
+      // no registrados — los "pendientes de registro"). pendingInvites NO
+      // se consulta porque solo guarda el hash del email (no el plano), y
+      // queremos mostrar el correo legible al admin.
+      let invDocs: BetaTesterDoc[] = [];
+      try {
+        const qInv = query(
+          collection(db, "invitations"),
+          where("source", "==", "beta_tester_invite"),
+          orderBy("created_at", "desc"),
+          limit(300),
+        );
+        const snap = await getDocs(qInv);
+        // Mapear shape invitation → BetaTesterDoc para reusar la fila.
+        // Nota: el script de batch (founder_batch) marca created_by="founder_batch_..."
+        // y source="beta_tester_invite". El CF inviteBetaTester marca igual.
+        invDocs = snap.docs
+          .filter(d => !d.data().revoked)
+          .map(d => {
+            const x = d.data();
+            return {
+              id: d.id,
+              email: x.email,
+              planTier: "beta_tester",
+              planStatus: "pending_registration",
+              isBetaTester: true,
+              source: x.source || "beta_tester_invite",
+              invitedBy: x.created_by || "—",
+              invitedAt: x.created_at,
+              activeUntil: x.beta_license_until,
+              _origin: "invitation",
+            } as BetaTesterDoc;
+          });
+      } catch (errInv) {
+        console.warn("Listado de invitations falló (sin index):", errInv);
+      }
+
+      // ── Merge: para cada email solo dejamos UNA fila. Si tiene licencia
+      // (registrado), gana la de licenses (estado real). Si no, se queda
+      // la de invitations como "pendiente".
+      const byEmail = new Map<string, BetaTesterDoc>();
+      // Primero las invitaciones (pendientes), luego sobreescribimos con
+      // licencias si existen → el admin ve siempre el estado más avanzado.
+      for (const t of invDocs) {
+        const k = (t.email || t.id).toLowerCase();
+        byEmail.set(k, t);
+      }
+      for (const t of licDocs) {
+        const k = (t.email || t.id).toLowerCase();
+        byEmail.set(k, t);
+      }
+      const merged = Array.from(byEmail.values()).sort((a, b) => {
+        const ta = a.invitedAt?.seconds || 0;
+        const tb = b.invitedAt?.seconds || 0;
+        return tb - ta;
+      });
+      setTesters(merged);
+      setLastSync(new Date());
+    } catch (e) {
+      console.error("Listado testers falló:", e);
     }
     setLoading(false);
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => {
+    load();
+    const id = setInterval(load, POLL_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [load]);
 
   const active   = testers.filter(t => t.planStatus === "active");
-  const expired  = testers.filter(t => t.planStatus !== "active");
+  const pending  = testers.filter(t => t.planStatus === "pending_registration");
+  const expired  = testers.filter(t =>
+    t.planStatus !== "active" && t.planStatus !== "pending_registration"
+  );
 
   return (
     <div style={{ minHeight: "100vh", background: "#0f1117", padding: "48px 32px", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
@@ -57,7 +130,14 @@ function TestersTable() {
               <span style={{ color: "#555d6e", fontSize: 16, fontWeight: 400, marginLeft: 12 }}>/ Admin / Beta Testers</span>
             </h1>
             <p style={{ color: "#555d6e", fontSize: 13, margin: "6px 0 0" }}>
-              {testers.length} total · {active.length} activos · {expired.length} caducados/revocados
+              {testers.length} total · <strong style={{ color: "#4ade80" }}>{active.length} registrados</strong>
+              {" · "}<strong style={{ color: "#ff6b1a" }}>{pending.length} sin registrar</strong>
+              {expired.length > 0 ? ` · ${expired.length} caducados/revocados` : ""}
+              {lastSync && (
+                <span style={{ color: "#3a3f50", marginLeft: 12, fontSize: 11 }}>
+                  · sync {lastSync.toLocaleTimeString("es-ES")} (auto cada 30s)
+                </span>
+              )}
             </p>
           </div>
           <button onClick={load} style={{ background: "transparent", border: "1px solid #2a2f3a", borderRadius: 8, padding: "8px 16px", color: "#9095a0", fontSize: 13, cursor: "pointer" }}>

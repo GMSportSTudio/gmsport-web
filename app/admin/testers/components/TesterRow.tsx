@@ -14,6 +14,9 @@ export interface BetaTesterDoc {
   invitedBy?: string;
   invitedAt?: { seconds: number; nanoseconds?: number };
   activeUntil?: { seconds: number; nanoseconds?: number };
+  // _origin: "license" → registrado, hay licenses/{uid}.
+  //          "invitation" → invitado pero aún sin licenses (pendiente de registro).
+  _origin?: "license" | "invitation";
 }
 
 interface Props {
@@ -33,6 +36,8 @@ function _statusLabel(status: string | undefined): { label: string; color: strin
   switch (status) {
     case "active":
       return { label: "✓ Activo",    color: "#4ade80" };
+    case "pending_registration":
+      return { label: "⏳ Sin registrar", color: "#ff6b1a" };
     case "expired":
       return { label: "✗ Caducado",  color: "#f87171" };
     case "paused":
