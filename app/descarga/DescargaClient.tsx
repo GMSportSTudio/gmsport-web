@@ -20,10 +20,83 @@ interface Meta {
   error?: string;
 }
 
+// Detecta el chip Mac del usuario. Priorización:
+//   1. navigator.userAgentData.getHighEntropyValues({ architecture, bitness })
+//      — solo Chromium/Edge en Mac y devuelve "arm" o "x86".
+//   2. Heurística sobre navigator.userAgent (todos los navegadores la exponen):
+//      Apple Silicon emite Mac OS X 10_15_7 fijo desde 2020; Intel reales
+//      muestran versiones reales (11_x_x, 12_x_x…). No es 100% fiable
+//      (Safari mintió en algunas builds) pero cubre la mayoría.
+//   3. WebGL: el renderer de Apple Silicon empieza por "Apple M". Útil
+//      como tiebreaker cuando UA es ambiguo.
+// Si todo falla → null y el portal pide al usuario que elija manualmente.
+async function detectMacArch(): Promise<"silicon" | "intel" | null> {
+  if (typeof navigator === "undefined") return null;
+
+  // 1. UA-CH (Chromium/Edge)
+  const uaData = (navigator as unknown as {
+    userAgentData?: {
+      getHighEntropyValues: (h: string[]) => Promise<{ architecture?: string; bitness?: string }>;
+    };
+  }).userAgentData;
+  if (uaData?.getHighEntropyValues) {
+    try {
+      const v = await uaData.getHighEntropyValues(["architecture", "bitness"]);
+      if (v.architecture === "arm") return "silicon";
+      if (v.architecture === "x86") return "intel";
+    } catch { /* noop */ }
+  }
+
+  // 2. WebGL renderer (más fiable que UA — Apple Silicon expone "Apple M*")
+  try {
+    const canvas = document.createElement("canvas");
+    const gl = (canvas.getContext("webgl") || canvas.getContext("experimental-webgl")) as WebGLRenderingContext | null;
+    if (gl) {
+      const ext = gl.getExtension("WEBGL_debug_renderer_info");
+      if (ext) {
+        const renderer = String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) || "");
+        if (/Apple\s*M\d/i.test(renderer)) return "silicon";
+        if (/Intel|AMD|Radeon|NVIDIA/i.test(renderer)) return "intel";
+      }
+    }
+  } catch { /* noop */ }
+
+  // 3. UA fallback
+  const ua = navigator.userAgent || "";
+  if (/Mac OS X 10[._]15[._]7/.test(ua)) {
+    // Apple Silicon emite ESTA versión fija. Pero también algunos Intel post-2020.
+    // Sin más datos, asumimos silicon (mayoría del parque tras 2024).
+    return "silicon";
+  }
+  if (/Mac OS X 1[12345678]/.test(ua)) {
+    // Versiones >=11.x reales suelen ser Intel (porque Silicon emite 10_15_7).
+    return "intel";
+  }
+  return null;
+}
+
 const PLATFORM_LABELS: Record<string, { icon: string; name: string; note: string }> = {
   mac: {
     icon: "🍎",
-    name: "macOS Universal (Apple Silicon + Intel)",
+    name: "macOS",
+    note:
+      'Antes de abrir la app, verifica la integridad: ' +
+      'shasum -a 256 ~/Downloads/GMSportStudio*.zip ' +
+      'y compara con el SHA256 publicado debajo. ' +
+      'Solo si el hash coincide, abre la app con Control+clic → Abrir.',
+  },
+  "mac-silicon": {
+    icon: "🍎",
+    name: "macOS · Apple Silicon (M1/M2/M3/M4)",
+    note:
+      'Antes de abrir la app, verifica la integridad: ' +
+      'shasum -a 256 ~/Downloads/GMSportStudio*.zip ' +
+      'y compara con el SHA256 publicado debajo. ' +
+      'Solo si el hash coincide, abre la app con Control+clic → Abrir.',
+  },
+  "mac-intel": {
+    icon: "🍎",
+    name: "macOS · Intel",
     note:
       'Antes de abrir la app, verifica la integridad: ' +
       'shasum -a 256 ~/Downloads/GMSportStudio*.zip ' +
@@ -53,6 +126,8 @@ export function DescargaClient() {
   const [loading, setLoading]   = useState(true);
   const [downloading, setDl]    = useState<string | null>(null);
   const [dlError, setDlError]   = useState<string | null>(null);
+  const [macArch, setMacArch]   = useState<"silicon" | "intel" | null>(null);
+  const [archChoiceShown, setArchChoiceShown] = useState(false);
 
   useEffect(() => {
     if (!token) { setLoading(false); return; }
@@ -65,6 +140,10 @@ export function DescargaClient() {
       .catch(() => setMeta({ error: "network_error" } as unknown as Meta))
       .finally(() => setLoading(false));
   }, [token]);
+
+  useEffect(() => {
+    detectMacArch().then(setMacArch);
+  }, []);
 
   const handleDownload = async (platform: string) => {
     setDl(platform);
@@ -157,11 +236,27 @@ export function DescargaClient() {
           //   viejo: platforms = { mac:{...}, windows:{...} }   (bug: spread sobrescribía el array)
           const rawPlatforms = (meta as { platforms: unknown }).platforms;
           const rawMetaObj   = (meta as { platforms_meta?: Record<string, PlatformMeta> }).platforms_meta;
-          const platformIds: string[] = Array.isArray(rawPlatforms)
+          const invPlatforms: string[] = Array.isArray(rawPlatforms)
             ? rawPlatforms as string[]
             : (rawPlatforms && typeof rawPlatforms === "object" ? Object.keys(rawPlatforms) : []);
           const metaByPlatform: Record<string, PlatformMeta> =
             rawMetaObj ?? (Array.isArray(rawPlatforms) ? {} : (rawPlatforms as Record<string, PlatformMeta>) ?? {});
+
+          // Expandir "mac" → granular según detección. Si el usuario pulsó
+          // "Mostrar las dos opciones", forzamos ambas variantes aunque la
+          // detección sí hubiese acertado.
+          const platformIds: string[] = invPlatforms.flatMap(p => {
+            if (p !== "mac") return [p];
+            if (archChoiceShown) return ["mac-silicon", "mac-intel"];
+            if (macArch === "silicon") return ["mac-silicon"];
+            if (macArch === "intel")   return ["mac-intel"];
+            // Detección sin resultado: ambas opciones para que elija.
+            return ["mac-silicon", "mac-intel"];
+          });
+
+          // Mostramos el hint solo cuando hay detección concluyente y el
+          // usuario aún no se la ha saltado.
+          const showArchHint = invPlatforms.includes("mac") && macArch !== null && !archChoiceShown;
 
           return (
           <>
@@ -173,7 +268,8 @@ export function DescargaClient() {
 
             {platformIds.map(platform => {
               const info = PLATFORM_LABELS[platform];
-              const pmeta = metaByPlatform[platform];
+              // Para SHA/size usamos la entrada granular si existe, si no la del padre "mac".
+              const pmeta = metaByPlatform[platform] || metaByPlatform[platform.startsWith("mac") ? "mac" : platform];
               if (!info) return null;
               return (
                 <div key={platform} style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 16, padding: "24px 28px", marginBottom: 16 }}>
@@ -203,6 +299,20 @@ export function DescargaClient() {
                 </div>
               );
             })}
+
+            {showArchHint && (
+              <div style={{ background: "rgba(255,107,26,0.06)", border: "1px solid rgba(255,107,26,0.2)", borderRadius: 12, padding: "12px 18px", marginTop: 4, marginBottom: 16 }}>
+                <p style={{ color: "#9095a0", fontSize: 12, margin: 0, lineHeight: 1.6 }}>
+                  Hemos detectado que tu Mac es <strong style={{ color: "#ff6b1a" }}>{macArch === "silicon" ? "Apple Silicon (M1/M2/M3/M4)" : "Intel"}</strong>.
+                  {" "}¿No es correcto?{" "}
+                  <button
+                    onClick={() => setArchChoiceShown(true)}
+                    style={{ background: "transparent", color: "#ff6b1a", border: "none", padding: 0, font: "inherit", cursor: "pointer", textDecoration: "underline" }}>
+                    Mostrar las dos opciones
+                  </button>
+                </p>
+              </div>
+            )}
 
             {dlError && (
               <div style={{ background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.3)", borderRadius: 12, padding: "14px 18px", marginTop: 8, marginBottom: 8 }}>
