@@ -29,22 +29,35 @@ export function InviteTesterForm({ onInvited }: Props) {
     setMessage(null);
     try {
       const fn = httpsCallable(functions, "inviteBetaTester");
-      const res = await fn({ email: e2, durationDays: days });
+      const res = await fn({
+        email:        e2,
+        name:         nombre.trim(),
+        durationDays: days,
+        sendEmail:    true,
+      });
       const data = res.data as {
         ok?: boolean;
         mode?: string;
         uid?: string;
         emailHash?: string;
+        emailSent?: boolean;
+        emailReason?: string | null;
       };
+      const correoTxt = data.emailSent
+        ? "📩 Email enviado."
+        : "⚠ Email no enviado (puedes copiar la plantilla manual).";
       if (data.mode === "license_created_or_updated") {
-        setMessage({ type: "ok", text: `✓ Invitado: ${e2}${nombre ? " (" + nombre + ")" : ""}` });
+        setMessage({
+          type: "ok",
+          text: `✓ Invitado: ${e2}${nombre ? " (" + nombre + ")" : ""}. ${correoTxt}`,
+        });
       } else if (data.mode === "pending_invite") {
         setMessage({
           type: "ok",
-          text: `⧗ Pendiente: ${e2}. Se activa cuando se registre con ese email.`,
+          text: `⧗ Pendiente: ${e2}. Se activará cuando se registre. ${correoTxt}`,
         });
       } else {
-        setMessage({ type: "ok", text: `OK: ${data.mode || "sin mensaje"}` });
+        setMessage({ type: "ok", text: `OK: ${data.mode || "sin mensaje"}. ${correoTxt}` });
       }
       setEmail("");
       setNombre("");
