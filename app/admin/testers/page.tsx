@@ -42,41 +42,48 @@ function TestersTable() {
         licDocs = snap.docs.map(d => ({ id: d.id, _origin: "license", ...d.data() } as BetaTesterDoc));
       }
 
-      // ── Query 2: invitations source=beta_tester_invite (incluye los aún
-      // no registrados — los "pendientes de registro"). pendingInvites NO
-      // se consulta porque solo guarda el hash del email (no el plano), y
-      // queremos mostrar el correo legible al admin.
+      // ── Query 2: invitations recientes ordenadas por created_at.
+      //
+      // El filtro source==beta_tester_invite NO se aplica server-side
+      // porque combinarlo con orderBy(created_at) requería un index
+      // compuesto que es fácil de olvidar crear (la query falla con
+      // FAILED_PRECONDITION). Como el volumen total de invitations
+      // es bajo (~150), traemos todas y filtramos en cliente.
+      // pendingInvites NO se consulta porque solo guarda hash del email,
+      // y queremos mostrar el correo legible al admin.
       let invDocs: BetaTesterDoc[] = [];
       try {
         const qInv = query(
           collection(db, "invitations"),
-          where("source", "==", "beta_tester_invite"),
           orderBy("created_at", "desc"),
-          limit(300),
+          limit(500),
         );
         const snap = await getDocs(qInv);
-        // Mapear shape invitation → BetaTesterDoc para reusar la fila.
-        // Nota: el script de batch (founder_batch) marca created_by="founder_batch_..."
-        // y source="beta_tester_invite". El CF inviteBetaTester marca igual.
         invDocs = snap.docs
-          .filter(d => !d.data().revoked)
-          .map(d => {
-            const x = d.data();
-            return {
-              id: d.id,
-              email: x.email,
-              planTier: "beta_tester",
-              planStatus: "pending_registration",
-              isBetaTester: true,
-              source: x.source || "beta_tester_invite",
-              invitedBy: x.created_by || "—",
-              invitedAt: x.created_at,
-              activeUntil: x.beta_license_until,
-              _origin: "invitation",
-            } as BetaTesterDoc;
-          });
+          .map(d => ({ id: d.id, data: d.data() }))
+          .filter(({ data }) => !data.revoked && (data.source || "") === "beta_tester_invite")
+          .map(({ id, data }) => ({
+            id,
+            email: data.email,
+            planTier: "beta_tester",
+            planStatus: "pending_registration",
+            isBetaTester: true,
+            source: data.source || "beta_tester_invite",
+            invitedBy: data.created_by || "—",
+            invitedAt: data.created_at,
+            activeUntil: data.beta_license_until,
+            _origin: "invitation",
+          } as BetaTesterDoc));
       } catch (errInv) {
-        console.warn("Listado de invitations falló (sin index):", errInv);
+        // Reglas Firestore bloquean reads, o falta autenticación.
+        // Mostramos el error en consola con suficiente detalle para
+        // diagnosticar si vuelve a pasar.
+        console.error(
+          "[testers] No se pudieron leer invitations:",
+          errInv,
+          "— posibles causas: 1) reglas Firestore (admin claim?), "
+          + "2) usuario no autenticado, 3) red.",
+        );
       }
 
       // ── Merge: para cada email solo dejamos UNA fila. Si tiene licencia
