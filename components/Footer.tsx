@@ -109,7 +109,7 @@ export default function Footer() {
             {t("contactTitle")}
           </p>
           {[
-            { label: t("contact.supportLabel"), href: "mailto:info@gmsportstudio.com",   text: "info@gmsportstudio.com"   },
+            { label: t("contact.supportLabel"), href: "mailto:ceo@gmsportstudio.com",   text: "ceo@gmsportstudio.com"   },
             { label: t("contact.clubesLabel"),  href: "mailto:clubes@gmsportstudio.com", text: "clubes@gmsportstudio.com" },
             { label: t("contact.ceoLabel"),     href: "mailto:ceo@gmsportstudio.com",    text: "ceo@gmsportstudio.com"    },
           ].map(({ label, href, text }) => (

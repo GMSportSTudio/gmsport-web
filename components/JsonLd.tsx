@@ -104,8 +104,8 @@ export default async function JsonLd({ locale }: { locale: string }) {
     },
     keywords: t("keywords"),
     featureList: [
-      t("features.telestrator"),
-      t("features.youtube"),
+      t("features.buttonBoard"),
+      t("features.multiMatch"),
       t("features.clips"),
       t("features.offlineDb"),
       t("features.platforms"),

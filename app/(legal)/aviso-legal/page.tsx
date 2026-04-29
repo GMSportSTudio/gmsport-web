@@ -15,7 +15,7 @@ const sections = [
         <p><span className="text-white/70">Titular:</span> José Carlos Galán Moscoso</p>
         <p><span className="text-white/70">NIF:</span> 44965596K</p>
         <p><span className="text-white/70">Domicilio:</span> Calle Playa de Bolonia 31, 11406 Jerez de la Frontera, Cádiz, España</p>
-        <p><span className="text-white/70">Correo electrónico:</span> info@gmsportstudio.com</p>
+        <p><span className="text-white/70">Correo electrónico:</span> ceo@gmsportstudio.com</p>
         <p><span className="text-white/70">Sitio web:</span> https://www.gmsportstudio.com</p>
       </div>
     ),

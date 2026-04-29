@@ -45,7 +45,7 @@ const sections = [
           <li>El acceso es inmediato tras la verificación del pago, lo que implica la pérdida del derecho de desistimiento conforme al Art. 103.m) del Real Decreto Legislativo 1/2007.</li>
         </ul>
         <p className="mt-2">
-          En caso de problemas técnicos graves imputables exclusivamente al titular, se estudiará la situación de forma individual contactando con <span className="text-white/70">info@gmsportstudio.com</span>.
+          En caso de problemas técnicos graves imputables exclusivamente al titular, se estudiará la situación de forma individual contactando con <span className="text-white/70">ceo@gmsportstudio.com</span>.
         </p>
       </>
     ),

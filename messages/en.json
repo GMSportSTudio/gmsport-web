@@ -2,12 +2,12 @@
   "Metadata": {
     "title": "GmSportStudio | Video Analysis Software for Basketball",
     "titleTemplate": "%s · GmSportStudio",
-    "description": "Break down basketball games with pro-grade telestration, advanced scouting and lightning-fast clip cutting. Native YouTube integration. Monthly plans, yearly plans and club licenses. Elite-level technology at a price that fits your program.",
+    "description": "Break down basketball games with an unlimited custom button board, multiple games per project and lightning-fast clip cutting. Local offline database. Monthly plans, yearly plans and club licenses. Elite-level technology at a price that fits your program.",
     "ogTitle": "GmSportStudio | Sports Video Analysis for Coaches",
-    "ogDescription": "Telestration, scouting and clips in seconds. Native YouTube integration. Pro-grade analysis built for coaches — at a price that actually works.",
+    "ogDescription": "Unlimited button board, multiple games per project and clips in seconds. Pro-grade analysis built for coaches — at a price that actually works.",
     "ogImageAlt": "GmSportStudio — Sports video analysis software for basketball and soccer",
     "twitterTitle": "GmSportStudio | Sports Video Analysis",
-    "twitterDescription": "Telestration, scouting and clip cutting. Pro-grade tools for coaches — at a price that actually works."
+    "twitterDescription": "Unlimited button board, multi-game projects and clip cutting. Pro-grade tools for coaches — at a price that actually works."
   },
   "Navbar": {
     "features": "Features",
@@ -19,17 +19,20 @@
     "closeMenu": "Close menu"
   },
   "HeroSection": {
-    "badge": "Beta · Opens April 30 · Limited spots",
+    "badge": "Beta · Live · Spots still open",
     "titleLine1": "Elite scouting",
     "titleLine2": "is no longer a privilege.",
-    "subtitle": "GmSportStudio puts pro-grade analysis on your laptop. Telestration, scouting and clip cutting in seconds — at a price any coach can afford.",
-    "cta": "Claim my spot · €9.99",
+    "subtitle": "GmSportStudio puts pro-grade analysis on your laptop. Unlimited button board, multiple games per project and clip cutting in seconds — at a price any coach can afford.",
+    "cta": "Get my access · €9.99",
     "socialProofPrice": "Beta €9.99",
-    "socialProofLaunch": "Launches April 30",
+    "socialProofLaunch": "Beta live",
     "socialProofPlatform": "Mac & Windows"
   },
   "CountdownHero": {
-    "ariaLabel": "{days} days, {hours} hours, {minutes} minutes and {seconds} seconds until the Beta opens",
+    "ariaLabel": "GmSportStudio Beta is live. Spots still available at the same price.",
+    "labelLaunched": "Beta live",
+    "labelAvailable": "Spots still open",
+    "labelSamePrice": "Same price · €9.99",
     "labelDays": "Days",
     "labelHours": "Hours",
     "labelMin": "Min",
@@ -46,12 +49,12 @@
     "tableColClub": "Club",
     "pillars": {
       "youtube": {
-        "tag": "Native YouTube",
-        "title": "Break down any game in seconds",
-        "body": "Forget downloading video files or paying for streaming platforms. Paste a YouTube URL and start telestrating, tagging events and cutting clips right away. No conversions, no waiting.",
-        "bullet0": "Live and recorded games",
-        "bullet1": "Full-season playlists",
-        "bullet2": "Unlimited URLs to analyze"
+        "tag": "Unlimited Button Board",
+        "title": "Your tagging system, with no limits",
+        "body": "Every coach analyzes differently. Build as many categories and subcategories as you need — defensive, offensive, transition, set plays, dead-ball plays — and reuse them across any project. Your button board follows you from game to game.",
+        "bullet0": "Unlimited categories and subcategories",
+        "bullet1": "Customizable keyboard shortcuts",
+        "bullet2": "Reusable across projects and seasons"
       },
       "dashboard": {
         "tag": "Interactive Dashboard",
@@ -72,8 +75,8 @@
     },
     "features": {
       "videoAnalysis": "Advanced video analysis",
-      "telestration": "Real-time telestration",
-      "youtube": "YouTube integration",
+      "multiMatch": "Multiple games per project",
+      "buttonBoard": "Unlimited custom button board",
       "clips": "Lightning-fast clip cutting",
       "platforms": "Mac + Windows",
       "offlineDb": "Local offline database",
@@ -92,8 +95,8 @@
         "description": "Group every game of a matchday, opponent or season into a single project. Switch between games without losing your analysis context."
       },
       "youtube": {
-        "title": "Native YouTube",
-        "description": "Paste any game URL and start breaking it down instantly."
+        "title": "Unlimited Button Board",
+        "description": "Build unlimited categories and subcategories. Customizable keyboard shortcuts. Your tagging system follows you from project to project."
       },
       "clips": {
         "title": "Ultra-fast Clip Cutting",
@@ -105,7 +108,7 @@
       }
     },
     "badge": {
-      "youtube": "Native integration"
+      "youtube": "No limits"
     },
     "visual": {
       "matchActive": "Active",
@@ -116,22 +119,22 @@
   },
   "PricingSection": {
     "eyebrow": "Pricing",
-    "title1": "Reserve before",
-    "title2": "April 30.",
-    "subtitle": "Special launch price only for those who come in with the Founder Pass. Limited spots.",
-    "badgeLabel": "Beta only",
+    "title1": "Beta is live.",
+    "title2": "Spots still open.",
+    "subtitle": "Special launch price still active — only for those who come in with the Founder Pass. Spots remain, don't let them slip.",
+    "badgeLabel": "Beta · €9.99 · Same price",
     "planEyebrow": "Founder Access",
     "planTitle": "GMSS Beta",
-    "planSubtitle": "Claim your spot now and become one of the first to use the tool.",
+    "planSubtitle": "The Beta is already running. Get your spot now and start analyzing today.",
     "priceUnitLine1": "one-time",
     "priceUnitLine2": "payment",
     "benefits": {
-      "access": "Full access from April 30 through the official launch",
+      "access": "Immediate access through the official launch",
       "support": "Priority support directly with the team",
       "badge": "Exclusive in-app Founder badge",
       "discount": "Permanent discount on the future subscription"
     },
-    "cta": "Claim my Beta Pass",
+    "cta": "Get my Beta Pass",
     "clubEyebrow": "For clubs and academies",
     "clubTitle": "5 seats · the full coaching staff analyzing in parallel",
     "clubPriceYear": "/ year",
@@ -152,9 +155,9 @@
     "title": "Frequently asked questions",
     "faqs": {
       "q0": "When can I access the Beta?",
-      "a0": "The Beta opens on April 30, 2026. If you complete the sign-up form now, you lock in your spot (they're limited) and you'll receive the download link by email that same day.",
+      "a0": "The Beta has been running since April 28, 2026. If you sign up now, you'll receive the download link by email within hours and can start using it the same day. The Founder Pass price (€9.99) is still active while spots remain.",
       "q1": "Do I need an external video subscription?",
-      "a1": "No. GmSportStudio integrates natively with YouTube, so you can analyze any public game without any extra subscription. For your own footage, you can import local files.",
+      "a1": "No. Work directly with your own video files (MP4, MOV, MKV, AVI). You can group multiple games into a single project and reuse your button board across them. If you want to use YouTube videos, download them first with any external tool and open them as local files.",
       "q2": "Does it work on Mac and PC?",
       "a2": "Yes. The app runs on macOS (Apple Silicon and Intel) and Windows 10/11. The installer adapts automatically to your platform.",
       "q3": "What pricing plans will there be after launch?",
@@ -193,8 +196,8 @@
     "switchToEn": "Switch to English"
   },
   "JsonLd": {
-    "appDescription": "Sports video analysis software with telestration, scouting and clip cutting. Monthly plans, yearly plans and license packs for sports clubs and academies.",
-    "keywords": "basketball video analysis, basketball scouting, basketball telestration, sports coaching software, soccer tactical analysis",
+    "appDescription": "Sports video analysis software with an unlimited custom button board, multiple games per project and lightning-fast clip cutting. Monthly plans, yearly plans and license packs for sports clubs and academies.",
+    "keywords": "basketball video analysis, basketball scouting, custom tagging button board, sports coaching software, soccer tactical analysis",
     "offers": {
       "founder": "Founder Beta Pass",
       "monthly": "Monthly Plan",
@@ -203,15 +206,15 @@
       "clubMonthly": "Club license 5 users monthly"
     },
     "features": {
-      "telestrator": "Real-time dynamic telestration",
-      "youtube": "Native YouTube integration",
+      "buttonBoard": "Unlimited custom tagging button board",
+      "multiMatch": "Multiple games in a single project",
       "clips": "Lightning-fast clip cutting",
       "offlineDb": "Local offline database",
       "platforms": "Runs on macOS and Windows"
     },
     "video": {
-      "name": "GmSportStudio — Telestration and tactical analysis demo",
-      "description": "Walkthrough of the video analysis workflow in GmSportStudio: real-time telestration, scouting and clip cutting."
+      "name": "GmSportStudio — Tactical analysis demo",
+      "description": "Walkthrough of the video analysis workflow in GmSportStudio: unlimited tagging board, multi-game projects and clip cutting."
     }
   }
 }

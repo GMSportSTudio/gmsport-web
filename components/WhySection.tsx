@@ -62,8 +62,8 @@ export default function WhySection() {
 
   const FEATURES_TABLE = [
     { feature: t("features.videoAnalysis"), individual: true,  club: true  },
-    { feature: t("features.telestration"),  individual: true,  club: true  },
-    { feature: t("features.youtube"),       individual: true,  club: true  },
+    { feature: t("features.multiMatch"),    individual: true,  club: true  },
+    { feature: t("features.buttonBoard"),   individual: true,  club: true  },
     { feature: t("features.clips"),         individual: true,  club: true  },
     { feature: t("features.platforms"),     individual: true,  club: true  },
     { feature: t("features.offlineDb"),     individual: true,  club: true  },
