@@ -14,6 +14,7 @@ export function InviteTesterForm({ onInvited }: Props) {
   const [email, setEmail]       = useState("");
   const [nombre, setNombre]     = useState("");
   const [days, setDays]         = useState<number>(DEFAULT_DAYS);
+  const [sendEmail, setSendEmail] = useState<boolean>(true);
   const [loading, setLoading]   = useState(false);
   const [message, setMessage]   = useState<{ type: "ok" | "err"; text: string } | null>(null);
 
@@ -33,7 +34,7 @@ export function InviteTesterForm({ onInvited }: Props) {
         email:        e2,
         name:         nombre.trim(),
         durationDays: days,
-        sendEmail:    true,
+        sendEmail,
       });
       const data = res.data as {
         ok?: boolean;
@@ -45,7 +46,9 @@ export function InviteTesterForm({ onInvited }: Props) {
       };
       const correoTxt = data.emailSent
         ? "📩 Email enviado."
-        : "⚠ Email no enviado (puedes copiar la plantilla manual).";
+        : sendEmail
+          ? "⚠ Email no enviado (puedes copiar la plantilla manual)."
+          : "✉ Email omitido (envío manual).";
       if (data.mode === "license_created_or_updated") {
         setMessage({
           type: "ok",
@@ -62,6 +65,7 @@ export function InviteTesterForm({ onInvited }: Props) {
       setEmail("");
       setNombre("");
       setDays(DEFAULT_DAYS);
+      setSendEmail(true);
       onInvited();
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Error desconocido";
@@ -152,6 +156,19 @@ export function InviteTesterForm({ onInvited }: Props) {
         />
         <span style={{ color: "#555d6e", fontSize: 11 }}>
           (cap a 31/07/2026)
+        </span>
+      </label>
+
+      <label style={{ color: "#9095a0", fontSize: 13, display: "flex", alignItems: "center", gap: 10 }}>
+        <input
+          type="checkbox"
+          checked={sendEmail}
+          onChange={e => setSendEmail(e.target.checked)}
+          style={{ accentColor: "#ff6b1a", width: 16, height: 16 }}
+        />
+        <span>Enviar email automáticamente</span>
+        <span style={{ color: "#555d6e", fontSize: 11 }}>
+          (desactiva si solo quieres crear/actualizar la licencia)
         </span>
       </label>
 

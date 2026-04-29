@@ -49,9 +49,13 @@ function _statusLabel(status: string | undefined): { label: string; color: strin
   }
 }
 
+const DEFAULT_EDIT_DAYS = 30;
+
 export function TesterRow({ tester, onChanged }: Props) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [editing, setEditing] = useState(false);
+  const [editDays, setEditDays] = useState<number>(DEFAULT_EDIT_DAYS);
 
   const status = _statusLabel(tester.planStatus);
   const email = tester.email || tester.id || "—";
@@ -72,6 +76,33 @@ export function TesterRow({ tester, onChanged }: Props) {
     }
   };
 
+  const onSaveEdit = async () => {
+    if (!email) return;
+    const days = Number.isFinite(editDays) ? Math.max(1, Math.min(365, editDays)) : DEFAULT_EDIT_DAYS;
+    setBusy(true);
+    setError("");
+    try {
+      const fn = httpsCallable(functions, "inviteBetaTester");
+      await fn({
+        email,
+        durationDays: days,
+        sendEmail: false,
+      });
+      setEditing(false);
+      onChanged();
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Error desconocido");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const onStartEdit = () => {
+    setEditDays(DEFAULT_EDIT_DAYS);
+    setError("");
+    setEditing(true);
+  };
+
   return (
     <tr style={{ borderBottom: "1px solid #1e2128" }}>
       <td style={{ padding: "12px 16px", color: "#e8eaf0", fontSize: 13 }}>
@@ -90,25 +121,99 @@ export function TesterRow({ tester, onChanged }: Props) {
         {tester.source || "—"}
       </td>
       <td style={{ padding: "12px 16px", textAlign: "right" }}>
-        {tester.planStatus === "active" ? (
-          <button
-            onClick={onRevoke}
-            disabled={busy}
-            style={{
-              background: "transparent",
-              border: "1px solid #5c2f37",
-              borderRadius: 6,
-              padding: "5px 12px",
-              color: "#f87171",
-              fontSize: 12,
-              cursor: busy ? "wait" : "pointer",
-              opacity: busy ? 0.6 : 1,
-            }}
-          >
-            {busy ? "…" : "Revocar"}
-          </button>
+        {editing ? (
+          <span style={{ display: "inline-flex", gap: 6, alignItems: "center" }}>
+            <input
+              type="number"
+              min={1}
+              max={365}
+              value={editDays}
+              onChange={e => setEditDays(parseInt(e.target.value || "0", 10))}
+              disabled={busy}
+              autoFocus
+              style={{
+                background: "#1e2128",
+                border: "1px solid #2a2f3a",
+                borderRadius: 6,
+                padding: "4px 8px",
+                color: "#e8eaf0",
+                fontSize: 12,
+                width: 64,
+                outline: "none",
+              }}
+            />
+            <span style={{ color: "#555d6e", fontSize: 11 }}>días</span>
+            <button
+              onClick={onSaveEdit}
+              disabled={busy}
+              style={{
+                background: "#ff6b1a",
+                border: "none",
+                borderRadius: 6,
+                padding: "5px 10px",
+                color: "#fff",
+                fontSize: 12,
+                fontWeight: 600,
+                cursor: busy ? "wait" : "pointer",
+                opacity: busy ? 0.6 : 1,
+              }}
+            >
+              {busy ? "…" : "Guardar"}
+            </button>
+            <button
+              onClick={() => { setEditing(false); setError(""); }}
+              disabled={busy}
+              style={{
+                background: "transparent",
+                border: "1px solid #2a2f3a",
+                borderRadius: 6,
+                padding: "5px 10px",
+                color: "#9095a0",
+                fontSize: 12,
+                cursor: busy ? "wait" : "pointer",
+              }}
+            >
+              Cancelar
+            </button>
+          </span>
         ) : (
-          <span style={{ color: "#555d6e", fontSize: 11 }}>—</span>
+          <span style={{ display: "inline-flex", gap: 6 }}>
+            <button
+              onClick={onStartEdit}
+              disabled={busy}
+              title="Cambiar la duración (no envía email)"
+              style={{
+                background: "transparent",
+                border: "1px solid #2a4d6b",
+                borderRadius: 6,
+                padding: "5px 12px",
+                color: "#3a8dde",
+                fontSize: 12,
+                cursor: busy ? "wait" : "pointer",
+                opacity: busy ? 0.6 : 1,
+              }}
+            >
+              Editar
+            </button>
+            {tester.planStatus === "active" && (
+              <button
+                onClick={onRevoke}
+                disabled={busy}
+                style={{
+                  background: "transparent",
+                  border: "1px solid #5c2f37",
+                  borderRadius: 6,
+                  padding: "5px 12px",
+                  color: "#f87171",
+                  fontSize: 12,
+                  cursor: busy ? "wait" : "pointer",
+                  opacity: busy ? 0.6 : 1,
+                }}
+              >
+                {busy ? "…" : "Revocar"}
+              </button>
+            )}
+          </span>
         )}
         {error && (
           <p style={{ color: "#f87171", fontSize: 11, margin: "4px 0 0" }}>{error}</p>
