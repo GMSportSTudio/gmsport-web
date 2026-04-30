@@ -20,10 +20,10 @@ export function useAdminAuth() {
         const token = await u.getIdTokenResult();
         setIsAdmin(!!token.claims.admin);
         // Set session cookie for middleware
-        document.cookie = `gms_session=1; path=/; max-age=${60 * 60 * 8}; SameSite=Strict`;
+        document.cookie = `gms_session=1; path=/; max-age=${60 * 60 * 8}; SameSite=Strict; Secure`;
       } else {
         setIsAdmin(false);
-        document.cookie = "gms_session=; path=/; max-age=0";
+        document.cookie = "gms_session=; path=/; max-age=0; SameSite=Strict; Secure";
       }
       setLoading(false);
     });

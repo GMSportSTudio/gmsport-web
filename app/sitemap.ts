@@ -1,12 +1,11 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://www.gmsportstudio.com";
+  const base = (process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.gmsportstudio.com").replace(/\/$/, "");
   const lastModified = new Date();
   const languages = {
     es: `${base}/`,
     en: `${base}/en`,
-    fr: `${base}/fr`,
     "x-default": `${base}/`,
   };
   return [
@@ -22,13 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "weekly",
       priority: 0.9,
-      alternates: { languages },
-    },
-    {
-      url: `${base}/fr`,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 0.8,
       alternates: { languages },
     },
     {

@@ -64,9 +64,30 @@ export function ActivarClient() {
           setStatus("missing_url");
           return;
         }
+        // Defensa en profundidad: aunque el URL viene del backend, validamos
+        // el host antes de redirigir para evitar open-redirect si la CF
+        // devolviera un valor mutado.
+        let safeUrl: string | null = null;
+        try {
+          const parsed = new URL(json.gumroad_url);
+          if (
+            parsed.protocol === "https:" &&
+            (parsed.hostname === "gumroad.com" ||
+              parsed.hostname.endsWith(".gumroad.com"))
+          ) {
+            safeUrl = parsed.toString();
+          }
+        } catch {
+          /* URL inválida → cae al else */
+        }
+        if (!safeUrl) {
+          setStatus("invalid");
+          setErrorMsg("URL de checkout no válida. Contacta soporte.");
+          return;
+        }
         setStatus("redirecting");
         setTimeout(() => {
-          window.location.href = json.gumroad_url as string;
+          window.location.href = safeUrl as string;
         }, 1200);
       } catch (_e) {
         setStatus("network_error");

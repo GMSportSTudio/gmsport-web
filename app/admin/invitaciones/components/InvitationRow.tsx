@@ -19,8 +19,8 @@ export interface Invitation {
 function statusBadge(inv: Invitation) {
   const now = Date.now() / 1000;
   if (inv.revoked) return { label: "Revocada", color: "#f87171", bg: "rgba(248,113,113,0.1)" };
-  if (inv.expires_at.seconds < now) return { label: "Expirada", color: "#fbbf24", bg: "rgba(251,191,36,0.1)" };
-  if (inv.downloads.length > 0) return { label: "Usada", color: "#818cf8", bg: "rgba(129,140,248,0.1)" };
+  if ((inv.expires_at?.seconds ?? 0) < now) return { label: "Expirada", color: "#fbbf24", bg: "rgba(251,191,36,0.1)" };
+  if (inv.downloads?.length > 0) return { label: "Usada", color: "#818cf8", bg: "rgba(129,140,248,0.1)" };
   return { label: "Activa", color: "#4ade80", bg: "rgba(74,222,128,0.1)" };
 }
 
@@ -34,7 +34,7 @@ export function InvitationRow({ inv, onChanged }: Props) {
   const [loading, setLoading]   = useState<"resend" | "revoke" | null>(null);
 
   const badge  = statusBadge(inv);
-  const lastIp = inv.downloads.at(-1)?.ip ?? "—";
+  const lastIp = inv.downloads?.at(-1)?.ip ?? "—";
 
   const handleResend = async () => {
     if (!confirm(`¿Reenviar invitación a ${inv.email}?`)) return;

@@ -109,8 +109,9 @@ function TestersTable() {
       setLastSync(new Date());
     } catch (e) {
       console.error("Listado testers falló:", e);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -147,7 +148,20 @@ function TestersTable() {
               )}
             </p>
           </div>
-          <button onClick={load} style={{ background: "transparent", border: "1px solid #2a2f3a", borderRadius: 8, padding: "8px 16px", color: "#9095a0", fontSize: 13, cursor: "pointer" }}>
+          <button
+            onClick={load}
+            disabled={loading}
+            style={{
+              background: "transparent",
+              border: "1px solid #2a2f3a",
+              borderRadius: 8,
+              padding: "8px 16px",
+              color: "#9095a0",
+              fontSize: 13,
+              cursor: loading ? "wait" : "pointer",
+              opacity: loading ? 0.6 : 1,
+            }}
+          >
             ↻ Actualizar
           </button>
         </div>

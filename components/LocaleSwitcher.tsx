@@ -22,8 +22,14 @@ export default function LocaleSwitcher() {
 
   const onSelect = (next: (typeof VISIBLE_LOCALES)[number]) => {
     if (next === current) return;
+    // Conservar query string y hash al cambiar de idioma para no perder
+    // anclas (#precios, #faq) ni parámetros de tracking (?ref=...).
+    const tail =
+      typeof window !== "undefined"
+        ? window.location.search + window.location.hash
+        : "";
     startTransition(() => {
-      router.replace(pathname, { locale: next });
+      router.replace(pathname + tail, { locale: next });
     });
   };
 

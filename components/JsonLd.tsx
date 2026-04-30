@@ -31,7 +31,9 @@ export default async function JsonLd({ locale }: { locale: string }) {
         price: "9.99",
         priceCurrency: "EUR",
         availability: "https://schema.org/InStock",
-        priceValidUntil: "2026-04-29",
+        // Cap del Pase Fundador. Mantener sincronizado con la fecha de fin
+        // de la oferta Beta (ver TesterRow / CancelarClient).
+        priceValidUntil: "2026-07-31",
         url: "https://www.gmsportstudio.com/",
         category: "Limited Edition",
         eligibleQuantity: { "@type": "QuantitativeValue", value: 1, unitText: "usuario" },
@@ -124,15 +126,19 @@ export default async function JsonLd({ locale }: { locale: string }) {
     inLanguage: locale,
   };
 
+  // Escapar `</` para que un valor con "</script>" no rompa el HTML.
+  const safeStringify = (obj: unknown) =>
+    JSON.stringify(obj).replace(/<\//g, "<\\/");
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeStringify(softwareSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeStringify(videoSchema) }}
       />
     </>
   );

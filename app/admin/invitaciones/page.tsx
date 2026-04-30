@@ -13,17 +13,23 @@ function InvitacionesTable() {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const snap = await getDocs(
-      query(collection(db, "invitations"), orderBy("created_at", "desc"), limit(100))
-    );
-    setInvitations(snap.docs.map(d => ({ id: d.id, ...d.data() } as Invitation)));
-    setLoading(false);
+    try {
+      const snap = await getDocs(
+        query(collection(db, "invitations"), orderBy("created_at", "desc"), limit(100))
+      );
+      setInvitations(snap.docs.map(d => ({ id: d.id, ...d.data() } as Invitation)));
+    } catch (e) {
+      console.error("Listado invitaciones falló:", e);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => { load(); }, [load]);
 
-  const active   = invitations.filter(i => !i.revoked && i.expires_at.seconds > Date.now() / 1000);
-  const used     = invitations.filter(i => i.downloads?.length > 0);
+  const nowSec = Date.now() / 1000;
+  const active = invitations.filter(i => !i.revoked && (i.expires_at?.seconds ?? 0) > nowSec);
+  const used   = invitations.filter(i => i.downloads?.length > 0);
 
   return (
     <div style={{ minHeight: "100vh", background: "#0f1117", padding: "48px 32px", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import LogoIcon from "@/components/LogoIcon";
+import { Link } from "@/i18n/navigation";
 
 export default function Navbar() {
   const t = useTranslations("Navbar");
@@ -49,7 +50,7 @@ export default function Navbar() {
       <nav className="mx-auto max-w-6xl px-5 md:px-8 h-16 flex items-center justify-between">
 
         {/* Logo */}
-        <a
+        <Link
           href="/"
           className="flex items-center select-none group"
           aria-label={t("logoLabel")}
@@ -58,7 +59,7 @@ export default function Navbar() {
             size={40}
             className="h-10 w-10 group-hover:scale-105 transition-transform duration-200"
           />
-        </a>
+        </Link>
 
         {/* Links desktop */}
         <ul className="hidden md:flex items-center gap-8" role="list">
