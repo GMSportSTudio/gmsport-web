@@ -199,7 +199,7 @@ function TestersTable() {
         </div>
 
         <p style={{ color: "#555d6e", fontSize: 12, marginTop: 24, textAlign: "center" }}>
-          Listado limitado a los 200 últimos. La fecha "Invitado" se ordena del más reciente al más antiguo.
+          Listado limitado a los 200 últimos. La fecha &laquo;Invitado&raquo; se ordena del más reciente al más antiguo.
         </p>
       </div>
     </div>

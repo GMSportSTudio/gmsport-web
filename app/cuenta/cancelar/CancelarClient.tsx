@@ -46,7 +46,7 @@ export function CancelarClient() {
         return;
       }
       setDone(true);
-    } catch (e) {
+    } catch {
       setError("Error de red. Comprueba la conexión y vuelve a intentarlo.");
     } finally {
       setSubmitting(false);

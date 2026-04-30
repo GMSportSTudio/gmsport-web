@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 const FUNCTIONS_BASE = "https://europe-west1-gmsportstudio-53bbf.cloudfunctions.net";
@@ -325,7 +326,7 @@ export function DescargaClient() {
             <div style={{ textAlign: "center", marginTop: 24 }}>
               <p style={{ color: "#3a3f50", fontSize: 12 }}>
                 Al descargar aceptas las{" "}
-                <a href="/terminos-beta" style={{ color: "#555d6e" }}>condiciones Beta</a>.
+                <Link href="/terminos-beta" style={{ color: "#555d6e" }}>condiciones Beta</Link>.
                 {" "}Licencia válida hasta el 30/05/2026.
               </p>
             </div>

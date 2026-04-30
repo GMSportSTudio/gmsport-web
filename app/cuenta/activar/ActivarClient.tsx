@@ -89,7 +89,7 @@ export function ActivarClient() {
         setTimeout(() => {
           window.location.href = safeUrl as string;
         }, 1200);
-      } catch (_e) {
+      } catch {
         setStatus("network_error");
         setErrorMsg("Error de red. Comprueba la conexión y vuelve a intentarlo.");
       }

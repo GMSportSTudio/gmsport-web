@@ -41,7 +41,7 @@ function detectPlatform(): { os: OsType; chip: ChipType } {
         if (/Intel/.test(renderer))               return { os: "mac", chip: "intel"   };
       }
     }
-  } catch (_) { /* silencioso */ }
+  } catch { /* silencioso */ }
 
   return { os: "mac", chip: "unknown" };
 }
