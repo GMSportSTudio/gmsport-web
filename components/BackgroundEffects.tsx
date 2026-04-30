@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 /* ─── Tipos ──────────────────────────────────────────────────── */
@@ -111,30 +111,47 @@ function CursorGlow() {
   );
 }
 
+/* ─── Sync con prefers-reduced-motion ────────────────────────── */
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
+function subscribeReducedMotion(cb: () => void): () => void {
+  const mq = window.matchMedia(REDUCED_MOTION_QUERY);
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+}
+
+function getReducedMotion(): boolean {
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
+}
+
 /* ─── Componente principal ───────────────────────────────────── */
 export default function BackgroundEffects() {
-  /* Evita hidratación incorrecta: solo renderiza en el cliente */
+  /* Evita hidratación incorrecta con framer-motion: solo renderiza en el cliente. */
   const [mounted, setMounted] = useState(false);
-
-  /* Sólo activamos las partículas si el usuario no prefiere movimiento reducido */
-  const prefersReduced = useRef(false);
-
   useEffect(() => {
-    prefersReduced.current = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
+
+  // useSyncExternalStore reacciona si el usuario cambia su preferencia
+  // de reduce-motion en caliente. Antes se hacía con useRef, lo que rompía
+  // la regla "no acceder a refs en render" y dejaba el primer paint con
+  // efectos activos aunque el usuario tuviera reduce-motion activado.
+  const prefersReduced = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotion,
+    () => false,
+  );
 
   if (!mounted) return null;
 
   return (
     <>
       {/* Glow cursor */}
-      {!prefersReduced.current && <CursorGlow />}
+      {!prefersReduced && <CursorGlow />}
 
       {/* Partículas flotantes */}
-      {!prefersReduced.current && (
+      {!prefersReduced && (
         <div
           aria-hidden="true"
           className="fixed inset-0 pointer-events-none z-0 overflow-hidden"

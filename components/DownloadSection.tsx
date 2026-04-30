@@ -207,6 +207,10 @@ export default function DownloadSection() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   useEffect(() => {
+    // Bootstrap de la plataforma detectada tras hidratación. SSR no tiene
+    // navigator/WebGL, así que el estado inicial debe ser null para que el
+    // HTML servido coincida con el primer paint del cliente y no haya mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPlatform(detectPlatform());
   }, []);
 

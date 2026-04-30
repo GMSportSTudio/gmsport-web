@@ -12,9 +12,11 @@ export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem(STORAGE_KEY)) {
-      setVisible(true);
-    }
+    // Bootstrap desde localStorage tras la hidratación. Mantener `visible=false`
+    // como estado inicial garantiza que SSR y primer paint coinciden (no hay
+    // mismatch); luego mostramos el banner si no hay consentimiento previo.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!localStorage.getItem(STORAGE_KEY)) setVisible(true);
   }, []);
 
   function accept() {

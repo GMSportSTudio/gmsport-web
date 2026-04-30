@@ -27,19 +27,19 @@ export function ActivarClient() {
   const token = (params.get("token") ?? "").trim();
   const calledRef = useRef(false);
 
-  const [status, setStatus] = useState<Status>("loading");
+  // Derivamos el estado inicial del token presente/ausente para no tener que
+  // hacer setState dentro del useEffect en el caso "sin token" (anti-pattern
+  // en React 19: causa un render extra innecesario).
+  const [status, setStatus] = useState<Status>(token ? "loading" : "invalid");
   const [data, setData] = useState<VerifyResponse | null>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(
+    token ? null : "Falta el token de activación en el enlace."
+  );
 
   useEffect(() => {
+    if (!token) return;
     if (calledRef.current) return;
     calledRef.current = true;
-
-    if (!token) {
-      setStatus("invalid");
-      setErrorMsg("Falta el token de activación en el enlace.");
-      return;
-    }
 
     (async () => {
       try {

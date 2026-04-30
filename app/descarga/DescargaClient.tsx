@@ -124,14 +124,16 @@ export function DescargaClient() {
   const token  = params.get("token") ?? "";
 
   const [meta, setMeta]         = useState<Meta | null>(null);
-  const [loading, setLoading]   = useState(true);
+  // Si no hay token, no hay nada que cargar — partimos de loading=false
+  // para evitar setState dentro del effect en ese caso (anti-pattern R19).
+  const [loading, setLoading]   = useState<boolean>(!!token);
   const [downloading, setDl]    = useState<string | null>(null);
   const [dlError, setDlError]   = useState<string | null>(null);
   const [macArch, setMacArch]   = useState<"silicon" | "intel" | null>(null);
   const [archChoiceShown, setArchChoiceShown] = useState(false);
 
   useEffect(() => {
-    if (!token) { setLoading(false); return; }
+    if (!token) return;
     fetch(`${FUNCTIONS_BASE}/getInvitationMeta?token=${encodeURIComponent(token)}`)
       .then(async r => {
         const data = await r.json();
