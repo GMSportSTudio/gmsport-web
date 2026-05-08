@@ -20,12 +20,19 @@ export function InviteForm({ onInvited }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || platforms.length === 0) return;
+    const e2 = email.trim().toLowerCase();
+    // Misma regex que InviteTesterForm — el callable también valida
+    // server-side, pero adelantar el chequeo aquí evita un round-trip.
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e2)) {
+      setMessage({ type: "err", text: "Email no válido." });
+      return;
+    }
     setLoading(true);
     setMessage(null);
     try {
       const fn = httpsCallable(functions, "createInvitation");
-      await fn({ email: email.trim().toLowerCase(), platforms });
-      setMessage({ type: "ok", text: `✓ Invitación enviada a ${email}` });
+      await fn({ email: e2, platforms });
+      setMessage({ type: "ok", text: `✓ Invitación enviada a ${e2}` });
       setEmail("");
       onInvited();
     } catch (err: unknown) {
