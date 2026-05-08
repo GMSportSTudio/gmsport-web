@@ -26,6 +26,12 @@ export function InviteTesterForm({ onInvited }: Props) {
       setMessage({ type: "err", text: "Email no válido." });
       return;
     }
+    // Si days quedó NaN (campo vacío), volvemos al default antes
+    // de enviar al callable; el server cap-ea de todas formas, pero
+    // así el feedback al admin es coherente con lo que verá luego.
+    const safeDays = Number.isFinite(days) && days >= 1 && days <= 365
+      ? days
+      : DEFAULT_DAYS;
     setLoading(true);
     setMessage(null);
     try {
@@ -33,7 +39,7 @@ export function InviteTesterForm({ onInvited }: Props) {
       const res = await fn({
         email:        e2,
         name:         nombre.trim(),
-        durationDays: days,
+        durationDays: safeDays,
         sendEmail,
       });
       const data = res.data as {
@@ -141,8 +147,16 @@ export function InviteTesterForm({ onInvited }: Props) {
           type="number"
           min={1}
           max={365}
-          value={days}
-          onChange={e => setDays(parseInt(e.target.value || "95", 10))}
+          value={Number.isFinite(days) ? days : ""}
+          onChange={e => {
+            // parseInt("" ,10) → NaN. Si el admin borra el campo,
+            // mantenemos NaN en estado y el "" en el input para que
+            // pueda escribir desde cero sin que aparezca un 95 fantasma.
+            const raw = e.target.value;
+            if (raw === "") { setDays(NaN); return; }
+            const n = parseInt(raw, 10);
+            setDays(Number.isFinite(n) ? n : NaN);
+          }}
           style={{
             background: "#1e2128",
             border: "1px solid #2a2f3a",

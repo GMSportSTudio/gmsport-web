@@ -127,8 +127,13 @@ export function TesterRow({ tester, onChanged }: Props) {
               type="number"
               min={1}
               max={365}
-              value={editDays}
-              onChange={e => setEditDays(parseInt(e.target.value || "0", 10))}
+              value={Number.isFinite(editDays) ? editDays : ""}
+              onChange={e => {
+                const raw = e.target.value;
+                if (raw === "") { setEditDays(NaN); return; }
+                const n = parseInt(raw, 10);
+                setEditDays(Number.isFinite(n) ? n : NaN);
+              }}
               disabled={busy}
               autoFocus
               style={{
