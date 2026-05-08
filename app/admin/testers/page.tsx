@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { collection, getDocs, where, query, orderBy, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { AdminGate } from "../invitaciones/components/AdminAuth";
+import { AdminGate } from "../_shared/AdminAuth";
 import { InviteTesterForm } from "./components/InviteTesterForm";
 import { TesterRow, type BetaTesterDoc } from "./components/TesterRow";
 
@@ -14,11 +14,15 @@ const POLL_INTERVAL_MS = 30_000;
 
 function TestersTable() {
   const [testers, setTesters] = useState<BetaTesterDoc[]>([]);
-  const [loading, setLoading] = useState(true);
+  // initialLoading: solo true durante la PRIMERA carga. Los polls cada
+  // 30s NO ponen esto a true → la tabla no parpadea con "Cargando…"
+  // mientras el admin la mira.
+  const [initialLoading, setInitialLoading] = useState(true);
   const [lastSync, setLastSync] = useState<Date | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
-    setLoading(true);
+    setLoadError(null);
     try {
       // ── Query 1: licenses con planTier=beta_tester (testers ya registrados)
       let licDocs: BetaTesterDoc[] = [];
@@ -109,8 +113,9 @@ function TestersTable() {
       setLastSync(new Date());
     } catch (e) {
       console.error("Listado testers falló:", e);
+      setLoadError(e instanceof Error ? e.message : "Error al cargar testers.");
     }
-    setLoading(false);
+    setInitialLoading(false);
   }, []);
 
   useEffect(() => {
@@ -156,7 +161,12 @@ function TestersTable() {
 
           {/* Tabla */}
           <div style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 12, overflow: "hidden" }}>
-            {loading ? (
+            {loadError && (
+              <p style={{ color: "#f87171", padding: "12px 24px", margin: 0, fontSize: 12, borderBottom: "1px solid #23272f", background: "rgba(248,113,113,0.05)" }}>
+                ⚠ {loadError}
+              </p>
+            )}
+            {initialLoading ? (
               <p style={{ color: "#555d6e", padding: 24, textAlign: "center" }}>Cargando…</p>
             ) : testers.length === 0 ? (
               <p style={{ color: "#555d6e", padding: 24, textAlign: "center" }}>

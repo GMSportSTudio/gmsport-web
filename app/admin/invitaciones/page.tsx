@@ -1,29 +1,44 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { collection, getDocs, orderBy, query, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { AdminGate } from "./components/AdminAuth";
+import { AdminGate } from "../_shared/AdminAuth";
 import { InviteForm } from "./components/InviteForm";
 import { InvitationRow, type Invitation } from "./components/InvitationRow";
 
 function InvitacionesTable() {
   const [invitations, setInvitations] = useState<Invitation[]>([]);
   const [loading, setLoading]         = useState(true);
+  const [loadError, setLoadError]     = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
-    const snap = await getDocs(
-      query(collection(db, "invitations"), orderBy("created_at", "desc"), limit(100))
-    );
-    setInvitations(snap.docs.map(d => ({ id: d.id, ...d.data() } as Invitation)));
-    setLoading(false);
+    setLoadError(null);
+    try {
+      const snap = await getDocs(
+        query(collection(db, "invitations"), orderBy("created_at", "desc"), limit(100))
+      );
+      setInvitations(snap.docs.map(d => ({ id: d.id, ...d.data() } as Invitation)));
+    } catch (e) {
+      console.error("Listado invitaciones falló:", e);
+      setLoadError(e instanceof Error ? e.message : "Error al cargar invitaciones.");
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => { load(); }, [load]);
 
-  const active   = invitations.filter(i => !i.revoked && i.expires_at.seconds > Date.now() / 1000);
-  const used     = invitations.filter(i => i.downloads?.length > 0);
+  // Defensa: documentos antiguos pueden no tener expires_at o downloads.
+  // Sin estos guards, un único doc malformado tiraba todo el render.
+  const { active, used } = useMemo(() => {
+    const nowSec = Date.now() / 1000;
+    return {
+      active: invitations.filter(i => !i.revoked && (i.expires_at?.seconds ?? 0) > nowSec),
+      used:   invitations.filter(i => (i.downloads?.length ?? 0) > 0),
+    };
+  }, [invitations]);
 
   return (
     <div style={{ minHeight: "100vh", background: "#0f1117", padding: "48px 32px", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
@@ -49,6 +64,11 @@ function InvitacionesTable() {
 
           {/* Tabla */}
           <div style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 12, overflow: "hidden" }}>
+            {loadError && (
+              <p style={{ color: "#f87171", padding: "12px 24px", margin: 0, fontSize: 12, borderBottom: "1px solid #23272f", background: "rgba(248,113,113,0.05)" }}>
+                ⚠ {loadError}
+              </p>
+            )}
             {loading ? (
               <p style={{ color: "#555d6e", padding: 24, textAlign: "center" }}>Cargando…</p>
             ) : invitations.length === 0 ? (
