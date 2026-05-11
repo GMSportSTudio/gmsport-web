@@ -22,11 +22,11 @@ const CANARY_VERSION = "1.3.0-exp15";
 // Mantener en sync con dist/canary/ tras cada build canary.
 const CANARY_SHA256: Record<string, string> = {
   "mac-silicon":
-    "29c1f92be282f8fcd5a437914ab41bb44027e95f9f9e4b879a3ebb11a0d1e601",
+    "193d285ac0f1041b21413d5ab802d5f5086b1c68db237b1f7c19d9752bc8b8f4",
   "mac-intel":
-    "4471c26b4187ebc23d2397d6572aa2f330de30eaa5bd3f134d777092edfd675d",
+    "6e8e8a52167ebfc8cbd09091923afb5e1cf97ab178f75d929dcb185c9575c5ec",
   windows:
-    "8845147ac390647a9513dfe0c4738fa719dc9c89c06a1a953982cdcf1b8d99be",
+    "07aac175f6d5f2fd3d6c8aa61561c9c780e800dc94edcaeda36bc69a11386366",
 };
 
 type MacArch = "silicon" | "intel" | null;
