@@ -16,7 +16,7 @@ import { httpsCallable } from "firebase/functions";
 // pasarla como '' al callable y que use canary/latest.json. Por ahora
 // preferimos pinearlo para que el SHA256 mostrado coincida 1:1 con el
 // build esperado.
-const CANARY_VERSION = "1.3.0-exp13";
+const CANARY_VERSION = "1.3.0-exp15";
 
 // SHA256 de los 3 builds para que el tester pueda verificar antes de abrir.
 // Mantener en sync con dist/canary/ tras cada build canary.
