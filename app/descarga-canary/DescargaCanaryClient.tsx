@@ -16,17 +16,17 @@ import { httpsCallable } from "firebase/functions";
 // pasarla como '' al callable y que use canary/latest.json. Por ahora
 // preferimos pinearlo para que el SHA256 mostrado coincida 1:1 con el
 // build esperado.
-const CANARY_VERSION = "1.3.0-exp21";
+const CANARY_VERSION = "1.3.0-exp24";
 
 // SHA256 de los 3 builds para que el tester pueda verificar antes de abrir.
 // Mantener en sync con dist/canary/ tras cada build canary.
 const CANARY_SHA256: Record<string, string> = {
   "mac-silicon":
-    "843290d2e93a48b6265d6be1bf606cc42c29703e6d4d87dfb60d0b68fb3ab0df",
+    "e16cdd54b7fb1055f4fe081c459bdd045e80f72a3d61407c667b622659425925",
   "mac-intel":
-    "28dd27bc93ce12e77caac2768eb9b602f4345d11376015cc483264c51f2ad0de",
+    "7b7a057b7117d4a9c405b2ca043ad778dda7d7d904c1b284b7325d24a447c62e",
   windows:
-    "3a8bdc35b813f9086e9941bef61cc13781b3a86877d48375eef3642dc8c439d2",
+    "8ab341eb53d8c61e161993da6e4eb7f1fe61fbf343ff848104d49aaa898473e7",
 };
 
 type MacArch = "silicon" | "intel" | null;
