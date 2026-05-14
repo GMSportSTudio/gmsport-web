@@ -131,7 +131,7 @@ export function DescargaClient() {
 
   useEffect(() => {
     if (!token) { setLoading(false); return; }
-    fetch(`${FUNCTIONS_BASE}/getInvitationMeta?token=${encodeURIComponent(token)}`)
+    fetch(`${FUNCTIONS_BASE}/getInvitationMeta?token=${encodeURIComponent(token)}`, { cache: "no-store" })
       .then(async r => {
         const data = await r.json();
         if (!r.ok) setMeta({ ...data, error: data.error } as Meta);
