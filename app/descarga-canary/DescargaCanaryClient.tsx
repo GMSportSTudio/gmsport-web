@@ -11,12 +11,15 @@ import {
 } from "firebase/auth";
 import { httpsCallable } from "firebase/functions";
 
-// Versión canary que servimos a los testers en este lanzamiento.
-// Si en el futuro queremos servir la última automáticamente, podemos
-// pasarla como '' al callable y que use canary/latest.json. Por ahora
-// preferimos pinearlo para que el SHA256 mostrado coincida 1:1 con el
-// build esperado.
-const CANARY_VERSION = "1.3.0-exp27";
+// Versión por plataforma. Cada plataforma puede estar en un exp distinto
+// cuando los builds no se publican todos a la vez (ej. Windows exp27, Mac exp26).
+// El header muestra la versión más alta disponible.
+const CANARY_VERSION_BY_PLATFORM: Record<string, string> = {
+  "mac-silicon": "1.3.0-exp26",
+  "mac-intel":   "1.3.0-exp26",
+  windows:       "1.3.0-exp27",
+};
+const CANARY_VERSION = "1.3.0-exp27"; // versión del header (la más reciente)
 
 // SHA256 de los 3 builds para que el tester pueda verificar antes de abrir.
 // Mantener en sync con dist/canary/ tras cada build canary.
@@ -210,7 +213,7 @@ export function DescargaCanaryClient() {
       const res = await callable({
         platform,
         track: "canary",
-        version: CANARY_VERSION,
+        version: CANARY_VERSION_BY_PLATFORM[platform] ?? CANARY_VERSION,
       });
       const url = res.data?.url;
       if (!url) {
