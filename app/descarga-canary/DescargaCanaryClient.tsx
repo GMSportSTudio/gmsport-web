@@ -26,7 +26,7 @@ const CANARY_SHA256: Record<string, string> = {
   "mac-intel":
     "0b080007025418861a2f6719c1b1c9f66257e5fce6231cf30fefa95cb3d31e66",
   windows:
-    "69cbc75d472d392223ce4303ba1feefa26f62bd3327fd72f7699d01bf8f96944",
+    "60389b438705ccab00d8a3b4494e361b08bea287f93ce1b7bd3a65cec6a94e22",
 };
 
 type MacArch = "silicon" | "intel" | null;
