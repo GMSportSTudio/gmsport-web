@@ -15,19 +15,19 @@ import { httpsCallable } from "firebase/functions";
 // cuando los builds no se publican todos a la vez (ej. Windows exp27, Mac exp26).
 // El header muestra la versión más alta disponible.
 const CANARY_VERSION_BY_PLATFORM: Record<string, string> = {
-  "mac-silicon": "1.3.0-exp26",
-  "mac-intel":   "1.3.0-exp26",
+  "mac-silicon": "1.3.0-exp28",
+  "mac-intel":   "1.3.0-exp28",
   windows:       "1.3.0-exp27",
 };
-const CANARY_VERSION = "1.3.0-exp27"; // versión del header (la más reciente)
+const CANARY_VERSION = "1.3.0-exp28"; // versión del header (la más reciente)
 
 // SHA256 de los 3 builds para que el tester pueda verificar antes de abrir.
 // Mantener en sync con dist/canary/ tras cada build canary.
 const CANARY_SHA256: Record<string, string> = {
   "mac-silicon":
-    "6bcf2908d86aafe70b9248241f09224610dad66b9c019a4c37b9495d26baf9fd",
+    "1dede47dbeb3305c8968d51beb3195b607ada6a7c2b09f0c2f858d1fdfc75687",
   "mac-intel":
-    "0b080007025418861a2f6719c1b1c9f66257e5fce6231cf30fefa95cb3d31e66",
+    "59169948f24da4b24d27a92de58d6c5e433a742a191c226ca8b4d7bc4018965b",
   windows:
     "85a77dccc6be7e4d8282c58f714647e1f1843a2c4bf2f4700c4ba287d749587a",
 };
