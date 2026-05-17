@@ -23,13 +23,13 @@ const sections = [
     title: "2. Datos que recogemos",
     content: (
       <>
-        <p>En el marco de la Beta, recogemos los siguientes datos personales que el usuario nos proporciona voluntariamente a través del formulario de registro:</p>
+        <p>Para la prestación del servicio recogemos los siguientes datos personales que el usuario nos proporciona voluntariamente al suscribirse y al usar la Aplicación:</p>
         <ul className="list-disc list-inside space-y-1 mt-2">
           <li>Nombre y apellidos</li>
-          <li>Club o entidad deportiva</li>
-          <li>Número de teléfono</li>
+          <li>Club o entidad deportiva (opcional)</li>
+          <li>Correo electrónico</li>
           <li>Dispositivo (sistema operativo y versión)</li>
-          <li>Correo electrónico (a través de Google Forms)</li>
+          <li>Identificador único del dispositivo (para el vínculo de licencia)</li>
         </ul>
         <p className="mt-2">
           Adicionalmente, cuando el usuario realiza un pago, <strong className="text-white/70">Gumroad, Inc.</strong> actúa como <strong className="text-white/70">Merchant of Record (MoR)</strong> y trata los datos financieros (nombre, dirección de facturación, datos de tarjeta) conforme a su propia política de privacidad. Gumroad es responsable del cobro, la facturación, la gestión del IVA europeo y la emisión del recibo. GmSportStudio no almacena datos de tarjetas bancarias en ningún momento; recibe únicamente confirmación del pago, identificador de venta (sale_id), email del comprador y país de facturación a efectos de habilitar el acceso a la Aplicación.
@@ -42,8 +42,8 @@ const sections = [
     content: (
       <div className="space-y-3">
         <div>
-          <p className="text-white/70 font-semibold mb-1">Gestión del acceso a la Beta</p>
-          <p>Base jurídica: ejecución de un contrato (Art. 6.1.b RGPD). Necesario para provisionar tu acceso a la Aplicación.</p>
+          <p className="text-white/70 font-semibold mb-1">Gestión del acceso al servicio</p>
+          <p>Base jurídica: ejecución de un contrato (Art. 6.1.b RGPD). Necesario para provisionar tu acceso a la Aplicación, validar tu licencia y vincular tu dispositivo.</p>
         </div>
         <div>
           <p className="text-white/70 font-semibold mb-1">Comunicaciones sobre el producto</p>
@@ -67,7 +67,6 @@ const sections = [
           <li><span className="text-white/70">Resend</span> — envío de emails transaccionales (confirmación de compra, invitaciones, notificaciones). Procesamiento en EE. UU. con cláusulas contractuales tipo.</li>
           <li><span className="text-white/70">Vercel, Inc.</span> — hospedaje web y analítica sin cookies (EE. UU.; DPA firmado).</li>
           <li><span className="text-white/70">Sentry</span> (Functional Software Inc.) — monitorización de errores en la Aplicación. Los eventos enviados se anonimizan (hash del UID con sal, eliminación de paths con nombre de usuario, sin tarjetas ni emails en logs).</li>
-          <li><span className="text-white/70">Google Forms</span> — recogida del formulario de registro a la lista de espera de la Beta.</li>
         </ul>
         <p className="mt-3 text-white/40 text-xs">
           Los enlaces a las políticas de privacidad de cada encargado están disponibles previa solicitud por correo electrónico a <span className="text-white/60">ceo@gmsportstudio.com</span>.
@@ -79,7 +78,7 @@ const sections = [
     title: "5. Plazo de conservación",
     content: (
       <p>
-        Los datos personales se conservarán durante la fase Beta y hasta <strong className="text-white/70">un mes después del lanzamiento oficial</strong> del producto. Transcurrido ese plazo, los datos que no sean necesarios para la relación contractual o para cumplir obligaciones legales serán eliminados o anonimizados.
+        Los datos personales se conservarán mientras tengas una <strong className="text-white/70">suscripción activa</strong> y hasta <strong className="text-white/70">seis meses después de la baja</strong>. Transcurrido ese plazo, los datos que no sean necesarios para la relación contractual o para cumplir obligaciones legales (facturación: 4-6 años Art. 30 Código de Comercio) serán eliminados o anonimizados.
       </p>
     ),
   },
@@ -125,7 +124,7 @@ export default function PrivacidadPage() {
     <LegalPage
       title="Política de Privacidad"
       subtitle="Protección de Datos"
-      updated="27 de abril de 2026"
+      updated="17 de mayo de 2026"
       sections={sections}
     />
   );
