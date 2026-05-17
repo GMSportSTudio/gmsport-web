@@ -29,14 +29,14 @@
     "socialProofPlatform": "Mac & Windows"
   },
   "CountdownHero": {
-    "ariaLabel": "La Beta de GmSportStudio ya está lanzada. Plazas aún disponibles al mismo precio.",
-    "labelLaunched": "Beta lanzada",
-    "labelAvailable": "Plazas aún disponibles",
-    "labelSamePrice": "Mismo precio · 9,99€",
-    "labelDays": "Días",
-    "labelHours": "Horas",
+    "ariaLabel": "GMSportStudio est disponible. Abonnez-vous à partir de 14,99 €/mois.",
+    "labelLaunched": "Disponible",
+    "labelAvailable": "Pour entraîneurs professionnels",
+    "labelSamePrice": "À partir de 14,99 €/mois",
+    "labelDays": "Jours",
+    "labelHours": "Heures",
     "labelMin": "Min",
-    "labelSec": "Seg"
+    "labelSec": "Sec"
   },
   "WhySection": {
     "sectionLabel": "Por qué elegir GmSportStudio",
@@ -152,14 +152,14 @@
     "eyebrow": "FAQ",
     "title": "Preguntas frecuentes",
     "faqs": {
-      "q0": "¿Cuándo puedo acceder a la Beta?",
-      "a0": "La Beta ya está en marcha desde el 28 de abril de 2026. Si te apuntas ahora, recibes el enlace de descarga por email en pocas horas y puedes empezar a usarla el mismo día. El precio del Pase Fundador (9,99€) sigue activo mientras queden plazas.",
+      "q0": "Quand recevrai-je l'accès après l'abonnement ?",
+      "a0": "Immédiatement. Après le paiement via Gumroad, vous recevrez un email avec votre licence et le lien de téléchargement. L'application est disponible pour macOS (Apple Silicon et Intel) et Windows 10/11. Vous pouvez commencer à l'utiliser le même jour et annuler à tout moment.",
       "q1": "¿Necesito una suscripción de video externa?",
       "a1": "No. Trabaja con tus propios archivos de vídeo (MP4, MOV, MKV, AVI). Puedes agrupar varios partidos en un único proyecto y reutilizar tu botonera entre ellos. Si quieres usar vídeos de YouTube, descárgalos antes con cualquier herramienta externa y abrirlos como archivo local.",
       "q2": "¿Funciona en Mac y PC?",
       "a2": "Sí. La aplicación es compatible con macOS (Apple Silicon y Intel) y Windows 10/11. El instalador se adapta automáticamente a tu plataforma.",
-      "q3": "¿Qué planes de precio habrá tras el lanzamiento?",
-      "a3": "Tres opciones. Para entrenadores individuales: plan Mensual a 15€/mes o plan Anual a 99€/año (ahorras un 45% frente al mensual). Para clubes y academias: plan Club con 5 cuentas a 299€/año (o 40€/mes), pensado para que todo el cuerpo técnico trabaje sobre la misma biblioteca de clips y scouting. Quien entre con el Pase Fundador de 9,99€ tendrá descuento permanente en cualquiera de estos planes. Federaciones y clubes con más de 5 entrenadores: escríbenos a clubes@gmsportstudio.com para oferta personalizada."
+      "q3": "Quels plans sont disponibles ?",
+      "a3": "Trois options. Pour les entraîneurs individuels : plan Mensuel à 14,99 €/mois ou plan Annuel à 99 €/an (45% d'économies par rapport au mensuel). Pour les clubs et académies : plan Club avec 5 comptes à 299 €/an, idéal pour que tout le staff technique partage la même bibliothèque de clips et scouting. Fédérations ou clubs avec plus de 5 entraîneurs : email à clubes@gmsportstudio.com pour une offre personnalisée."
     }
   },
   "Footer": {
@@ -197,11 +197,9 @@
     "appDescription": "Software de vídeo análisis deportivo con botonera infinita personalizable, varios partidos por proyecto y corte de clips ultrarrápido. Planes mensuales, anuales y paquetes de licencias para clubes y academias deportivas.",
     "keywords": "video análisis baloncesto, scouting basket, botonera de marcaje, software entrenadores deportivos, análisis táctico fútbol",
     "offers": {
-      "founder": "Pase Fundador Beta",
-      "monthly": "Plan Mensual",
-      "yearly": "Plan Anual",
-      "club": "Plan Club (5 cuentas)",
-      "clubMonthly": "Licencia club 5 usuarios mensual"
+      "monthly": "Abonnement Individuel Mensuel",
+      "yearly": "Abonnement Individuel Annuel",
+      "club": "Plan Club (5 comptes)"
     },
     "features": {
       "buttonBoard": "Botonera infinita personalizable",

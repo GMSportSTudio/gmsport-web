@@ -29,10 +29,10 @@
     "socialProofPlatform": "Mac & Windows"
   },
   "CountdownHero": {
-    "ariaLabel": "GmSportStudio Beta is live. Spots still available at the same price.",
-    "labelLaunched": "Beta live",
-    "labelAvailable": "Spots still open",
-    "labelSamePrice": "Same price · €9.99",
+    "ariaLabel": "GMSportStudio is live. Subscribe from €14.99/month.",
+    "labelLaunched": "Live",
+    "labelAvailable": "For professional coaches",
+    "labelSamePrice": "From €14.99/month",
     "labelDays": "Days",
     "labelHours": "Hours",
     "labelMin": "Min",
@@ -152,14 +152,14 @@
     "eyebrow": "FAQ",
     "title": "Frequently asked questions",
     "faqs": {
-      "q0": "When can I access the Beta?",
-      "a0": "The Beta has been running since April 28, 2026. If you sign up now, you'll receive the download link by email within hours and can start using it the same day. The Founder Pass price (€9.99) is still active while spots remain.",
+      "q0": "When do I get access after subscribing?",
+      "a0": "Immediately. After paying through Gumroad, you'll receive an email with your license and download link. The app is available for macOS (Apple Silicon and Intel) and Windows 10/11. You can start using it the same day and cancel anytime.",
       "q1": "Do I need an external video subscription?",
       "a1": "No. Work directly with your own video files (MP4, MOV, MKV, AVI). You can group multiple games into a single project and reuse your button board across them. If you want to use YouTube videos, download them first with any external tool and open them as local files.",
       "q2": "Does it work on Mac and PC?",
       "a2": "Yes. The app runs on macOS (Apple Silicon and Intel) and Windows 10/11. The installer adapts automatically to your platform.",
-      "q3": "What pricing plans will there be after launch?",
-      "a3": "Three options. For individual coaches: a Monthly plan at €15/month or a Yearly plan at €99/year (you save 45% vs. monthly). For clubs and academies: the Club plan with 5 seats at €299/year (or €40/month), built so the whole coaching staff works on the same clip library and scouting. Anyone who joins with the €9.99 Founder Pass keeps a permanent discount on any of these plans. Federations and clubs with more than 5 coaches: reach out to clubes@gmsportstudio.com for a custom offer."
+      "q3": "What plans are available?",
+      "a3": "Three options. For individual coaches: Monthly plan at €14.99/mo or Annual plan at €99/yr (45% savings vs monthly). For clubs and academies: Club plan with 5 seats at €299/yr, ideal for the entire coaching staff to share clips library and scouting. Federations or clubs with more than 5 coaches: email clubes@gmsportstudio.com for a custom quote."
     }
   },
   "Footer": {
@@ -197,11 +197,9 @@
     "appDescription": "Sports video analysis software with an unlimited custom button board, multiple games per project and lightning-fast clip cutting. Monthly plans, yearly plans and license packs for sports clubs and academies.",
     "keywords": "basketball video analysis, basketball scouting, custom tagging button board, sports coaching software, soccer tactical analysis",
     "offers": {
-      "founder": "Founder Beta Pass",
-      "monthly": "Monthly Plan",
-      "yearly": "Yearly Plan",
-      "club": "Club Plan (5 seats)",
-      "clubMonthly": "Club license 5 users monthly"
+      "monthly": "Individual Monthly Subscription",
+      "yearly": "Individual Annual Subscription",
+      "club": "Club Plan (5 seats)"
     },
     "features": {
       "buttonBoard": "Unlimited custom tagging button board",

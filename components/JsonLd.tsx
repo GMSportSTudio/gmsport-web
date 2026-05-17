@@ -7,8 +7,15 @@ const BASE_URL = "https://www.gmsportstudio.com";
  * del namespace "JsonLd" en messages/{locale}.json y genera los objetos
  * SoftwareApplication + VideoObject con el texto correcto.
  *
- * priceValidUntil del Pase Fundador = fecha de lanzamiento de la Beta,
- * tras la cual el plan deja de estar disponible como PreOrder.
+ * Modelo comercial post-Beta (a partir del 17/05/2026):
+ *   - Individual Mensual 14,99 €/mes (InStock)
+ *   - Individual Anual    99 €/año   (InStock)
+ *   - Pro Club            299 €/año  (InStock, 5 cuentas)
+ *
+ * El Pase Fundador 9,99 € se retiró el 17/05/2026; los 64 founders ya
+ * marcados conservan su derecho al 50 % lifetime mediante link firmado
+ * (enviado por email el 25/05). Ese flujo NO se expone como Offer en
+ * schema.org porque no es comprable públicamente.
  */
 export default async function JsonLd({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: "JsonLd" });
@@ -27,24 +34,14 @@ export default async function JsonLd({ locale }: { locale: string }) {
     offers: [
       {
         "@type": "Offer",
-        name: t("offers.founder"),
-        price: "9.99",
+        name: t("offers.monthly"),
+        price: "14.99",
         priceCurrency: "EUR",
         availability: "https://schema.org/InStock",
-        priceValidUntil: "2026-04-29",
-        url: "https://www.gmsportstudio.com/",
-        category: "Limited Edition",
-        eligibleQuantity: { "@type": "QuantitativeValue", value: 1, unitText: "usuario" },
-      },
-      {
-        "@type": "Offer",
-        name: t("offers.monthly"),
-        price: "15",
-        priceCurrency: "EUR",
-        availability: "https://schema.org/PreOrder",
+        url: "https://gmsportstudio.gumroad.com/l/gms-mensual",
         priceSpecification: {
           "@type": "UnitPriceSpecification",
-          price: "15",
+          price: "14.99",
           priceCurrency: "EUR",
           billingDuration: "P1M",
           billingIncrement: 1,
@@ -56,7 +53,8 @@ export default async function JsonLd({ locale }: { locale: string }) {
         name: t("offers.yearly"),
         price: "99",
         priceCurrency: "EUR",
-        availability: "https://schema.org/PreOrder",
+        availability: "https://schema.org/InStock",
+        url: "https://gmsportstudio.gumroad.com/l/gms-anual",
         priceSpecification: {
           "@type": "UnitPriceSpecification",
           price: "99",
@@ -68,25 +66,11 @@ export default async function JsonLd({ locale }: { locale: string }) {
       },
       {
         "@type": "Offer",
-        name: t("offers.clubMonthly"),
-        price: "40",
-        priceCurrency: "EUR",
-        availability: "https://schema.org/PreOrder",
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "40",
-          priceCurrency: "EUR",
-          billingDuration: "P1M",
-          billingIncrement: 1,
-        },
-        eligibleQuantity: { "@type": "QuantitativeValue", value: 5, unitText: "usuarios" },
-      },
-      {
-        "@type": "Offer",
         name: t("offers.club"),
         price: "299",
         priceCurrency: "EUR",
-        availability: "https://schema.org/PreOrder",
+        availability: "https://schema.org/InStock",
+        url: "mailto:clubes@gmsportstudio.com",
         priceSpecification: {
           "@type": "UnitPriceSpecification",
           price: "299",
