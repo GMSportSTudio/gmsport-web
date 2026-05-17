@@ -102,10 +102,10 @@ export function CancelarClient() {
         {!done ? (
           <>
             <p style={{ color: "#9095a0", fontSize: 15, lineHeight: 1.7, margin: "16px 0 24px" }}>
-              Vamos a procesar la cancelación de tu suscripción. La cancelación se hace efectiva al
-              recibir tu solicitud — recibirás un email de confirmación. Si tienes una versión Beta
-              activa, mantendrás el acceso hasta el {" "}
-              <strong style={{ color: "#ff6b1a" }}>30 de mayo de 2026</strong>.
+              Vamos a procesar la cancelación de tu suscripción. La cancelación se registra al
+              recibir tu solicitud y recibirás un email de confirmación. Mantienes el acceso{" "}
+              <strong style={{ color: "#ff6b1a" }}>hasta el final del periodo facturado actual</strong>{" "}
+              y a partir de ahí no se realizarán más cargos.
             </p>
 
             <label
@@ -192,7 +192,7 @@ export function CancelarClient() {
               />
               <span>
                 Confirmo que quiero cancelar mi suscripción a GMSportStudio y entiendo que
-                perderé el acceso al finalizar el periodo Beta actual.
+                perderé el acceso al finalizar el periodo de facturación actual.
               </span>
             </label>
 
