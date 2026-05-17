@@ -127,9 +127,7 @@ export default function Footer() {
             </div>
           ))}
           <a
-            href="https://forms.gle/Kfj3TwAeuJe88Bc28"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/#precios"
             className="text-sm text-white/35 hover:text-[#FF7043]
                        transition-colors duration-200 py-0.5 mt-3"
           >

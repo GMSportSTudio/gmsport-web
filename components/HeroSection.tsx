@@ -112,9 +112,7 @@ export default function HeroSection() {
               />
 
               <motion.a
-                href="https://forms.gle/Kfj3TwAeuJe88Bc28"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#precios"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 380, damping: 22 }}

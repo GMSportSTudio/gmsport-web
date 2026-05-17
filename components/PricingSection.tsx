@@ -5,6 +5,12 @@ import { motion, useInView, type Variants } from "framer-motion";
 import { Zap, MessageCircle, Award, Percent, Star, Users, ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import {
+  INDIVIDUAL_MONTHLY,
+  INDIVIDUAL_ANNUAL,
+  formatPriceEUR,
+} from "@/lib/plans";
+
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const fadeUp = (delay = 0): Variants => ({
@@ -22,11 +28,6 @@ export default function PricingSection() {
     { icon: <MessageCircle size={15} strokeWidth={2} />, label: t("benefits.support")  },
     { icon: <Award size={15} strokeWidth={2} />,         label: t("benefits.badge")    },
     { icon: <Percent size={15} strokeWidth={2} />,       label: t("benefits.discount") },
-  ];
-
-  const FUTURE_PLANS = [
-    { label: t("futurePlanMonthly"), price: t("futurePlanMonthlyPrice") },
-    { label: t("futurePlanYearly"),  price: t("futurePlanYearlyPrice")  },
   ];
 
   return (
@@ -55,129 +56,220 @@ export default function PricingSection() {
           {t("title1")}
           <br />{t("title2")}
         </h2>
-        <p className="max-w-sm text-[#cccccc]/45 text-base leading-relaxed">
+        <p className="max-w-md text-[#cccccc]/45 text-base leading-relaxed">
           {t("subtitle")}
         </p>
       </motion.div>
 
-      {/* Tarjeta principal */}
-      <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp(0.15)}
-        className="w-full max-w-md relative glow-cta-guide"
-      >
-        {/* Glow detrás */}
-        <div aria-hidden="true" className="absolute -inset-px pointer-events-none"
-          style={{
-            borderRadius: "9px",
-            background: "linear-gradient(135deg, rgba(255,87,34,0.4) 0%, rgba(255,112,67,0.15) 50%, transparent 100%)",
-            filter: "blur(1px)",
-          }}
-        />
+      {/* Grid de planes individuales: 2 cards */}
+      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
 
-        <div className="relative overflow-hidden"
-          style={{
-            borderRadius: "8px",
-            background: "linear-gradient(160deg, #1c1208 0%, #141414 50%, #0f0f0f 100%)",
-            border: "1px solid rgba(255,87,34,0.35)",
-            boxShadow: "0 0 0 1px rgba(255,87,34,0.12), 0 24px 80px rgba(0,0,0,0.6), 0 0 60px rgba(255,87,34,0.07)",
-          }}
+        {/* ── Card MENSUAL ───────────────────────────────────────────── */}
+        <motion.div
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={fadeUp(0.15)}
+          className="relative"
         >
-          {/* Línea superior */}
-          <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px"
-            style={{ background: "linear-gradient(90deg, transparent 5%, rgba(255,87,34,0.75) 50%, transparent 95%)" }}
+          <div className="relative h-full overflow-hidden"
+            style={{
+              borderRadius: "8px",
+              background: "linear-gradient(160deg, #141414 0%, #0f0f0f 100%)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              boxShadow: "0 16px 48px rgba(0,0,0,0.4)",
+            }}
+          >
+            <div className="p-7 md:p-8 flex flex-col gap-6 h-full">
+
+              {/* Nombre del plan */}
+              <div className="flex flex-col gap-1">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#cccccc]/45">
+                  {t("monthlyEyebrow")}
+                </p>
+                <h3 className="text-lg font-bold text-white leading-snug">
+                  {t("monthlyTitle")}
+                </h3>
+              </div>
+
+              {/* Precio */}
+              <div className="flex items-end gap-2 leading-none">
+                <span className="text-[#cccccc]/50 text-xl font-medium mb-1">€</span>
+                <span className="stat-num text-6xl font-black text-white">
+                  {formatPriceEUR(Math.floor(INDIVIDUAL_MONTHLY.priceEur))}
+                </span>
+                <span className="stat-num text-3xl font-black text-white/70 mb-1">
+                  ,{String(INDIVIDUAL_MONTHLY.priceEur).split(".")[1] || "00"}
+                </span>
+                <div className="flex flex-col mb-2 ml-1">
+                  <span className="text-xs text-[#cccccc]/40 leading-tight">{t("monthlyPriceUnit")}</span>
+                </div>
+              </div>
+
+              {/* Separador */}
+              <div className="h-px bg-white/6" />
+
+              {/* Beneficios */}
+              <ul className="flex flex-col gap-3 flex-1">
+                {BENEFITS.map(({ icon, label }) => (
+                  <li key={label} className="flex items-start gap-3">
+                    <span className="mt-0.5 w-6 h-6 rounded flex items-center justify-center shrink-0
+                                     bg-white/5 text-white/45 border border-white/10"
+                      style={{ borderRadius: "4px" }}>
+                      {icon}
+                    </span>
+                    <span className="text-sm text-[#cccccc]/65 leading-snug">{label}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA — Mensual (secundario, border naranja sin fondo) */}
+              <motion.a
+                href={INDIVIDUAL_MONTHLY.gumroadUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                className="relative flex items-center justify-center gap-2 w-full py-3
+                           text-[#FF7043] font-semibold text-sm
+                           bg-transparent hover:bg-[#FF5722]/8
+                           border border-[rgba(255,87,34,0.4)]
+                           hover:border-[rgba(255,87,34,0.7)]
+                           transition-all duration-150"
+                style={{ borderRadius: "6px" }}
+              >
+                {t("monthlyCta")}
+                <ArrowRight size={14} strokeWidth={2.2} />
+              </motion.a>
+
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ── Card ANUAL (destacada) ─────────────────────────────────── */}
+        <motion.div
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={fadeUp(0.22)}
+          className="relative glow-cta-guide"
+        >
+          {/* Glow detrás */}
+          <div aria-hidden="true" className="absolute -inset-px pointer-events-none"
+            style={{
+              borderRadius: "9px",
+              background: "linear-gradient(135deg, rgba(255,87,34,0.4) 0%, rgba(255,112,67,0.15) 50%, transparent 100%)",
+              filter: "blur(1px)",
+            }}
           />
 
-          {/* Badge */}
-          <div className="absolute top-5 right-5">
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-semibold
-                             bg-[#FF5722]/15 border border-[#FF5722]/30 text-[#FF8A65]"
-              style={{ borderRadius: "4px" }}>
-              <Star size={9} fill="currentColor" />
-              {t("badgeLabel")}
-            </span>
-          </div>
+          <div className="relative h-full overflow-hidden"
+            style={{
+              borderRadius: "8px",
+              background: "linear-gradient(160deg, #1c1208 0%, #141414 50%, #0f0f0f 100%)",
+              border: "1px solid rgba(255,87,34,0.35)",
+              boxShadow: "0 0 0 1px rgba(255,87,34,0.12), 0 24px 80px rgba(0,0,0,0.6), 0 0 60px rgba(255,87,34,0.07)",
+            }}
+          >
+            {/* Línea superior */}
+            <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px"
+              style={{ background: "linear-gradient(90deg, transparent 5%, rgba(255,87,34,0.75) 50%, transparent 95%)" }}
+            />
 
-          <div className="p-8 flex flex-col gap-7">
-
-            {/* Nombre del plan */}
-            <div className="flex flex-col gap-1">
-              <p className="text-xs font-bold uppercase tracking-widest text-[#FF7043]">
-                {t("planEyebrow")}
-              </p>
-              <h3 className="text-xl font-bold text-white leading-snug">
-                {t("planTitle")}
-              </h3>
-              <p className="text-xs text-[#cccccc]/35 mt-0.5 leading-relaxed">
-                {t("planSubtitle")}
-              </p>
+            {/* Badge "Mejor opción · Ahorra 45%" */}
+            <div className="absolute top-5 right-5 z-10">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-semibold
+                               bg-[#FF5722]/15 border border-[#FF5722]/30 text-[#FF8A65]"
+                style={{ borderRadius: "4px" }}>
+                <Star size={9} fill="currentColor" />
+                {t("annualSavingsBadge")}
+              </span>
             </div>
 
-            {/* Precio */}
-            <div className="flex items-end gap-2 leading-none">
-              <span className="text-[#cccccc]/50 text-xl font-medium mb-1">€</span>
-              <span className="stat-num text-7xl font-black text-white">9</span>
-              <span className="stat-num text-4xl font-black text-white/70 mb-1">,99</span>
-              <div className="flex flex-col mb-2 ml-1">
-                <span className="text-xs text-[#cccccc]/40 leading-tight">{t("priceUnitLine1")}</span>
-                <span className="text-xs text-[#cccccc]/40 leading-tight">{t("priceUnitLine2")}</span>
+            <div className="p-7 md:p-8 flex flex-col gap-6 h-full">
+
+              {/* Nombre del plan */}
+              <div className="flex flex-col gap-1">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#FF7043]">
+                  {t("annualEyebrow")}
+                </p>
+                <h3 className="text-lg font-bold text-white leading-snug">
+                  {t("annualTitle")}
+                </h3>
               </div>
-            </div>
 
-            {/* Separador */}
-            <div className="h-px bg-white/6" />
-
-            {/* Beneficios */}
-            <ul className="flex flex-col gap-3.5">
-              {BENEFITS.map(({ icon, label }) => (
-                <li key={label} className="flex items-start gap-3">
-                  <span className="mt-0.5 w-6 h-6 rounded flex items-center justify-center shrink-0
-                                   bg-[#FF5722]/12 text-[#FF7043] border border-[#FF5722]/20"
-                    style={{ borderRadius: "4px" }}>
-                    {icon}
+              {/* Precio */}
+              <div className="flex flex-col gap-1">
+                <div className="flex items-end gap-2 leading-none">
+                  <span className="text-[#cccccc]/50 text-xl font-medium mb-1">€</span>
+                  <span className="stat-num text-6xl font-black text-white">
+                    {formatPriceEUR(INDIVIDUAL_ANNUAL.priceEur)}
                   </span>
-                  <span className="text-sm text-[#cccccc]/70 leading-snug">{label}</span>
-                </li>
-              ))}
-            </ul>
+                  <div className="flex flex-col mb-2 ml-1">
+                    <span className="text-xs text-[#cccccc]/40 leading-tight">{t("annualPriceUnit")}</span>
+                  </div>
+                </div>
+                <p className="text-[11px] text-[#cccccc]/35 mt-0.5">
+                  {t("annualPricePerMonth")}
+                </p>
+              </div>
 
-            {/* CTA */}
-            <motion.a
-              href="https://forms.gle/Kfj3TwAeuJe88Bc28"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 380, damping: 22 }}
-              className="relative flex items-center justify-center gap-2 w-full py-3.5
-                         text-white font-semibold text-base
-                         bg-[#FF5722] hover:bg-[#E64A19]
-                         border border-[rgba(255,87,34,0.5)]
-                         shadow-[0_1px_4px_rgba(0,0,0,0.5)]
-                         hover:shadow-[0_0_0_1px_rgba(255,87,34,0.4),0_4px_20px_rgba(255,87,34,0.35)]
-                         transition-all duration-150"
-              style={{ borderRadius: "6px" }}
-            >
-              <span aria-hidden="true"
-                className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-              <Zap size={16} strokeWidth={2.2} />
-              {t("cta")}
-            </motion.a>
+              {/* Separador */}
+              <div className="h-px bg-white/6" />
 
+              {/* Beneficios */}
+              <ul className="flex flex-col gap-3 flex-1">
+                {BENEFITS.map(({ icon, label }) => (
+                  <li key={label} className="flex items-start gap-3">
+                    <span className="mt-0.5 w-6 h-6 rounded flex items-center justify-center shrink-0
+                                     bg-[#FF5722]/12 text-[#FF7043] border border-[#FF5722]/20"
+                      style={{ borderRadius: "4px" }}>
+                      {icon}
+                    </span>
+                    <span className="text-sm text-[#cccccc]/70 leading-snug">{label}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA — Anual (primario, naranja sólido) */}
+              <motion.a
+                href={INDIVIDUAL_ANNUAL.gumroadUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                className="relative flex items-center justify-center gap-2 w-full py-3.5
+                           text-white font-semibold text-base
+                           bg-[#FF5722] hover:bg-[#E64A19]
+                           border border-[rgba(255,87,34,0.5)]
+                           shadow-[0_1px_4px_rgba(0,0,0,0.5)]
+                           hover:shadow-[0_0_0_1px_rgba(255,87,34,0.4),0_4px_20px_rgba(255,87,34,0.35)]
+                           transition-all duration-150"
+                style={{ borderRadius: "6px" }}
+              >
+                <span aria-hidden="true"
+                  className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                <Zap size={16} strokeWidth={2.2} />
+                {t("annualCta")}
+              </motion.a>
+
+            </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
 
-      {/* Plan Club */}
+      </div>
+
+      {/* Plan Club (intacto, B2B mailto) */}
       <motion.div
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        variants={fadeUp(0.28)}
+        variants={fadeUp(0.32)}
         className="mt-10 w-full max-w-md"
       >
         <div
           className="relative overflow-hidden rounded-xl border border-white/10 bg-[#0f0f0f] p-6"
           style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.45)" }}
         >
-          {/* Accento naranja superior */}
           <div
             aria-hidden="true"
             className="absolute inset-x-0 top-0 h-px"
@@ -205,7 +297,6 @@ export default function PricingSection() {
             </div>
           </div>
 
-          {/* Precio */}
           <div className="flex items-baseline flex-wrap gap-x-2 gap-y-1 mb-4">
             <span className="stat-num text-3xl font-black text-white leading-none">299€</span>
             <span className="text-xs text-[#cccccc]/50">{t("clubPriceYear")}</span>
@@ -228,32 +319,11 @@ export default function PricingSection() {
         </div>
       </motion.div>
 
-      {/* Proximos planes individuales */}
-      <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp(0.4)}
-        className="mt-10 flex flex-col items-center gap-3"
-      >
-        <p className="text-xs text-[#cccccc]/20 uppercase tracking-widest">
-          {t("futurePlansLabel")}
-        </p>
-        <div className="flex gap-3">
-          {FUTURE_PLANS.map(({ label, price }) => (
-            <div key={label}
-              className="flex items-center gap-2 px-4 py-2 border border-white/6 bg-white/3"
-              style={{ borderRadius: "6px" }}
-            >
-              <span className="text-xs text-[#cccccc]/25 font-medium">{label}</span>
-              <span className="text-xs text-[#cccccc]/20">{price}</span>
-            </div>
-          ))}
-        </div>
-        <p className="text-[11px] text-[#cccccc]/18">{t("futureFounderNote")}</p>
-      </motion.div>
-
-      {/* B2B lead capture */}
+      {/* B2B lead capture (intacto, para >5 cuentas) */}
       <motion.div
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        variants={fadeUp(0.52)}
+        variants={fadeUp(0.44)}
         className="mt-8 flex items-start gap-3 max-w-md w-full px-4 py-3.5 rounded-lg border border-white/7 bg-white/3"
       >
         <span className="text-[#FF7043] mt-0.5 shrink-0">
@@ -270,6 +340,18 @@ export default function PricingSection() {
           >
             {t("b2bCta")}
           </a>
+        </p>
+      </motion.div>
+
+      {/* Footnote Founders — programa cerrado */}
+      <motion.div
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={fadeUp(0.6)}
+        className="mt-10 max-w-md text-center"
+      >
+        <p className="text-[11px] text-[#cccccc]/30 leading-relaxed">
+          {t("founderNote")}
         </p>
       </motion.div>
     </section>

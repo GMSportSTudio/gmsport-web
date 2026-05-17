@@ -61,7 +61,7 @@ export default function OGImage() {
         }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#FF5722" }} />
           <span style={{ color: "#FF8A65", fontSize: 16, fontWeight: 600, letterSpacing: "1px" }}>
-            Beta abierta · 9,99€ · gmsportstudio.com
+            Desde 14,99€/mes · gmsportstudio.com
           </span>
         </div>
       </div>
