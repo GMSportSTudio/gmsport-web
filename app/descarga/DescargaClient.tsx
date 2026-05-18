@@ -116,6 +116,7 @@ function formatBytes(b: number) {
 }
 
 const errorMessages: Record<string, string> = {
+  // ── Errores rama Beta (token-based, POST a getDownloadUrl) ────────────────
   invalid_token:        "Este enlace no es válido.",
   expired:              "Este enlace ha expirado. Solicita uno nuevo a ceo@gmsportstudio.com",
   revoked:              "Este enlace ha sido revocado. Contacta con ceo@gmsportstudio.com",
@@ -123,10 +124,15 @@ const errorMessages: Record<string, string> = {
   platform_not_allowed: "Esta plataforma no está permitida para tu invitación.",
   missing_token:        "Falta el token de descarga.",
   missing_params:       "Faltan parámetros en la petición.",
-  no_release:           "No hay build disponible para esta plataforma. Contacta con ceo@gmsportstudio.com",
+  // ── Errores genéricos ─────────────────────────────────────────────────────
   internal:             "Error interno. Inténtalo de nuevo en unos segundos.",
   network_error:        "Error de red. Comprueba tu conexión e inténtalo de nuevo.",
-  no_active_license:    "No tienes una licencia activa. Si has pagado en Gumroad, asegúrate de usar el mismo email al iniciar sesión.",
+  // ── Errores rama paid (callable getSignedDownloadUrl) ─────────────────────
+  no_active_license:    "No tienes una licencia activa. Si has pagado en Gumroad con otro email, reclama tu pago en /cuenta/reclamar para vincularlo a tu cuenta.",
+  email_not_verified:   "Tu email no está verificado todavía. Revisa tu bandeja de entrada para el enlace de verificación. Si no lo encuentras, escríbenos a ceo@gmsportstudio.com.",
+  no_session_expired:   "Tu sesión ha expirado. Vuelve a iniciar sesión con el enlace mágico.",
+  invalid_platform:     "Plataforma no soportada en este momento.",
+  no_release:           "Aún no hay build disponible para esta plataforma. Si crees que es un error, contacta con ceo@gmsportstudio.com.",
 };
 
 type AuthStatus = "loading_auth" | "no_session" | "link_sent" | "signing_in" | "authenticated";
@@ -290,14 +296,42 @@ export function DescargaClient() {
       setTimeout(() => setDl(null), 4000);
     } catch (e: unknown) {
       console.error("getSignedDownloadUrl callable", e);
-      // Distinguir error de licencia inactiva por el mensaje (la callable
-      // devuelve permission-denied con texto explicativo).
-      const msg = e instanceof Error ? e.message.toLowerCase() : "";
-      if (msg.includes("licencia") || msg.includes("license") || msg.includes("denied")) {
-        setDlError("no_active_license");
+      // Las HttpsError de Firebase Functions llegan al cliente con
+      // `error.code` (string estructurado, con o sin prefijo "functions/")
+      // y `error.message` (texto legible). Usamos el code para discriminar
+      // y, dentro de permission-denied (que tiene 2 escenarios distintos),
+      // el mensaje como tiebreaker.
+      //
+      // Antes del fix de 2026-05-18 esta función solo miraba e.message y
+      // buscaba "licencia/license/denied" — los errores en español como
+      // "Email no verificado" caían a "network_error" sin razón.
+      const httpsErr = e as { code?: string; message?: string };
+      const code = String(httpsErr.code || "").toLowerCase().replace(/^functions\//, "");
+      const msg  = String(httpsErr.message || "").toLowerCase();
+
+      let mapped: string;
+      if (code === "unauthenticated") {
+        mapped = "no_session_expired";
+      } else if (code === "permission-denied") {
+        // 2 escenarios:
+        //   · "Email no verificado." → email_not_verified
+        //   · "No tienes una licencia activa..." → no_active_license
+        if (msg.includes("email") && msg.includes("verif")) {
+          mapped = "email_not_verified";
+        } else {
+          mapped = "no_active_license";
+        }
+      } else if (code === "not-found") {
+        mapped = "no_release";
+      } else if (code === "invalid-argument") {
+        mapped = "invalid_platform";
+      } else if (code === "internal" || code === "unavailable") {
+        mapped = "internal";
       } else {
-        setDlError("network_error");
+        // Sin código identificable → asumimos red.
+        mapped = "network_error";
       }
+      setDlError(mapped);
       setDl(null);
     }
   };
