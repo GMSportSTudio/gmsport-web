@@ -1,30 +1,15 @@
-import type { Metadata } from "next";
-import { Suspense } from "react";
-import { DescargaCanaryClient } from "./DescargaCanaryClient";
+// Canary archivado en 1.3.0 (2026-05-18). El motor ffpyplayer validado
+// en 28 iteraciones canary pasó a ser stable. Esta página queda como
+// shim de redirect server-side; el redirect "real" está en next.config.ts
+// (tiene prioridad sobre file-based routing en Next).
+//
+// Este archivo se elimina en el commit del usuario:
+//   git rm -r gmsport-web/app/descarga-canary
 
-export const metadata: Metadata = {
-  title: "Descarga GMSportStudio Canary",
-  robots: { index: false, follow: false },
-};
+import { redirect } from "next/navigation";
 
-export default function DescargaCanaryPage() {
-  return (
-    <Suspense
-      fallback={
-        <div
-          style={{
-            minHeight: "100vh",
-            background: "#0f1117",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <p style={{ color: "#555d6e", fontFamily: "sans-serif" }}>Cargando…</p>
-        </div>
-      }
-    >
-      <DescargaCanaryClient />
-    </Suspense>
-  );
+export const dynamic = "force-static";
+
+export default function DescargaCanaryArchived() {
+  redirect("/descarga");
 }

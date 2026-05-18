@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
       { source: "/terminos-beta", destination: "/", permanent: true },
       { source: "/pt", destination: "/", permanent: true },
       { source: "/pt/:path*", destination: "/:path*", permanent: true },
+      // Canary archivado en 1.3.0 (2026-05-18): el motor ffpyplayer
+      // validado en 28 iteraciones canary pasó a ser el stable. Solo
+      // queda una línea de producto.
+      { source: "/descarga-canary", destination: "/descarga", permanent: true },
+      { source: "/descarga-canary/:path*", destination: "/descarga", permanent: true },
     ];
   },
 };
