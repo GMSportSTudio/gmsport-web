@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import {
   onAuthStateChanged,
   sendSignInLinkToEmail,
@@ -310,12 +311,12 @@ export function ReclamarClient() {
             <p style={{ color: "#9095a0", fontSize: 14, lineHeight: 1.7, margin: "12px 0 18px" }}>
               Ya puedes descargar la app desde tu cuenta:
             </p>
-            <a
+            <Link
               href="/descarga"
               style={{ display: "block", width: "100%", padding: "13px 20px", background: "#ff6b1a", color: "#fff", fontSize: 15, fontWeight: 700, textAlign: "center", textDecoration: "none", borderRadius: 10, boxSizing: "border-box" }}
             >
               Ir a la descarga →
-            </a>
+            </Link>
           </>
         )}
       </div>

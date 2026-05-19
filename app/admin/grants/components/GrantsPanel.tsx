@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { httpsCallable, FunctionsError } from "firebase/functions";
 import { signOut } from "firebase/auth";
 import { auth, functionsUS } from "@/lib/firebase";
@@ -153,9 +154,9 @@ export function GrantsPanel() {
             <p style={{ color: "#555d6e", fontSize: 13, margin: "6px 0 0" }}>
               Acceso gratuito indefinido para prensa, partners y coaches influyentes.
               {" "}
-              <a href="/admin/testers" style={{ color: "#ff6b1a" }}>→ Beta testers</a>
+              <Link href="/admin/testers" style={{ color: "#ff6b1a" }}>→ Beta testers</Link>
               {" · "}
-              <a href="/admin/invitaciones" style={{ color: "#ff6b1a" }}>→ Invitaciones</a>
+              <Link href="/admin/invitaciones" style={{ color: "#ff6b1a" }}>→ Invitaciones</Link>
             </p>
           </div>
           <button

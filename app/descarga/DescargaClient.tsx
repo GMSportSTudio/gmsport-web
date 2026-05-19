@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
   onAuthStateChanged,
@@ -553,7 +554,7 @@ export function DescargaClient() {
               <div style={{ textAlign: "center", marginTop: 24 }}>
                 <p style={{ color: "#3a3f50", fontSize: 12 }}>
                   Al descargar aceptas las{" "}
-                  <a href="/terminos-beta" style={{ color: "#555d6e" }}>condiciones Beta</a>.
+                  <Link href="/terminos-beta" style={{ color: "#555d6e" }}>condiciones Beta</Link>.
                 </p>
               </div>
             </>
@@ -610,10 +611,10 @@ export function DescargaClient() {
             </button>
             <p style={{ color: "#555d6e", fontSize: 12, margin: "16px 0 0", textAlign: "center", lineHeight: 1.6 }}>
               ¿Aún no tienes suscripción?{" "}
-              <a href="/#precios" style={{ color: "#ff6b1a" }}>Ver planes</a>.
+              <Link href="/#precios" style={{ color: "#ff6b1a" }}>Ver planes</Link>.
               <br />
               ¿Pagaste con otro email?{" "}
-              <a href="/cuenta/reclamar" style={{ color: "#ff6b1a" }}>Reclamar pago</a>.
+              <Link href="/cuenta/reclamar" style={{ color: "#ff6b1a" }}>Reclamar pago</Link>.
             </p>
           </div>
         )}
