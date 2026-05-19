@@ -119,6 +119,12 @@ function TestersTable() {
   }, []);
 
   useEffect(() => {
+    // `load()` es async y los setTesters/setLastSync/setLoadError dentro
+    // se ejecutan en microtasks posteriores, no síncronamente. ESLint no
+    // puede trazar a través de async functions, así que la regla
+    // react-hooks/set-state-in-effect lo marca conservadoramente.
+    // Patrón canónico de polling: fetch al montar + intervalo cada 30 s.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
     const id = setInterval(load, POLL_INTERVAL_MS);
     return () => clearInterval(id);
@@ -195,7 +201,7 @@ function TestersTable() {
         </div>
 
         <p style={{ color: "#555d6e", fontSize: 12, marginTop: 24, textAlign: "center" }}>
-          Listado limitado a los 200 últimos. La fecha "Invitado" se ordena del más reciente al más antiguo.
+          Listado limitado a los 200 últimos. La fecha &ldquo;Invitado&rdquo; se ordena del más reciente al más antiguo.
         </p>
       </div>
     </div>

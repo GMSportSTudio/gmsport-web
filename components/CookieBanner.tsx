@@ -12,7 +12,12 @@ export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    // localStorage solo existe en cliente. La regla react-hooks/set-state-in-effect
+    // prohíbe setState síncronos en effects, pero este es el patrón correcto para
+    // leer una preferencia persistida en el navegador tras montar (no hay forma de
+    // inicializar useState con localStorage sin causar hydration mismatch en SSR).
     if (!localStorage.getItem(STORAGE_KEY)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setVisible(true);
     }
   }, []);

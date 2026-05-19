@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 /* ─── Tipos ──────────────────────────────────────────────────── */
@@ -116,13 +116,20 @@ export default function BackgroundEffects() {
   /* Evita hidratación incorrecta: solo renderiza en el cliente */
   const [mounted, setMounted] = useState(false);
 
-  /* Sólo activamos las partículas si el usuario no prefiere movimiento reducido */
-  const prefersReduced = useRef(false);
+  /* Sólo activamos las partículas si el usuario no prefiere movimiento reducido.
+     Antes era useRef pero el lint rule react-hooks/refs prohíbe acceder a
+     `.current` durante render. Convertido a state: se setea una vez al montar
+     y no vuelve a cambiar (no causa re-render adicional, mismo coste). */
+  const [prefersReduced, setPrefersReduced] = useState(false);
 
   useEffect(() => {
-    prefersReduced.current = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    // window.matchMedia solo existe en cliente. La regla react-hooks/set-state-in-effect
+    // prohíbe setState síncronos en effects, pero leer matchMedia tras montar es el
+    // único patrón seguro sin hydration mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPrefersReduced(
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
     setMounted(true);
   }, []);
 
@@ -131,10 +138,10 @@ export default function BackgroundEffects() {
   return (
     <>
       {/* Glow cursor */}
-      {!prefersReduced.current && <CursorGlow />}
+      {!prefersReduced && <CursorGlow />}
 
       {/* Partículas flotantes */}
-      {!prefersReduced.current && (
+      {!prefersReduced && (
         <div
           aria-hidden="true"
           className="fixed inset-0 pointer-events-none z-0 overflow-hidden"

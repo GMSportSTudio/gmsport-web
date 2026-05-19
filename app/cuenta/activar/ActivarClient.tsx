@@ -36,6 +36,10 @@ export function ActivarClient() {
     calledRef.current = true;
 
     if (!token) {
+      // Estado terminal de error: marcamos invalid y salimos. La regla
+      // react-hooks/set-state-in-effect lo flagga pero aquí es el patrón
+      // correcto — un missing query param solo se detecta tras montar.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setStatus("invalid");
       setErrorMsg("Falta el token de activación en el enlace.");
       return;
@@ -68,7 +72,7 @@ export function ActivarClient() {
         setTimeout(() => {
           window.location.href = json.gumroad_url as string;
         }, 1200);
-      } catch (_e) {
+      } catch {
         setStatus("network_error");
         setErrorMsg("Error de red. Comprueba la conexión y vuelve a intentarlo.");
       }

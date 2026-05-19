@@ -41,7 +41,7 @@ function detectPlatform(): { os: OsType; chip: ChipType } {
         if (/Intel/.test(renderer))               return { os: "mac", chip: "intel"   };
       }
     }
-  } catch (_) { /* silencioso */ }
+  } catch { /* silencioso */ }
 
   return { os: "mac", chip: "unknown" };
 }
@@ -207,6 +207,11 @@ export default function DownloadSection() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   useEffect(() => {
+    // detectPlatform() lee navigator/UA-CH — sólo en cliente, no en SSR. La
+    // regla react-hooks/set-state-in-effect prohíbe setState síncronos en
+    // effects, pero este es el único momento donde podemos detectar el chip
+    // del usuario sin causar hydration mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPlatform(detectPlatform());
   }, []);
 
