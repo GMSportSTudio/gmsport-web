@@ -72,33 +72,35 @@ async function detectMacArch(): Promise<"silicon" | "intel" | null> {
   return null;
 }
 
+// Nota Mac (compartida por mac, mac-silicon, mac-intel). Histórico:
+//   · Antes (≤ 2026-05-18): mencionaba "Control+clic → Abrir" como flujo
+//     para saltarse Gatekeeper. Apple lo eliminó en macOS Sequoia (15) —
+//     ahora la única ruta para apps "no verificadas online" es
+//     Ajustes → Privacidad y Seguridad → "Abrir igualmente".
+//   · Caso disparador (#71, 2026-05-19): Xavier Isern recibe diálogo
+//     "no se ha podido verificar" en Sequoia y nuestra nota le decía un
+//     atajo que ya no existe. Reescrito + añadido panel desplegable abajo.
+const MAC_NOTE =
+  "Si en la primera apertura macOS muestra un aviso de seguridad, " +
+  "abre el panel \"¿Aparece un aviso de seguridad?\" al final de la página. " +
+  "Para verificar integridad: shasum -a 256 ~/Downloads/GMSportStudio*.zip " +
+  "y comparar con el SHA256 publicado.";
+
 const PLATFORM_LABELS: Record<string, { icon: string; name: string; note: string }> = {
   mac: {
     icon: "🍎",
     name: "macOS",
-    note:
-      "Antes de abrir la app, verifica la integridad: " +
-      "shasum -a 256 ~/Downloads/GMSportStudio*.zip " +
-      "y compara con el SHA256 publicado debajo. " +
-      "Solo si el hash coincide, abre la app con Control+clic → Abrir.",
+    note: MAC_NOTE,
   },
   "mac-silicon": {
     icon: "🍎",
     name: "macOS · Apple Silicon (M1/M2/M3/M4)",
-    note:
-      "Antes de abrir la app, verifica la integridad: " +
-      "shasum -a 256 ~/Downloads/GMSportStudio*.zip " +
-      "y compara con el SHA256 publicado debajo. " +
-      "Solo si el hash coincide, abre la app con Control+clic → Abrir.",
+    note: MAC_NOTE,
   },
   "mac-intel": {
     icon: "🍎",
     name: "macOS · Intel",
-    note:
-      "Antes de abrir la app, verifica la integridad: " +
-      "shasum -a 256 ~/Downloads/GMSportStudio*.zip " +
-      "y compara con el SHA256 publicado debajo. " +
-      "Solo si el hash coincide, abre la app con Control+clic → Abrir.",
+    note: MAC_NOTE,
   },
   windows: {
     icon: "🪟",
@@ -110,6 +112,92 @@ const PLATFORM_LABELS: Record<string, { icon: string; name: string; note: string
       "Solo si el hash coincide, ejecuta la app.",
   },
 };
+
+/**
+ * Panel desplegable con los pasos para autorizar la app en macOS Sequoia
+ * (15) la primera vez que el usuario la abre. Apple eliminó el atajo
+ * Control+clic → Abrir, y los testers Mac ven ahora diálogos como
+ * "no se ha podido verificar" sin ruta obvia para autorizar.
+ *
+ * Histórico:
+ *   · 2026-05-19, caso #71 (Xavier Isern): el cambio de Sequoia pilló
+ *     sin documentar. Añadimos este panel para reducir reportes futuros.
+ *
+ * Se renderiza colapsado por defecto en ambas ramas (Beta token y Paid Auth)
+ * cuando la lista de plataformas contiene cualquier variante Mac.
+ */
+function MacFirstOpenGuide() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 16, padding: "20px 28px", marginBottom: 16 }}>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        style={{
+          width: "100%", background: "transparent", border: "none", padding: 0,
+          color: "#e8eaf0", fontSize: 15, fontWeight: 700, textAlign: "left",
+          cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center",
+        }}
+      >
+        <span>🛡️ ¿Aparece un aviso de seguridad al abrir en Mac?</span>
+        <span style={{ color: "#9095a0", fontSize: 22, lineHeight: 1, marginLeft: 12 }}>{open ? "−" : "+"}</span>
+      </button>
+
+      {open && (
+        <div style={{ marginTop: 16, color: "#9095a0", fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ margin: "0 0 14px" }}>
+            macOS Sequoia muestra un aviso de seguridad en la primera apertura
+            de cualquier app descargada de internet, aunque esté firmada y
+            notarizada por Apple. Es normal — solo hay que autorizarla una vez.
+            Después se abrirá con doble clic, sin avisos.
+          </p>
+
+          <ol style={{ margin: 0, paddingLeft: 20 }}>
+            <li style={{ marginBottom: 10 }}>
+              Cierra el diálogo de aviso (<strong style={{ color: "#e8eaf0" }}>&ldquo;Aceptar&rdquo;</strong> o
+              {" "}<strong style={{ color: "#e8eaf0" }}>&ldquo;Cancelar&rdquo;</strong>).
+              <strong style={{ color: "#e8eaf0" }}> No</strong> mandes la app a la papelera.
+            </li>
+            <li style={{ marginBottom: 10 }}>
+              Abre <strong style={{ color: "#e8eaf0" }}>Ajustes del Sistema</strong>
+              {" "}(menú Apple → Ajustes del Sistema, o <code style={{ background: "#0f1117", padding: "1px 6px", borderRadius: 4, fontSize: 12 }}>⌘ + Espacio</code> y escribir &ldquo;Ajustes&rdquo;).
+            </li>
+            <li style={{ marginBottom: 10 }}>
+              En la barra lateral, busca <strong style={{ color: "#e8eaf0" }}>Privacidad y Seguridad</strong>.
+              Desplázate hasta la sección <strong style={{ color: "#e8eaf0" }}>&ldquo;Seguridad&rdquo;</strong>:
+              verás un mensaje sobre GMSportStudio con el botón
+              {" "}<strong style={{ color: "#ff6b1a" }}>&ldquo;Abrir igualmente&rdquo;</strong>.
+            </li>
+            <li style={{ marginBottom: 10 }}>
+              Pulsa <strong style={{ color: "#ff6b1a" }}>&ldquo;Abrir igualmente&rdquo;</strong>.
+              macOS te pedirá tu contraseña de Mac o Touch ID.
+            </li>
+            <li>
+              En el diálogo final, pulsa <strong style={{ color: "#ff6b1a" }}>&ldquo;Abrir&rdquo;</strong>.
+              GMSportStudio arrancará. A partir de aquí podrás abrirla con doble clic normal.
+            </li>
+          </ol>
+
+          <div style={{ marginTop: 18, padding: "12px 14px", background: "#0f1117", border: "1px solid #23272f", borderRadius: 8 }}>
+            <p style={{ margin: 0, fontSize: 13, color: "#9095a0", lineHeight: 1.6 }}>
+              <strong style={{ color: "#e8eaf0" }}>¿El botón &ldquo;Abrir igualmente&rdquo; no aparece?</strong>{" "}
+              Solo es visible durante unos minutos tras intentar abrir la app.
+              Vuelve a hacer doble clic en GMSportStudio, dale a &ldquo;Aceptar&rdquo; en el aviso
+              e inmediatamente abre Ajustes → Privacidad y Seguridad. El botón estará ahí.
+            </p>
+          </div>
+
+          <p style={{ margin: "16px 0 0", fontSize: 13, color: "#555d6e", lineHeight: 1.6 }}>
+            ¿Sigue sin funcionar? Escríbenos a{" "}
+            <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#ff6b1a" }}>ceo@gmsportstudio.com</a>
+            {" "}indicando tu versión exacta de macOS
+            (menú Apple → Acerca de este Mac → te aparece, p.ej. &ldquo;15.3.1&rdquo;).
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function formatBytes(b: number) {
   return b > 1_000_000 ? `${(b / 1_000_000).toFixed(0)} MB` : `${(b / 1000).toFixed(0)} KB`;
@@ -457,6 +545,11 @@ export function DescargaClient() {
                 </div>
               )}
 
+              {/* Panel ayuda Gatekeeper Sequoia (caso #71 Xavier Isern). */}
+              {platformIds.some((p) => p.startsWith("mac")) && (
+                <MacFirstOpenGuide />
+              )}
+
               <div style={{ textAlign: "center", marginTop: 24 }}>
                 <p style={{ color: "#3a3f50", fontSize: 12 }}>
                   Al descargar aceptas las{" "}
@@ -616,6 +709,11 @@ export function DescargaClient() {
                     {errorMessages[dlError] ?? "Error al iniciar la descarga."}
                   </p>
                 </div>
+              )}
+
+              {/* Panel ayuda Gatekeeper Sequoia (caso #71 Xavier Isern). */}
+              {platformIds.some((p) => p.startsWith("mac")) && (
+                <MacFirstOpenGuide />
               )}
 
               <div style={{ textAlign: "center", marginTop: 24 }}>
