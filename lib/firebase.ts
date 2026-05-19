@@ -19,9 +19,9 @@ export const auth      = getAuth(app);
 export const db        = getFirestore(app);
 export const functions = getFunctions(app, "europe-west1");
 
-// Callables que quedaron en us-central1 por no especificar .region() en
-// el deploy del 2026-05-17: grantFreeAccess, revokeFreeAccess,
-// claimGumroadPurchase. Apuntado en backlog para homogeneizar a
-// europe-west1 post-launch (audit-comercial-2026-05-17.md). Mientras
-// tanto, los callers usan este export específico.
-export const functionsUS = getFunctions(app, "us-central1");
+// Homogeneización 2026-05-19 (task #40): las callables grantFreeAccess,
+// revokeFreeAccess y claimGumroadPurchase se movieron de us-central1 a
+// europe-west1 añadiendo region: "europe-west1" al onCall() en el lado
+// servidor. El export `functionsUS` quedó sin clientes y se eliminó
+// para evitar que futuros callers se confundan apuntando a una región
+// que ya no tiene funciones desplegadas.

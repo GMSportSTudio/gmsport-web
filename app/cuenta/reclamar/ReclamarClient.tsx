@@ -11,7 +11,7 @@ import {
   type User,
 } from "firebase/auth";
 import { httpsCallable, FunctionsError } from "firebase/functions";
-import { auth, functionsUS } from "@/lib/firebase";
+import { auth, functions } from "@/lib/firebase";
 
 const EMAIL_STORAGE_KEY = "gms_reclamar_email";
 
@@ -117,7 +117,7 @@ export function ReclamarClient() {
       const fn = httpsCallable<
         { licenseKey: string; saleId?: string },
         { ok: boolean; planTier?: string; activeUntil?: number }
-      >(functionsUS, "claimGumroadPurchase");
+      >(functions, "claimGumroadPurchase");
       const args: { licenseKey: string; saleId?: string } = { licenseKey: cleanKey };
       if (cleanSaleId) args.saleId = cleanSaleId;
       const result = await fn(args);

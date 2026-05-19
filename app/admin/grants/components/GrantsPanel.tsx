@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { httpsCallable, FunctionsError } from "firebase/functions";
 import { signOut } from "firebase/auth";
-import { auth, functionsUS } from "@/lib/firebase";
+import { auth, functions } from "@/lib/firebase";
 
 type GrantStatus = "idle" | "submitting" | "ok" | "err";
 type RevokeStatus = "idle" | "submitting" | "ok" | "err";
@@ -75,7 +75,7 @@ export function GrantsPanel() {
       const fn = httpsCallable<
         { email: string; planTier: PlanTier; devices: number; note: string },
         { ok: boolean; skipped?: string }
-      >(functionsUS, "grantFreeAccess");
+      >(functions, "grantFreeAccess");
       const result = await fn({
         email,
         planTier: grantPlan,
@@ -125,7 +125,7 @@ export function GrantsPanel() {
       const fn = httpsCallable<
         { email: string; reason: string },
         { ok: boolean }
-      >(functionsUS, "revokeFreeAccess");
+      >(functions, "revokeFreeAccess");
       await fn({ email, reason: revokeReason.trim() });
       setRevokeStatus("ok");
       setRevokeMsg(`✓ Acceso revocado a ${email}.`);
