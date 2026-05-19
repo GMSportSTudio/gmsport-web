@@ -277,10 +277,17 @@ export function DescargaClient() {
       const storedEmail = localStorage.getItem(EMAIL_STORAGE_KEY);
       if (storedEmail) {
         signInWithEmailLink(auth, storedEmail, window.location.href)
-          .then(() => {
+          .then((result) => {
             localStorage.removeItem(EMAIL_STORAGE_KEY);
             // Limpiar el magic-link de la URL.
             window.history.replaceState(null, "", window.location.pathname);
+            // Transición explícita: el listener general de Auth NO se
+            // registra en esta rama (early return abajo), así que sin
+            // estas dos líneas el authStatus se queda eternamente en
+            // "signing_in" y el usuario ve "Completando inicio de sesión…"
+            // para siempre. Bug reproducido 2026-05-19 con cuenta founder.
+            setAuthUser(result.user);
+            setAuthStatus("authenticated");
           })
           .catch((err: unknown) => {
             console.error("signInWithEmailLink", err);
