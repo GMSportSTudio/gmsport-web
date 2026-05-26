@@ -105,6 +105,10 @@
       "db": {
         "title": "Base de Datos Local",
         "description": "Tus informes, sesiones y jugadores guardados offline. Siempre contigo, sin depender de la nube."
+      },
+      "playbook": {
+        "title": "Pizarra y Playbook integrados",
+        "description": "Dibuja jugadas encima del vídeo o sobre la cancha en blanco. Líneas rectas, curvas, flechas de pase, bloqueos y cortes. Guarda cada jugada en tu cuaderno y exporta como imagen para mandar al equipo. Hecho para el coach que prepara la pizarra del vestuario en su portátil."
       }
     },
     "badge": {

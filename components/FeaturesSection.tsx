@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
-import { FolderOpen, CirclePlay, Scissors, Database } from "lucide-react";
+import { FolderOpen, CirclePlay, Scissors, Database, PencilRuler } from "lucide-react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useTranslations } from "next-intl";
 
@@ -85,6 +85,71 @@ function ClipsVisual() {
           }}
         />
       ))}
+    </div>
+  );
+}
+
+function PlaybookVisual() {
+  /* Media cancha de baloncesto estilizada con jugadas dibujadas encima.
+     SVG inline para que escale en cualquier tamaño + tema oscuro de la web. */
+  return (
+    <div className="absolute right-6 bottom-6 opacity-25 pointer-events-none">
+      <svg
+        width="220"
+        height="170"
+        viewBox="0 0 220 170"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Marco media cancha */}
+        <rect x="2" y="2" width="216" height="166" rx="3"
+              stroke="rgba(255,255,255,0.4)" strokeWidth="1.2" fill="none" />
+        {/* Línea de tiros libres + zona */}
+        <rect x="70" y="2" width="80" height="58"
+              stroke="rgba(255,255,255,0.32)" strokeWidth="1" fill="none" />
+        {/* Semicírculo tiros libres */}
+        <path d="M 90 60 A 20 20 0 0 0 130 60"
+              stroke="rgba(255,255,255,0.32)" strokeWidth="1" fill="none" />
+        {/* Línea triple */}
+        <path d="M 30 2 L 30 28 A 80 80 0 0 0 190 28 L 190 2"
+              stroke="rgba(255,255,255,0.32)" strokeWidth="1" fill="none" />
+        {/* Aro */}
+        <circle cx="110" cy="20" r="6"
+                stroke="rgba(255,255,255,0.5)" strokeWidth="1.2" fill="none" />
+
+        {/* Jugadores: 5 puntos del ataque */}
+        <circle cx="50"  cy="120" r="5" fill="#FF5722" />
+        <circle cx="170" cy="120" r="5" fill="#FF5722" />
+        <circle cx="110" cy="100" r="5" fill="#FF7043" />
+        <circle cx="80"  cy="70"  r="5" fill="#FF5722" />
+        <circle cx="140" cy="70"  r="5" fill="#FF5722" />
+
+        {/* Flecha 1 — pase del 5 al 3 */}
+        <path d="M 110 100 Q 95 85 80 70"
+              stroke="#FF7043" strokeWidth="1.6" fill="none"
+              strokeDasharray="3 2"
+              markerEnd="url(#arrow)" />
+        {/* Flecha 2 — corte del 1 al aro */}
+        <path d="M 50 120 Q 80 95 105 30"
+              stroke="rgba(255,255,255,0.55)" strokeWidth="1.6" fill="none"
+              markerEnd="url(#arrow-w)" />
+        {/* Flecha 3 — bloqueo del 4 al 5 */}
+        <path d="M 140 70 L 118 95"
+              stroke="rgba(255,255,255,0.45)" strokeWidth="1.6" fill="none"
+              strokeDasharray="2 2"
+              markerEnd="url(#arrow-w)" />
+
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF7043" />
+          </marker>
+          <marker id="arrow-w" viewBox="0 0 10 10" refX="8" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(255,255,255,0.55)" />
+          </marker>
+        </defs>
+      </svg>
     </div>
   );
 }
@@ -241,6 +306,15 @@ export default function FeaturesSection() {
       grid:        "col-span-2 md:col-span-2",
       variant:     "default",
       visual:      undefined,
+    },
+    {
+      id:          "playbook",
+      icon:        <PencilRuler size={22} strokeWidth={1.8} />,
+      title:       t("features.playbook.title"),
+      description: t("features.playbook.description"),
+      grid:        "col-span-2 md:col-span-4",
+      variant:     "large",
+      visual:      <PlaybookVisual />,
     },
   ];
 

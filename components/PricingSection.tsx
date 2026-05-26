@@ -59,6 +59,26 @@ export default function PricingSection() {
         <p className="max-w-md text-[#cccccc]/45 text-base leading-relaxed">
           {t("subtitle")}
         </p>
+
+        {/* Aviso founders Beta — su 50 % lifetime se canjea por el link
+            personal del email del 25/05/2026 (válido hasta el 30/06/2026),
+            NO desde esta página pública. Si lo perdieron, deben escribir
+            a ceo@gmsportstudio.com para reenvío del enlace JWT. */}
+        <div
+          className="mt-2 max-w-md text-xs text-[#ff7a3d]/80 leading-relaxed border border-[#ff7a3d]/20 rounded-md px-3 py-2 bg-[#ff7a3d]/5"
+          role="note"
+        >
+          <strong className="text-[#ff7a3d]">¿Eres founder de la Beta?</strong>{" "}
+          Tu 50 % lifetime se canjea desde el email personal que te llegó el 25/05.
+          Si no lo encuentras, escríbenos a{" "}
+          <a
+            href="mailto:ceo@gmsportstudio.com?subject=Founder%20lifetime%20-%20reenv%C3%ADo%20enlace"
+            className="underline hover:text-[#ff7a3d]"
+          >
+            ceo@gmsportstudio.com
+          </a>
+          .
+        </div>
       </motion.div>
 
       {/* Grid de planes individuales: 2 cards */}
@@ -104,6 +124,11 @@ export default function PricingSection() {
                   <span className="text-xs text-[#cccccc]/40 leading-tight">{t("monthlyPriceUnit")}</span>
                 </div>
               </div>
+
+              {/* Aviso fiscal — IVA aplicado por el proveedor de pago según país */}
+              <p className="text-[11px] text-[#cccccc]/55 leading-tight -mt-1">
+                + IVA o impuesto equivalente
+              </p>
 
               {/* Separador */}
               <div className="h-px bg-white/6" />
@@ -211,6 +236,10 @@ export default function PricingSection() {
                 <p className="text-[11px] text-[#cccccc]/35 mt-0.5">
                   {t("annualPricePerMonth")}
                 </p>
+                {/* Aviso fiscal — IVA aplicado por el proveedor de pago según país */}
+                <p className="text-[11px] text-[#cccccc]/55 leading-tight">
+                  + IVA o impuesto equivalente
+                </p>
               </div>
 
               {/* Separador */}
@@ -297,12 +326,16 @@ export default function PricingSection() {
             </div>
           </div>
 
-          <div className="flex items-baseline flex-wrap gap-x-2 gap-y-1 mb-4">
+          <div className="flex items-baseline flex-wrap gap-x-2 gap-y-1 mb-1">
             <span className="stat-num text-3xl font-black text-white leading-none">299€</span>
             <span className="text-xs text-[#cccccc]/50">{t("clubPriceYear")}</span>
             <span className="text-xs text-[#cccccc]/25 mx-1">·</span>
             <span className="text-sm text-[#cccccc]/55">{t("clubPriceMonth")}</span>
           </div>
+          {/* Aviso fiscal — IVA aplicado por el proveedor de pago según país */}
+          <p className="text-[11px] text-[#cccccc]/55 leading-tight mb-4">
+            + IVA o impuesto equivalente
+          </p>
 
           <p className="text-xs text-[#cccccc]/45 leading-relaxed mb-5">
             {t("clubBody")}

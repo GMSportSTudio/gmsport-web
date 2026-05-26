@@ -105,6 +105,10 @@
       "db": {
         "title": "Local Database",
         "description": "Your reports, sessions and players stored offline. Always with you — no cloud required."
+      },
+      "playbook": {
+        "title": "Built-in Playbook & Whiteboard",
+        "description": "Draw plays over the live video or on a clean court. Straight lines, curves, pass arrows, screens and cuts. Save every play in your notebook and export as an image to share with the team. Built for the coach who preps the locker-room whiteboard on a laptop."
       }
     },
     "badge": {
