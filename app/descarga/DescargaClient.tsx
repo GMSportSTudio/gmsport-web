@@ -291,7 +291,23 @@ export function DescargaClient() {
           })
           .catch((err: unknown) => {
             console.error("signInWithEmailLink", err);
-            setAuthError("Este enlace no es válido o ha caducado. Solicita uno nuevo.");
+            // Mensaje específico según código Firebase Auth — mucho más
+            // accionable para soporte que el genérico "enlace inválido"
+            // que devolvía antes (reporte 2026-05-27 Mauricio Faraday).
+            const code = (err as { code?: string })?.code || "";
+            let msg = "Este enlace no es válido o ha caducado. Solicita uno nuevo.";
+            if (code === "auth/expired-action-code") {
+              msg = "El enlace ha caducado (más de 1 hora desde que se envió). Solicita uno nuevo.";
+            } else if (code === "auth/invalid-action-code") {
+              msg = "El enlace ya se ha usado o está malformado. Solicita uno nuevo y úsalo solo una vez.";
+            } else if (code === "auth/invalid-email") {
+              msg = "El email guardado no coincide con el del enlace. Introduce el mismo email donde recibiste el correo.";
+              // En este caso conviene limpiar el localStorage corrupto
+              localStorage.removeItem(EMAIL_STORAGE_KEY);
+            } else if (code === "auth/network-request-failed") {
+              msg = "Sin conexión a internet. Comprueba la red y vuelve a intentarlo.";
+            }
+            setAuthError(msg);
             setAuthStatus("no_session");
           });
       } else {
@@ -461,6 +477,61 @@ export function DescargaClient() {
             {token ? "Acceso Beta — Descarga privada" : "Descarga de tu suscripción"}
           </p>
         </div>
+
+        {/* ─────────── Manual de uso (público, sin auth) ─────────── */}
+        {/*
+            Tarea #160 (2026-05-24): el manual PDF es contenido comercial /
+            onboarding sin secrets. Cualquiera (founders, suscriptores,
+            prospects, prensa) puede descargarlo sin login. La URL apunta a
+            manuals/Manual_GMSportStudio_latest.pdf en Storage (regla pública
+            en storage.rules), que cada release sobrescribe con la versión
+            actual. Visible en TODOS los estados (con token, sin token, con
+            auth, sin auth) para que no se esconda bajo el flujo de login.
+        */}
+        <a
+          href="https://firebasestorage.googleapis.com/v0/b/gmsportstudio-53bbf.firebasestorage.app/o/manuals%2FManual_GMSportStudio_latest.pdf?alt=media"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 16,
+            background: "rgba(255, 107, 26, 0.06)",
+            border: "1px solid rgba(255, 107, 26, 0.22)",
+            borderRadius: 16,
+            padding: "18px 24px",
+            marginBottom: 24,
+            textDecoration: "none",
+            transition: "background 0.15s",
+          }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255, 107, 26, 0.1)"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255, 107, 26, 0.06)"; }}
+        >
+          <div>
+            <p style={{ color: "#e8eaf0", fontSize: 15, fontWeight: 700, margin: "0 0 4px" }}>
+              📘 Manual de uso (PDF)
+            </p>
+            <p style={{ color: "#9095a0", fontSize: 12, margin: 0, lineHeight: 1.5 }}>
+              Guía completa para coaches — atajos, mesa de montaje,
+              pizarra, exports. Acceso libre, sin registro.
+            </p>
+          </div>
+          <span
+            style={{
+              background: "#ff6b1a",
+              color: "#fff",
+              borderRadius: 10,
+              padding: "10px 18px",
+              fontWeight: 700,
+              fontSize: 13,
+              whiteSpace: "nowrap",
+              flexShrink: 0,
+            }}
+          >
+            Descargar →
+          </span>
+        </a>
 
         {/* ─────────── RAMA A · Token Beta (legacy) ─────────── */}
         {token && betaLoading && (
