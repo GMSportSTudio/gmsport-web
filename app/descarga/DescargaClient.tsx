@@ -651,8 +651,9 @@ export function DescargaClient() {
         {!token && authStatus === "no_session" && (
           <div style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 16, padding: 32 }}>
             <p style={{ color: "#9095a0", fontSize: 15, lineHeight: 1.7, margin: "0 0 18px" }}>
-              Introduce el email con el que pagaste tu suscripción. Te enviaremos
-              un enlace de acceso único para descargar la app.
+              Introduce tu email para acceder a las descargas. Te enviaremos
+              un enlace de acceso único — válido para suscriptores,
+              testers y founders.
             </p>
             <input
               type="email"
@@ -688,11 +689,14 @@ export function DescargaClient() {
               {magicLinkSending ? "Enviando…" : "Enviarme enlace de acceso"}
             </button>
             <p style={{ color: "#555d6e", fontSize: 12, margin: "16px 0 0", textAlign: "center", lineHeight: 1.6 }}>
-              ¿Aún no tienes suscripción?{" "}
+              ¿Aún no tienes cuenta?{" "}
               <Link href="/#precios" style={{ color: "#ff6b1a" }}>Ver planes</Link>.
               <br />
               ¿Pagaste con otro email?{" "}
               <Link href="/cuenta/reclamar" style={{ color: "#ff6b1a" }}>Reclamar pago</Link>.
+              <br />
+              ¿Eres tester y tienes problemas para entrar?{" "}
+              <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#ff6b1a" }}>ceo@gmsportstudio.com</a>.
             </p>
           </div>
         )}
