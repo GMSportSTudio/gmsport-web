@@ -109,9 +109,9 @@ export default function Footer() {
             {t("contactTitle")}
           </p>
           {[
-            { label: t("contact.supportLabel"), href: "mailto:ceo@gmsportstudio.com",   text: "ceo@gmsportstudio.com"   },
-            { label: t("contact.clubesLabel"),  href: "mailto:clubes@gmsportstudio.com", text: "clubes@gmsportstudio.com" },
-            { label: t("contact.ceoLabel"),     href: "mailto:ceo@gmsportstudio.com",    text: "ceo@gmsportstudio.com"    },
+            { label: t("contact.supportLabel"), href: "mailto:ceo@inboundbasketballstudio.com",   text: "ceo@inboundbasketballstudio.com"   },
+            { label: t("contact.clubesLabel"),  href: "mailto:ceo@inboundbasketballstudio.com", text: "ceo@inboundbasketballstudio.com" },
+            { label: t("contact.ceoLabel"),     href: "mailto:ceo@inboundbasketballstudio.com",    text: "ceo@inboundbasketballstudio.com"    },
           ].map(({ label, href, text }) => (
             <div key={href} className="flex items-baseline gap-2 py-0.5">
               <span className="text-[10px] uppercase tracking-widest text-white/15 w-12 shrink-0">

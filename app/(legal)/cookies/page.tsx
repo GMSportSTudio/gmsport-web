@@ -115,7 +115,7 @@ const sections = [
     title: "7. Contacto",
     content: (
       <p>
-        Si tienes preguntas sobre el uso de cookies o tecnologías similares, puedes contactarnos en <span className="text-white/70">ceo@gmsportstudio.com</span>.
+        Si tienes preguntas sobre el uso de cookies o tecnologías similares, puedes contactarnos en <span className="text-white/70">ceo@inboundbasketballstudio.com</span>.
       </p>
     ),
   },

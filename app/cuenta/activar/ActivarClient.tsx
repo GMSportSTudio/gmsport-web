@@ -183,10 +183,10 @@ export function ActivarClient() {
             <p style={{ color: "#9095a0", fontSize: 13, lineHeight: 1.7, margin: "12px 0" }}>
               Si tienes dudas, escribe a{" "}
               <a
-                href="mailto:ceo@gmsportstudio.com"
+                href="mailto:ceo@inboundbasketballstudio.com"
                 style={{ color: "#22FFE0", textDecoration: "none" }}
               >
-                ceo@gmsportstudio.com
+                ceo@inboundbasketballstudio.com
               </a>
               .
             </p>
@@ -219,10 +219,10 @@ export function ActivarClient() {
             <p style={{ color: "#9095a0", fontSize: 13, lineHeight: 1.7, margin: "12px 0" }}>
               Solicita un nuevo enlace o escribe a{" "}
               <a
-                href="mailto:ceo@gmsportstudio.com"
+                href="mailto:ceo@inboundbasketballstudio.com"
                 style={{ color: "#22FFE0", textDecoration: "none" }}
               >
-                ceo@gmsportstudio.com
+                ceo@inboundbasketballstudio.com
               </a>
               .
             </p>

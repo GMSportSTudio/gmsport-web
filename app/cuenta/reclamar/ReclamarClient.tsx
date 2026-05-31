@@ -23,9 +23,9 @@ const claimErrorMessages: Record<string, string> = {
   "invalid-argument": "Faltan datos. Asegúrate de pegar la licenseKey completa.",
   "not-found":        "No encontramos ningún pago con esa licenseKey. Comprueba el email que recibiste de Gumroad.",
   "permission-denied": "Esa licenseKey no coincide con ningún pago activo. Revisa el código exacto.",
-  "already-exists":   "Este pago ya está vinculado a otra cuenta. Escribe a ceo@gmsportstudio.com.",
+  "already-exists":   "Este pago ya está vinculado a otra cuenta. Escribe a ceo@inboundbasketballstudio.com.",
   "resource-exhausted": "Demasiados intentos. Espera una hora antes de probar de nuevo.",
-  "failed-precondition": "Este pago no está activo (reembolsado o revocado). Contacta con ceo@gmsportstudio.com.",
+  "failed-precondition": "Este pago no está activo (reembolsado o revocado). Contacta con ceo@inboundbasketballstudio.com.",
   internal:           "Error interno. Inténtalo en unos minutos.",
   unknown:            "Error inesperado. Inténtalo de nuevo.",
 };
@@ -195,8 +195,8 @@ export function ReclamarClient() {
             </button>
             <p style={{ color: "#555d6e", fontSize: 12, margin: "16px 0 0", textAlign: "center" }}>
               ¿Tienes dudas? Escribe a{" "}
-              <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#22FFE0", textDecoration: "none" }}>
-                ceo@gmsportstudio.com
+              <a href="mailto:ceo@inboundbasketballstudio.com" style={{ color: "#22FFE0", textDecoration: "none" }}>
+                ceo@inboundbasketballstudio.com
               </a>
             </p>
           </>
@@ -287,8 +287,8 @@ export function ReclamarClient() {
               Rate limit: 5 intentos por hora.
               <br />
               ¿No encuentras tu licenseKey? Busca el email de Gumroad o escribe a{" "}
-              <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#22FFE0", textDecoration: "none" }}>
-                ceo@gmsportstudio.com
+              <a href="mailto:ceo@inboundbasketballstudio.com" style={{ color: "#22FFE0", textDecoration: "none" }}>
+                ceo@inboundbasketballstudio.com
               </a>
               .
             </p>

@@ -124,7 +124,7 @@ export function AdminGate({ children }: Props) {
           <h1 style={{ color: "#e8eaf0", fontSize: 20, fontWeight: 700, margin: 0 }}>Admin — <span style={{ color: "#22FFE0" }}>Inbound Studio</span></h1>
           <input
             type="email" value={email} onChange={e => setEmail(e.target.value)}
-            placeholder="ceo@gmsportstudio.com" required
+            placeholder="ceo@inboundbasketballstudio.com" required
             autoComplete="username"
             aria-label="Email"
             style={{ background: "#1e2128", border: "1px solid #2a2f3a", borderRadius: 8, padding: "10px 14px", color: "#e8eaf0", fontSize: 14, outline: "none" }}

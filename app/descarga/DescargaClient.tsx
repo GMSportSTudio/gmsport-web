@@ -190,7 +190,7 @@ function MacFirstOpenGuide() {
 
           <p style={{ margin: "16px 0 0", fontSize: 13, color: "#555d6e", lineHeight: 1.6 }}>
             ¿Sigue sin funcionar? Escríbenos a{" "}
-            <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#22FFE0" }}>ceo@gmsportstudio.com</a>
+            <a href="mailto:ceo@inboundbasketballstudio.com" style={{ color: "#22FFE0" }}>ceo@inboundbasketballstudio.com</a>
             {" "}indicando tu versión exacta de macOS
             (menú Apple → Acerca de este Mac → te aparece, p.ej. &ldquo;15.3.1&rdquo;).
           </p>
@@ -207,9 +207,9 @@ function formatBytes(b: number) {
 const errorMessages: Record<string, string> = {
   // ── Errores rama Beta (token-based, POST a getDownloadUrl) ────────────────
   invalid_token:        "Este enlace no es válido.",
-  expired:              "Este enlace ha expirado. Solicita uno nuevo a ceo@gmsportstudio.com",
-  revoked:              "Este enlace ha sido revocado. Contacta con ceo@gmsportstudio.com",
-  limit_reached:        "Límite de descargas alcanzado. Contacta con ceo@gmsportstudio.com",
+  expired:              "Este enlace ha expirado. Solicita uno nuevo a ceo@inboundbasketballstudio.com",
+  revoked:              "Este enlace ha sido revocado. Contacta con ceo@inboundbasketballstudio.com",
+  limit_reached:        "Límite de descargas alcanzado. Contacta con ceo@inboundbasketballstudio.com",
   platform_not_allowed: "Esta plataforma no está permitida para tu invitación.",
   missing_token:        "Falta el token de descarga.",
   missing_params:       "Faltan parámetros en la petición.",
@@ -218,10 +218,10 @@ const errorMessages: Record<string, string> = {
   network_error:        "Error de red. Comprueba tu conexión e inténtalo de nuevo.",
   // ── Errores rama paid (callable getSignedDownloadUrl) ─────────────────────
   no_active_license:    "No tienes una licencia activa. Si has pagado en Gumroad con otro email, reclama tu pago en /cuenta/reclamar para vincularlo a tu cuenta.",
-  email_not_verified:   "Tu email no está verificado todavía. Revisa tu bandeja de entrada para el enlace de verificación. Si no lo encuentras, escríbenos a ceo@gmsportstudio.com.",
+  email_not_verified:   "Tu email no está verificado todavía. Revisa tu bandeja de entrada para el enlace de verificación. Si no lo encuentras, escríbenos a ceo@inboundbasketballstudio.com.",
   no_session_expired:   "Tu sesión ha expirado. Vuelve a iniciar sesión con el enlace mágico.",
   invalid_platform:     "Plataforma no soportada en este momento.",
-  no_release:           "Aún no hay build disponible para esta plataforma. Si crees que es un error, contacta con ceo@gmsportstudio.com.",
+  no_release:           "Aún no hay build disponible para esta plataforma. Si crees que es un error, contacta con ceo@inboundbasketballstudio.com.",
 };
 
 type AuthStatus = "loading_auth" | "no_session" | "link_sent" | "signing_in" | "authenticated";
@@ -543,8 +543,8 @@ export function DescargaClient() {
             <p style={{ color: "#f87171", fontSize: 16, fontWeight: 600, margin: "0 0 12px" }}>
               {errorMessages[meta.error] ?? "Error desconocido."}
             </p>
-            <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#22FFE0", fontSize: 14 }}>
-              ceo@gmsportstudio.com
+            <a href="mailto:ceo@inboundbasketballstudio.com" style={{ color: "#22FFE0", fontSize: 14 }}>
+              ceo@inboundbasketballstudio.com
             </a>
           </div>
         )}
@@ -696,7 +696,7 @@ export function DescargaClient() {
               <Link href="/cuenta/reclamar" style={{ color: "#22FFE0" }}>Reclamar pago</Link>.
               <br />
               ¿Eres tester y tienes problemas para entrar?{" "}
-              <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#22FFE0" }}>ceo@gmsportstudio.com</a>.
+              <a href="mailto:ceo@inboundbasketballstudio.com" style={{ color: "#22FFE0" }}>ceo@inboundbasketballstudio.com</a>.
             </p>
           </div>
         )}
@@ -801,7 +801,7 @@ export function DescargaClient() {
 
               <div style={{ textAlign: "center", marginTop: 24 }}>
                 <p style={{ color: "#3a3f50", fontSize: 12 }}>
-                  Soporte: <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#555d6e" }}>ceo@gmsportstudio.com</a>
+                  Soporte: <a href="mailto:ceo@inboundbasketballstudio.com" style={{ color: "#555d6e" }}>ceo@inboundbasketballstudio.com</a>
                 </p>
               </div>
             </>

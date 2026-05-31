@@ -15,7 +15,7 @@ const sections = [
         <p><span className="text-white/70">Responsable:</span> José Carlos Galán Moscoso</p>
         <p><span className="text-white/70">NIF:</span> 44965596K</p>
         <p><span className="text-white/70">Domicilio:</span> Calle Playa de Bolonia 31, 11406 Jerez de la Frontera, Cádiz, España</p>
-        <p><span className="text-white/70">Contacto:</span> ceo@gmsportstudio.com</p>
+        <p><span className="text-white/70">Contacto:</span> ceo@inboundbasketballstudio.com</p>
       </div>
     ),
   },
@@ -69,7 +69,7 @@ const sections = [
           <li><span className="text-white/70">Sentry</span> (Functional Software Inc.) — monitorización de errores en la Aplicación. Los eventos enviados se anonimizan (hash del UID con sal, eliminación de paths con nombre de usuario, sin tarjetas ni emails en logs).</li>
         </ul>
         <p className="mt-3 text-white/40 text-xs">
-          Los enlaces a las políticas de privacidad de cada encargado están disponibles previa solicitud por correo electrónico a <span className="text-white/60">ceo@gmsportstudio.com</span>.
+          Los enlaces a las políticas de privacidad de cada encargado están disponibles previa solicitud por correo electrónico a <span className="text-white/60">ceo@inboundbasketballstudio.com</span>.
         </p>
       </>
     ),
@@ -86,7 +86,7 @@ const sections = [
     title: "6. Derechos del interesado",
     content: (
       <>
-        <p>En virtud del RGPD y la LOPDGDD, puedes ejercitar en cualquier momento los siguientes derechos escribiendo a <span className="text-white/70">ceo@gmsportstudio.com</span>:</p>
+        <p>En virtud del RGPD y la LOPDGDD, puedes ejercitar en cualquier momento los siguientes derechos escribiendo a <span className="text-white/70">ceo@inboundbasketballstudio.com</span>:</p>
         <ul className="list-disc list-inside space-y-1 mt-2">
           <li><span className="text-white/70">Acceso</span> — conocer qué datos tratamos sobre ti.</li>
           <li><span className="text-white/70">Rectificación</span> — corregir datos inexactos.</li>

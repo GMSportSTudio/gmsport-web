@@ -63,7 +63,7 @@ export default function PricingSection() {
         {/* Aviso founders Beta — su 50 % lifetime se canjea por el link
             personal del email del 25/05/2026 (válido hasta el 30/06/2026),
             NO desde esta página pública. Si lo perdieron, deben escribir
-            a ceo@gmsportstudio.com para reenvío del enlace JWT. */}
+            a ceo@inboundbasketballstudio.com para reenvío del enlace JWT. */}
         <div
           className="mt-2 max-w-md text-xs text-[#22FFE0]/80 leading-relaxed border border-[#22FFE0]/20 rounded-md px-3 py-2 bg-[#22FFE0]/5"
           role="note"
@@ -72,10 +72,10 @@ export default function PricingSection() {
           Tu 50 % lifetime se canjea desde el email personal que te llegó el 25/05.
           Si no lo encuentras, escríbenos a{" "}
           <a
-            href="mailto:ceo@gmsportstudio.com?subject=Founder%20lifetime%20-%20reenv%C3%ADo%20enlace"
+            href="mailto:ceo@inboundbasketballstudio.com?subject=Founder%20lifetime%20-%20reenv%C3%ADo%20enlace"
             className="underline hover:text-[#22FFE0]"
           >
-            ceo@gmsportstudio.com
+            ceo@inboundbasketballstudio.com
           </a>
           .
         </div>
@@ -342,7 +342,7 @@ export default function PricingSection() {
           </p>
 
           <a
-            href="mailto:clubes@gmsportstudio.com?subject=Inter%C3%A9s%20en%20plan%20Club%20GMSportStudio"
+            href="mailto:ceo@inboundbasketballstudio.com?subject=Inter%C3%A9s%20en%20plan%20Club%20GMSportStudio"
             className="inline-flex items-center gap-1.5 text-xs font-semibold
                        text-[#22FFE0] hover:text-[#5FFFE8] transition-colors duration-150"
           >
@@ -368,7 +368,7 @@ export default function PricingSection() {
         <p className="text-xs text-[#cccccc]/40 leading-relaxed">
           {t("b2bText")}{" "}
           <a
-            href="mailto:clubes@gmsportstudio.com?subject=Oferta%20personalizada%20%2B5%20cuentas"
+            href="mailto:ceo@inboundbasketballstudio.com?subject=Oferta%20personalizada%20%2B5%20cuentas"
             className="text-[#22FFE0]/80 hover:text-[#22FFE0] underline underline-offset-2 transition-colors duration-150"
           >
             {t("b2bCta")}

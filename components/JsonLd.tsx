@@ -70,7 +70,7 @@ export default async function JsonLd({ locale }: { locale: string }) {
         price: "299",
         priceCurrency: "EUR",
         availability: "https://schema.org/InStock",
-        url: "mailto:clubes@gmsportstudio.com",
+        url: "mailto:ceo@inboundbasketballstudio.com",
         priceSpecification: {
           "@type": "UnitPriceSpecification",
           price: "299",

@@ -28,7 +28,7 @@ export const PRO_CLUB = {
   id: "pro_club",
   priceEur: 299,
   devices: 5,
-  contactEmail: "clubes@gmsportstudio.com",
+  contactEmail: "ceo@inboundbasketballstudio.com",
 } as const;
 
 /** Formato precio en es-ES (coma decimal). Sin decimales si es entero. */
