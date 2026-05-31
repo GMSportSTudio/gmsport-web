@@ -178,7 +178,7 @@ export function InviteTesterForm({ onInvited }: Props) {
           type="checkbox"
           checked={sendEmail}
           onChange={e => setSendEmail(e.target.checked)}
-          style={{ accentColor: "#ff6b1a", width: 16, height: 16 }}
+          style={{ accentColor: "#22FFE0", width: 16, height: 16 }}
         />
         <span>Enviar email automáticamente</span>
         <span style={{ color: "#555d6e", fontSize: 11 }}>
@@ -203,8 +203,7 @@ export function InviteTesterForm({ onInvited }: Props) {
         type="submit"
         disabled={loading}
         style={{
-          background: "#ff6b1a",
-          color: "#fff",
+          background: "#22FFE0", color: "#06231F",
           border: "none",
           borderRadius: 8,
           padding: "11px 0",

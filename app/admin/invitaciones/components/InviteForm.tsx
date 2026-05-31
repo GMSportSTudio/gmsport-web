@@ -55,7 +55,7 @@ export function InviteForm({ onInvited }: Props) {
         {(["mac", "windows"] as const).map(p => (
           <label key={p} style={{ display: "flex", alignItems: "center", gap: 8, color: "#9095a0", fontSize: 14, cursor: "pointer" }}>
             <input type="checkbox" checked={platforms.includes(p)} onChange={() => toggle(p)}
-              style={{ accentColor: "#ff6b1a", width: 16, height: 16 }} />
+              style={{ accentColor: "#22FFE0", width: 16, height: 16 }} />
             {p === "mac" ? "🍎 Mac" : "🪟 Windows"}
           </label>
         ))}
@@ -64,7 +64,7 @@ export function InviteForm({ onInvited }: Props) {
         <p style={{ fontSize: 13, margin: 0, color: message.type === "ok" ? "#4ade80" : "#f87171" }}>{message.text}</p>
       )}
       <button type="submit" disabled={loading || platforms.length === 0}
-        style={{ background: "#ff6b1a", color: "#fff", border: "none", borderRadius: 8, padding: "11px 0", fontWeight: 700, fontSize: 14, cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1 }}>
+        style={{ background: "#22FFE0", color: "#06231F", border: "none", borderRadius: 8, padding: "11px 0", fontWeight: 700, fontSize: 14, cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1 }}>
         {loading ? "Enviando…" : "Invitar →"}
       </button>
     </form>

@@ -154,9 +154,9 @@ export function GrantsPanel() {
             <p style={{ color: "#555d6e", fontSize: 13, margin: "6px 0 0" }}>
               Acceso gratuito indefinido para prensa, partners y coaches influyentes.
               {" "}
-              <Link href="/admin/testers" style={{ color: "#ff6b1a" }}>→ Beta testers</Link>
+              <Link href="/admin/testers" style={{ color: "#22FFE0" }}>→ Beta testers</Link>
               {" · "}
-              <Link href="/admin/invitaciones" style={{ color: "#ff6b1a" }}>→ Invitaciones</Link>
+              <Link href="/admin/invitaciones" style={{ color: "#22FFE0" }}>→ Invitaciones</Link>
             </p>
           </div>
           <button
@@ -243,7 +243,7 @@ export function GrantsPanel() {
               disabled={grantStatus === "submitting" || !grantEmail.trim()}
               style={{
                 marginTop: 4, padding: "12px 0",
-                background: (grantStatus === "submitting" || !grantEmail.trim()) ? "#3a3f50" : "#ff6b1a",
+                background: (grantStatus === "submitting" || !grantEmail.trim()) ? "#3a3f50" : "#22FFE0",
                 color: "#fff", fontSize: 14, fontWeight: 700,
                 border: "none", borderRadius: 8,
                 cursor: (grantStatus === "submitting" || !grantEmail.trim()) ? "default" : "pointer",

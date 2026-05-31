@@ -149,7 +149,7 @@ function TestersTable() {
             </h1>
             <p style={{ color: "#555d6e", fontSize: 13, margin: "6px 0 0" }}>
               {testers.length} total · <strong style={{ color: "#4ade80" }}>{active.length} registrados</strong>
-              {" · "}<strong style={{ color: "#ff6b1a" }}>{pending.length} sin registrar</strong>
+              {" · "}<strong style={{ color: "#22FFE0" }}>{pending.length} sin registrar</strong>
               {expired.length > 0 ? ` · ${expired.length} caducados/revocados` : ""}
               {lastSync && (
                 <span style={{ color: "#3a3f50", marginLeft: 12, fontSize: 11 }}>

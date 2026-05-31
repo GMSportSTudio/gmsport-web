@@ -37,7 +37,7 @@ function _statusLabel(status: string | undefined): { label: string; color: strin
     case "active":
       return { label: "✓ Activo",    color: "#4ade80" };
     case "pending_registration":
-      return { label: "⏳ Sin registrar", color: "#ff6b1a" };
+      return { label: "⏳ Sin registrar", color: "#22FFE0" };
     case "expired":
       return { label: "✗ Caducado",  color: "#f87171" };
     case "paused":
@@ -152,11 +152,11 @@ export function TesterRow({ tester, onChanged }: Props) {
               onClick={onSaveEdit}
               disabled={busy}
               style={{
-                background: "#ff6b1a",
+                background: "#22FFE0",
                 border: "none",
                 borderRadius: 6,
                 padding: "5px 10px",
-                color: "#fff",
+                color: "#06231F",
                 fontSize: 12,
                 fontWeight: 600,
                 cursor: busy ? "wait" : "pointer",

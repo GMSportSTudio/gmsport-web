@@ -101,7 +101,7 @@ export function InvitationRow({ inv, onChanged }: Props) {
         <td style={{ padding: "12px 16px" }}>
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
             <button onClick={handleResend} disabled={!!loading}
-              style={{ background: "rgba(255,107,26,0.15)", color: "#ff6b1a", border: "1px solid rgba(255,107,26,0.3)", borderRadius: 6, padding: "4px 10px", fontSize: 12, cursor: loading ? "wait" : "pointer", opacity: loading ? 0.6 : 1 }}>
+              style={{ background: "rgba(255,107,26,0.15)", color: "#22FFE0", border: "1px solid rgba(255,107,26,0.3)", borderRadius: 6, padding: "4px 10px", fontSize: 12, cursor: loading ? "wait" : "pointer", opacity: loading ? 0.6 : 1 }}>
               {loading === "resend" ? "…" : "Reenviar"}
             </button>
             {!inv.revoked && (
