@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
   title: "Aviso Legal",
-  description: "Información legal sobre el titular y condiciones de uso de GmSportStudio.",
+  description: "Información legal sobre el titular y condiciones de uso de Inbound Studio.",
   robots: { index: false, follow: false },
 };
 
@@ -16,7 +16,7 @@ const sections = [
         <p><span className="text-white/70">NIF:</span> 44965596K</p>
         <p><span className="text-white/70">Domicilio:</span> Calle Playa de Bolonia 31, 11406 Jerez de la Frontera, Cádiz, España</p>
         <p><span className="text-white/70">Correo electrónico:</span> ceo@gmsportstudio.com</p>
-        <p><span className="text-white/70">Sitio web:</span> https://www.gmsportstudio.com</p>
+        <p><span className="text-white/70">Sitio web:</span> https://www.inboundbasketballstudio.com</p>
       </div>
     ),
   },
@@ -25,7 +25,7 @@ const sections = [
     content: (
       <>
         <p>
-          El presente Aviso Legal regula el acceso y uso del sitio web <strong className="text-white/70">www.gmsportstudio.com</strong> (en adelante, «el Sitio»), así como del software de escritorio GmSportStudio (en adelante, «la Aplicación»), titularidad de José Carlos Galán Moscoso.
+          El presente Aviso Legal regula el acceso y uso del sitio web <strong className="text-white/70">www.inboundbasketballstudio.com</strong> (en adelante, «el Sitio»), así como del software de escritorio Inbound Studio (en adelante, «la Aplicación»), titularidad de José Carlos Galán Moscoso.
         </p>
         <p>
           El acceso al Sitio atribuye la condición de usuario e implica la aceptación plena y sin reservas de todas las disposiciones incluidas en este Aviso Legal, en la Política de Privacidad y en los Términos de la Beta vigentes en el momento del acceso.
@@ -51,7 +51,7 @@ const sections = [
           <li>Descompilar, desensamblar o realizar ingeniería inversa (<em>reverse engineering</em>) sobre cualquier componente de la Aplicación.</li>
           <li>Desofuscar, depurar o instrumentar la Aplicación para reconstruir su lógica interna o código fuente.</li>
           <li>Eludir, eliminar o alterar cualquier medida tecnológica de protección implementada, en vulneración del Art. 160 LPI y el Art. 6 de la Directiva 2001/29/CE.</li>
-          <li>Crear obras derivadas basadas en el código, diseño o lógica de GmSportStudio.</li>
+          <li>Crear obras derivadas basadas en el código, diseño o lógica de Inbound Studio.</li>
         </ul>
         <p className="mt-2">
           El incumplimiento podrá dar lugar a acciones civiles por daños y perjuicios (Arts. 138–140 LPI) y, en su caso, a acciones penales conforme al Art. 270 del Código Penal español.

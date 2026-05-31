@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const BASE_URL = "https://www.gmsportstudio.com";
+const BASE_URL = "https://www.inboundbasketballstudio.com";
 
 export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -56,12 +56,12 @@ export async function generateMetadata({
       "edición video deportivo",
       "dashboard análisis deportivo",
       "scouting fútbol bajo coste",
-      "GmSportStudio",
+      "Inbound Studio",
     ],
 
-    authors: [{ name: "GmSportStudio", url: BASE_URL }],
-    creator: "GmSportStudio",
-    publisher: "GmSportStudio",
+    authors: [{ name: "Inbound Studio", url: BASE_URL }],
+    creator: "Inbound Studio",
+    publisher: "Inbound Studio",
 
     robots: {
       index: true,
@@ -84,7 +84,7 @@ export async function generateMetadata({
       type: "website",
       locale: locale === "en" ? "en_US" : "es_ES",
       url: locale === "es" ? BASE_URL : `${BASE_URL}/${locale}`,
-      siteName: "GmSportStudio",
+      siteName: "Inbound Studio",
       title: t("ogTitle"),
       description: t("ogDescription"),
       images: [

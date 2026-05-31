@@ -78,7 +78,7 @@ export function CancelarClient() {
       >
         <p
           style={{
-            color: "#ff6b1a",
+            color: "#22FFE0",
             fontSize: 11,
             fontWeight: 700,
             letterSpacing: 2,
@@ -96,7 +96,7 @@ export function CancelarClient() {
             letterSpacing: "-0.5px",
           }}
         >
-          GMSport<span style={{ color: "#ff6b1a" }}>Studio</span>
+          Inbound <span style={{ color: "#22FFE0" }}>Studio</span>
         </h1>
 
         {!done ? (
@@ -104,7 +104,7 @@ export function CancelarClient() {
             <p style={{ color: "#9095a0", fontSize: 15, lineHeight: 1.7, margin: "16px 0 24px" }}>
               Vamos a procesar la cancelación de tu suscripción. La cancelación se registra al
               recibir tu solicitud y recibirás un email de confirmación. Mantienes el acceso{" "}
-              <strong style={{ color: "#ff6b1a" }}>hasta el final del periodo facturado actual</strong>{" "}
+              <strong style={{ color: "#22FFE0" }}>hasta el final del periodo facturado actual</strong>{" "}
               y a partir de ahí no se realizarán más cargos.
             </p>
 
@@ -188,10 +188,10 @@ export function CancelarClient() {
                 checked={acepta}
                 onChange={(e) => setAcepta(e.target.checked)}
                 disabled={submitting}
-                style={{ marginTop: 3, accentColor: "#ff6b1a" }}
+                style={{ marginTop: 3, accentColor: "#22FFE0" }}
               />
               <span>
-                Confirmo que quiero cancelar mi suscripción a GMSportStudio y entiendo que
+                Confirmo que quiero cancelar mi suscripción a Inbound Studio y entiendo que
                 perderé el acceso al finalizar el periodo de facturación actual.
               </span>
             </label>
@@ -218,7 +218,7 @@ export function CancelarClient() {
               style={{
                 width: "100%",
                 padding: "14px 20px",
-                background: submitting || !validEmail || !acepta ? "#3a3f50" : "#ff6b1a",
+                background: submitting || !validEmail || !acepta ? "#3a3f50" : "#22FFE0",
                 color: "#fff",
                 fontSize: 15,
                 fontWeight: 700,
@@ -243,7 +243,7 @@ export function CancelarClient() {
               ¿Tienes dudas? Escribe a{" "}
               <a
                 href="mailto:ceo@gmsportstudio.com"
-                style={{ color: "#ff6b1a", textDecoration: "none" }}
+                style={{ color: "#22FFE0", textDecoration: "none" }}
               >
                 ceo@gmsportstudio.com
               </a>
@@ -271,7 +271,7 @@ export function CancelarClient() {
               Si necesitas revertir la cancelación o tienes preguntas, escribe a{" "}
               <a
                 href="mailto:ceo@gmsportstudio.com"
-                style={{ color: "#ff6b1a", textDecoration: "none" }}
+                style={{ color: "#22FFE0", textDecoration: "none" }}
               >
                 ceo@gmsportstudio.com
               </a>

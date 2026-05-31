@@ -1,5 +1,5 @@
 /**
- * Versión "plana" del logo GmSportStudio para usarse en contextos donde
+ * Versión "plana" del logo Inbound Studio para usarse en contextos donde
  * Satori (ImageResponse de Next.js) renderiza el SVG: favicons, apple-icon,
  * opengraph-image.
  *
@@ -27,14 +27,14 @@ export function getLogoSvgString(size: number): string {
   const strokePlay = Math.max(1.2, size * 0.018);
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-  <circle cx="${cx}" cy="${cy}" r="${size / 2}" fill="#080C10"/>
-  <ellipse cx="${cx - r * 0.25}" cy="${cy}" rx="${r * 0.8}" ry="${r * 0.7}" fill="#FF6B1A" opacity="0.12"/>
-  <ellipse cx="${cx + r * 0.25}" cy="${cy}" rx="${r * 0.8}" ry="${r * 0.7}" fill="#1A8FFF" opacity="0.12"/>
-  <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#FF6B1A" stroke-width="${strokeOuter}"/>
-  <line x1="${lineX1}" y1="${cy}" x2="${lineX2}" y2="${cy}" stroke="#FF6B1A" stroke-width="${strokeCenter}"/>
-  <path d="M${semiL} ${cy - semiOff} A${semiOff} ${semiOff} 0 0 0 ${semiL} ${cy + semiOff}" fill="none" stroke="#1A8FFF" stroke-width="${strokeSemi}"/>
-  <path d="M${semiR} ${cy - semiOff} A${semiOff} ${semiOff} 0 0 1 ${semiR} ${cy + semiOff}" fill="none" stroke="#FF6B1A" stroke-width="${strokeSemi}"/>
-  <circle cx="${cx}" cy="${cy}" r="${Math.max(1.5, size * 0.04)}" fill="#1A8FFF"/>
+  <circle cx="${cx}" cy="${cy}" r="${size / 2}" fill="#0A0E16"/>
+  <ellipse cx="${cx - r * 0.25}" cy="${cy}" rx="${r * 0.8}" ry="${r * 0.7}" fill="#C77DFF" opacity="0.12"/>
+  <ellipse cx="${cx + r * 0.25}" cy="${cy}" rx="${r * 0.8}" ry="${r * 0.7}" fill="#22FFE0" opacity="0.12"/>
+  <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#C77DFF" stroke-width="${strokeOuter}"/>
+  <line x1="${lineX1}" y1="${cy}" x2="${lineX2}" y2="${cy}" stroke="#C77DFF" stroke-width="${strokeCenter}"/>
+  <path d="M${semiL} ${cy - semiOff} A${semiOff} ${semiOff} 0 0 0 ${semiL} ${cy + semiOff}" fill="none" stroke="#22FFE0" stroke-width="${strokeSemi}"/>
+  <path d="M${semiR} ${cy - semiOff} A${semiOff} ${semiOff} 0 0 1 ${semiR} ${cy + semiOff}" fill="none" stroke="#C77DFF" stroke-width="${strokeSemi}"/>
+  <circle cx="${cx}" cy="${cy}" r="${Math.max(1.5, size * 0.04)}" fill="#22FFE0"/>
   <polygon points="${playL},${cy - playV} ${playR},${cy} ${playL},${cy + playV}" fill="none" stroke="#FFFFFF" stroke-width="${strokePlay}" stroke-linejoin="round"/>
 </svg>`;
 }

@@ -104,7 +104,7 @@ export function ActivarClient() {
       >
         <p
           style={{
-            color: "#ff6b1a",
+            color: "#22FFE0",
             fontSize: 11,
             fontWeight: 700,
             letterSpacing: 2,
@@ -122,7 +122,7 @@ export function ActivarClient() {
             letterSpacing: "-0.5px",
           }}
         >
-          GMSport<span style={{ color: "#ff6b1a" }}>Studio</span>
+          Inbound <span style={{ color: "#22FFE0" }}>Studio</span>
         </h1>
 
         {status === "loading" && (
@@ -138,7 +138,7 @@ export function ActivarClient() {
               <strong style={{ color: "#e8eaf0" }}>
                 {PLAN_LABEL[data.plan ?? ""] || data.plan}
               </strong>{" "}
-              con tu <strong style={{ color: "#ff6b1a" }}>{data.discount_pct}% Founder</strong>.
+              con tu <strong style={{ color: "#22FFE0" }}>{data.discount_pct}% Founder</strong>.
             </p>
             <div
               style={{
@@ -154,7 +154,7 @@ export function ActivarClient() {
               Si el navegador no redirige automáticamente,{" "}
               <a
                 href={data.gumroad_url ?? "#"}
-                style={{ color: "#ff6b1a", textDecoration: "underline" }}
+                style={{ color: "#22FFE0", textDecoration: "underline" }}
               >
                 pulsa aquí
               </a>
@@ -184,7 +184,7 @@ export function ActivarClient() {
               Si tienes dudas, escribe a{" "}
               <a
                 href="mailto:ceo@gmsportstudio.com"
-                style={{ color: "#ff6b1a", textDecoration: "none" }}
+                style={{ color: "#22FFE0", textDecoration: "none" }}
               >
                 ceo@gmsportstudio.com
               </a>
@@ -220,7 +220,7 @@ export function ActivarClient() {
               Solicita un nuevo enlace o escribe a{" "}
               <a
                 href="mailto:ceo@gmsportstudio.com"
-                style={{ color: "#ff6b1a", textDecoration: "none" }}
+                style={{ color: "#22FFE0", textDecoration: "none" }}
               >
                 ceo@gmsportstudio.com
               </a>

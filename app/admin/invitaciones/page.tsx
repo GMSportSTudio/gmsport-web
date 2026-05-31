@@ -48,7 +48,7 @@ function InvitacionesTable() {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 32 }}>
           <div>
             <h1 style={{ color: "#e8eaf0", fontSize: 24, fontWeight: 800, margin: 0 }}>
-              GMSport<span style={{ color: "#ff6b1a" }}>Studio</span>
+              Inbound <span style={{ color: "#22FFE0" }}>Studio</span>
               <span style={{ color: "#555d6e", fontSize: 16, fontWeight: 400, marginLeft: 12 }}>/ Admin / Invitaciones</span>
             </h1>
             <p style={{ color: "#555d6e", fontSize: 13, margin: "6px 0 0" }}>

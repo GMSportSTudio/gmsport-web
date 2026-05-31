@@ -1,12 +1,12 @@
 {
   "Metadata": {
-    "title": "GmSportStudio | Video Analysis Software for Basketball",
-    "titleTemplate": "%s · GmSportStudio",
+    "title": "Inbound Studio | Video Analysis Software for Basketball",
+    "titleTemplate": "%s · Inbound Studio",
     "description": "Break down basketball games with an unlimited custom button board, multiple games per project and lightning-fast clip cutting. Local offline database. Monthly plans, yearly plans and club licenses. Elite-level technology at a price that fits your program.",
-    "ogTitle": "GmSportStudio | Sports Video Analysis for Coaches",
+    "ogTitle": "Inbound Studio | Sports Video Analysis for Coaches",
     "ogDescription": "Unlimited button board, multiple games per project and clips in seconds. Pro-grade analysis built for coaches — at a price that actually works.",
-    "ogImageAlt": "GmSportStudio — Sports video analysis software for basketball and soccer",
-    "twitterTitle": "GmSportStudio | Sports Video Analysis",
+    "ogImageAlt": "Inbound Studio — Sports video analysis software for basketball and soccer",
+    "twitterTitle": "Inbound Studio | Sports Video Analysis",
     "twitterDescription": "Unlimited button board, multi-game projects and clip cutting. Pro-grade tools for coaches — at a price that actually works."
   },
   "Navbar": {
@@ -14,7 +14,7 @@
     "pricing": "Pricing",
     "faq": "FAQ",
     "ctaBeta": "View plans",
-    "logoLabel": "GmSportStudio — home",
+    "logoLabel": "Inbound Studio — home",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
@@ -22,14 +22,14 @@
     "badge": "● Live · Professional software",
     "titleLine1": "Elite scouting",
     "titleLine2": "is no longer a privilege.",
-    "subtitle": "GmSportStudio puts pro-grade analysis on your laptop. Unlimited button board, multiple games per project and clip cutting in seconds — at a price any coach can afford.",
+    "subtitle": "Inbound Studio puts pro-grade analysis on your laptop. Unlimited button board, multiple games per project and clip cutting in seconds — at a price any coach can afford.",
     "cta": "View plans",
     "socialProofPrice": "From €14.99/mo",
     "socialProofLaunch": "Now available",
     "socialProofPlatform": "Mac & Windows"
   },
   "CountdownHero": {
-    "ariaLabel": "GMSportStudio is live. Subscribe from €14.99/month.",
+    "ariaLabel": "Inbound Studio is live. Subscribe from €14.99/month.",
     "labelLaunched": "Live",
     "labelAvailable": "For professional coaches",
     "labelSamePrice": "From €14.99/month",
@@ -39,8 +39,8 @@
     "labelSec": "Sec"
   },
   "WhySection": {
-    "sectionLabel": "Why choose GmSportStudio",
-    "eyebrow": "Why GmSportStudio",
+    "sectionLabel": "Why choose Inbound Studio",
+    "eyebrow": "Why Inbound Studio",
     "title1": "Elite-level tools",
     "title2": "within everyone's reach",
     "subtitle": "The same level of analysis professional teams use, with plans designed for individual coaches and clubs at every level.",
@@ -67,7 +67,7 @@
       "price": {
         "tag": "Affordable pricing",
         "title": "Elite tech for modest clubs",
-        "body": "Pro-grade analysis software has historically been out of reach for most clubs. GmSportStudio breaks that barrier with monthly plans, yearly plans and team license packs — without cutting a single feature.",
+        "body": "Pro-grade analysis software has historically been out of reach for most clubs. Inbound Studio breaks that barrier with monthly plans, yearly plans and team license packs — without cutting a single feature.",
         "bullet0": "Monthly and yearly plans",
         "bullet1": "Licenses for clubs and academies",
         "bullet2": "No hidden fees"
@@ -124,7 +124,7 @@
   "PricingSection": {
     "eyebrow": "Choose your plan",
     "title1": "Subscribe to",
-    "title2": "GMSportStudio",
+    "title2": "Inbound Studio",
     "subtitle": "Professional basketball analysis. Cancel anytime.",
     "monthlyEyebrow": "Monthly Plan",
     "monthlyTitle": "Pay month to month",
@@ -182,7 +182,7 @@
       "ceoLabel": "CEO"
     },
     "betaAccess": "View plans →",
-    "copyright": "© {year} GmSportStudio. All rights reserved.",
+    "copyright": "© {year} Inbound Studio. All rights reserved.",
     "systemStatus": "System Status:",
     "systemStatusOk": "All systems operational"
   },
@@ -213,8 +213,8 @@
       "platforms": "Runs on macOS and Windows"
     },
     "video": {
-      "name": "GmSportStudio — Tactical analysis demo",
-      "description": "Walkthrough of the video analysis workflow in GmSportStudio: unlimited tagging board, multi-game projects and clip cutting."
+      "name": "Inbound Studio — Tactical analysis demo",
+      "description": "Walkthrough of the video analysis workflow in Inbound Studio: unlimited tagging board, multi-game projects and clip cutting."
     }
   }
 }

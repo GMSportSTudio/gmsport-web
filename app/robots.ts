@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/_next/", "/api/"],
       },
     ],
-    sitemap: "https://www.gmsportstudio.com/sitemap.xml",
-    host: "https://www.gmsportstudio.com",
+    sitemap: "https://www.inboundbasketballstudio.com/sitemap.xml",
+    host: "https://www.inboundbasketballstudio.com",
   };
 }

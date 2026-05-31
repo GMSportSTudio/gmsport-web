@@ -29,8 +29,8 @@ export default function WhySection() {
         t("pillars.youtube.bullet1"),
         t("pillars.youtube.bullet2"),
       ],
-      color:  "#FF5722",
-      border: "border-[#FF5722]/20",
+      color:  "#22FFE0",
+      border: "border-[#22FFE0]/20",
     },
     {
       icon:    <LayoutDashboard size={24} strokeWidth={1.8} />,
@@ -173,7 +173,7 @@ export default function WhySection() {
           ].map(({ label, highlight }) => (
             <span key={label} className={[
               "text-xs font-semibold text-center uppercase tracking-wider",
-              highlight ? "text-[#4ec9b0]" : "text-[#FF7043]",
+              highlight ? "text-[#4ec9b0]" : "text-[#22FFE0]",
             ].join(" ")}>
               {label}
             </span>
@@ -194,7 +194,7 @@ export default function WhySection() {
             {[row.individual, row.club].map((val, j) => (
               <div key={j} className="flex justify-center">
                 {val ? (
-                  <CheckCircle2 size={16} className={j === 1 ? "text-[#4ec9b0]" : "text-[#FF7043]"} />
+                  <CheckCircle2 size={16} className={j === 1 ? "text-[#4ec9b0]" : "text-[#22FFE0]"} />
                 ) : (
                   <span className="text-white/15 text-lg leading-none">—</span>
                 )}

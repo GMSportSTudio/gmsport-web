@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.gmsportstudio.com"),
+  metadataBase: new URL("https://www.inboundbasketballstudio.com"),
   robots: { index: false, follow: false },
 };
 

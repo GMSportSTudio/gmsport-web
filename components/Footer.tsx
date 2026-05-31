@@ -128,7 +128,7 @@ export default function Footer() {
           ))}
           <Link
             href="/#precios"
-            className="text-sm text-white/35 hover:text-[#FF7043]
+            className="text-sm text-white/35 hover:text-[#22FFE0]
                        transition-colors duration-200 py-0.5 mt-3"
           >
             {t("betaAccess")}

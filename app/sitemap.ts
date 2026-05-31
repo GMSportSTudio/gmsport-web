@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://www.gmsportstudio.com";
+  const base = "https://www.inboundbasketballstudio.com";
   const lastModified = new Date();
   const languages = {
     es: `${base}/`,

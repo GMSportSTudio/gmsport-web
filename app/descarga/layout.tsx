@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.gmsportstudio.com"),
+  metadataBase: new URL("https://www.inboundbasketballstudio.com"),
   robots: { index: false, follow: false },
 };
 
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
  * Mismo patrón que (legal)/layout.tsx — copiamos la base mínima sin
  * Navbar, Footer ni CookieBanner. La página `/descarga` es self-contained:
  * el bloque de descarga ocupa toda la pantalla con su propio header
- * (logo GMSportStudio) y no necesita navegación global.
+ * (logo Inbound Studio) y no necesita navegación global.
  */
 export default function DescargaLayout({
   children,

@@ -31,7 +31,7 @@ function AccordionItem({
       className={[
         "rounded-xl border transition-colors duration-300 overflow-hidden",
         isOpen
-          ? "border-[#FF5722]/30 bg-[#FF5722]/5"
+          ? "border-[#22FFE0]/30 bg-[#22FFE0]/5"
           : "border-white/7 bg-[#111111] hover:border-white/12",
       ].join(" ")}
     >
@@ -40,7 +40,7 @@ function AccordionItem({
         aria-expanded={isOpen}
         className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left
                    group focus-visible:outline-none focus-visible:ring-2
-                   focus-visible:ring-[#FF5722]/50 focus-visible:ring-offset-2
+                   focus-visible:ring-[#22FFE0]/50 focus-visible:ring-offset-2
                    focus-visible:ring-offset-[#050505]"
       >
         <span className={[
@@ -55,7 +55,7 @@ function AccordionItem({
           className={[
             "shrink-0 w-6 h-6 rounded-md flex items-center justify-center transition-all duration-300",
             isOpen
-              ? "bg-[#FF5722]/20 text-[#FF7043] rotate-45"
+              ? "bg-[#22FFE0]/20 text-[#22FFE0] rotate-45"
               : "bg-white/6 text-white/40 group-hover:text-white/70 group-hover:bg-white/10",
           ].join(" ")}
           aria-hidden="true"

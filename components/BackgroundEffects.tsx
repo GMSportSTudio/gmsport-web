@@ -50,7 +50,7 @@ function FloatingDot({ p }: { p: Particle }) {
         width:  p.size,
         height: p.size,
         background: p.id % 4 === 0
-          ? "rgba(255,87,34,0.55)"   // 1 de cada 4: naranja
+          ? "rgba(34,255,224,0.55)"   // 1 de cada 4: naranja
           : "rgba(255,255,255,0.18)", // el resto: blanco tenue
       }}
       animate={{
@@ -103,7 +103,7 @@ function CursorGlow() {
           width:  600,
           height: 600,
           background:
-            "radial-gradient(circle, rgba(255,87,34,0.07) 0%, rgba(255,87,34,0.03) 35%, transparent 70%)",
+            "radial-gradient(circle, rgba(34,255,224,0.07) 0%, rgba(34,255,224,0.03) 35%, transparent 70%)",
           filter: "blur(8px)",
         }}
       />

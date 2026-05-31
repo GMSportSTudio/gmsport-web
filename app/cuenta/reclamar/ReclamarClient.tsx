@@ -145,11 +145,11 @@ export function ReclamarClient() {
   return (
     <div style={{ minHeight: "100vh", background: "#0f1117", display: "flex", alignItems: "center", justifyContent: "center", padding: "24px 16px", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif", color: "#e8eaf0" }}>
       <div style={{ width: "100%", maxWidth: 560, background: "#161920", border: "1px solid #23272f", borderRadius: 16, padding: 32 }}>
-        <p style={{ color: "#ff6b1a", fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", margin: "0 0 12px" }}>
+        <p style={{ color: "#22FFE0", fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", margin: "0 0 12px" }}>
           Reclamar pago
         </p>
         <h1 style={{ fontSize: 24, fontWeight: 800, margin: "0 0 8px", letterSpacing: "-0.5px" }}>
-          GMSport<span style={{ color: "#ff6b1a" }}>Studio</span>
+          Inbound <span style={{ color: "#22FFE0" }}>Studio</span>
         </h1>
 
         {/* ── Sub-pantalla: cargando auth ── */}
@@ -166,10 +166,10 @@ export function ReclamarClient() {
           <>
             <p style={{ color: "#9095a0", fontSize: 15, lineHeight: 1.7, margin: "16px 0 18px" }}>
               Si pagaste en Gumroad con un email distinto al que usaste para registrarte en
-              GMSportStudio, aquí puedes vincular tu pago a tu cuenta.
+              Inbound Studio, aquí puedes vincular tu pago a tu cuenta.
               <br /><br />
               Primero inicia sesión con el email <strong style={{ color: "#e8eaf0" }}>de tu cuenta
-              GMSportStudio</strong> (no el de Gumroad).
+              Inbound Studio</strong> (no el de Gumroad).
             </p>
             <input
               type="email"
@@ -189,13 +189,13 @@ export function ReclamarClient() {
             <button
               onClick={handleSendMagicLink}
               disabled={linkSending}
-              style={{ width: "100%", padding: "13px 20px", background: linkSending ? "#3a3f50" : "#ff6b1a", color: "#fff", fontSize: 15, fontWeight: 700, border: "none", borderRadius: 10, cursor: linkSending ? "default" : "pointer" }}
+              style={{ width: "100%", padding: "13px 20px", background: linkSending ? "#3a3f50" : "#22FFE0", color: "#fff", fontSize: 15, fontWeight: 700, border: "none", borderRadius: 10, cursor: linkSending ? "default" : "pointer" }}
             >
               {linkSending ? "Enviando…" : "Enviarme enlace de acceso"}
             </button>
             <p style={{ color: "#555d6e", fontSize: 12, margin: "16px 0 0", textAlign: "center" }}>
               ¿Tienes dudas? Escribe a{" "}
-              <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#ff6b1a", textDecoration: "none" }}>
+              <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#22FFE0", textDecoration: "none" }}>
                 ceo@gmsportstudio.com
               </a>
             </p>
@@ -278,7 +278,7 @@ export function ReclamarClient() {
             <button
               onClick={handleClaim}
               disabled={claimStatus === "submitting" || !licenseKey.trim()}
-              style={{ width: "100%", padding: "14px 20px", background: (claimStatus === "submitting" || !licenseKey.trim()) ? "#3a3f50" : "#ff6b1a", color: "#fff", fontSize: 15, fontWeight: 700, border: "none", borderRadius: 10, cursor: (claimStatus === "submitting" || !licenseKey.trim()) ? "default" : "pointer", letterSpacing: "-0.2px" }}
+              style={{ width: "100%", padding: "14px 20px", background: (claimStatus === "submitting" || !licenseKey.trim()) ? "#3a3f50" : "#22FFE0", color: "#fff", fontSize: 15, fontWeight: 700, border: "none", borderRadius: 10, cursor: (claimStatus === "submitting" || !licenseKey.trim()) ? "default" : "pointer", letterSpacing: "-0.2px" }}
             >
               {claimStatus === "submitting" ? "Verificando…" : "Reclamar pago"}
             </button>
@@ -287,7 +287,7 @@ export function ReclamarClient() {
               Rate limit: 5 intentos por hora.
               <br />
               ¿No encuentras tu licenseKey? Busca el email de Gumroad o escribe a{" "}
-              <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#ff6b1a", textDecoration: "none" }}>
+              <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#22FFE0", textDecoration: "none" }}>
                 ceo@gmsportstudio.com
               </a>
               .
@@ -313,7 +313,7 @@ export function ReclamarClient() {
             </p>
             <Link
               href="/descarga"
-              style={{ display: "block", width: "100%", padding: "13px 20px", background: "#ff6b1a", color: "#fff", fontSize: 15, fontWeight: 700, textAlign: "center", textDecoration: "none", borderRadius: 10, boxSizing: "border-box" }}
+              style={{ display: "block", width: "100%", padding: "13px 20px", background: "#22FFE0", color: "#fff", fontSize: 15, fontWeight: 700, textAlign: "center", textDecoration: "none", borderRadius: 10, boxSizing: "border-box" }}
             >
               Ir a la descarga →
             </Link>

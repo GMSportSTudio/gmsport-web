@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
   title: "Política de Privacidad",
-  description: "Cómo GmSportStudio recoge, usa y protege tus datos personales.",
+  description: "Cómo Inbound Studio recoge, usa y protege tus datos personales.",
   robots: { index: false, follow: false },
 };
 
@@ -32,7 +32,7 @@ const sections = [
           <li>Identificador único del dispositivo (para el vínculo de licencia)</li>
         </ul>
         <p className="mt-2">
-          Adicionalmente, cuando el usuario realiza un pago, <strong className="text-white/70">Gumroad, Inc.</strong> actúa como <strong className="text-white/70">Merchant of Record (MoR)</strong> y trata los datos financieros (nombre, dirección de facturación, datos de tarjeta) conforme a su propia política de privacidad. Gumroad es responsable del cobro, la facturación, la gestión del IVA europeo y la emisión del recibo. GmSportStudio no almacena datos de tarjetas bancarias en ningún momento; recibe únicamente confirmación del pago, identificador de venta (sale_id), email del comprador y país de facturación a efectos de habilitar el acceso a la Aplicación.
+          Adicionalmente, cuando el usuario realiza un pago, <strong className="text-white/70">Gumroad, Inc.</strong> actúa como <strong className="text-white/70">Merchant of Record (MoR)</strong> y trata los datos financieros (nombre, dirección de facturación, datos de tarjeta) conforme a su propia política de privacidad. Gumroad es responsable del cobro, la facturación, la gestión del IVA europeo y la emisión del recibo. Inbound Studio no almacena datos de tarjetas bancarias en ningún momento; recibe únicamente confirmación del pago, identificador de venta (sale_id), email del comprador y país de facturación a efectos de habilitar el acceso a la Aplicación.
         </p>
       </>
     ),
@@ -47,7 +47,7 @@ const sections = [
         </div>
         <div>
           <p className="text-white/70 font-semibold mb-1">Comunicaciones sobre el producto</p>
-          <p>Base jurídica: interés legítimo (Art. 6.1.f RGPD) y/o consentimiento. Te informaremos de actualizaciones, lanzamientos y ofertas relacionadas con GmSportStudio.</p>
+          <p>Base jurídica: interés legítimo (Art. 6.1.f RGPD) y/o consentimiento. Te informaremos de actualizaciones, lanzamientos y ofertas relacionadas con Inbound Studio.</p>
         </div>
         <div>
           <p className="text-white/70 font-semibold mb-1">Mejora del producto</p>

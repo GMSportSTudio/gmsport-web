@@ -18,9 +18,9 @@
   --color-hint:            #8a9aaa;   /* COLOR_TEXTO_HINT_BOTONERA          */
 
   /* ── Naranja deportivo (acento de marca web) ──────────────────  */
-  --color-accent:          #FF5722;
-  --color-accent-hover:    #E64A19;
-  --color-accent-subtle:   rgba(255, 87, 34, 0.15);
+  --color-accent:          #22FFE0;
+  --color-accent-hover:    #5FFFE8;
+  --color-accent-subtle:   rgba(34, 255, 224, 0.15);
 
   /* ── Verde de acierto (btn_success de la app) ─────────────────
      btn_success = #16825d   titlebar_btn_active = #4ec9b0               */
@@ -82,17 +82,17 @@ body {
     padding: 0.5rem 1rem;
     border-radius: var(--radius-btn);
     background: var(--color-accent);
-    color: #ffffff;
+    color: #06231F;
     font-weight: 600;
     font-size: 0.875rem;
     letter-spacing: 0.01em;
-    border: 1px solid rgba(255, 87, 34, 0.6);
+    border: 1px solid rgba(34, 255, 224, 0.6);
     box-shadow: 0 1px 3px rgba(0,0,0,0.4);
     transition: background 150ms ease, box-shadow 150ms ease;
   }
   .btn-primary:hover {
     background: var(--color-accent-hover);
-    box-shadow: 0 0 0 1px rgba(255,87,34,0.5), 0 4px 16px rgba(255,87,34,0.35);
+    box-shadow: 0 0 0 1px rgba(34,255,224,0.5), 0 4px 16px rgba(34,255,224,0.35);
   }
 
   /* Botón secundario (estilo btn_secondary de la app) */
@@ -165,13 +165,13 @@ body {
     background: rgba(30, 30, 30, 0.72);
     backdrop-filter: blur(16px) saturate(140%);
     -webkit-backdrop-filter: blur(16px) saturate(140%);
-    border: 1px solid rgba(255, 87, 34, 0.3);
+    border: 1px solid rgba(34, 255, 224, 0.3);
     border-radius: var(--radius-card);
   }
 
   /* Gradiente de texto naranja */
   .text-gradient {
-    background: linear-gradient(135deg, #FF5722 0%, #FF8A65 100%);
+    background: linear-gradient(135deg, #22FFE0 0%, #C77DFF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -184,13 +184,13 @@ body {
 
   /* ── Glow naranja ─────────────────────────────────────────────── */
   .glow-accent {
-    box-shadow: 0 0 16px rgba(255, 87, 34, 0.25), 0 0 48px rgba(255, 87, 34, 0.08);
+    box-shadow: 0 0 16px rgba(34, 255, 224, 0.25), 0 0 48px rgba(34, 255, 224, 0.08);
   }
   .glow-accent-lg {
     box-shadow:
-      0 0 0 1px rgba(255, 87, 34, 0.18),
-      0 0 32px rgba(255, 87, 34, 0.22),
-      0 0 80px rgba(255, 87, 34, 0.10),
+      0 0 0 1px rgba(34, 255, 224, 0.18),
+      0 0 32px rgba(34, 255, 224, 0.22),
+      0 0 80px rgba(34, 255, 224, 0.10),
       0 32px 80px rgba(0, 0, 0, 0.6);
   }
   /* Halo ambiental que guía la vista hacia el CTA */
@@ -201,7 +201,7 @@ body {
     content: "";
     position: absolute;
     inset: -60px -80px;
-    background: radial-gradient(ellipse at 50% 60%, rgba(255, 87, 34, 0.13) 0%, transparent 65%);
+    background: radial-gradient(ellipse at 50% 60%, rgba(34, 255, 224, 0.13) 0%, transparent 65%);
     pointer-events: none;
     z-index: -1;
     filter: blur(24px);
@@ -233,21 +233,21 @@ body {
     transform: translateY(-3px);
   }
   .bento-card-accent {
-    background: linear-gradient(135deg, rgba(255, 87, 34, 0.12) 0%, rgba(14, 14, 14, 0.92) 55%);
-    border-color: rgba(255, 87, 34, 0.28);
+    background: linear-gradient(135deg, rgba(34, 255, 224, 0.12) 0%, rgba(14, 14, 14, 0.92) 55%);
+    border-color: rgba(34, 255, 224, 0.28);
     box-shadow:
       0 1px 0 0 rgba(255, 120, 60, 0.15) inset,
       0 -1px 0 0 rgba(0, 0, 0, 0.4) inset,
       0 8px 32px rgba(0, 0, 0, 0.5),
-      0 0 40px rgba(255, 87, 34, 0.06);
+      0 0 40px rgba(34, 255, 224, 0.06);
   }
   .bento-card-accent:hover {
-    border-color: rgba(255, 87, 34, 0.45);
+    border-color: rgba(34, 255, 224, 0.45);
     box-shadow:
       0 1px 0 0 rgba(255, 120, 60, 0.22) inset,
       0 -1px 0 0 rgba(0, 0, 0, 0.4) inset,
       0 16px 48px rgba(0, 0, 0, 0.55),
-      0 0 60px rgba(255, 87, 34, 0.10);
+      0 0 60px rgba(34, 255, 224, 0.10);
   }
 
   /* ── Números tech — tabular, tight ───────────────────────────── */
@@ -269,7 +269,7 @@ body {
     pointer-events: none;
   }
   .card-top-shine-accent::after {
-    background: linear-gradient(90deg, transparent, rgba(255, 87, 34, 0.55), transparent);
+    background: linear-gradient(90deg, transparent, rgba(34, 255, 224, 0.55), transparent);
   }
 }
 

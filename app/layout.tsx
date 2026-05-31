@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.gmsportstudio.com"),
+  metadataBase: new URL("https://www.inboundbasketballstudio.com"),
   title: {
-    default: "GMSportStudio — Análisis táctico de baloncesto",
-    template: "%s | GMSportStudio",
+    default: "Inbound Studio — Análisis táctico de baloncesto",
+    template: "%s | Inbound Studio",
   },
   description:
     "Software profesional de análisis táctico de baloncesto para entrenadores y analistas. Edita vídeos, crea clips, exporta informes. Mac y Windows.",
-  applicationName: "GMSportStudio",
+  applicationName: "Inbound Studio",
   authors: [{ name: "Jose Carlos Galán Moscoso" }],
   keywords: [
     "análisis táctico baloncesto",
@@ -29,24 +29,24 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    siteName: "GMSportStudio",
-    title: "GMSportStudio — Análisis táctico de baloncesto",
+    siteName: "Inbound Studio",
+    title: "Inbound Studio — Análisis táctico de baloncesto",
     description:
       "Software profesional de análisis táctico de baloncesto para entrenadores y analistas.",
-    url: "https://www.gmsportstudio.com/",
+    url: "https://www.inboundbasketballstudio.com/",
     locale: "es_ES",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "GMSportStudio — Análisis táctico de baloncesto",
+        alt: "Inbound Studio — Análisis táctico de baloncesto",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GMSportStudio — Análisis táctico de baloncesto",
+    title: "Inbound Studio — Análisis táctico de baloncesto",
     description:
       "Software profesional de análisis táctico de baloncesto para entrenadores y analistas.",
     images: ["/og-image.png"],

@@ -30,7 +30,7 @@ export default function HeroSection() {
 
       {/* Fondo radial */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20"
-        style={{ background: "radial-gradient(ellipse 80% 60% at 60% 40%, rgba(255,87,34,0.08) 0%, transparent 65%)" }} />
+        style={{ background: "radial-gradient(ellipse 80% 60% at 60% 40%, rgba(34,255,224,0.08) 0%, transparent 65%)" }} />
       {/* Grid de puntos */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 opacity-25"
         style={{
@@ -49,10 +49,10 @@ export default function HeroSection() {
             variants={fadeUp(0)}
             initial="hidden"
             animate="visible"
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#FF5722]/30
-                       bg-[#FF5722]/10 text-[#FF8A65] text-xs font-medium tracking-wide"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#22FFE0]/30
+                       bg-[#22FFE0]/10 text-[#5FFFE8] text-xs font-medium tracking-wide"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#22FFE0] animate-pulse" />
             {t("badge")}
           </motion.div>
 
@@ -68,7 +68,7 @@ export default function HeroSection() {
           >
             <span
               style={{
-                background: "linear-gradient(135deg, #FF5722 0%, #FF8A65 38%, #ffffff 72%, #e5e5e5 100%)",
+                background: "linear-gradient(135deg, #22FFE0 0%, #5FFFE8 38%, #ffffff 72%, #e5e5e5 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -100,13 +100,13 @@ export default function HeroSection() {
               {/* Anillo de pulso */}
               <motion.span
                 aria-hidden="true"
-                className="absolute inset-0 rounded-[8px] bg-[#FF5722]/30"
+                className="absolute inset-0 rounded-[8px] bg-[#22FFE0]/30"
                 animate={{ scale: [1, 1.18, 1], opacity: [0.5, 0, 0.5] }}
                 transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.span
                 aria-hidden="true"
-                className="absolute inset-0 rounded-[8px] bg-[#FF5722]/18"
+                className="absolute inset-0 rounded-[8px] bg-[#22FFE0]/18"
                 animate={{ scale: [1, 1.36, 1], opacity: [0.4, 0, 0.4] }}
                 transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
               />
@@ -118,11 +118,11 @@ export default function HeroSection() {
                 transition={{ type: "spring", stiffness: 380, damping: 22 }}
                 className="relative inline-flex items-center justify-center gap-2.5
                            w-full sm:w-auto px-8 py-3.5
-                           text-white font-semibold text-base cursor-pointer
-                           bg-[#FF5722] hover:bg-[#E64A19]
-                           border border-[rgba(255,87,34,0.55)]
-                           shadow-[0_1px_4px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,87,34,0.2)]
-                           hover:shadow-[0_0_0_1px_rgba(255,87,34,0.5),0_6px_24px_rgba(255,87,34,0.35)]
+                           text-[#06231F] font-semibold text-base cursor-pointer
+                           bg-[#22FFE0] hover:bg-[#5FFFE8]
+                           border border-[rgba(34,255,224,0.55)]
+                           shadow-[0_1px_4px_rgba(0,0,0,0.5),0_0_0_1px_rgba(34,255,224,0.2)]
+                           hover:shadow-[0_0_0_1px_rgba(34,255,224,0.5),0_6px_24px_rgba(34,255,224,0.35)]
                            transition-all duration-150"
                 style={{ borderRadius: "8px" }}
               >
@@ -149,7 +149,7 @@ export default function HeroSection() {
             <span className="flex items-center gap-1.5">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path d="M6 1L7.5 4.5H11L8.5 6.5L9.5 10L6 8L2.5 10L3.5 6.5L1 4.5H4.5L6 1Z"
-                  fill="#FF5722" fillOpacity="0.6" />
+                  fill="#22FFE0" fillOpacity="0.6" />
               </svg>
               {t("socialProofPrice")}
             </span>
@@ -176,7 +176,7 @@ export default function HeroSection() {
               aria-hidden="true"
               className="absolute inset-x-[8%] top-[10%] bottom-[-8%] -z-10 pointer-events-none"
               style={{
-                background: "radial-gradient(ellipse at 50% 50%, rgba(255,87,34,0.30) 0%, rgba(255,87,34,0.08) 45%, transparent 70%)",
+                background: "radial-gradient(ellipse at 50% 50%, rgba(34,255,224,0.30) 0%, rgba(34,255,224,0.08) 45%, transparent 70%)",
                 filter: "blur(36px)",
               }}
             />

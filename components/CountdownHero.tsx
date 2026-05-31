@@ -24,7 +24,7 @@ export default function CountdownHero() {
     >
       <div
         className="flex flex-wrap items-center gap-2 sm:gap-3 px-3 py-2.5
-                   rounded-xl border border-[#FF5722]/30 bg-[#FF5722]/8
+                   rounded-xl border border-[#22FFE0]/30 bg-[#22FFE0]/8
                    backdrop-blur-sm w-fit"
         style={{
           boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04), 0 4px 12px rgba(0,0,0,0.25)",
@@ -39,12 +39,12 @@ export default function CountdownHero() {
             {t("labelLaunched")}
           </span>
         </span>
-        <span className="text-[#FF5722]/70 select-none" aria-hidden="true">·</span>
+        <span className="text-[#22FFE0]/70 select-none" aria-hidden="true">·</span>
         <span className="text-xs sm:text-sm font-medium text-[#EDEDED]/85">
           {t("labelAvailable")}
         </span>
-        <span className="text-[#FF5722]/70 select-none" aria-hidden="true">·</span>
-        <span className="text-xs sm:text-sm font-medium text-[#FF8A65]">
+        <span className="text-[#22FFE0]/70 select-none" aria-hidden="true">·</span>
+        <span className="text-xs sm:text-sm font-medium text-[#5FFFE8]">
           {t("labelSamePrice")}
         </span>
       </div>

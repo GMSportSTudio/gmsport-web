@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt     = "GmSportStudio — Software de vídeo análisis deportivo para baloncesto y fútbol";
+export const alt     = "Inbound Studio — Software de vídeo análisis deportivo para baloncesto y fútbol";
 export const size    = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -22,27 +22,27 @@ export default function OGImage() {
         <div style={{
           position: "absolute", top: -126, right: -70,
           width: 700, height: 700, borderRadius: "50%",
-          background: "rgba(255,87,34,0.12)",
+          background: "rgba(34,255,224,0.12)",
         }} />
 
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 48 }}>
           <div style={{
             width: 60, height: 60, borderRadius: "50%",
-            border: "2px solid #FF6B1A",
+            border: "2px solid #C77DFF",
             display: "flex", alignItems: "center", justifyContent: "center",
             background: "#0a0a0a",
           }}>
-            <div style={{ width: 32, height: 2, background: "#FF6B1A" }} />
+            <div style={{ width: 32, height: 2, background: "#22FFE0" }} />
           </div>
           <span style={{ fontSize: 30, fontWeight: 700, color: "white", letterSpacing: "-0.5px" }}>
-            GmSport<span style={{ color: "#FF5722" }}>Studio</span>
+            Inbound <span style={{ color: "#22FFE0" }}>Studio</span>
           </span>
         </div>
 
         {/* Titular */}
         <div style={{ display: "flex", flexDirection: "column", fontSize: 64, fontWeight: 900, lineHeight: 1.05, letterSpacing: "-2px", maxWidth: 800 }}>
-          <span style={{ color: "#FF5722" }}>Deja de perder horas</span>
+          <span style={{ color: "#22FFE0" }}>Deja de perder horas</span>
           <span style={{ color: "white" }}>editando. Empieza a</span>
           <span style={{ color: "white" }}>ganar partidos.</span>
         </div>
@@ -56,12 +56,12 @@ export default function OGImage() {
         <div style={{
           marginTop: 40, display: "flex", alignItems: "center", gap: 10,
           padding: "10px 20px", borderRadius: 999,
-          border: "1px solid rgba(255,87,34,0.4)",
-          background: "rgba(255,87,34,0.12)",
+          border: "1px solid rgba(34,255,224,0.4)",
+          background: "rgba(34,255,224,0.12)",
         }}>
-          <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#FF5722" }} />
-          <span style={{ color: "#FF8A65", fontSize: 16, fontWeight: 600, letterSpacing: "1px" }}>
-            Desde 14,99€/mes · gmsportstudio.com
+          <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#22FFE0" }} />
+          <span style={{ color: "#22FFE0", fontSize: 16, fontWeight: 600, letterSpacing: "1px" }}>
+            Desde 14,99€/mes · inboundbasketballstudio.com
           </span>
         </div>
       </div>

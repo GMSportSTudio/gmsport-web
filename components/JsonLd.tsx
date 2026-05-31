@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
-const BASE_URL = "https://www.gmsportstudio.com";
+const BASE_URL = "https://www.inboundbasketballstudio.com";
 
 /**
  * JSON-LD estructurado por locale. Server component: extrae las claves
@@ -25,7 +25,7 @@ export default async function JsonLd({ locale }: { locale: string }) {
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "GmSportStudio",
+    name: "Inbound Studio",
     applicationCategory: "SportsApplication",
     operatingSystem: "macOS, Windows",
     url,
@@ -83,7 +83,7 @@ export default async function JsonLd({ locale }: { locale: string }) {
     ],
     creator: {
       "@type": "Organization",
-      name: "GmSportStudio",
+      name: "Inbound Studio",
       url: BASE_URL,
     },
     keywords: t("keywords"),

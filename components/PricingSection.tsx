@@ -38,7 +38,7 @@ export default function PricingSection() {
     >
       {/* Glow ambiental */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-[20%] top-[10%] bottom-[20%] -z-10"
-        style={{ background: "radial-gradient(ellipse at 50% 40%, rgba(255,87,34,0.09) 0%, transparent 65%)", filter: "blur(40px)" }}
+        style={{ background: "radial-gradient(ellipse at 50% 40%, rgba(34,255,224,0.09) 0%, transparent 65%)", filter: "blur(40px)" }}
       />
 
       {/* Cabecera */}
@@ -65,15 +65,15 @@ export default function PricingSection() {
             NO desde esta página pública. Si lo perdieron, deben escribir
             a ceo@gmsportstudio.com para reenvío del enlace JWT. */}
         <div
-          className="mt-2 max-w-md text-xs text-[#ff7a3d]/80 leading-relaxed border border-[#ff7a3d]/20 rounded-md px-3 py-2 bg-[#ff7a3d]/5"
+          className="mt-2 max-w-md text-xs text-[#22FFE0]/80 leading-relaxed border border-[#22FFE0]/20 rounded-md px-3 py-2 bg-[#22FFE0]/5"
           role="note"
         >
-          <strong className="text-[#ff7a3d]">¿Eres founder de la Beta?</strong>{" "}
+          <strong className="text-[#22FFE0]">¿Eres founder de la Beta?</strong>{" "}
           Tu 50 % lifetime se canjea desde el email personal que te llegó el 25/05.
           Si no lo encuentras, escríbenos a{" "}
           <a
             href="mailto:ceo@gmsportstudio.com?subject=Founder%20lifetime%20-%20reenv%C3%ADo%20enlace"
-            className="underline hover:text-[#ff7a3d]"
+            className="underline hover:text-[#22FFE0]"
           >
             ceo@gmsportstudio.com
           </a>
@@ -156,10 +156,10 @@ export default function PricingSection() {
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 380, damping: 22 }}
                 className="relative flex items-center justify-center gap-2 w-full py-3
-                           text-[#FF7043] font-semibold text-sm
-                           bg-transparent hover:bg-[#FF5722]/8
-                           border border-[rgba(255,87,34,0.4)]
-                           hover:border-[rgba(255,87,34,0.7)]
+                           text-[#22FFE0] font-semibold text-sm
+                           bg-transparent hover:bg-[#22FFE0]/8
+                           border border-[rgba(34,255,224,0.4)]
+                           hover:border-[rgba(34,255,224,0.7)]
                            transition-all duration-150"
                 style={{ borderRadius: "6px" }}
               >
@@ -182,7 +182,7 @@ export default function PricingSection() {
           <div aria-hidden="true" className="absolute -inset-px pointer-events-none"
             style={{
               borderRadius: "9px",
-              background: "linear-gradient(135deg, rgba(255,87,34,0.4) 0%, rgba(255,112,67,0.15) 50%, transparent 100%)",
+              background: "linear-gradient(135deg, rgba(34,255,224,0.4) 0%, rgba(255,112,67,0.15) 50%, transparent 100%)",
               filter: "blur(1px)",
             }}
           />
@@ -191,19 +191,19 @@ export default function PricingSection() {
             style={{
               borderRadius: "8px",
               background: "linear-gradient(160deg, #1c1208 0%, #141414 50%, #0f0f0f 100%)",
-              border: "1px solid rgba(255,87,34,0.35)",
-              boxShadow: "0 0 0 1px rgba(255,87,34,0.12), 0 24px 80px rgba(0,0,0,0.6), 0 0 60px rgba(255,87,34,0.07)",
+              border: "1px solid rgba(34,255,224,0.35)",
+              boxShadow: "0 0 0 1px rgba(34,255,224,0.12), 0 24px 80px rgba(0,0,0,0.6), 0 0 60px rgba(34,255,224,0.07)",
             }}
           >
             {/* Línea superior */}
             <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px"
-              style={{ background: "linear-gradient(90deg, transparent 5%, rgba(255,87,34,0.75) 50%, transparent 95%)" }}
+              style={{ background: "linear-gradient(90deg, transparent 5%, rgba(34,255,224,0.75) 50%, transparent 95%)" }}
             />
 
             {/* Badge "Mejor opción · Ahorra 45%" */}
             <div className="absolute top-5 right-5 z-10">
               <span className="inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-semibold
-                               bg-[#FF5722]/15 border border-[#FF5722]/30 text-[#FF8A65]"
+                               bg-[#22FFE0]/15 border border-[#22FFE0]/30 text-[#5FFFE8]"
                 style={{ borderRadius: "4px" }}>
                 <Star size={9} fill="currentColor" />
                 {t("annualSavingsBadge")}
@@ -214,7 +214,7 @@ export default function PricingSection() {
 
               {/* Nombre del plan */}
               <div className="flex flex-col gap-1">
-                <p className="text-xs font-bold uppercase tracking-widest text-[#FF7043]">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#22FFE0]">
                   {t("annualEyebrow")}
                 </p>
                 <h3 className="text-lg font-bold text-white leading-snug">
@@ -250,7 +250,7 @@ export default function PricingSection() {
                 {BENEFITS.map(({ icon, label }) => (
                   <li key={label} className="flex items-start gap-3">
                     <span className="mt-0.5 w-6 h-6 rounded flex items-center justify-center shrink-0
-                                     bg-[#FF5722]/12 text-[#FF7043] border border-[#FF5722]/20"
+                                     bg-[#22FFE0]/12 text-[#22FFE0] border border-[#22FFE0]/20"
                       style={{ borderRadius: "4px" }}>
                       {icon}
                     </span>
@@ -268,11 +268,11 @@ export default function PricingSection() {
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 380, damping: 22 }}
                 className="relative flex items-center justify-center gap-2 w-full py-3.5
-                           text-white font-semibold text-base
-                           bg-[#FF5722] hover:bg-[#E64A19]
-                           border border-[rgba(255,87,34,0.5)]
+                           text-[#06231F] font-semibold text-base
+                           bg-[#22FFE0] hover:bg-[#5FFFE8]
+                           border border-[rgba(34,255,224,0.5)]
                            shadow-[0_1px_4px_rgba(0,0,0,0.5)]
-                           hover:shadow-[0_0_0_1px_rgba(255,87,34,0.4),0_4px_20px_rgba(255,87,34,0.35)]
+                           hover:shadow-[0_0_0_1px_rgba(34,255,224,0.4),0_4px_20px_rgba(34,255,224,0.35)]
                            transition-all duration-150"
                 style={{ borderRadius: "6px" }}
               >
@@ -304,20 +304,20 @@ export default function PricingSection() {
             className="absolute inset-x-0 top-0 h-px"
             style={{
               background:
-                "linear-gradient(90deg, transparent 15%, rgba(255,87,34,0.45) 50%, transparent 85%)",
+                "linear-gradient(90deg, transparent 15%, rgba(34,255,224,0.45) 50%, transparent 85%)",
             }}
           />
 
           <div className="flex items-start gap-3 mb-5">
             <span
               className="w-9 h-9 flex items-center justify-center shrink-0
-                         bg-[#FF5722]/12 text-[#FF7043] border border-[#FF5722]/20"
+                         bg-[#22FFE0]/12 text-[#22FFE0] border border-[#22FFE0]/20"
               style={{ borderRadius: "6px" }}
             >
               <Users size={16} strokeWidth={2} />
             </span>
             <div className="flex-1">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#FF7043] mb-1">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#22FFE0] mb-1">
                 {t("clubEyebrow")}
               </p>
               <h3 className="text-base font-bold text-white leading-snug">
@@ -344,7 +344,7 @@ export default function PricingSection() {
           <a
             href="mailto:clubes@gmsportstudio.com?subject=Inter%C3%A9s%20en%20plan%20Club%20GMSportStudio"
             className="inline-flex items-center gap-1.5 text-xs font-semibold
-                       text-[#FF7043] hover:text-[#FF8A65] transition-colors duration-150"
+                       text-[#22FFE0] hover:text-[#5FFFE8] transition-colors duration-150"
           >
             {t("clubCta")}
             <ArrowRight size={12} strokeWidth={2.2} />
@@ -359,7 +359,7 @@ export default function PricingSection() {
         variants={fadeUp(0.44)}
         className="mt-8 flex items-start gap-3 max-w-md w-full px-4 py-3.5 rounded-lg border border-white/7 bg-white/3"
       >
-        <span className="text-[#FF7043] mt-0.5 shrink-0">
+        <span className="text-[#22FFE0] mt-0.5 shrink-0">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
             <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
@@ -369,7 +369,7 @@ export default function PricingSection() {
           {t("b2bText")}{" "}
           <a
             href="mailto:clubes@gmsportstudio.com?subject=Oferta%20personalizada%20%2B5%20cuentas"
-            className="text-[#FF7043]/80 hover:text-[#FF7043] underline underline-offset-2 transition-colors duration-150"
+            className="text-[#22FFE0]/80 hover:text-[#22FFE0] underline underline-offset-2 transition-colors duration-150"
           >
             {t("b2bCta")}
           </a>

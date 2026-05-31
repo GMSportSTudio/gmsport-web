@@ -166,16 +166,16 @@ function MacFirstOpenGuide() {
             <li style={{ marginBottom: 10 }}>
               En la barra lateral, busca <strong style={{ color: "#e8eaf0" }}>Privacidad y Seguridad</strong>.
               Desplázate hasta la sección <strong style={{ color: "#e8eaf0" }}>&ldquo;Seguridad&rdquo;</strong>:
-              verás un mensaje sobre GMSportStudio con el botón
-              {" "}<strong style={{ color: "#ff6b1a" }}>&ldquo;Abrir igualmente&rdquo;</strong>.
+              verás un mensaje sobre Inbound Studio con el botón
+              {" "}<strong style={{ color: "#22FFE0" }}>&ldquo;Abrir igualmente&rdquo;</strong>.
             </li>
             <li style={{ marginBottom: 10 }}>
-              Pulsa <strong style={{ color: "#ff6b1a" }}>&ldquo;Abrir igualmente&rdquo;</strong>.
+              Pulsa <strong style={{ color: "#22FFE0" }}>&ldquo;Abrir igualmente&rdquo;</strong>.
               macOS te pedirá tu contraseña de Mac o Touch ID.
             </li>
             <li>
-              En el diálogo final, pulsa <strong style={{ color: "#ff6b1a" }}>&ldquo;Abrir&rdquo;</strong>.
-              GMSportStudio arrancará. A partir de aquí podrás abrirla con doble clic normal.
+              En el diálogo final, pulsa <strong style={{ color: "#22FFE0" }}>&ldquo;Abrir&rdquo;</strong>.
+              Inbound Studio arrancará. A partir de aquí podrás abrirla con doble clic normal.
             </li>
           </ol>
 
@@ -190,7 +190,7 @@ function MacFirstOpenGuide() {
 
           <p style={{ margin: "16px 0 0", fontSize: 13, color: "#555d6e", lineHeight: 1.6 }}>
             ¿Sigue sin funcionar? Escríbenos a{" "}
-            <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#ff6b1a" }}>ceo@gmsportstudio.com</a>
+            <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#22FFE0" }}>ceo@gmsportstudio.com</a>
             {" "}indicando tu versión exacta de macOS
             (menú Apple → Acerca de este Mac → te aparece, p.ej. &ldquo;15.3.1&rdquo;).
           </p>
@@ -471,7 +471,7 @@ export function DescargaClient() {
         {/* Logo */}
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <h1 style={{ color: "#e8eaf0", fontSize: 28, fontWeight: 800, margin: "0 0 8px" }}>
-            GMSport<span style={{ color: "#ff6b1a" }}>Studio</span>
+            Inbound <span style={{ color: "#22FFE0" }}>Studio</span>
           </h1>
           <p style={{ color: "#555d6e", fontSize: 14, margin: 0 }}>
             {token ? "Acceso Beta — Descarga privada" : "Descarga de tu suscripción"}
@@ -497,16 +497,16 @@ export function DescargaClient() {
             alignItems: "center",
             justifyContent: "space-between",
             gap: 16,
-            background: "rgba(255, 107, 26, 0.06)",
-            border: "1px solid rgba(255, 107, 26, 0.22)",
+            background: "rgba(34, 255, 224, 0.06)",
+            border: "1px solid rgba(34, 255, 224, 0.22)",
             borderRadius: 16,
             padding: "18px 24px",
             marginBottom: 24,
             textDecoration: "none",
             transition: "background 0.15s",
           }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255, 107, 26, 0.1)"; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255, 107, 26, 0.06)"; }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(34, 255, 224, 0.1)"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(34, 255, 224, 0.06)"; }}
         >
           <div>
             <p style={{ color: "#e8eaf0", fontSize: 15, fontWeight: 700, margin: "0 0 4px" }}>
@@ -519,7 +519,7 @@ export function DescargaClient() {
           </div>
           <span
             style={{
-              background: "#ff6b1a",
+              background: "#22FFE0",
               color: "#fff",
               borderRadius: 10,
               padding: "10px 18px",
@@ -543,7 +543,7 @@ export function DescargaClient() {
             <p style={{ color: "#f87171", fontSize: 16, fontWeight: 600, margin: "0 0 12px" }}>
               {errorMessages[meta.error] ?? "Error desconocido."}
             </p>
-            <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#ff6b1a", fontSize: 14 }}>
+            <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#22FFE0", fontSize: 14 }}>
               ceo@gmsportstudio.com
             </a>
           </div>
@@ -578,7 +578,7 @@ export function DescargaClient() {
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
                       <div>
                         <p style={{ color: "#e8eaf0", fontSize: 16, fontWeight: 700, margin: "0 0 4px" }}>
-                          {info.icon} GMSportStudio — {info.name}
+                          {info.icon} Inbound Studio — {info.name}
                         </p>
                         {pmeta?.size && (
                           <p style={{ color: "#555d6e", fontSize: 12, margin: 0 }}>{formatBytes(pmeta.size)}</p>
@@ -587,7 +587,7 @@ export function DescargaClient() {
                       <button
                         onClick={() => handleBetaDownload(platform)}
                         disabled={downloading === platform}
-                        style={{ background: "#ff6b1a", color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontWeight: 700, fontSize: 14, cursor: "pointer", whiteSpace: "nowrap", opacity: downloading === platform ? 0.7 : 1 }}>
+                        style={{ background: "#22FFE0", color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontWeight: 700, fontSize: 14, cursor: "pointer", whiteSpace: "nowrap", opacity: downloading === platform ? 0.7 : 1 }}>
                         {downloading === platform ? "Preparando…" : "Descargar →"}
                       </button>
                     </div>
@@ -603,13 +603,13 @@ export function DescargaClient() {
               })}
 
               {showArchHint && (
-                <div style={{ background: "rgba(255,107,26,0.06)", border: "1px solid rgba(255,107,26,0.2)", borderRadius: 12, padding: "12px 18px", marginTop: 4, marginBottom: 16 }}>
+                <div style={{ background: "rgba(34,255,224,0.06)", border: "1px solid rgba(34,255,224,0.2)", borderRadius: 12, padding: "12px 18px", marginTop: 4, marginBottom: 16 }}>
                   <p style={{ color: "#9095a0", fontSize: 12, margin: 0, lineHeight: 1.6 }}>
-                    Hemos detectado que tu Mac es <strong style={{ color: "#ff6b1a" }}>{macArch === "silicon" ? "Apple Silicon (M1/M2/M3/M4)" : "Intel"}</strong>.
+                    Hemos detectado que tu Mac es <strong style={{ color: "#22FFE0" }}>{macArch === "silicon" ? "Apple Silicon (M1/M2/M3/M4)" : "Intel"}</strong>.
                     {" "}¿No es correcto?{" "}
                     <button
                       onClick={() => setArchChoiceShown(true)}
-                      style={{ background: "transparent", color: "#ff6b1a", border: "none", padding: 0, font: "inherit", cursor: "pointer", textDecoration: "underline" }}>
+                      style={{ background: "transparent", color: "#22FFE0", border: "none", padding: 0, font: "inherit", cursor: "pointer", textDecoration: "underline" }}>
                       Mostrar las dos opciones
                     </button>
                   </p>
@@ -680,7 +680,7 @@ export function DescargaClient() {
               disabled={magicLinkSending}
               style={{
                 width: "100%", padding: "13px 20px",
-                background: magicLinkSending ? "#3a3f50" : "#ff6b1a",
+                background: magicLinkSending ? "#3a3f50" : "#22FFE0",
                 color: "#fff", fontSize: 15, fontWeight: 700,
                 border: "none", borderRadius: 10,
                 cursor: magicLinkSending ? "default" : "pointer",
@@ -690,13 +690,13 @@ export function DescargaClient() {
             </button>
             <p style={{ color: "#555d6e", fontSize: 12, margin: "16px 0 0", textAlign: "center", lineHeight: 1.6 }}>
               ¿Aún no tienes cuenta?{" "}
-              <Link href="/#precios" style={{ color: "#ff6b1a" }}>Ver planes</Link>.
+              <Link href="/#precios" style={{ color: "#22FFE0" }}>Ver planes</Link>.
               <br />
               ¿Pagaste con otro email?{" "}
-              <Link href="/cuenta/reclamar" style={{ color: "#ff6b1a" }}>Reclamar pago</Link>.
+              <Link href="/cuenta/reclamar" style={{ color: "#22FFE0" }}>Reclamar pago</Link>.
               <br />
               ¿Eres tester y tienes problemas para entrar?{" "}
-              <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#ff6b1a" }}>ceo@gmsportstudio.com</a>.
+              <a href="mailto:ceo@gmsportstudio.com" style={{ color: "#22FFE0" }}>ceo@gmsportstudio.com</a>.
             </p>
           </div>
         )}
@@ -757,13 +757,13 @@ export function DescargaClient() {
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
                       <div>
                         <p style={{ color: "#e8eaf0", fontSize: 16, fontWeight: 700, margin: "0 0 4px" }}>
-                          {info.icon} GMSportStudio — {info.name}
+                          {info.icon} Inbound Studio — {info.name}
                         </p>
                       </div>
                       <button
                         onClick={() => handlePaidDownload(platform)}
                         disabled={downloading === platform}
-                        style={{ background: "#ff6b1a", color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontWeight: 700, fontSize: 14, cursor: "pointer", whiteSpace: "nowrap", opacity: downloading === platform ? 0.7 : 1 }}>
+                        style={{ background: "#22FFE0", color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontWeight: 700, fontSize: 14, cursor: "pointer", whiteSpace: "nowrap", opacity: downloading === platform ? 0.7 : 1 }}>
                         {downloading === platform ? "Preparando…" : "Descargar →"}
                       </button>
                     </div>
@@ -773,13 +773,13 @@ export function DescargaClient() {
               })}
 
               {macArch !== null && !archChoiceShown && (
-                <div style={{ background: "rgba(255,107,26,0.06)", border: "1px solid rgba(255,107,26,0.2)", borderRadius: 12, padding: "12px 18px", marginBottom: 16 }}>
+                <div style={{ background: "rgba(34,255,224,0.06)", border: "1px solid rgba(34,255,224,0.2)", borderRadius: 12, padding: "12px 18px", marginBottom: 16 }}>
                   <p style={{ color: "#9095a0", fontSize: 12, margin: 0, lineHeight: 1.6 }}>
-                    Hemos detectado que tu Mac es <strong style={{ color: "#ff6b1a" }}>{macArch === "silicon" ? "Apple Silicon (M1/M2/M3/M4)" : "Intel"}</strong>.
+                    Hemos detectado que tu Mac es <strong style={{ color: "#22FFE0" }}>{macArch === "silicon" ? "Apple Silicon (M1/M2/M3/M4)" : "Intel"}</strong>.
                     {" "}¿No es correcto?{" "}
                     <button
                       onClick={() => setArchChoiceShown(true)}
-                      style={{ background: "transparent", color: "#ff6b1a", border: "none", padding: 0, font: "inherit", cursor: "pointer", textDecoration: "underline" }}>
+                      style={{ background: "transparent", color: "#22FFE0", border: "none", padding: 0, font: "inherit", cursor: "pointer", textDecoration: "underline" }}>
                       Mostrar las dos opciones
                     </button>
                   </p>

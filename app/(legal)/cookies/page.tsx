@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
   title: "Política de Cookies",
-  description: "Información sobre el uso de cookies y tecnologías similares en GmSportStudio.",
+  description: "Información sobre el uso de cookies y tecnologías similares en Inbound Studio.",
   robots: { index: false, follow: false },
 };
 

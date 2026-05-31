@@ -1,5 +1,5 @@
 /**
- * LogoIcon — Isotipo GmSportStudio renderizado como SVG inline.
+ * LogoIcon — Isotipo Inbound Studio renderizado como SVG inline.
  *
  * Sustituye al PNG (/logo.png) en Navbar y Footer. Ventajas:
  * - Escala nítido en cualquier resolución (retina, 4K, print).
@@ -46,7 +46,7 @@ export default function LogoIcon({ size = 48, className = "" }: Props) {
       viewBox={`0 0 ${size} ${size}`}
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      aria-label="GmSportStudio"
+      aria-label="Inbound Studio"
       role="img"
     >
       <defs>
@@ -83,38 +83,38 @@ export default function LogoIcon({ size = 48, className = "" }: Props) {
       </defs>
 
       {/* Fondo negro circular */}
-      <circle cx={cx} cy={cy} r={size / 2} fill="#080C10" />
+      <circle cx={cx} cy={cy} r={size / 2} fill="#0A0E16" />
 
       {/* Resplandores ambientales */}
-      <ellipse cx={cx - r * 0.25} cy={cy} rx={r * 0.8} ry={r * 0.7} fill="#FF6B1A" opacity="0.06" />
-      <ellipse cx={cx + r * 0.25} cy={cy} rx={r * 0.8} ry={r * 0.7} fill="#1A8FFF" opacity="0.07" />
+      <ellipse cx={cx - r * 0.25} cy={cy} rx={r * 0.8} ry={r * 0.7} fill="#C77DFF" opacity="0.06" />
+      <ellipse cx={cx + r * 0.25} cy={cy} rx={r * 0.8} ry={r * 0.7} fill="#22FFE0" opacity="0.07" />
 
       {/* Círculo exterior naranja — glow + nítido */}
-      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#FF6B1A" strokeWidth={size * 0.018} filter={`url(#${foId})`} opacity="0.9" />
-      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#FF6B1A" strokeWidth={size * 0.009} />
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#C77DFF" strokeWidth={size * 0.018} filter={`url(#${foId})`} opacity="0.9" />
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#C77DFF" strokeWidth={size * 0.009} />
 
       {/* Línea central — glow + nítido */}
-      <line x1={lineX1} y1={cy} x2={lineX2} y2={cy} stroke="#FF6B1A" strokeWidth={size * 0.014} filter={`url(#${foId})`} opacity="0.85" clipPath={`url(#${clipId})`} />
-      <line x1={lineX1} y1={cy} x2={lineX2} y2={cy} stroke="#FF6B1A" strokeWidth={size * 0.007} clipPath={`url(#${clipId})`} />
+      <line x1={lineX1} y1={cy} x2={lineX2} y2={cy} stroke="#C77DFF" strokeWidth={size * 0.014} filter={`url(#${foId})`} opacity="0.85" clipPath={`url(#${clipId})`} />
+      <line x1={lineX1} y1={cy} x2={lineX2} y2={cy} stroke="#C77DFF" strokeWidth={size * 0.007} clipPath={`url(#${clipId})`} />
 
       {/* Semicírculo izquierda azul — glow + nítido */}
-      <path d={`M${semiL} ${cy - semiOff} A${semiOff} ${semiOff} 0 0 0 ${semiL} ${cy + semiOff}`} fill="none" stroke="#1A8FFF" strokeWidth={size * 0.016} filter={`url(#${fbId})`} opacity="0.9" />
-      <path d={`M${semiL} ${cy - semiOff} A${semiOff} ${semiOff} 0 0 0 ${semiL} ${cy + semiOff}`} fill="none" stroke="#1A8FFF" strokeWidth={size * 0.008} />
+      <path d={`M${semiL} ${cy - semiOff} A${semiOff} ${semiOff} 0 0 0 ${semiL} ${cy + semiOff}`} fill="none" stroke="#22FFE0" strokeWidth={size * 0.016} filter={`url(#${fbId})`} opacity="0.9" />
+      <path d={`M${semiL} ${cy - semiOff} A${semiOff} ${semiOff} 0 0 0 ${semiL} ${cy + semiOff}`} fill="none" stroke="#22FFE0" strokeWidth={size * 0.008} />
 
       {/* Semicírculo derecha naranja — glow + nítido */}
-      <path d={`M${semiR} ${cy - semiOff} A${semiOff} ${semiOff} 0 0 1 ${semiR} ${cy + semiOff}`} fill="none" stroke="#FF6B1A" strokeWidth={size * 0.016} filter={`url(#${foId})`} opacity="0.85" />
-      <path d={`M${semiR} ${cy - semiOff} A${semiOff} ${semiOff} 0 0 1 ${semiR} ${cy + semiOff}`} fill="none" stroke="#FF6B1A" strokeWidth={size * 0.008} />
+      <path d={`M${semiR} ${cy - semiOff} A${semiOff} ${semiOff} 0 0 1 ${semiR} ${cy + semiOff}`} fill="none" stroke="#C77DFF" strokeWidth={size * 0.016} filter={`url(#${foId})`} opacity="0.85" />
+      <path d={`M${semiR} ${cy - semiOff} A${semiOff} ${semiOff} 0 0 1 ${semiR} ${cy + semiOff}`} fill="none" stroke="#C77DFF" strokeWidth={size * 0.008} />
 
       {/* Punto central azul */}
-      <circle cx={cx} cy={cy} r={size * 0.04} fill="#1A8FFF" filter={`url(#${fbId})`} opacity="0.9" />
-      <circle cx={cx} cy={cy} r={size * 0.022} fill="#1A8FFF" />
+      <circle cx={cx} cy={cy} r={size * 0.04} fill="#22FFE0" filter={`url(#${fbId})`} opacity="0.9" />
+      <circle cx={cx} cy={cy} r={size * 0.022} fill="#22FFE0" />
 
       {/* Triángulo play blanco — glow + nítido */}
       <polygon points={`${playL},${cy - playV} ${playR},${cy} ${playL},${cy + playV}`} fill="none" stroke="#FFFFFF" strokeWidth={size * 0.022} strokeLinejoin="round" filter={`url(#${fwId})`} opacity="0.9" />
       <polygon points={`${playL},${cy - playV} ${playR},${cy} ${playL},${cy + playV}`} fill="none" stroke="#FFFFFF" strokeWidth={size * 0.012} strokeLinejoin="round" />
 
       {/* Borde exterior muy fino */}
-      <circle cx={cx} cy={cy} r={size / 2 - 1} fill="none" stroke="#FF6B1A" strokeWidth="0.5" opacity="0.25" />
+      <circle cx={cx} cy={cy} r={size / 2 - 1} fill="none" stroke="#C77DFF" strokeWidth="0.5" opacity="0.25" />
     </svg>
   );
 }

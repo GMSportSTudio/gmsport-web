@@ -39,19 +39,19 @@ function MultiMatchVisual() {
           key={label}
           className="flex items-center gap-2.5 px-3 py-2 rounded-lg border"
           style={{
-            background: active ? "rgba(255,87,34,0.12)" : "rgba(255,255,255,0.04)",
-            borderColor: active ? "rgba(255,87,34,0.35)" : "rgba(255,255,255,0.08)",
+            background: active ? "rgba(34,255,224,0.12)" : "rgba(255,255,255,0.04)",
+            borderColor: active ? "rgba(34,255,224,0.35)" : "rgba(255,255,255,0.08)",
           }}
         >
           <span
             className="w-1.5 h-1.5 rounded-full shrink-0"
-            style={{ background: active ? "#FF5722" : "rgba(255,255,255,0.2)" }}
+            style={{ background: active ? "#22FFE0" : "rgba(255,255,255,0.2)" }}
           />
-          <span className="text-[11px] font-medium" style={{ color: active ? "#FF8A65" : "rgba(255,255,255,0.4)" }}>
+          <span className="text-[11px] font-medium" style={{ color: active ? "#5FFFE8" : "rgba(255,255,255,0.4)" }}>
             {label}
           </span>
           {active && (
-            <span className="ml-auto text-[9px] text-[#FF7043] font-semibold uppercase tracking-wider">
+            <span className="ml-auto text-[9px] text-[#22FFE0] font-semibold uppercase tracking-wider">
               Activo
             </span>
           )}
@@ -81,7 +81,7 @@ function ClipsVisual() {
           style={{
             height: `${h}%`,
             maxHeight: "40px",
-            background: i === 3 ? "#FF5722" : "rgba(255,255,255,0.3)",
+            background: i === 3 ? "#22FFE0" : "rgba(255,255,255,0.3)",
           }}
         />
       ))}
@@ -118,15 +118,15 @@ function PlaybookVisual() {
                 stroke="rgba(255,255,255,0.5)" strokeWidth="1.2" fill="none" />
 
         {/* Jugadores: 5 puntos del ataque */}
-        <circle cx="50"  cy="120" r="5" fill="#FF5722" />
-        <circle cx="170" cy="120" r="5" fill="#FF5722" />
-        <circle cx="110" cy="100" r="5" fill="#FF7043" />
-        <circle cx="80"  cy="70"  r="5" fill="#FF5722" />
-        <circle cx="140" cy="70"  r="5" fill="#FF5722" />
+        <circle cx="50"  cy="120" r="5" fill="#22FFE0" />
+        <circle cx="170" cy="120" r="5" fill="#22FFE0" />
+        <circle cx="110" cy="100" r="5" fill="#22FFE0" />
+        <circle cx="80"  cy="70"  r="5" fill="#22FFE0" />
+        <circle cx="140" cy="70"  r="5" fill="#22FFE0" />
 
         {/* Flecha 1 — pase del 5 al 3 */}
         <path d="M 110 100 Q 95 85 80 70"
-              stroke="#FF7043" strokeWidth="1.6" fill="none"
+              stroke="#22FFE0" strokeWidth="1.6" fill="none"
               strokeDasharray="3 2"
               markerEnd="url(#arrow)" />
         {/* Flecha 2 — corte del 1 al aro */}
@@ -142,7 +142,7 @@ function PlaybookVisual() {
         <defs>
           <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5"
                   markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF7043" />
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#22FFE0" />
           </marker>
           <marker id="arrow-w" viewBox="0 0 10 10" refX="8" refY="5"
                   markerWidth="6" markerHeight="6" orient="auto">
@@ -192,8 +192,8 @@ function FeatureCard({
   const isLarge  = feature.variant === "large";
 
   const hoverGlow = isAccent
-    ? "0 0 0 1.5px rgba(255,87,34,0.65), 0 20px 56px rgba(0,0,0,0.65), 0 0 48px rgba(255,87,34,0.14)"
-    : "0 0 0 1.5px rgba(255,87,34,0.4),  0 20px 56px rgba(0,0,0,0.65), 0 0 40px rgba(255,87,34,0.09)";
+    ? "0 0 0 1.5px rgba(34,255,224,0.65), 0 20px 56px rgba(0,0,0,0.65), 0 0 48px rgba(34,255,224,0.14)"
+    : "0 0 0 1.5px rgba(34,255,224,0.4),  0 20px 56px rgba(0,0,0,0.65), 0 0 40px rgba(34,255,224,0.09)";
 
   return (
     <motion.div
@@ -220,7 +220,7 @@ function FeatureCard({
           className={[
             "w-10 h-10 rounded-xl flex items-center justify-center shrink-0",
             isAccent
-              ? "bg-[#FF5722]/20 text-[#FF7043]"
+              ? "bg-[#22FFE0]/20 text-[#22FFE0]"
               : "bg-white/6 text-white/60 group-hover:text-white/90 transition-colors duration-300",
           ].join(" ")}
         >
@@ -248,9 +248,9 @@ function FeatureCard({
         {/* Badge en card accent */}
         {isAccent && (
           <span className="mt-auto self-start inline-flex items-center gap-1.5 px-2.5 py-1
-                           rounded-full text-xs font-medium bg-[#FF5722]/15 text-[#FF8A65]
-                           border border-[#FF5722]/25">
-            <span className="w-1 h-1 rounded-full bg-[#FF5722]" />
+                           rounded-full text-xs font-medium bg-[#22FFE0]/15 text-[#5FFFE8]
+                           border border-[#22FFE0]/25">
+            <span className="w-1 h-1 rounded-full bg-[#22FFE0]" />
             {t("badge.youtube")}
           </span>
         )}

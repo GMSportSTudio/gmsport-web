@@ -51,7 +51,7 @@ export default function CookieBanner() {
             <button
               onClick={accept}
               className="shrink-0 px-4 py-1.5 rounded-lg text-xs font-semibold
-                         bg-[#FF5722] text-white hover:bg-[#FF7043]
+                         bg-[#22FFE0] text-[#06231F] hover:bg-[#22FFE0]
                          transition-colors duration-200"
             >
               {t("accept")}

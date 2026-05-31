@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { ActivarClient } from "./ActivarClient";
 
 export const metadata: Metadata = {
-  title: "Activar suscripción Fundador — GMSportStudio",
+  title: "Activar suscripción Fundador — Inbound Studio",
   robots: { index: false, follow: false },
 };
 

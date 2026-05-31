@@ -121,7 +121,7 @@ export function AdminGate({ children }: Props) {
     return (
       <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#0f1117" }}>
         <form onSubmit={handleLogin} style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 16, padding: "40px 48px", width: 360, display: "flex", flexDirection: "column", gap: 16 }}>
-          <h1 style={{ color: "#e8eaf0", fontSize: 20, fontWeight: 700, margin: 0 }}>Admin — <span style={{ color: "#ff6b1a" }}>GMSportStudio</span></h1>
+          <h1 style={{ color: "#e8eaf0", fontSize: 20, fontWeight: 700, margin: 0 }}>Admin — <span style={{ color: "#ff6b1a" }}>Inbound Studio</span></h1>
           <input
             type="email" value={email} onChange={e => setEmail(e.target.value)}
             placeholder="ceo@gmsportstudio.com" required

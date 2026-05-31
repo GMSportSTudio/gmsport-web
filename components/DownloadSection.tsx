@@ -59,7 +59,7 @@ const STEPS = [
   {
     icon: <Download size={16} />,
     title: "Descarga e instala",
-    desc:  "Abre el archivo .dmg y arrastra GmSportStudio a tu carpeta Aplicaciones.",
+    desc:  "Abre el archivo .dmg y arrastra Inbound Studio a tu carpeta Aplicaciones.",
   },
   {
     icon: <MousePointer2 size={16} />,
@@ -124,7 +124,7 @@ function SecurityModal({ onClose }: { onClose: () => void }) {
               <div key={i} className="flex gap-4">
                 {/* Línea vertical */}
                 <div className="flex flex-col items-center shrink-0">
-                  <div className="w-8 h-8 rounded-xl bg-[#FF5722]/12 text-[#FF7043] flex items-center justify-center border border-[#FF5722]/20">
+                  <div className="w-8 h-8 rounded-xl bg-[#22FFE0]/12 text-[#22FFE0] flex items-center justify-center border border-[#22FFE0]/20">
                     {step.icon}
                   </div>
                   {i < STEPS.length - 1 && (
@@ -145,7 +145,7 @@ function SecurityModal({ onClose }: { onClose: () => void }) {
             <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-500/8 border border-amber-500/15">
               <ShieldCheck size={14} className="text-amber-400 mt-0.5 shrink-0" />
               <p className="text-xs text-amber-200/60 leading-relaxed">
-                GmSportStudio es una app segura. El aviso de macOS aparece porque aún no está firmada con certificado Apple Developer.
+                Inbound Studio es una app segura. El aviso de macOS aparece porque aún no está firmada con certificado Apple Developer.
               </p>
             </div>
           </div>
@@ -172,7 +172,7 @@ function DownloadButton({
         "relative flex items-center gap-4 px-6 py-4 rounded-2xl cursor-pointer w-full sm:w-auto",
         "transition-shadow duration-300",
         primary
-          ? "bg-gradient-to-r from-[#FF5722] to-[#FF7043] text-white shadow-[0_4px_24px_rgba(255,87,34,0.4)] hover:shadow-[0_6px_36px_rgba(255,87,34,0.55)]"
+          ? "bg-gradient-to-r from-[#22FFE0] to-[#22FFE0] text-white shadow-[0_4px_24px_rgba(34,255,224,0.4)] hover:shadow-[0_6px_36px_rgba(34,255,224,0.55)]"
           : "bg-[#111] text-white border border-white/10 hover:border-white/20 hover:bg-[#161616] shadow-[0_4px_20px_rgba(0,0,0,0.4)]",
       ].join(" ")}
     >
@@ -233,7 +233,7 @@ export default function DownloadSection() {
         {/* Glow ambiental */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-x-[15%] top-[5%] bottom-[30%] -z-10"
           style={{
-            background: "radial-gradient(ellipse at 50% 30%, rgba(255,87,34,0.07) 0%, transparent 65%)",
+            background: "radial-gradient(ellipse at 50% 30%, rgba(34,255,224,0.07) 0%, transparent 65%)",
             filter: "blur(40px)",
           }}
         />
@@ -254,7 +254,7 @@ export default function DownloadSection() {
             }}>
             {isMac && detected
               ? `Hemos detectado tu Mac ${isSilicon ? "Apple Silicon" : "Intel"}`
-              : "Descarga GmSportStudio"}
+              : "Descarga Inbound Studio"}
           </h2>
           <p className="max-w-sm text-[#EDEDED]/45 text-base leading-relaxed">
             {isMac && detected
@@ -389,7 +389,7 @@ export default function DownloadSection() {
                 <div className="mt-1 p-4 rounded-xl bg-[#111] border border-white/8 flex flex-col gap-3">
                   {STEPS.map((step, i) => (
                     <div key={i} className="flex items-start gap-3">
-                      <span className="w-6 h-6 rounded-lg bg-[#FF5722]/12 text-[#FF7043] flex items-center justify-center shrink-0 mt-0.5 border border-[#FF5722]/15">
+                      <span className="w-6 h-6 rounded-lg bg-[#22FFE0]/12 text-[#22FFE0] flex items-center justify-center shrink-0 mt-0.5 border border-[#22FFE0]/15">
                         {step.icon}
                       </span>
                       <div>
@@ -400,7 +400,7 @@ export default function DownloadSection() {
                   ))}
                   <button
                     onClick={() => setModalOpen(true)}
-                    className="self-end text-[11px] text-[#FF8A65]/60 hover:text-[#FF8A65] transition-colors"
+                    className="self-end text-[11px] text-[#5FFFE8]/60 hover:text-[#5FFFE8] transition-colors"
                   >
                     Ver en detalle →
                   </button>

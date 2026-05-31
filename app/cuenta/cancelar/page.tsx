@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { CancelarClient } from "./CancelarClient";
 
 export const metadata: Metadata = {
-  title: "Cancelar suscripción — GMSportStudio",
+  title: "Cancelar suscripción — Inbound Studio",
   robots: { index: false, follow: false },
 };
 

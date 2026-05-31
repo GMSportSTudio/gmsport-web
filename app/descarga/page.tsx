@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { DescargaClient } from "./DescargaClient";
 
 export const metadata: Metadata = {
-  title: "Descarga GMSportStudio Beta",
+  title: "Descarga Inbound Studio Beta",
   robots: { index: false, follow: false },
 };
 

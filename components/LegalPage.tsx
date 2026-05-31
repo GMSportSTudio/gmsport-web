@@ -32,7 +32,7 @@ export function LegalPage({
           Volver a inicio
         </Link>
 
-        <p className="text-xs font-semibold uppercase tracking-widest text-[#FF7043] mb-3">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#22FFE0] mb-3">
           {subtitle}
         </p>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">

@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
   title: "Términos de la Beta",
-  description: "Condiciones de acceso y uso del programa Beta de GmSportStudio.",
+  description: "Condiciones de acceso y uso del programa Beta de Inbound Studio.",
   robots: { index: false, follow: false },
 };
 
@@ -12,7 +12,7 @@ const sections = [
     title: "1. Descripción del programa Beta",
     content: (
       <p>
-        El Pase Beta de GmSportStudio es un acceso anticipado a una versión en desarrollo (<em>pre-release</em>) de la Aplicación. El objetivo es recoger feedback real de entrenadores para mejorar el producto antes de su lanzamiento oficial. Como producto en Beta, puede contener errores, funcionalidades incompletas y sufrir cambios sin previo aviso.
+        El Pase Beta de Inbound Studio es un acceso anticipado a una versión en desarrollo (<em>pre-release</em>) de la Aplicación. El objetivo es recoger feedback real de entrenadores para mejorar el producto antes de su lanzamiento oficial. Como producto en Beta, puede contener errores, funcionalidades incompletas y sufrir cambios sin previo aviso.
       </p>
     ),
   },
@@ -79,7 +79,7 @@ const sections = [
         </ul>
 
         <p className="mt-3 text-white/40 text-xs">
-          El descuento se aplica de forma automatizada mediante enlaces personales e intransferibles emitidos por GmSportStudio. El titular se reserva el derecho a modificar la estructura de precios; el descuento del 50% para Fundadores en los planes individuales se mantiene como compromiso firme dentro de los términos definidos en este apartado.
+          El descuento se aplica de forma automatizada mediante enlaces personales e intransferibles emitidos por Inbound Studio. El titular se reserva el derecho a modificar la estructura de precios; el descuento del 50% para Fundadores en los planes individuales se mantiene como compromiso firme dentro de los términos definidos en este apartado.
         </p>
       </>
     ),
@@ -106,7 +106,7 @@ const sections = [
     content: (
       <>
         <p>
-          GmSportStudio y todos sus componentes —incluyendo, sin carácter limitativo, el código fuente, código objeto, bytecode, algoritmos, estructuras de datos, modelos de análisis deportivo, interfaces gráficas, recursos visuales y documentación técnica— son obras originales protegidas por la <strong className="text-white/70">Ley de Propiedad Intelectual (Real Decreto Legislativo 1/1996)</strong>, la <strong className="text-white/70">Directiva 2009/24/CE</strong> sobre protección jurídica de programas de ordenador, y el <strong className="text-white/70">Convenio de Berna</strong>. Todos los derechos están reservados en su integridad al titular.
+          Inbound Studio y todos sus componentes —incluyendo, sin carácter limitativo, el código fuente, código objeto, bytecode, algoritmos, estructuras de datos, modelos de análisis deportivo, interfaces gráficas, recursos visuales y documentación técnica— son obras originales protegidas por la <strong className="text-white/70">Ley de Propiedad Intelectual (Real Decreto Legislativo 1/1996)</strong>, la <strong className="text-white/70">Directiva 2009/24/CE</strong> sobre protección jurídica de programas de ordenador, y el <strong className="text-white/70">Convenio de Berna</strong>. Todos los derechos están reservados en su integridad al titular.
         </p>
         <p>
           Queda <strong className="text-white/70">terminante y absolutamente prohibido</strong>, con independencia del fin alegado:
@@ -117,13 +117,13 @@ const sections = [
           <li><strong className="text-white/60">Desofuscar, depurar o instrumentar</strong> la Aplicación con el objetivo de reconstruir su lógica interna, sus algoritmos o su código fuente.</li>
           <li><strong className="text-white/60">Extraer, copiar o derivar</strong> cualquier parte del código fuente, ya sea directa o indirectamente.</li>
           <li><strong className="text-white/60">Eliminar, eludir o alterar</strong> cualquier medida tecnológica de protección (DRM, ofuscación, firma de código, licencias) implementada en la Aplicación, en vulneración del Art. 160 LPI y el Art. 6 de la Directiva 2001/29/CE.</li>
-          <li><strong className="text-white/60">Crear obras derivadas</strong> basadas total o parcialmente en el código, diseño o lógica de GmSportStudio.</li>
+          <li><strong className="text-white/60">Crear obras derivadas</strong> basadas total o parcialmente en el código, diseño o lógica de Inbound Studio.</li>
           <li><strong className="text-white/60">Divulgar, publicar o compartir</strong> cualquier hallazgo, código o información obtenida mediante alguna de las acciones anteriores.</li>
         </ul>
         <p className="mt-3">
           La excepción prevista en el Art. 100.5 LPI (interoperabilidad) únicamente se podrá invocar previa solicitud escrita y autorización expresa del titular. En ningún caso se entenderá tácitamente concedida.
         </p>
-        <p className="mt-2 text-[#FF5722]/80 font-semibold text-xs tracking-wide uppercase">
+        <p className="mt-2 text-[#22FFE0]/80 font-semibold text-xs tracking-wide uppercase">
           Consecuencias del incumplimiento
         </p>
         <p className="mt-1">

@@ -1,12 +1,12 @@
 {
   "Metadata": {
-    "title": "GmSportStudio | Software de Vídeo Análisis para Baloncesto",
-    "titleTemplate": "%s · GmSportStudio",
+    "title": "Inbound Studio | Software de Vídeo Análisis para Baloncesto",
+    "titleTemplate": "%s · Inbound Studio",
     "description": "Analiza partidos de baloncesto con botonera infinita personalizable, varios partidos por proyecto y corte de clips ultrarrápido. Base de datos local offline. Planes mensuales, anuales y licencias para clubes. Tecnología de élite a precio asequible.",
-    "ogTitle": "GmSportStudio | Vídeo Análisis Deportivo para Entrenadores",
+    "ogTitle": "Inbound Studio | Vídeo Análisis Deportivo para Entrenadores",
     "ogDescription": "Botonera infinita, varios partidos por proyecto y corte de clips en segundos. La herramienta de análisis profesional para entrenadores a precio asequible.",
-    "ogImageAlt": "GmSportStudio — Software de vídeo análisis deportivo para baloncesto y fútbol",
-    "twitterTitle": "GmSportStudio | Vídeo Análisis Deportivo",
+    "ogImageAlt": "Inbound Studio — Software de vídeo análisis deportivo para baloncesto y fútbol",
+    "twitterTitle": "Inbound Studio | Vídeo Análisis Deportivo",
     "twitterDescription": "Botonera infinita, multi-partido y corte de clips. La herramienta profesional para entrenadores a precio asequible."
   },
   "Navbar": {
@@ -14,7 +14,7 @@
     "pricing": "Precios",
     "faq": "FAQ",
     "ctaBeta": "Voir les plans",
-    "logoLabel": "GmSportStudio — inicio",
+    "logoLabel": "Inbound Studio — inicio",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú"
   },
@@ -22,14 +22,14 @@
     "badge": "● Disponible · Logiciel professionnel",
     "titleLine1": "El scouting de élite",
     "titleLine2": "ya no es un privilegio.",
-    "subtitle": "GmSportStudio pone el análisis profesional en tu laptop. Botonera infinita, varios partidos por proyecto y corte de clips en segundos — a un precio que cualquier entrenador puede permitirse.",
+    "subtitle": "Inbound Studio pone el análisis profesional en tu laptop. Botonera infinita, varios partidos por proyecto y corte de clips en segundos — a un precio que cualquier entrenador puede permitirse.",
     "cta": "Voir les plans",
     "socialProofPrice": "À partir de 14,99€/mois",
     "socialProofLaunch": "Lancement commercial",
     "socialProofPlatform": "Mac & Windows"
   },
   "CountdownHero": {
-    "ariaLabel": "GMSportStudio est disponible. Abonnez-vous à partir de 14,99 €/mois.",
+    "ariaLabel": "Inbound Studio est disponible. Abonnez-vous à partir de 14,99 €/mois.",
     "labelLaunched": "Disponible",
     "labelAvailable": "Pour entraîneurs professionnels",
     "labelSamePrice": "À partir de 14,99 €/mois",
@@ -39,8 +39,8 @@
     "labelSec": "Sec"
   },
   "WhySection": {
-    "sectionLabel": "Por qué elegir GmSportStudio",
-    "eyebrow": "Por qué GmSportStudio",
+    "sectionLabel": "Por qué elegir Inbound Studio",
+    "eyebrow": "Por qué Inbound Studio",
     "title1": "Herramientas de élite",
     "title2": "al alcance de todos",
     "subtitle": "El mismo nivel de análisis que usan los equipos profesionales, con planes diseñados para entrenadores individuales y clubes de cualquier categoría.",
@@ -67,7 +67,7 @@
       "price": {
         "tag": "Precio accesible",
         "title": "Tecnología de élite para clubes modestos",
-        "body": "El software de análisis profesional ha sido históricamente inaccesible para la mayoría de clubes. GmSportStudio rompe esa barrera con planes mensuales, anuales y paquetes de licencias para equipos, sin renunciar a ninguna función.",
+        "body": "El software de análisis profesional ha sido históricamente inaccesible para la mayoría de clubes. Inbound Studio rompe esa barrera con planes mensuales, anuales y paquetes de licencias para equipos, sin renunciar a ninguna función.",
         "bullet0": "Planes mensuales y anuales",
         "bullet1": "Licencias para clubes y academias",
         "bullet2": "Sin costes ocultos"
@@ -124,7 +124,7 @@
   "PricingSection": {
     "eyebrow": "Choisissez votre plan",
     "title1": "Abonnez-vous à",
-    "title2": "GMSportStudio",
+    "title2": "Inbound Studio",
     "subtitle": "Analyse professionnelle de basketball. Annulez à tout moment.",
     "monthlyEyebrow": "Plan Mensuel",
     "monthlyTitle": "Paiement mois par mois",
@@ -182,7 +182,7 @@
       "ceoLabel": "CEO"
     },
     "betaAccess": "Voir les plans →",
-    "copyright": "© {year} GmSportStudio. Todos los derechos reservados.",
+    "copyright": "© {year} Inbound Studio. Todos los derechos reservados.",
     "systemStatus": "System Status:",
     "systemStatusOk": "All systems operational"
   },
@@ -213,8 +213,8 @@
       "platforms": "Compatible con macOS y Windows"
     },
     "video": {
-      "name": "GmSportStudio — Demo de análisis táctico",
-      "description": "Demostración del flujo de trabajo de videoanálisis en GmSportStudio: botonera infinita, varios partidos en un proyecto y corte de clips."
+      "name": "Inbound Studio — Demo de análisis táctico",
+      "description": "Demostración del flujo de trabajo de videoanálisis en Inbound Studio: botonera infinita, varios partidos en un proyecto y corte de clips."
     }
   }
 }

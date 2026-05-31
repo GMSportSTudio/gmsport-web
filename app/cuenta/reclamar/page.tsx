@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { ReclamarClient } from "./ReclamarClient";
 
 export const metadata: Metadata = {
-  title: "Reclamar pago — GMSportStudio",
+  title: "Reclamar pago — Inbound Studio",
   robots: { index: false, follow: false },
 };
 

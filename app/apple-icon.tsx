@@ -19,7 +19,7 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#080C10",
+          background: "#0A0E16",
         }}
       >
         <img src={getLogoDataUri(180)} width={180} height={180} alt="" />
