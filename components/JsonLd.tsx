@@ -38,7 +38,7 @@ export default async function JsonLd({ locale }: { locale: string }) {
         price: "14.99",
         priceCurrency: "EUR",
         availability: "https://schema.org/InStock",
-        url: "https://gmsportstudio.gumroad.com/l/gms-mensual",
+        url: "https://inboundstudio.gumroad.com/l/inbound-mensual",
         priceSpecification: {
           "@type": "UnitPriceSpecification",
           price: "14.99",
@@ -54,7 +54,7 @@ export default async function JsonLd({ locale }: { locale: string }) {
         price: "99",
         priceCurrency: "EUR",
         availability: "https://schema.org/InStock",
-        url: "https://gmsportstudio.gumroad.com/l/gms-anual",
+        url: "https://inboundstudio.gumroad.com/l/Inbound-anual",
         priceSpecification: {
           "@type": "UnitPriceSpecification",
           price: "99",

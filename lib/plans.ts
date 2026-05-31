@@ -10,7 +10,7 @@
 export const INDIVIDUAL_MONTHLY = {
   id: "individual_monthly",
   priceEur: 14.99,
-  gumroadUrl: "https://gmsportstudio.gumroad.com/l/gms-mensual",
+  gumroadUrl: "https://inboundstudio.gumroad.com/l/inbound-mensual",
   productId: "jmygj",
 } as const;
 
@@ -20,7 +20,7 @@ export const INDIVIDUAL_ANNUAL = {
   pricePerMonthEur: 8.25,
   // (14.99 * 12) − 99 = 80.88 ahorrado vs mensual·12 → ~45 %
   savingsPct: 45,
-  gumroadUrl: "https://gmsportstudio.gumroad.com/l/gms-anual",
+  gumroadUrl: "https://inboundstudio.gumroad.com/l/Inbound-anual",
   productId: "ubygvp",
 } as const;
 
