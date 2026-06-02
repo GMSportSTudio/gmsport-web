@@ -183,7 +183,7 @@ function MacFirstOpenGuide() {
             <p style={{ margin: 0, fontSize: 13, color: "#9095a0", lineHeight: 1.6 }}>
               <strong style={{ color: "#e8eaf0" }}>¿El botón &ldquo;Abrir igualmente&rdquo; no aparece?</strong>{" "}
               Solo es visible durante unos minutos tras intentar abrir la app.
-              Vuelve a hacer doble clic en GMSportStudio, dale a &ldquo;Aceptar&rdquo; en el aviso
+              Vuelve a hacer doble clic en Inbound Studio, dale a &ldquo;Aceptar&rdquo; en el aviso
               e inmediatamente abre Ajustes → Privacidad y Seguridad. El botón estará ahí.
             </p>
           </div>
@@ -193,6 +193,72 @@ function MacFirstOpenGuide() {
             <a href="mailto:ceo@inboundbasketballstudio.com" style={{ color: "#22FFE0" }}>ceo@inboundbasketballstudio.com</a>
             {" "}indicando tu versión exacta de macOS
             (menú Apple → Acerca de este Mac → te aparece, p.ej. &ldquo;15.3.1&rdquo;).
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function WindowsFirstOpenGuide() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 16, padding: "20px 28px", marginBottom: 16 }}>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        style={{
+          width: "100%", background: "transparent", border: "none", padding: 0,
+          color: "#e8eaf0", fontSize: 15, fontWeight: 700, textAlign: "left",
+          cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center",
+        }}
+      >
+        <span>💾 En Windows: descomprime el ZIP antes de abrir la app</span>
+        <span style={{ color: "#9095a0", fontSize: 22, lineHeight: 1, marginLeft: 12 }}>{open ? "−" : "+"}</span>
+      </button>
+
+      {open && (
+        <div style={{ marginTop: 16, color: "#9095a0", fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ margin: "0 0 14px" }}>
+            La descarga es un archivo <strong style={{ color: "#e8eaf0" }}>.zip</strong>. Tienes que
+            <strong style={{ color: "#e8eaf0" }}> extraerlo entero</strong> antes de abrir la app. Si
+            ejecutas el <code style={{ background: "#0f1117", padding: "1px 6px", borderRadius: 4, fontSize: 12 }}>.exe</code>
+            {" "}desde dentro del zip (sin extraer), Windows no encuentra los archivos que la app necesita
+            y verás un error tipo
+            {" "}<em style={{ color: "#e8eaf0" }}>&ldquo;Failed to load Python DLL / python312.dll&rdquo;</em>.
+          </p>
+
+          <ol style={{ margin: 0, paddingLeft: 20 }}>
+            <li style={{ marginBottom: 10 }}>
+              Busca el <strong style={{ color: "#e8eaf0" }}>.zip</strong> descargado (normalmente en la carpeta
+              {" "}<strong style={{ color: "#e8eaf0" }}>Descargas</strong>).
+            </li>
+            <li style={{ marginBottom: 10 }}>
+              <strong style={{ color: "#e8eaf0" }}>Clic derecho → &ldquo;Extraer todo…&rdquo;</strong> y pulsa
+              {" "}<strong style={{ color: "#e8eaf0" }}>Extraer</strong>.
+            </li>
+            <li style={{ marginBottom: 10 }}>
+              Abre la <strong style={{ color: "#e8eaf0" }}>carpeta que se ha creado</strong> al extraer.
+            </li>
+            <li>
+              Ejecuta <strong style={{ color: "#e8eaf0" }}>InboundStudio.exe</strong> desde esa carpeta
+              {" "}(<strong style={{ color: "#e8eaf0" }}>no</strong> desde dentro del zip).
+            </li>
+          </ol>
+
+          <div style={{ marginTop: 18, padding: "12px 14px", background: "#0f1117", border: "1px solid #23272f", borderRadius: 8 }}>
+            <p style={{ margin: 0, fontSize: 13, color: "#9095a0", lineHeight: 1.6 }}>
+              <strong style={{ color: "#e8eaf0" }}>¿Sale &ldquo;Windows protegió tu PC&rdquo; (SmartScreen)?</strong>{" "}
+              Pulsa <strong style={{ color: "#22FFE0" }}>&ldquo;Más información&rdquo;</strong> y luego
+              {" "}<strong style={{ color: "#22FFE0" }}>&ldquo;Ejecutar de todas formas&rdquo;</strong>.
+              Es normal en apps nuevas; desaparece a medida que más gente la instala.
+            </p>
+          </div>
+
+          <p style={{ margin: "16px 0 0", fontSize: 13, color: "#555d6e", lineHeight: 1.6 }}>
+            ¿Sigue sin abrir? Escríbenos a{" "}
+            <a href="mailto:ceo@inboundbasketballstudio.com" style={{ color: "#22FFE0" }}>ceo@inboundbasketballstudio.com</a>
+            {" "}contándonos qué error te aparece.
           </p>
         </div>
       )}
@@ -628,6 +694,9 @@ export function DescargaClient() {
               {platformIds.some((p) => p.startsWith("mac")) && (
                 <MacFirstOpenGuide />
               )}
+              {platformIds.includes("windows") && (
+                <WindowsFirstOpenGuide />
+              )}
 
               <div style={{ textAlign: "center", marginTop: 24 }}>
                 <p style={{ color: "#3a3f50", fontSize: 12 }}>
@@ -797,6 +866,9 @@ export function DescargaClient() {
               {/* Panel ayuda Gatekeeper Sequoia (caso #71 Xavier Isern). */}
               {platformIds.some((p) => p.startsWith("mac")) && (
                 <MacFirstOpenGuide />
+              )}
+              {platformIds.includes("windows") && (
+                <WindowsFirstOpenGuide />
               )}
 
               <div style={{ textAlign: "center", marginTop: 24 }}>
