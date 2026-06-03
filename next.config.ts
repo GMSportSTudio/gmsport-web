@@ -7,6 +7,22 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      // Rebrand 2026-06: el dominio viejo gmsportstudio.com sigue servido por
+      // el proyecto Vercel antiguo, que despliega ESTE mismo repo. Un redirect
+      // por host manda cualquier visita del dominio viejo a la marca nueva
+      // (308 permanente, conservando la ruta). No afecta a inboundbasketballstudio.com.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "gmsportstudio.com" }],
+        destination: "https://www.inboundbasketballstudio.com/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.gmsportstudio.com" }],
+        destination: "https://www.inboundbasketballstudio.com/:path*",
+        permanent: true,
+      },
       { source: "/terminos-beta", destination: "/", permanent: true },
       { source: "/pt", destination: "/", permanent: true },
       { source: "/pt/:path*", destination: "/:path*", permanent: true },
