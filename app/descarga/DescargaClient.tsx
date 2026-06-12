@@ -288,6 +288,7 @@ const errorMessages: Record<string, string> = {
   no_session_expired:   "Tu sesión ha expirado. Vuelve a iniciar sesión con el enlace mágico.",
   invalid_platform:     "Plataforma no soportada en este momento.",
   no_release:           "Aún no hay build disponible para esta plataforma. Si crees que es un error, contacta con ceo@inboundbasketballstudio.com.",
+  v2_not_invited:       "La preview de Inbound Studio 2.0 es por invitación. Si quieres participar, escríbenos a ceo@inboundbasketballstudio.com.",
 };
 
 type AuthStatus = "loading_auth" | "no_session" | "link_sent" | "signing_in" | "authenticated";
@@ -496,6 +497,9 @@ export function DescargaClient() {
         //   · "No tienes una licencia activa..." → no_active_license
         if (msg.includes("email") && msg.includes("verif")) {
           mapped = "email_not_verified";
+        } else if (msg.includes("invitaci") || msg.includes("preview")) {
+          // getSignedDownloadUrl rechaza plataformas v2-* sin v2PreviewAccess
+          mapped = "v2_not_invited";
         } else {
           mapped = "no_active_license";
         }
@@ -854,6 +858,39 @@ export function DescargaClient() {
                   </p>
                 </div>
               )}
+
+              {/* ── Inbound Studio 2.0 — preview privada ─────────────────
+                  Visible para cualquier sesión autenticada: el control de
+                  acceso es server-side (getSignedDownloadUrl exige
+                  v2PreviewAccess para plataformas v2-*). Sin invitación,
+                  el click devuelve permission-denied → v2_not_invited. */}
+              <div style={{ background: "rgba(34,255,224,0.04)", border: "1px dashed rgba(34,255,224,0.35)", borderRadius: 16, padding: "20px 24px", marginTop: 24, marginBottom: 16 }}>
+                <p style={{ color: "#22FFE0", fontSize: 14, fontWeight: 700, margin: "0 0 4px" }}>
+                  🧪 Inbound Studio 2.0 — Preview privada
+                </p>
+                <p style={{ color: "#9095a0", fontSize: 12, margin: "0 0 14px", lineHeight: 1.6 }}>
+                  El nuevo motor, mucho más fluido. Solo por invitación: si la tienes,
+                  descarga tu plataforma e inicia sesión en la app con esta misma cuenta.
+                </p>
+                {platformIds.map(platform => {
+                  const info = PLATFORM_LABELS[platform];
+                  if (!info) return null;
+                  const v2Platform = `v2-${platform}`;
+                  return (
+                    <div key={v2Platform} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 0", gap: 12 }}>
+                      <p style={{ color: "#e8eaf0", fontSize: 13, margin: 0 }}>
+                        {info.icon} Inbound 2.0 — {info.name}
+                      </p>
+                      <button
+                        onClick={() => handlePaidDownload(v2Platform)}
+                        disabled={downloading === v2Platform}
+                        style={{ background: "transparent", color: "#22FFE0", border: "1px solid rgba(34,255,224,0.5)", borderRadius: 8, padding: "8px 16px", fontWeight: 600, fontSize: 13, cursor: "pointer", whiteSpace: "nowrap", opacity: downloading === v2Platform ? 0.7 : 1 }}>
+                        {downloading === v2Platform ? "Preparando…" : "Descargar preview →"}
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
 
               {dlError && (
                 <div style={{ background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.3)", borderRadius: 12, padding: "14px 18px", marginTop: 8, marginBottom: 8 }}>
