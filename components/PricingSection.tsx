@@ -342,7 +342,7 @@ export default function PricingSection() {
           </p>
 
           <a
-            href="mailto:ceo@inboundbasketballstudio.com?subject=Inter%C3%A9s%20en%20plan%20Club%20GMSportStudio"
+            href="mailto:ceo@inboundbasketballstudio.com?subject=Inter%C3%A9s%20en%20plan%20Club%20Inbound%20Studio"
             className="inline-flex items-center gap-1.5 text-xs font-semibold
                        text-[#22FFE0] hover:text-[#5FFFE8] transition-colors duration-150"
           >

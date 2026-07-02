@@ -42,7 +42,7 @@ export default function Footer() {
     },
     {
       label: "Instagram",
-      href:  "https://instagram.com/gmsportstudio",
+      href:  "https://instagram.com/inboundbasketballstudio",
       icon:  <InstagramIcon />,
     },
   ];

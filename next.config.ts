@@ -7,22 +7,12 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 const nextConfig: NextConfig = {
   async redirects() {
     return [
-      // Rebrand 2026-06: el dominio viejo gmsportstudio.com sigue servido por
-      // el proyecto Vercel antiguo, que despliega ESTE mismo repo. Un redirect
-      // por host manda cualquier visita del dominio viejo a la marca nueva
-      // (308 permanente, conservando la ruta). No afecta a inboundbasketballstudio.com.
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "gmsportstudio.com" }],
-        destination: "https://www.inboundbasketballstudio.com/:path*",
-        permanent: true,
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.gmsportstudio.com" }],
-        destination: "https://www.inboundbasketballstudio.com/:path*",
-        permanent: true,
-      },
+      // Rebrand 2026-07: el 308 del dominio viejo gmsportstudio.com se ha
+      // ELIMINADO deliberadamente (requerimiento marca GM SCOUT, email
+      // 01/07/2026). El redirect permanente transfería las señales SEO del
+      // dominio viejo y mantenía la web nueva posicionada para la búsqueda
+      // "GM SPORT". Ahora middleware.ts responde 410 Gone por host. NO
+      // volver a añadir el redirect sin hablar con legal.
       { source: "/terminos-beta", destination: "/", permanent: true },
       { source: "/pt", destination: "/", permanent: true },
       { source: "/pt/:path*", destination: "/:path*", permanent: true },

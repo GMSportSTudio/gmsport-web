@@ -84,7 +84,7 @@ async function detectMacArch(): Promise<"silicon" | "intel" | null> {
 const MAC_NOTE =
   "Si en la primera apertura macOS muestra un aviso de seguridad, " +
   "abre el panel \"¿Aparece un aviso de seguridad?\" al final de la página. " +
-  "Para verificar integridad: shasum -a 256 ~/Downloads/GMSportStudio*.zip " +
+  "Para verificar integridad: shasum -a 256 ~/Downloads/InboundStudio*.zip " +
   "y comparar con el SHA256 publicado.";
 
 const PLATFORM_LABELS: Record<string, { icon: string; name: string; note: string }> = {
@@ -108,7 +108,7 @@ const PLATFORM_LABELS: Record<string, { icon: string; name: string; note: string
     name: "Windows (x64)",
     note:
       "Antes de ejecutar, verifica la integridad en PowerShell: " +
-      "Get-FileHash -Algorithm SHA256 GMSportStudio*.zip " +
+      "Get-FileHash -Algorithm SHA256 InboundStudio*.zip " +
       "y compara con el SHA256 publicado debajo. " +
       "Solo si el hash coincide, ejecuta la app.",
   },
