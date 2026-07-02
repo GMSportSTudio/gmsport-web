@@ -552,16 +552,19 @@ export function DescargaClient() {
         {/*
             Tarea #160 (2026-05-24): el manual PDF es contenido comercial /
             onboarding sin secrets. Cualquiera (founders, suscriptores,
-            prospects, prensa) puede descargarlo sin login. La URL apunta a
-            manuals/Manual_InboundStudio_latest.pdf en Storage (regla pública
-            en storage.rules), que cada release sobrescribe con la versión
-            actual. Visible en TODOS los estados (con token, sin token, con
-            auth, sin auth) para que no se esconda bajo el flujo de login.
-            ⚠ Rebrand 2026-07: subir el PDF nuevo a Storage ANTES de
-            desplegar este cambio, o el enlace dará 404.
+            prospects, prensa) puede descargarlo sin login. Visible en TODOS
+            los estados (con token, sin token, con auth, sin auth) para que
+            no se esconda bajo el flujo de login.
+            Rebrand 2026-07: el PDF ahora se sirve desde public/ del propio
+            repo (se despliega con la web, sin paso manual de Storage).
+            Para actualizarlo en cada release: regenerar con
+            scripts/build_manual_pdf.py y sobrescribir
+            public/Manual_InboundStudio_latest.pdf. El objeto antiguo de
+            Storage (manuals/Manual_GMSportStudio_latest.pdf) se mantiene
+            por los enlaces de emails viejos — su contenido ya es Inbound.
         */}
         <a
-          href="https://firebasestorage.googleapis.com/v0/b/gmsportstudio-53bbf.firebasestorage.app/o/manuals%2FManual_InboundStudio_latest.pdf?alt=media"
+          href="/Manual_InboundStudio_latest.pdf"
           target="_blank"
           rel="noopener noreferrer"
           style={{
