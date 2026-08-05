@@ -342,8 +342,8 @@ export function GrantsPanel() {
             hay cargos automáticos. Recibe un correo al empezar, otro a falta de 3 días
             y otro el día que caduca, los tres con el enlace de suscripción anual.
             <br />
-            <strong style={{ color: "#c0c5ce" }}>Requisito:</strong> la persona debe
-            haberse registrado antes en la app o en el portal. Solo se permite una
+            Si la persona no tiene cuenta, <strong style={{ color: "#c0c5ce" }}>se la creo yo</strong> y
+            el correo le lleva un enlace para poner su contraseña. Solo se permite una
             prueba por email.
           </p>
           <TrialForm />
@@ -371,10 +371,11 @@ function TrialForm() {
   // código crudo de la callable.
   const errorText: Record<string, string> = {
     already_granted:    "Este email ya tuvo una prueba. Solo se permite una por persona.",
-    user_not_registered:"Esa cuenta no existe todavía. Dile que se registre en la app o en el portal y vuelve a intentarlo.",
+    user_not_registered:"No se pudo resolver la cuenta. Reintenta en unos segundos.",
     paid_plan_active:   "Esa cuenta ya tiene una suscripción de pago activa — no tiene sentido darle una prueba.",
     invalid_email:      "Email no válido.",
     invalid_days:       "Número de días no válido (entre 1 y 90).",
+    auth_create_failed: "No se pudo crear la cuenta. Mira los logs de la función y reintenta.",
   };
 
   const submit = async () => {
@@ -391,10 +392,14 @@ function TrialForm() {
     setBusy(true);
     try {
       // Forma real del return de grantTrial (functions/admin_grants.js):
-      // { ok, uid, email, days, activeUntil (ms), forced, emailSent }
+      // { ok, uid, email, days, activeUntil (ms), forced, emailSent,
+      //   authUserCreated, passwordLinkMissing }
       const fn = httpsCallable<
         { email: string; days: number },
-        { ok?: boolean; days?: number; activeUntil?: number; emailSent?: boolean }
+        {
+          ok?: boolean; days?: number; activeUntil?: number; emailSent?: boolean;
+          authUserCreated?: boolean; passwordLinkMissing?: boolean;
+        }
       >(functions, "grantTrial");
       const r = await fn({ email: e, days });
       setIsErr(false);
@@ -402,13 +407,26 @@ function TrialForm() {
         ? new Date(r.data.activeUntil).toLocaleDateString("es-ES",
             { day: "numeric", month: "long", year: "numeric" })
         : null;
-      setMsg(
+
+      const partes = [
         `✓ Prueba de ${days} días activada para ${e}` +
-        (hasta ? ` — válida hasta el ${hasta}.` : ".") +
-        (r.data?.emailSent === false
-          ? " ⚠ Pero el correo NO salió: avísale tú."
-          : " Le ha llegado un correo con las instrucciones.")
-      );
+          (hasta ? ` — válida hasta el ${hasta}.` : "."),
+      ];
+      if (r.data?.authUserCreated) {
+        partes.push("Le he creado la cuenta y el correo lleva un enlace para que ponga su contraseña.");
+      }
+      if (r.data?.emailSent === false) {
+        partes.push("⚠ Pero el correo NO salió: avísale tú.");
+      } else if (!r.data?.authUserCreated) {
+        partes.push("Le ha llegado un correo con las instrucciones.");
+      }
+      if (r.data?.passwordLinkMissing) {
+        partes.push(
+          "⚠ No se pudo generar el enlace de contraseña. Sin él no podrá entrar en la app: " +
+          "dile que use «¿Has olvidado la contraseña?» en la pantalla de acceso."
+        );
+      }
+      setMsg(partes.join(" "));
       setEmail("");
     } catch (err: unknown) {
       console.error("grantTrial", err);
