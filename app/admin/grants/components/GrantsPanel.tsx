@@ -329,13 +329,124 @@ export function GrantsPanel() {
           <V2PreviewForm />
         </div>
 
+        {/* ── Demo de 14 días ────────────────────────────────────────────
+            grantTrial: licencia activa 14 días con source=manual_trial.
+            Caduca sola (evaluateAccess mira activeUntil); el cron
+            scheduledTrialLifecycle avisa a falta de 3 días y el día que
+            termina, siempre con el enlace de compra anual. */}
+        <div style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 16, padding: "28px 32px", marginTop: 24 }}>
+          <h2 style={{ color: "#e8eaf0", fontSize: 18, margin: "0 0 4px" }}>🎁 Demo de 14 días</h2>
+          <p style={{ color: "#9095a0", fontSize: 13, margin: "0 0 18px", lineHeight: 1.6 }}>
+            Da acceso completo durante 14 días — descarga la 1.3 y la 2.0, igual que
+            un cliente de pago. Se apaga sola al terminar: no hay que revocar nada ni
+            hay cargos automáticos. Recibe un correo al empezar, otro a falta de 3 días
+            y otro el día que caduca, los tres con el enlace de suscripción anual.
+            <br />
+            <strong style={{ color: "#c0c5ce" }}>Requisito:</strong> la persona debe
+            haberse registrado antes en la app o en el portal. Solo se permite una
+            prueba por email.
+          </p>
+          <TrialForm />
+        </div>
+
         <p style={{ color: "#3a3f50", fontSize: 11, marginTop: 32, textAlign: "center", lineHeight: 1.6 }}>
-          Las callables están en us-central1 (pendiente migración a europe-west1, backlog #40).
+          Callables en <code>europe-west1</code>.
           <br />
           Audit log completo en Firestore: <code>license_audit_logs</code> con
           <code> action=free_grant_created</code> /<code> free_grant_revoked</code>.
         </p>
       </div>
+    </div>
+  );
+}
+
+function TrialForm() {
+  const [email, setEmail] = useState("");
+  const [days, setDays]   = useState(14);
+  const [busy, setBusy]   = useState(false);
+  const [msg, setMsg]     = useState<string | null>(null);
+  const [isErr, setIsErr] = useState(false);
+
+  // Mensajes de los errores que devuelve grantTrial, para no enseñar el
+  // código crudo de la callable.
+  const errorText: Record<string, string> = {
+    already_granted:    "Este email ya tuvo una prueba. Solo se permite una por persona.",
+    user_not_registered:"Esa cuenta no existe todavía. Dile que se registre en la app o en el portal y vuelve a intentarlo.",
+    paid_plan_active:   "Esa cuenta ya tiene una suscripción de pago activa — no tiene sentido darle una prueba.",
+    invalid_email:      "Email no válido.",
+    invalid_days:       "Número de días no válido (entre 1 y 90).",
+  };
+
+  const submit = async () => {
+    setMsg(null);
+    const e = email.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) {
+      setIsErr(true); setMsg("Email no válido."); return;
+    }
+    if (!Number.isFinite(days) || days < 1 || days > 90) {
+      setIsErr(true); setMsg("Los días deben estar entre 1 y 90."); return;
+    }
+    if (!window.confirm(`¿Dar ${days} días de prueba a ${e}?`)) return;
+
+    setBusy(true);
+    try {
+      // Forma real del return de grantTrial (functions/admin_grants.js):
+      // { ok, uid, email, days, activeUntil (ms), forced, emailSent }
+      const fn = httpsCallable<
+        { email: string; days: number },
+        { ok?: boolean; days?: number; activeUntil?: number; emailSent?: boolean }
+      >(functions, "grantTrial");
+      const r = await fn({ email: e, days });
+      setIsErr(false);
+      const hasta = r.data?.activeUntil
+        ? new Date(r.data.activeUntil).toLocaleDateString("es-ES",
+            { day: "numeric", month: "long", year: "numeric" })
+        : null;
+      setMsg(
+        `✓ Prueba de ${days} días activada para ${e}` +
+        (hasta ? ` — válida hasta el ${hasta}.` : ".") +
+        (r.data?.emailSent === false
+          ? " ⚠ Pero el correo NO salió: avísale tú."
+          : " Le ha llegado un correo con las instrucciones.")
+      );
+      setEmail("");
+    } catch (err: unknown) {
+      console.error("grantTrial", err);
+      const fe = err as FunctionsError;
+      const key = getErrorKey(err);
+      setIsErr(true);
+      setMsg(errorText[key] || fe?.message || "Error inesperado. Mira la consola.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 12 }}>
+        <input
+          type="email" placeholder="email@delentrenador.com" value={email}
+          onChange={(ev) => setEmail(ev.target.value)}
+          onKeyDown={(ev) => { if (ev.key === "Enter") submit(); }}
+          style={{ ...inputStyle, flex: "3 1 260px" }}
+        />
+        <input
+          type="number" min={1} max={90} value={days}
+          onChange={(ev) => setDays(parseInt(ev.target.value, 10))}
+          title="Días de prueba"
+          style={{ ...inputStyle, flex: "0 0 90px" }}
+        />
+      </div>
+      <button
+        onClick={submit} disabled={busy}
+        style={{ background: "#22FFE0", color: "#06231F", border: "none", borderRadius: 8, padding: "10px 20px", fontWeight: 700, fontSize: 14, cursor: busy ? "default" : "pointer", opacity: busy ? 0.7 : 1 }}>
+        {busy ? "Activando…" : "Dar prueba"}
+      </button>
+      {msg && (
+        <p style={{ color: isErr ? "#f87171" : "#22FFE0", fontSize: 13, marginTop: 14, marginBottom: 0, lineHeight: 1.6 }}>
+          {msg}
+        </p>
+      )}
     </div>
   );
 }
