@@ -502,7 +502,12 @@ export function DescargaClient() {
         if (msg.includes("email") && msg.includes("verif")) {
           mapped = "email_not_verified";
         } else if (msg.includes("invitaci") || msg.includes("preview")) {
-          // getSignedDownloadUrl rechaza plataformas v2-* sin v2PreviewAccess
+          // Camino muerto desde la beta abierta (2026-07-31):
+          // getSignedDownloadUrl ya no rechaza las plataformas v2-* por falta
+          // de v2PreviewAccess. Se mantiene la rama porque es inofensiva y
+          // cubre a quien tenga una pestaña vieja abierta contra la CF
+          // anterior; si en algún momento se vuelve a cerrar el carril, el
+          // mensaje al usuario ya está.
           mapped = "v2_not_invited";
         } else {
           mapped = "no_active_license";
@@ -875,10 +880,17 @@ export function DescargaClient() {
               {/* ── Inbound Studio 2.0 — beta abierta ────────────────────
                   2026-07-31: la 2.0 pasa de "preview por invitación" a beta
                   abierta a cualquier licencia activa. El gate de
-                  v2PreviewAccess se retira en getSignedDownloadUrl, pero el
-                  campo y las callables grantV2Preview/revokeV2Preview siguen
-                  existiendo por si hay que volver a cerrar el carril: basta
-                  con restaurar el bloque en distribution.js.
+                  v2PreviewAccess se retira en getSignedDownloadUrl.
+
+                  2026-08-06: las callables grantV2Preview/revokeV2Preview se
+                  borraron de producción (llevaban fuera del código desde el
+                  commit de beta abierta y el deploy las retiró), y con ellas
+                  el panel de admin que las llamaba. Sobrevive el campo
+                  `v2PreviewAccess` en las licencias que ya lo tenían, sin
+                  ningún lector. Para volver a cerrar el carril hay que
+                  restaurar TRES piezas: el gate en distribution.js, las
+                  callables en admin_grants.js/index.js, y el formulario en
+                  admin/grants/components/GrantsPanel.tsx.
 
                   Jerarquía deliberada: la 1.3.x va arriba, con tarjeta sólida
                   y botón relleno; la 2.0 aquí abajo, en caja punteada y con

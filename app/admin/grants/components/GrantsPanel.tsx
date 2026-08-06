@@ -316,18 +316,18 @@ export function GrantsPanel() {
 
         </div>
 
-        {/* ── Preview privada Inbound Studio 2.0 ─────────────────────────
-            Flag v2PreviewAccess en licenses/{uid}. REQUIERE licencia activa
-            previa (la CF lo valida server-side). Grant envía email al tester
-            con el link de /descarga; revoke es silencioso. */}
-        <div style={{ background: "#161920", border: "1px dashed rgba(34,255,224,0.35)", borderRadius: 16, padding: "28px 32px", marginTop: 24 }}>
-          <h2 style={{ color: "#22FFE0", fontSize: 18, margin: "0 0 4px" }}>🧪 Preview Inbound Studio 2.0</h2>
-          <p style={{ color: "#9095a0", fontSize: 13, margin: "0 0 18px", lineHeight: 1.6 }}>
-            Abre o cierra la descarga de la preview 2.0 a una cuenta que <strong>ya tenga licencia activa</strong>.
-            No toca su licencia — solo el flag <code>v2PreviewAccess</code>.
-          </p>
-          <V2PreviewForm />
-        </div>
+        {/* El panel "Preview Inbound Studio 2.0" vivió aquí hasta el
+            2026-08-06. Lo retiro porque la 2.0 dejó de ser preview privada:
+            `getSignedDownloadUrl` ya no exige `v2PreviewAccess` y cualquiera
+            con licencia activa se la descarga. Las callables que lo
+            respaldaban (grantV2Preview / revokeV2Preview) están fuera del
+            código desde el commit de beta abierta y se borraron de producción
+            en el deploy del 2026-08-06, así que el botón solo podía devolver
+            `functions/not-found`.
+
+            Para volver a cerrar el carril hay que restaurar las tres piezas a
+            la vez: el gate en distribution.js, las callables en
+            admin_grants.js/index.js, y este formulario. */}
 
         {/* ── Demo de 14 días ────────────────────────────────────────────
             grantTrial: licencia activa 14 días con source=manual_trial.
@@ -462,75 +462,6 @@ function TrialForm() {
       </button>
       {msg && (
         <p style={{ color: isErr ? "#f87171" : "#22FFE0", fontSize: 13, marginTop: 14, marginBottom: 0, lineHeight: 1.6 }}>
-          {msg}
-        </p>
-      )}
-    </div>
-  );
-}
-
-function V2PreviewForm() {
-  const [email, setEmail]   = useState("");
-  const [note, setNote]     = useState("");
-  const [busy, setBusy]     = useState<"grant" | "revoke" | null>(null);
-  const [msg, setMsg]       = useState<string | null>(null);
-  const [isErr, setIsErr]   = useState(false);
-
-  const call = async (enabled: boolean) => {
-    setMsg(null);
-    const e = email.trim().toLowerCase();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) {
-      setIsErr(true); setMsg("Email no válido."); return;
-    }
-    if (!enabled && !window.confirm(`¿Cerrar la preview 2.0 a ${e}?`)) return;
-    setBusy(enabled ? "grant" : "revoke");
-    try {
-      const fn = httpsCallable<{ email: string; note?: string }, { status: string }>(
-        functions, enabled ? "grantV2Preview" : "revokeV2Preview");
-      const r = await fn({ email: e, note: note.trim() });
-      setIsErr(false);
-      setMsg(enabled
-        ? `✓ Preview 2.0 abierta a ${e} (${r.data?.status}). Email enviado con el link de descarga.`
-        : `✓ Preview 2.0 cerrada a ${e}.`);
-      if (enabled) { setEmail(""); setNote(""); }
-    } catch (err: unknown) {
-      console.error("v2Preview", err);
-      const fe = err as FunctionsError;
-      setIsErr(true);
-      setMsg(fe?.message || "Error inesperado. Mira la consola.");
-    } finally {
-      setBusy(null);
-    }
-  };
-
-  return (
-    <div>
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 12 }}>
-        <input
-          type="email" placeholder="email@deltester.com" value={email}
-          onChange={(ev) => setEmail(ev.target.value)}
-          style={{ ...inputStyle, flex: "2 1 260px" }}
-        />
-        <input
-          type="text" placeholder="nota interna (opcional)" value={note}
-          onChange={(ev) => setNote(ev.target.value)} maxLength={200}
-          style={{ ...inputStyle, flex: "1 1 180px" }}
-        />
-      </div>
-      <div style={{ display: "flex", gap: 12 }}>
-        <button
-          onClick={() => call(true)} disabled={busy !== null}
-          style={{ background: "#22FFE0", color: "#06231F", border: "none", borderRadius: 8, padding: "10px 20px", fontWeight: 700, fontSize: 14, cursor: "pointer", opacity: busy ? 0.7 : 1 }}>
-          {busy === "grant" ? "Abriendo…" : "Abrir preview"}
-        </button>
-        <button
-          onClick={() => call(false)} disabled={busy !== null}
-          style={{ background: "transparent", color: "#f87171", border: "1px solid rgba(248,113,113,0.4)", borderRadius: 8, padding: "10px 20px", fontWeight: 600, fontSize: 14, cursor: "pointer", opacity: busy ? 0.7 : 1 }}>
-          {busy === "revoke" ? "Cerrando…" : "Cerrar preview"}
-        </button>
-      </div>
-      {msg && (
-        <p style={{ color: isErr ? "#f87171" : "#22FFE0", fontSize: 13, marginTop: 14, marginBottom: 0 }}>
           {msg}
         </p>
       )}
