@@ -1,6 +1,7 @@
 import HeroSection     from "@/components/HeroSection";
 import WhySection      from "@/components/WhySection";
 import FeaturesSection from "@/components/FeaturesSection";
+import TrialRequestSection from "@/components/TrialRequestSection";
 import PricingSection  from "@/components/PricingSection";
 import FaqSection      from "@/components/FaqSection";
 import Footer          from "@/components/Footer";
@@ -11,6 +12,10 @@ export default function Home() {
       <HeroSection />
       <WhySection />
       <FeaturesSection />
+      {/* Justo ANTES de precios: ya ha visto lo que hace la herramienta y
+          todavía no ha visto la cifra. Es donde una prueba gratis convierte
+          mejor que un botón de compra. */}
+      <TrialRequestSection />
       <PricingSection />
       <FaqSection />
       <Footer />
