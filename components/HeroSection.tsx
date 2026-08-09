@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import CountdownHero from "./CountdownHero";
+import TrialForm from "./TrialForm";
 import { useTranslations } from "next-intl";
 
 /* ─── Animaciones ─────────────────────────────────────────────── */
@@ -89,54 +91,37 @@ export default function HeroSection() {
             {t("subtitle")}
           </motion.p>
 
-          {/* CTA con pulso magnético */}
+          {/* CTA principal — el formulario de prueba, aquí mismo.
+              Antes esto era un botón a "#precios": mandaba a la cifra a
+              alguien que todavía no ha probado nada. Ahora la primera acción
+              posible es empezar los 14 días, sin scroll y sin un clic
+              intermedio. El enlace a precios queda debajo para quien ya viene
+              decidido. */}
           <motion.div
             variants={fadeUp(0.3)}
             initial="hidden"
             animate="visible"
-            className="flex flex-col items-center lg:items-start gap-3 w-full sm:w-auto"
+            className="flex flex-col items-center lg:items-start gap-3 w-full"
           >
-            <div className="relative">
-              {/* Anillo de pulso */}
+            <div className="relative w-full max-w-md">
+              {/* Halo de atención detrás del formulario */}
               <motion.span
                 aria-hidden="true"
-                className="absolute inset-0 rounded-[8px] bg-[#22FFE0]/30"
-                animate={{ scale: [1, 1.18, 1], opacity: [0.5, 0, 0.5] }}
-                transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -inset-2 rounded-2xl bg-[#22FFE0]/12 blur-xl pointer-events-none"
+                animate={{ opacity: [0.45, 0.2, 0.45] }}
+                transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
               />
-              <motion.span
-                aria-hidden="true"
-                className="absolute inset-0 rounded-[8px] bg-[#22FFE0]/18"
-                animate={{ scale: [1, 1.36, 1], opacity: [0.4, 0, 0.4] }}
-                transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-              />
-
-              <motion.a
-                href="#precios"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 380, damping: 22 }}
-                className="relative inline-flex items-center justify-center gap-2.5
-                           w-full sm:w-auto px-8 py-3.5
-                           text-[#06231F] font-semibold text-base cursor-pointer
-                           bg-[#22FFE0] hover:bg-[#5FFFE8]
-                           border border-[rgba(34,255,224,0.55)]
-                           shadow-[0_1px_4px_rgba(0,0,0,0.5),0_0_0_1px_rgba(34,255,224,0.2)]
-                           hover:shadow-[0_0_0_1px_rgba(34,255,224,0.5),0_6px_24px_rgba(34,255,224,0.35)]
-                           transition-all duration-150"
-                style={{ borderRadius: "8px" }}
-              >
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                />
-                <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M8 1.5L10.5 6.5H15L11 9.5L12.5 14.5L8 11.5L3.5 14.5L5 9.5L1 6.5H5.5L8 1.5Z"
-                    fill="currentColor" fillOpacity="0.95" />
-                </svg>
-                {t("cta")}
-              </motion.a>
+              <div className="relative">
+                <TrialForm compacto />
+              </div>
             </div>
+
+            <p className="text-xs text-[#EDEDED]/35">
+              Sin tarjeta · Sin permanencia ·{" "}
+              <a href="#precios" className="underline underline-offset-2 hover:text-[#22FFE0]/80">
+                ver precios
+              </a>
+            </p>
           </motion.div>
 
           {/* Social proof */}
@@ -160,7 +145,10 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Columna derecha — Vídeo demo */}
+        {/* Columna derecha — la app de verdad.
+            Hasta 2026-08-09 aquí había un vídeo de la 1.3.x. Se quitó al
+            pasar la 2.0 a ser el único producto: enseñar la versión que ya
+            no vendemos confunde y envejece la página. */}
         <motion.div
           initial={{ opacity: 0, scale: 0.93, y: 30 }}
           animate={{ opacity: 1, scale: 1,    y: 0  }}
@@ -181,7 +169,7 @@ export default function HeroSection() {
               }}
             />
 
-            {/* Contenedor del vídeo — estética high-end */}
+            {/* Contenedor de la captura — estética high-end */}
             <div
               className="relative w-full overflow-hidden rounded-2xl border border-white/10"
               style={{
@@ -200,25 +188,37 @@ export default function HeroSection() {
                 }}
               />
 
-              {/* Vídeo */}
-              <video
-                src="/frontend-web.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
+              {/* La app etiquetando un partido real.
+                  `priority` porque es la imagen principal del hero: sin esto
+                  Next la carga en diferido y el primer vistazo es un hueco. */}
+              <Image
+                src="/capturas/app-etiquetando.webp"
+                alt="Inbound Studio analizando un partido: botonera de categorías,
+                     descriptores, mini-cancha y línea de tiempo con los clips marcados"
+                width={1800}
+                height={1171}
+                priority
+                sizes="(max-width: 1024px) 100vw, 60vw"
                 className="w-full h-auto block"
               />
 
-              {/* Máscara degradado inferior */}
+              {/* Antes había aquí una máscara que oscurecía el tercio inferior.
+                  Con un vídeo daba empaque; con esta captura tapaba justo la
+                  línea de tiempo con los clips marcados, que es lo que hay que
+                  enseñar. Queda un velo mínimo para fundir con el fondo. */}
               <div
                 aria-hidden="true"
-                className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none z-10"
+                className="absolute inset-x-0 bottom-0 h-16 pointer-events-none z-10"
                 style={{
-                  background: "linear-gradient(to bottom, transparent 0%, rgba(17,17,17,0.65) 60%, rgba(17,17,17,0.97) 100%)",
+                  background: "linear-gradient(to bottom, transparent 0%, rgba(17,17,17,0.45) 100%)",
                 }}
               />
             </div>
+
+            {/* Pie que traduce la captura a lo que le importa al entrenador */}
+            <p className="mt-4 text-center text-xs text-[#EDEDED]/35">
+              21 clips marcados en un partido · botonera propia · atajos de teclado
+            </p>
           </motion.div>
         </motion.div>
       </div>

@@ -96,28 +96,16 @@ export default async function JsonLd({ locale }: { locale: string }) {
     ],
   };
 
-  const videoSchema = {
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: t("video.name"),
-    description: t("video.description"),
-    thumbnailUrl: `${BASE_URL}/opengraph-image`,
-    uploadDate: "2026-04-19T12:00:00+02:00",
-    contentUrl: `${BASE_URL}/frontend-web.mp4`,
-    duration: "PT24S",
-    inLanguage: locale,
-  };
+  // El VideoObject se retiró el 2026-08-09 junto con el vídeo del hero, que
+  // era de la 1.3.x. Google penaliza los datos estructurados que describen
+  // contenido que no está en la página, así que dejarlo apuntando a un .mp4
+  // huérfano era peor que no tenerlo. Si algún día se graba una demo de la
+  // 2.0, se recupera de git — las claves `video.*` siguen en messages/.
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+    />
   );
 }
