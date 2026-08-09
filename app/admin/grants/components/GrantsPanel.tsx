@@ -330,19 +330,23 @@ export function GrantsPanel() {
             admin_grants.js/index.js, y este formulario. */}
 
         {/* ── Demo de 14 días ────────────────────────────────────────────
-            grantTrial: licencia activa 14 días con source=manual_trial.
-            Caduca sola (evaluateAccess mira activeUntil); el cron
-            scheduledTrialLifecycle avisa a falta de 3 días y el día que
-            termina, siempre con el enlace de compra anual. */}
+            grantTrial deja la licencia PENDIENTE (source=manual_trial, sin
+            activeUntil). El reloj arranca cuando la persona pulsa el botón
+            de /prueba — ver functions/trials.js. Después caduca sola
+            (evaluateAccess mira activeUntil) y el cron scheduledTrialLifecycle
+            avisa a falta de 3 días y el día que termina. */}
         <div style={{ background: "#161920", border: "1px solid #23272f", borderRadius: 16, padding: "28px 32px", marginTop: 24 }}>
           <h2 style={{ color: "#e8eaf0", fontSize: 18, margin: "0 0 4px" }}>🎁 Demo de 14 días</h2>
           <p style={{ color: "#9095a0", fontSize: 13, margin: "0 0 18px", lineHeight: 1.6 }}>
             Da acceso completo durante 14 días — descarga la 1.3 y la 2.0, igual que
             un cliente de pago. Se apaga sola al terminar: no hay que revocar nada ni
-            hay cargos automáticos. Recibe un correo al empezar, otro a falta de 3 días
-            y otro el día que caduca, los tres con el enlace de suscripción anual.
+            hay cargos automáticos.
             <br />
-            Si la persona no tiene cuenta, <strong style={{ color: "#c0c5ce" }}>se la creo yo</strong> y
+            <strong style={{ color: "#c0c5ce" }}>Los 14 días no empiezan hoy</strong>: empiezan
+            cuando la persona pulse el botón del correo. Tiene 30 días para hacerlo.
+            Así, si tarda una semana en verlo, no llega a una prueba de siete días.
+            <br />
+            Si no tiene cuenta, <strong style={{ color: "#c0c5ce" }}>se la creo yo</strong> y
             el correo le lleva un enlace para poner su contraseña. Solo se permite una
             prueba por email.
           </p>
@@ -366,20 +370,29 @@ function TrialForm() {
   const [busy, setBusy]   = useState(false);
   const [msg, setMsg]     = useState<string | null>(null);
   const [isErr, setIsErr] = useState(false);
+  const [force, setForce] = useState(false);
+  // El enlace de activación, para poder reenviárselo a mano. Sin esto, cuando
+  // el correo no sale —o cuando alguien deja caducar el suyo y escribe— no
+  // había forma de dárselo desde aquí: solo por la consola de Firebase.
+  const [enlace, setEnlace] = useState<string | null>(null);
+  const [copiado, setCopiado] = useState(false);
 
   // Mensajes de los errores que devuelve grantTrial, para no enseñar el
   // código crudo de la callable.
   const errorText: Record<string, string> = {
-    already_granted:    "Este email ya tuvo una prueba. Solo se permite una por persona.",
+    already_granted:    "Este email ya tuvo una prueba. Marca «forzar» si quieres darle otra o reenviarle el enlace.",
     user_not_registered:"No se pudo resolver la cuenta. Reintenta en unos segundos.",
-    paid_plan_active:   "Esa cuenta ya tiene una suscripción de pago activa — no tiene sentido darle una prueba.",
+    already_has_access: "Esa cuenta ya tiene acceso activo (suscripción, beta tester o concesión). Darle una prueba se lo quitaría.",
     invalid_email:      "Email no válido.",
     invalid_days:       "Número de días no válido (entre 1 y 90).",
     auth_create_failed: "No se pudo crear la cuenta. Mira los logs de la función y reintenta.",
+    activation_link_failed: "No se pudo firmar el enlace de activación (revisa BETA_CONVERSION_JWT_SECRET). No se ha concedido nada.",
   };
 
   const submit = async () => {
     setMsg(null);
+    setEnlace(null);
+    setCopiado(false);
     const e = email.trim().toLowerCase();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) {
       setIsErr(true); setMsg("Email no válido."); return;
@@ -387,47 +400,49 @@ function TrialForm() {
     if (!Number.isFinite(days) || days < 1 || days > 90) {
       setIsErr(true); setMsg("Los días deben estar entre 1 y 90."); return;
     }
-    if (!window.confirm(`¿Dar ${days} días de prueba a ${e}?`)) return;
+    const aviso = force
+      ? `¿Dar ${days} días a ${e} FORZANDO? Si ya tenía una prueba, se reemplaza.`
+      : `¿Dar ${days} días de prueba a ${e}?`;
+    if (!window.confirm(aviso)) return;
 
     setBusy(true);
     try {
-      // Forma real del return de grantTrial (functions/admin_grants.js):
-      // { ok, uid, email, days, activeUntil (ms), forced, emailSent,
-      //   authUserCreated, passwordLinkMissing }
+      // Forma real del return de grantTrial (functions/admin_grants.js).
+      // Desde 2026-08-09 `activeUntil` llega SIEMPRE null: la prueba nace
+      // pendiente y el reloj arranca cuando la persona pulsa el botón del
+      // correo. Lo que hay que enseñar aquí es hasta cuándo puede hacerlo.
       const fn = httpsCallable<
-        { email: string; days: number },
+        { email: string; days: number; force?: boolean },
         {
-          ok?: boolean; days?: number; activeUntil?: number; emailSent?: boolean;
-          authUserCreated?: boolean; passwordLinkMissing?: boolean;
+          ok?: boolean; days?: number; activeUntil?: number | null;
+          pendingUntil?: number; activationUrl?: string; emailSent?: boolean;
+          authUserCreated?: boolean; forced?: boolean;
         }
       >(functions, "grantTrial");
-      const r = await fn({ email: e, days });
+      const r = await fn({ email: e, days, force });
       setIsErr(false);
-      const hasta = r.data?.activeUntil
-        ? new Date(r.data.activeUntil).toLocaleDateString("es-ES",
+      setEnlace(r.data?.activationUrl ?? null);
+      const limite = r.data?.pendingUntil
+        ? new Date(r.data.pendingUntil).toLocaleDateString("es-ES",
             { day: "numeric", month: "long", year: "numeric" })
         : null;
 
       const partes = [
-        `✓ Prueba de ${days} días activada para ${e}` +
-          (hasta ? ` — válida hasta el ${hasta}.` : "."),
+        `✓ Prueba de ${days} días reservada para ${e}. Los ${days} días empiezan ` +
+          `cuando abra el enlace, no ahora` +
+          (limite ? ` — tiene hasta el ${limite} para hacerlo.` : "."),
       ];
       if (r.data?.authUserCreated) {
-        partes.push("Le he creado la cuenta y el correo lleva un enlace para que ponga su contraseña.");
+        partes.push("Le he creado la cuenta; el enlace para poner su contraseña le llegará cuando active la prueba.");
       }
       if (r.data?.emailSent === false) {
-        partes.push("⚠ Pero el correo NO salió: avísale tú.");
-      } else if (!r.data?.authUserCreated) {
+        partes.push("⚠ Pero el correo NO salió: mándale tú el enlace de abajo.");
+      } else {
         partes.push("Le ha llegado un correo con las instrucciones.");
-      }
-      if (r.data?.passwordLinkMissing) {
-        partes.push(
-          "⚠ No se pudo generar el enlace de contraseña. Sin él no podrá entrar en la app: " +
-          "dile que use «¿Has olvidado la contraseña?» en la pantalla de acceso."
-        );
       }
       setMsg(partes.join(" "));
       setEmail("");
+      setForce(false);
     } catch (err: unknown) {
       console.error("grantTrial", err);
       const fe = err as FunctionsError;
@@ -455,15 +470,42 @@ function TrialForm() {
           style={{ ...inputStyle, flex: "0 0 90px" }}
         />
       </div>
-      <button
-        onClick={submit} disabled={busy}
-        style={{ background: "#22FFE0", color: "#06231F", border: "none", borderRadius: 8, padding: "10px 20px", fontWeight: 700, fontSize: 14, cursor: busy ? "default" : "pointer", opacity: busy ? 0.7 : 1 }}>
-        {busy ? "Activando…" : "Dar prueba"}
-      </button>
+      <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
+        <button
+          onClick={submit} disabled={busy}
+          style={{ background: "#22FFE0", color: "#06231F", border: "none", borderRadius: 8, padding: "10px 20px", fontWeight: 700, fontSize: 14, cursor: busy ? "default" : "pointer", opacity: busy ? 0.7 : 1 }}>
+          {busy ? "Reservando…" : "Dar prueba"}
+        </button>
+        <label style={{ color: "#9095a0", fontSize: 13, display: "flex", alignItems: "center", gap: 7, cursor: "pointer" }}>
+          <input type="checkbox" checked={force}
+            onChange={(ev) => setForce(ev.target.checked)} />
+          Forzar (repetir prueba o reenviar enlace caducado)
+        </label>
+      </div>
       {msg && (
         <p style={{ color: isErr ? "#f87171" : "#22FFE0", fontSize: 13, marginTop: 14, marginBottom: 0, lineHeight: 1.6 }}>
           {msg}
         </p>
+      )}
+      {enlace && (
+        <div style={{ marginTop: 12, background: "#11141a", border: "1px solid #23272f", borderRadius: 8, padding: "10px 12px" }}>
+          <p style={{ color: "#9095a0", fontSize: 11, margin: "0 0 6px" }}>
+            Enlace de activación (por si tienes que mandárselo tú):
+          </p>
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <code style={{ color: "#c0c5ce", fontSize: 11, wordBreak: "break-all", flex: 1 }}>
+              {enlace}
+            </code>
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(enlace);
+                setCopiado(true);
+              }}
+              style={{ background: "#23272f", color: "#c0c5ce", border: "1px solid #2a2f3a", borderRadius: 6, padding: "6px 12px", fontSize: 12, cursor: "pointer", whiteSpace: "nowrap" }}>
+              {copiado ? "✓ Copiado" : "Copiar"}
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
