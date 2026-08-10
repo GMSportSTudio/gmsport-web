@@ -41,7 +41,25 @@ const INTL_EXCLUDED_PREFIXES = [
   "/sitemap.xml",
   "/robots.txt",
 ];
-const STATIC_FILE_RE = /\.(?:png|jpg|jpeg|gif|svg|ico|mp4|webm|webp|woff|woff2|ttf|otf|eot)/i;
+/**
+ * Cualquier ruta que termine en un nombre de fichero con extensión.
+ *
+ * Antes esto era una lista blanca de extensiones
+ * (`png|jpg|gif|svg|ico|mp4|webm|webp|woff|...`) y **`pdf` no estaba**. El
+ * resultado: `/Manual_InboundStudio_latest.pdf` no casaba con ninguna
+ * exclusión, caía al middleware de next-intl, se redirigía a
+ * `/es/Manual_InboundStudio_latest.pdf` — que no existe — y devolvía 404.
+ *
+ * El fichero estaba en git y desplegado, así que desde fuera parecía un
+ * problema del PDF. Estuvo roto cinco semanas (desde 5526686, 02/07/2026,
+ * cuando las exclusiones se portaron del matcher al código) y solo se supo
+ * porque los usuarios se quejaron.
+ *
+ * Una lista blanca obliga a acordarse de cada formato nuevo. Preguntar si el
+ * último segmento tiene extensión cubre lo que venga: PDF, ZIP, CSV, AVIF.
+ * Ninguna ruta de la web lleva punto en el último tramo.
+ */
+const ES_FICHERO_RE = /\/[^/]+\.[a-z0-9]+$/i;
 
 export default function proxy(req: NextRequest) {
   const host = (req.headers.get("host") ?? "").toLowerCase().split(":")[0];
@@ -64,7 +82,7 @@ export default function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
   if (
     INTL_EXCLUDED_PREFIXES.some((p) => path.startsWith(p)) ||
-    STATIC_FILE_RE.test(path)
+    ES_FICHERO_RE.test(path)
   ) {
     return NextResponse.next();
   }
