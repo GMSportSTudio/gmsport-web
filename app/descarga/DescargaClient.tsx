@@ -557,7 +557,7 @@ export function DescargaClient() {
           </p>
         </div>
 
-        {/* ─────────── Manual de uso (público, sin auth) ─────────── */}
+        {/* ─────────── Manuales de uso (públicos, sin auth) ─────────── */}
         {/*
             Tarea #160 (2026-05-24): el manual PDF es contenido comercial /
             onboarding sin secrets. Cualquiera (founders, suscriptores,
@@ -571,51 +571,80 @@ export function DescargaClient() {
             public/Manual_InboundStudio_latest.pdf. El objeto antiguo de
             Storage (manuals/Manual_GMSportStudio_latest.pdf) se mantiene
             por los enlaces de emails viejos — su contenido ya es Inbound.
+
+            2026-08-10: son DOS manuales. Hasta ahora solo se ofrecía el de
+            la 1.3 y el de la 2.0 ni siquiera estaba commiteado, así que
+            quien probaba la 2.0 —que es la beta abierta a cualquiera con
+            licencia— no tenía documentación.
+
+            El de la 2.0 va PRIMERO a propósito: es la versión hacia la que
+            se está migrando. El de la 1.3 se queda mientras haya gente en
+            ella; cuando se apague, se borra esta segunda tarjeta.
+
+            ⚠ Un PDF que no esté en la lista de exclusiones de proxy.ts
+            devuelve 404 aunque esté desplegado. Fue el fallo del 02/07 al
+            10/08: cinco semanas con los manuales rotos. Ver
+            scripts/comprobar_rutas_estaticas.mjs.
         */}
-        <a
-          href="/Manual_InboundStudio_latest.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 16,
-            background: "rgba(34, 255, 224, 0.06)",
-            border: "1px solid rgba(34, 255, 224, 0.22)",
-            borderRadius: 16,
-            padding: "18px 24px",
-            marginBottom: 24,
-            textDecoration: "none",
-            transition: "background 0.15s",
-          }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(34, 255, 224, 0.1)"; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(34, 255, 224, 0.06)"; }}
-        >
-          <div>
-            <p style={{ color: "#e8eaf0", fontSize: 15, fontWeight: 700, margin: "0 0 4px" }}>
-              📘 Manual de uso (PDF)
-            </p>
-            <p style={{ color: "#9095a0", fontSize: 12, margin: 0, lineHeight: 1.5 }}>
-              Guía completa para coaches — atajos, mesa de montaje,
-              pizarra, exports. Acceso libre, sin registro.
-            </p>
-          </div>
-          <span
+        {[
+          {
+            href: "/Manual_InboundStudio_2.0.pdf",
+            titulo: "📘 Manual de Inbound Studio 2.0",
+            desc: "La versión nueva — marcador y períodos, informes, XML, " +
+                  "línea de tiempo con zoom. Acceso libre, sin registro.",
+          },
+          {
+            href: "/Manual_InboundStudio_latest.pdf",
+            titulo: "📗 Manual de la versión 1.3",
+            desc: "Para quien siga en la versión anterior — atajos, mesa " +
+                  "de montaje, pizarra, exports.",
+          },
+        ].map((m, i, todos) => (
+          <a
+            key={m.href}
+            href={m.href}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
-              background: "#22FFE0",
-              color: "#fff",
-              borderRadius: 10,
-              padding: "10px 18px",
-              fontWeight: 700,
-              fontSize: 13,
-              whiteSpace: "nowrap",
-              flexShrink: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 16,
+              background: "rgba(34, 255, 224, 0.06)",
+              border: "1px solid rgba(34, 255, 224, 0.22)",
+              borderRadius: 16,
+              padding: "18px 24px",
+              marginBottom: i === todos.length - 1 ? 24 : 10,
+              textDecoration: "none",
+              transition: "background 0.15s",
             }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(34, 255, 224, 0.1)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(34, 255, 224, 0.06)"; }}
           >
-            Descargar →
-          </span>
-        </a>
+            <div>
+              <p style={{ color: "#e8eaf0", fontSize: 15, fontWeight: 700, margin: "0 0 4px" }}>
+                {m.titulo}
+              </p>
+              <p style={{ color: "#9095a0", fontSize: 12, margin: 0, lineHeight: 1.5 }}>
+                {m.desc}
+              </p>
+            </div>
+            <span
+              style={{
+                background: "#22FFE0",
+                color: "#06231F",
+                borderRadius: 10,
+                padding: "10px 18px",
+                fontWeight: 700,
+                fontSize: 13,
+                whiteSpace: "nowrap",
+                flexShrink: 0,
+              }}
+            >
+              Descargar →
+            </span>
+          </a>
+        ))}
 
         {/* ─────────── RAMA A · Token Beta (legacy) ─────────── */}
         {token && betaLoading && (
