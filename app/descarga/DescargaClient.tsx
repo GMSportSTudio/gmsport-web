@@ -602,6 +602,10 @@ export function DescargaClient() {
         ].map((m, i, todos) => (
           <a
             key={m.href}
+            // El ancla va en la primera tarjeta: el correo de conversión
+            // founder enlaza /descarga#manuales y tiene que caer aquí, no
+            // al principio de la página.
+            id={i === 0 ? "manuales" : undefined}
             href={m.href}
             target="_blank"
             rel="noopener noreferrer"
