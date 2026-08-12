@@ -516,6 +516,18 @@ export function DescargaClient() {
         mapped = "no_release";
       } else if (code === "invalid-argument") {
         mapped = "invalid_platform";
+      } else if (code === "failed-precondition") {
+        // La cuenta está bien, pero falta un paso: la prueba concedida que
+        // todavía no se ha arrancado, o su enlace caducado. El backend ya
+        // redacta el mensaje explicando qué hacer, así que se muestra tal
+        // cual — se pinta directo porque `errorMessages` cae al texto crudo
+        // cuando la clave no existe.
+        //
+        // Sin esta rama caía al `else` y salía "Error de red. Comprueba tu
+        // conexión", mandando a la persona a mirar el wifi cuando su wifi
+        // está perfectamente. Se introdujo el 2026-08-09 al añadir esos dos
+        // casos en getSignedDownloadUrl.
+        mapped = httpsErr.message || "No se puede descargar todavía.";
       } else if (code === "internal" || code === "unavailable") {
         mapped = "internal";
       } else {
@@ -736,7 +748,11 @@ export function DescargaClient() {
               {dlError && (
                 <div style={{ background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.3)", borderRadius: 12, padding: "14px 18px", marginTop: 8, marginBottom: 8 }}>
                   <p style={{ color: "#f87171", fontSize: 14, margin: 0 }}>
-                    {errorMessages[dlError] ?? "Error al iniciar la descarga."}
+                    {/* Si no es una clave conocida, es un mensaje ya redactado por el
+                        backend (p. ej. los failed-precondition de la prueba sin
+                        arrancar). Mostrarlo tal cual es mejor que taparlo con
+                        un generico. */}
+                    {errorMessages[dlError] ?? dlError}
                   </p>
                 </div>
               )}
@@ -966,7 +982,11 @@ export function DescargaClient() {
               {dlError && (
                 <div style={{ background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.3)", borderRadius: 12, padding: "14px 18px", marginTop: 8, marginBottom: 8 }}>
                   <p style={{ color: "#f87171", fontSize: 14, margin: 0 }}>
-                    {errorMessages[dlError] ?? "Error al iniciar la descarga."}
+                    {/* Si no es una clave conocida, es un mensaje ya redactado por el
+                        backend (p. ej. los failed-precondition de la prueba sin
+                        arrancar). Mostrarlo tal cual es mejor que taparlo con
+                        un generico. */}
+                    {errorMessages[dlError] ?? dlError}
                   </p>
                 </div>
               )}
