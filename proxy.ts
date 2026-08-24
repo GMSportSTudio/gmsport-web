@@ -24,12 +24,23 @@ const OLD_HOSTS = new Set(["gmsportstudio.com", "www.gmsportstudio.com"]);
 // (negative lookahead); se portan a código con la MISMA semántica de
 // prefijo para que el matcher pueda cubrir el 100% de rutas y el 410 del
 // dominio viejo aplique también a /descarga, /admin, estáticos, etc.
+//
+// AÑADIR AQUÍ toda ruta nueva que viva fuera de `app/[locale]/`. Olvidarlo no
+// da un error de compilación ni un aviso: la página simplemente devuelve 404
+// en producción. Ya ha pasado dos veces — los manuales estuvieron rotos cinco
+// semanas, y `/prueba` (el botón «Empezar mis días» de los correos) dejó a
+// todo el mundo sin poder activar su prueba hasta que un cliente lo reportó.
+//
+// Además de estar en esta lista, la ruta necesita su propio `layout.tsx` con
+// `<html>` y `<body>`: el layout raíz es pass-through. Con una sola de las dos
+// cosas, sigue rota. `scripts/comprobar_rutas_estaticas.mjs` vigila las dos.
 const INTL_EXCLUDED_PREFIXES = [
   "/api",
   "/_next",
   "/admin",
   "/descarga",
   "/cuenta",
+  "/prueba",
   "/aviso-legal",
   "/privacidad",
   "/terminos-beta",

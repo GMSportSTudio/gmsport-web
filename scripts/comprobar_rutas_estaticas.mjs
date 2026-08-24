@@ -93,5 +93,75 @@ if (perdidos.length) {
   console.log("  ✓ cubre formatos que todavía no usamos");
 }
 
+// 4. Toda carpeta de `app/` que NO viva bajo `[locale]` necesita DOS cosas, y
+//    con una sola sigue rota:
+//      · estar en INTL_EXCLUDED_PREFIXES (si no, next-intl la reescribe a
+//        /es/... y devuelve 404)
+//      · su propio layout.tsx con <html>+<body> (el layout raíz es
+//        pass-through y Next los exige en ese nivel)
+//
+//    Olvidarlo no da error de compilación ni aviso: la página simplemente no
+//    existe en producción. Pasó con `/prueba` —el botón «Empezar mis días» de
+//    los correos— y dejó a todo el mundo sin poder activar su prueba hasta que
+//    Xavi Sastre lo reportó el 24/08.
+const IGNORAR = new Set(["[locale]", "(legal)", "api"]);
+
+function prefijosExcluidos() {
+  const src = fs.readFileSync(path.join(RAIZ, "proxy.ts"), "utf8");
+  const m = src.match(/const INTL_EXCLUDED_PREFIXES = \[([\s\S]*?)\]/);
+  if (!m) {
+    console.error("\n✗ No encuentro INTL_EXCLUDED_PREFIXES en proxy.ts.\n");
+    process.exit(1);
+  }
+  return [...m[1].matchAll(/"([^"]+)"/g)].map((x) => x[1]);
+}
+
+const excluidos = prefijosExcluidos();
+const sinExcluir = [];
+const sinLayout = [];
+
+for (const e of fs.readdirSync(path.join(RAIZ, "app"), { withFileTypes: true })) {
+  if (!e.isDirectory() || IGNORAR.has(e.name)) continue;
+  const dir = path.join(RAIZ, "app", e.name);
+  // Solo carpetas que son rutas de verdad (tienen page.tsx en algún nivel).
+  const tieneRuta = fs.existsSync(path.join(dir, "page.tsx")) ||
+    fs.readdirSync(dir, { withFileTypes: true }).some(
+      (s) => s.isDirectory() && fs.existsSync(path.join(dir, s.name, "page.tsx")));
+  if (!tieneRuta) continue;
+
+  // Misma semántica que `proxy.ts`: prefijo, no coincidencia exacta.
+  // `/descarga` cubre también `/descarga-canary`.
+  if (!excluidos.some((x) => `/${e.name}`.startsWith(x))) sinExcluir.push(e.name);
+
+  // Una página que solo redirige nunca llega a renderizar, así que no
+  // necesita <html>+<body> propios.
+  const paginaRaiz = path.join(dir, "page.tsx");
+  const soloRedirige = fs.existsSync(paginaRaiz) &&
+    /\bredirect\s*\(/.test(fs.readFileSync(paginaRaiz, "utf8"));
+  if (soloRedirige) continue;
+
+  const layout = path.join(dir, "layout.tsx");
+  if (!fs.existsSync(layout)) {
+    sinLayout.push(e.name);
+  } else {
+    const src = fs.readFileSync(layout, "utf8");
+    if (!src.includes("<html") || !src.includes("<body")) sinLayout.push(e.name);
+  }
+}
+
+if (sinExcluir.length || sinLayout.length) {
+  console.error("\n✗ Rutas fuera de [locale] mal configuradas:");
+  for (const r of sinExcluir) {
+    console.error(`    /${r}  — falta en INTL_EXCLUDED_PREFIXES de proxy.ts (daría 404)`);
+  }
+  for (const r of sinLayout) {
+    console.error(`    /${r}  — su layout.tsx no tiene <html>+<body>`);
+  }
+  console.error("");
+  fallos++;
+} else {
+  console.log("  ✓ las rutas fuera de [locale] están excluidas y con layout propio");
+}
+
 if (fallos) process.exit(1);
 console.log("");
