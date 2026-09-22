@@ -19,6 +19,19 @@
  *
  * Por eso esta página al cargar solo LEE (GET verifyTrialToken) y la
  * activación es un POST que únicamente dispara un clic humano.
+ *
+ * LA CONTRASEÑA SE PONE AQUÍ (2026-09-22)
+ * ---------------------------------------
+ * Hasta ahora se ponía por un enlace de Firebase que llegaba en el correo de
+ * "ya corren tus días". Ese enlace caduca en UNA HORA, los antivirus de
+ * correo lo abren antes que la persona (y lo gastan), y aterriza en una
+ * página de Firebase en inglés, sin marca. Javier (16/09), Carlos (28/08) y
+ * Samu (05/08) se quedaron en la puerta con la prueba corriendo.
+ *
+ * Ahora, tras «Empezar mis días», la misma página pide elegir la contraseña
+ * y la guarda con el mismo token del enlace (POST establecerContrasenaDePrueba).
+ * Solo sale si la cuenta no tiene contraseña —lo dice `necesitaPassword`—,
+ * también para quien arrancó la prueba hace días y vuelve por el enlace.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -28,6 +41,9 @@ import { useSearchParams } from "next/navigation";
 const FUNCTIONS_BASE = "https://europe-west1-gmsportstudio-53bbf.cloudfunctions.net";
 const DOWNLOAD_URL = "/descarga";
 const SOPORTE = "ceo@inboundbasketballstudio.com";
+// Mismo mínimo que functions/trials.js (PASSWORD_MIN). Aquí solo ahorra un
+// viaje; el que manda es el del servidor.
+const PASSWORD_MIN = 8;
 
 type Estado = "pendiente" | "activa" | "terminada" | "caducada" | "sin_prueba";
 
@@ -142,7 +158,10 @@ export function PruebaClient() {
         );
         return;
       }
-      setDatos({ ...json, ok: true });
+      // Se MEZCLA con lo que dijo verifyTrialToken: la respuesta de «ya
+      // estaba» no trae `necesitaPassword`, y sin esto el formulario de
+      // contraseña desaparecía justo para quien más lo necesita.
+      setDatos((prev) => ({ ...(prev ?? {}), ...json, ok: true }));
       setVista(json.yaEstaba ? "ya_activa" : "activada");
     } catch {
       setVista("error_red");
@@ -151,6 +170,129 @@ export function PruebaClient() {
   };
 
   const dias = datos?.days ?? 14;
+
+  // ── La contraseña ──────────────────────────────────────────────────────
+  const [pwd, setPwd] = useState("");
+  const [pwd2, setPwd2] = useState("");
+  const [pwdEstado, setPwdEstado] = useState<
+    "reposo" | "guardando" | "guardada" | "ya_tenia" | "error"
+  >("reposo");
+  const [pwdError, setPwdError] = useState<string | null>(null);
+
+  const guardarContrasena = async (ev: React.FormEvent) => {
+    ev.preventDefault();
+    if (pwdEstado === "guardando") return;
+    if (pwd.length < PASSWORD_MIN) {
+      setPwdEstado("error");
+      setPwdError(`Que tenga al menos ${PASSWORD_MIN} caracteres.`);
+      return;
+    }
+    if (pwd !== pwd2) {
+      setPwdEstado("error");
+      setPwdError("Las dos no coinciden. Escríbela otra vez.");
+      return;
+    }
+    setPwdEstado("guardando");
+    setPwdError(null);
+    try {
+      const r = await fetch(`${FUNCTIONS_BASE}/establecerContrasenaDePrueba`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, password: pwd }),
+      });
+      const json = (await r.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      if (r.ok && json.ok) {
+        setPwd("");
+        setPwd2("");
+        setPwdEstado("guardada");
+        return;
+      }
+      if (json.error === "ya_tiene_contrasena") {
+        setPwdEstado("ya_tenia");
+        return;
+      }
+      setPwdEstado("error");
+      setPwdError(
+        json.error === "password_corta"
+          ? `Que tenga al menos ${PASSWORD_MIN} caracteres.`
+          : json.error === "invalid_or_expired"
+            ? "Este enlace ya no vale. Escríbeme y te mando otro."
+            : "No he podido guardarla. Inténtalo otra vez o escríbeme.",
+      );
+    } catch {
+      setPwdEstado("error");
+      setPwdError("No he podido conectar. Vuelve a intentarlo en un momento.");
+    }
+  };
+
+  // Sale tras activar y también en «ya_activa»: quien arrancó la prueba hace
+  // días y nunca llegó a poner la contraseña vuelve por el mismo enlace.
+  const pedirContrasena =
+    !!datos?.necesitaPassword && (vista === "activada" || vista === "ya_activa");
+
+  const bloqueContrasena = pedirContrasena && (
+    <div style={S.aviso}>
+      {pwdEstado === "guardada" && (
+        <>
+          <p style={{ ...S.texto, margin: "0 0 6px", color: "#22FFE0" }}>
+            Contraseña guardada.
+          </p>
+          <p style={{ ...S.texto, margin: 0 }}>
+            Ya puedes entrar en la app con tu email y esa contraseña.
+          </p>
+        </>
+      )}
+      {pwdEstado === "ya_tenia" && (
+        <p style={{ ...S.texto, margin: 0 }}>
+          Esta cuenta ya tiene contraseña. Entra en la app con ella, o pulsa
+          «¿Has olvidado la contraseña?» en la pantalla de acceso para cambiarla.
+        </p>
+      )}
+      {pwdEstado !== "guardada" && pwdEstado !== "ya_tenia" && (
+        <form onSubmit={guardarContrasena}>
+          <p style={{ ...S.texto, margin: "0 0 12px" }}>
+            <strong style={S.dato}>Elige tu contraseña</strong> — es con la que
+            entrarás en la app. Te he abierto la cuenta con el email al que
+            llegó este enlace.
+          </p>
+          <label htmlFor="pwd" style={S.sr}>Contraseña</label>
+          <input
+            id="pwd"
+            type="password"
+            autoComplete="new-password"
+            placeholder={`Contraseña (mínimo ${PASSWORD_MIN} caracteres)`}
+            value={pwd}
+            onChange={(e) => setPwd(e.target.value)}
+            disabled={pwdEstado === "guardando"}
+            style={S.campo}
+          />
+          <label htmlFor="pwd2" style={S.sr}>Repite la contraseña</label>
+          <input
+            id="pwd2"
+            type="password"
+            autoComplete="new-password"
+            placeholder="Repítela"
+            value={pwd2}
+            onChange={(e) => setPwd2(e.target.value)}
+            disabled={pwdEstado === "guardando"}
+            style={S.campo}
+          />
+          {pwdEstado === "error" && pwdError && (
+            <p role="alert" style={{ color: "#ff8d7a", fontSize: 13, margin: "0 0 10px" }}>
+              {pwdError}
+            </p>
+          )}
+          <button
+            type="submit"
+            disabled={pwdEstado === "guardando"}
+            style={{ ...S.boton, width: "100%", opacity: pwdEstado === "guardando" ? 0.7 : 1 }}
+          >
+            {pwdEstado === "guardando" ? "Guardando…" : "Guardar contraseña"}
+          </button>
+        </form>
+      )}
+    </div>
+  );
 
   return (
     <div style={S.pagina}>
@@ -195,22 +337,9 @@ export function PruebaClient() {
             </p>
 
             {/* Cuenta creada por nosotros: sin contraseña no puede entrar en
-                la app, así que ese paso va ANTES que la descarga. */}
-            {datos?.necesitaPassword && !datos?.passwordLinkMissing && (
-              <p style={S.aviso}>
-                Te acabo de mandar un correo para que pongas tu contraseña —
-                es el primer paso. <strong style={S.dato}>Caduca en una
-                hora</strong>, así que ábrelo ahora; si se te pasa, usa
-                «¿Has olvidado la contraseña?» en la app y te llega otro.
-              </p>
-            )}
-            {datos?.passwordLinkMissing && (
-              <p style={S.aviso}>
-                No he podido generarte el enlace de contraseña. Abre la app,
-                pulsa «¿Has olvidado la contraseña?» y te llegará uno. Si
-                tampoco funciona, escríbeme.
-              </p>
-            )}
+                la app, así que ese paso va ANTES que la descarga — y se hace
+                aquí mismo, no por un enlace de una hora. */}
+            {bloqueContrasena}
             {datos?.emailSent === false && !datos?.necesitaPassword && (
               <p style={S.aviso}>
                 El correo de confirmación no ha salido, pero tu prueba está
@@ -236,6 +365,7 @@ export function PruebaClient() {
                 ? ` — te quedan ${datos.diasRestantes} ${datos.diasRestantes === 1 ? "día" : "días"}.`
                 : "."}
             </p>
+            {bloqueContrasena}
             <a href={DOWNLOAD_URL} style={S.boton}>Ir a la descarga</a>
           </>
         )}
@@ -332,4 +462,25 @@ const S: Record<string, React.CSSProperties> = {
   },
   pie: { color: "#9095a0", fontSize: 13, margin: "22px 0 0", lineHeight: 1.6 },
   enlace: { color: "#22FFE0" },
+  campo: {
+    display: "block",
+    width: "100%",
+    boxSizing: "border-box",
+    padding: "12px 14px",
+    marginBottom: 10,
+    borderRadius: 8,
+    border: "1px solid #2a2f3a",
+    background: "#161920",
+    color: "#e8eaf0",
+    fontSize: 15,
+    fontFamily: "inherit",
+  },
+  sr: {
+    position: "absolute",
+    width: 1,
+    height: 1,
+    overflow: "hidden",
+    clip: "rect(0 0 0 0)",
+    whiteSpace: "nowrap",
+  },
 };
