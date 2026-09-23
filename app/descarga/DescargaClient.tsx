@@ -959,6 +959,13 @@ export function DescargaClient() {
                     ceo@inboundbasketballstudio.com
                   </a>.
                 </p>
+                {/* 23/09/2026: la libmpv que empaquetamos sale de Homebrew en un
+                    runner macos-15, y exige ese macOS. Antes exigía 14 sin
+                    decirlo. Decirlo aquí evita descargas que no abren. */}
+                <p style={{ color: "#9095a0", fontSize: 12, margin: "0 0 14px", lineHeight: 1.6 }}>
+                  En Mac necesita <strong style={{ color: "#e8eaf0" }}>macOS 15 (Sequoia) o posterior</strong> y
+                  chip Apple Silicon. En Windows, 10 u 11 de 64 bits.
+                </p>
                 {platformIds.map(platform => {
                   const info = PLATFORM_LABELS[platform];
                   if (!info) return null;
