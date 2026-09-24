@@ -74,7 +74,7 @@ export function GrantsPanel() {
     try {
       const fn = httpsCallable<
         { email: string; planTier: PlanTier; devices: number; note: string },
-        { ok: boolean; skipped?: string }
+        { ok: boolean; skipped?: string; status?: string; activeUntilMs?: number }
       >(functions, "grantFreeAccess");
       const result = await fn({
         email,
@@ -82,12 +82,18 @@ export function GrantsPanel() {
         devices: grantDevices,
         note:     grantNote.trim(),
       });
-      if (result.data?.skipped === "already_granted") {
+      // 24/09/2026: la concesión dura lo que el plan (anual 365 d, mensual
+      // 30 d) y repetirla sobre una activa la RENUEVA desde hoy. Antes era
+      // indefinida (+100 años) y la segunda llamada no hacía nada.
+      const hasta = result.data?.activeUntilMs
+        ? new Date(result.data.activeUntilMs).toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })
+        : null;
+      if (result.data?.status === "renewed") {
         setGrantStatus("ok");
-        setGrantMsg(`${email} ya tenía un free_grant activo. Sin cambios (idempotente).`);
+        setGrantMsg(`✓ Acceso de ${email} renovado${hasta ? ` hasta el ${hasta}` : ""} (${PLAN_LABELS[grantPlan]}). Email enviado.`);
       } else {
         setGrantStatus("ok");
-        setGrantMsg(`✓ Acceso concedido a ${email} (${PLAN_LABELS[grantPlan]}, ${grantDevices} device${grantDevices > 1 ? "s" : ""}). Email enviado.`);
+        setGrantMsg(`✓ Acceso concedido a ${email}${hasta ? ` hasta el ${hasta}` : ""} (${PLAN_LABELS[grantPlan]}, ${grantDevices} device${grantDevices > 1 ? "s" : ""}). Email enviado.`);
         // Reset form
         setGrantEmail(""); setGrantNote(""); setGrantDevices(1);
       }
@@ -152,7 +158,7 @@ export function GrantsPanel() {
               </span>
             </h1>
             <p style={{ color: "#555d6e", fontSize: 13, margin: "6px 0 0" }}>
-              Acceso gratuito indefinido para prensa, partners y coaches influyentes.
+              Acceso gratuito para prensa, partners y coaches influyentes: dura lo que el plan (anual = 1 año, mensual = 30 días).
               {" "}
               <Link href="/admin/testers" style={{ color: "#22FFE0" }}>→ Beta testers</Link>
               {" · "}
@@ -179,8 +185,9 @@ export function GrantsPanel() {
               Conceder acceso
             </h2>
             <p style={{ color: "#555d6e", fontSize: 12, margin: 0, lineHeight: 1.5 }}>
-              Acceso indefinido (100 años). Email automático al destinatario.
-              Idempotente: si ya tiene free_grant activo, no hace nada.
+              Dura lo que el plan elegido: anual = 365 días, mensual = 30, desde hoy.
+              Email automático al destinatario con la fecha. Si ya tiene una
+              concesión activa, esto la RENUEVA desde hoy (sirve para prorrogar).
             </p>
 
             <label style={{ color: "#9095a0", fontSize: 12, fontWeight: 600 }}>
