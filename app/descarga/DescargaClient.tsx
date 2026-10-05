@@ -964,8 +964,9 @@ export function DescargaClient() {
                     runner macos-15, y exige ese macOS. Antes exigía 14 sin
                     decirlo. Decirlo aquí evita descargas que no abren. */}
                 <p style={{ color: "#9095a0", fontSize: 12, margin: "0 0 14px", lineHeight: 1.6 }}>
-                  En Mac necesita <strong style={{ color: "#e8eaf0" }}>macOS 15 (Sequoia) o posterior</strong> y
-                  chip Apple Silicon. En Windows, 10 u 11 de 64 bits.
+                  En Mac necesita <strong style={{ color: "#e8eaf0" }}>macOS 15 (Sequoia) o posterior</strong> con
+                  chip Apple Silicon, o <strong style={{ color: "#e8eaf0" }}>macOS 14 (Sonoma) o posterior</strong> con
+                  Intel. En Windows, 10 u 11 de 64 bits.
                 </p>
                 {platformIds.map(platform => {
                   const info = PLATFORM_LABELS[platform];
