@@ -602,8 +602,9 @@ export function DescargaClient() {
           {
             href: "/Manual_InboundStudio_2.0.pdf",
             titulo: "📘 Manual de Inbound Studio 2.0",
-            desc: "La versión nueva — marcador y períodos, informes, XML, " +
-                  "línea de tiempo con zoom. Acceso libre, sin registro.",
+            desc: "Puesto al día con la preview26 — editor de vídeo (focos, " +
+                  "flechas, texto, pausas), mesa de montaje con portada y " +
+                  "carteles, botonera, dos equipos. Acceso libre, sin registro.",
           },
           {
             href: "/Manual_InboundStudio_latest.pdf",
