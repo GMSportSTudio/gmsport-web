@@ -602,9 +602,10 @@ export function DescargaClient() {
           {
             href: "/Manual_InboundStudio_2.0.pdf",
             titulo: "📘 Manual de Inbound Studio 2.0",
-            desc: "Puesto al día con la preview26 — editor de vídeo (focos, " +
+            desc: "Puesto al día con la preview28 — editor de vídeo (focos, " +
                   "flechas, texto, pausas), mesa de montaje con portada y " +
-                  "carteles, botonera, dos equipos. Acceso libre, sin registro.",
+                  "carteles, botonera, dos equipos, qué pasa con tus proyectos " +
+                  "de la 1.3. Acceso libre, sin registro.",
           },
           {
             href: "/Manual_InboundStudio_latest.pdf",
