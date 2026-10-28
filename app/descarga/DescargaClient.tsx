@@ -602,7 +602,8 @@ export function DescargaClient() {
           {
             href: "/Manual_InboundStudio_2.0.pdf",
             titulo: "📘 Manual de Inbound Studio 2.0",
-            desc: "Puesto al día con la preview30 — botonera que cabe en " +
+            desc: "Puesto al día con la preview32 — notas de voz en cada " +
+                  "clip, volumen y exportar sin sonido, botonera que cabe en " +
                   "cualquier ventana, editor de vídeo (lo que ves es lo que " +
                   "sale en el MP4), a qué clip van los descriptores, mesa de " +
                   "montaje, períodos y marcador por vídeo, qué pasa con tus " +
