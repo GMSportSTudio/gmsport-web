@@ -213,9 +213,20 @@ function WindowsFirstOpenGuide() {
           cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center",
         }}
       >
-        <span>💾 En Windows: descomprime el ZIP antes de abrir la app</span>
+        <span>💾 En Windows: descomprime el ZIP en C:\Inbound Studio, no en OneDrive</span>
         <span style={{ color: "#9095a0", fontSize: 22, lineHeight: 1, marginLeft: 12 }}>{open ? "−" : "+"}</span>
       </button>
+      {/* Siempre a la vista, no dentro del desplegable (preview33, 17/11/2026):
+          David Robles tenía la app en OneDrive\Escritorio y llevaba semanas
+          con cierres sin aviso hasta que dejó de arrancar («Windows no tiene
+          acceso al dispositivo, ruta de acceso o archivo especificado»). En
+          muchos Windows el Escritorio ES una carpeta de OneDrive. */}
+      <p style={{ margin: "12px 0 0", color: "#9095a0", fontSize: 14, lineHeight: 1.6 }}>
+        <strong style={{ color: "#e8eaf0" }}>No la pongas en el Escritorio si usas OneDrive</strong>{" "}
+        (ni en Dropbox o Google Drive): mientras sincronizan bloquean archivos de la app y
+        se cierra sola o no arranca. Extráela en <strong style={{ color: "#e8eaf0" }}>C:\Inbound Studio</strong>{" "}
+        y, si la quieres a mano, pon en el Escritorio solo un acceso directo.
+      </p>
 
       {open && (
         <div style={{ marginTop: 16, color: "#9095a0", fontSize: 14, lineHeight: 1.7 }}>
@@ -234,7 +245,9 @@ function WindowsFirstOpenGuide() {
               {" "}<strong style={{ color: "#e8eaf0" }}>Descargas</strong>).
             </li>
             <li style={{ marginBottom: 10 }}>
-              <strong style={{ color: "#e8eaf0" }}>Clic derecho → &ldquo;Extraer todo…&rdquo;</strong> y pulsa
+              <strong style={{ color: "#e8eaf0" }}>Clic derecho → &ldquo;Extraer todo…&rdquo;</strong>, pulsa
+              {" "}<strong style={{ color: "#e8eaf0" }}>Examinar</strong> y elige (o crea) la carpeta
+              {" "}<strong style={{ color: "#e8eaf0" }}>C:\Inbound Studio</strong>. Luego
               {" "}<strong style={{ color: "#e8eaf0" }}>Extraer</strong>.
             </li>
             <li style={{ marginBottom: 10 }}>
@@ -602,7 +615,9 @@ export function DescargaClient() {
           {
             href: "/Manual_InboundStudio_2.0.pdf",
             titulo: "📘 Manual de Inbound Studio 2.0",
-            desc: "Puesto al día con la preview32 — notas de voz en cada " +
+            desc: "Puesto al día con la preview33 — grupos de descriptores " +
+                  "con colores, botones que se arrastran, dónde instalarla en " +
+                  "Windows (no en OneDrive), notas de voz en cada " +
                   "clip, volumen y exportar sin sonido, botonera que cabe en " +
                   "cualquier ventana, editor de vídeo (lo que ves es lo que " +
                   "sale en el MP4), a qué clip van los descriptores, mesa de " +
